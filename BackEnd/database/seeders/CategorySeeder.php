@@ -17,7 +17,7 @@ class CategorySeeder extends Seeder
     {
         $category = Category::create([
             'id' => 1,
-            'name' => 'Automatic',
+            'name' => 'Đồng hồ thời trang',
         ]);
         $category = Category::create([
             'id' => 2,

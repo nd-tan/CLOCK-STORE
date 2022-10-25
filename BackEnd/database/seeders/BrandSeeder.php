@@ -18,27 +18,27 @@ class BrandSeeder extends Seeder
         $brand = Brand::create([
             'id' => 1,
             'name' => 'Orient',
-            'image' => 'MacBook',
+            'image' => 'orient.jpg',
         ]);
         $brand = Brand::create([
             'id' => 2,
             'name' => 'Citizen',
-            'image' => 'MacBook',
+            'image' => 'citizen01.jpg',
         ]);
         $brand = Brand::create([
             'id' => 3,
             'name' => 'Casio',
-            'image' => 'MacBook',
+            'image' => 'casio-banner.jpg',
         ]);
         $brand = Brand::create([
             'id' => 4,
             'name' => 'Seiko',
-            'image' => 'MacBook',
+            'image' => 'logo-seiko-1400x621.jpg',
         ]);
         $brand = Brand::create([
             'id' => 5,
             'name' => 'Tissot',
-            'image' => 'MacBook',
+            'image' => 'tissot.jpg',
         ]);
 
     }
