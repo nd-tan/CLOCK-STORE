@@ -6,7 +6,7 @@ use App\Models\Brand;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BrandsSeeder extends Seeder
+class BrandSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,25 +15,31 @@ class BrandsSeeder extends Seeder
      */
     public function run()
     {
-        $macbook = Brand::create([
+        $brand = Brand::create([
             'id' => 1,
-            'name' => 'MacBook',
+            'name' => 'Orient',
             'image' => 'MacBook',
         ]);
-        $asus = Brand::create([
+        $brand = Brand::create([
             'id' => 2,
-            'name' => 'Asus',
+            'name' => 'Citizen',
             'image' => 'MacBook',
         ]);
-        $dell = Brand::create([
+        $brand = Brand::create([
             'id' => 3,
-            'name' => 'Dell',
+            'name' => 'Casio',
             'image' => 'MacBook',
         ]);
-        $acer = Brand::create([
+        $brand = Brand::create([
             'id' => 4,
-            'name' => 'Acer',
+            'name' => 'Seiko',
             'image' => 'MacBook',
         ]);
+        $brand = Brand::create([
+            'id' => 5,
+            'name' => 'Tissot',
+            'image' => 'MacBook',
+        ]);
+
     }
 }

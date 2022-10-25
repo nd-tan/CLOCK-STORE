@@ -6,7 +6,7 @@ use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CategoriesSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +17,7 @@ class CategoriesSeeder extends Seeder
     {
         $category = Category::create([
             'id' => 1,
-            'name' => 'Đồng hồ thời trang',
+            'name' => 'Automatic',
         ]);
         $category = Category::create([
             'id' => 2,
@@ -34,18 +34,6 @@ class CategoriesSeeder extends Seeder
         $category = Category::create([
             'id' => 5,
             'name' => 'Đồng hồ pin',
-        ]);
-        $category = Category::create([
-            'id' => 5,
-            'name' => 'Đồng hồ điện tử',
-        ]);
-        $category = Category::create([
-            'id' => 5,
-            'name' => '2. Đồng hồ pin',
-        ]);
-        $category = Category::create([
-            'id' => 5,
-            'name' => '2. Đồng hồ pin',
         ]);
     }
 }
