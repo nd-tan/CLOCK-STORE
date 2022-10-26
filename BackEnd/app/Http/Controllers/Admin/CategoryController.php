@@ -9,6 +9,7 @@ use App\Services\Category\CategoryServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -21,74 +22,90 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $categories = $this->categoryService->all($request);
-        return view('#',compact('categories'));
+        return view('admin.category.index',compact('categories'));
+    }
+    public function show($id){
+
     }
 
     public function create()
     {
-        return view('#');
+        return view('admin.category.add');
     }
-    
+
     public function store(StoreCategoryRequest $request)
     {
         $data = $request->all();
-        $this->categoryService->create($data);
-        $notification = array(
-            'message' => 'Thêm danh mục thành công!',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('#')->with($notification);
+        try {
+            $this->categoryService->create($data);
+            Session::flash('success', 'Tạo mới danh mục thành công!');
+            return redirect()->route('category.index');
+        } catch (\Exception $e) {
+            Session::flash('error', 'Tạo mới danh mục không thành công!');
+            Log::error('message:'. $e->getMessage());
+            return redirect()->route('category.index');
+        }
     }
 
     public function edit($id)
     {
-        $category = $this->categoryService->find($id);
-        return view('#',compact('category'));
+        $item = $this->categoryService->find($id);
+        return view('admin.category.edit',compact('item'));
     }
 
     public function update(UpdateCategoryRequest $request,$id)
     {
         $data = $request->all();
-        $this->categoryService->update( $id, $data);
-        $notification = array(
-            'message' => 'Sửa danh mục thành công!',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('#')->with($notification);
-
+        try {
+            Session::flash('success', 'Sửa danh mục thành công!');
+            $this->categoryService->update( $id, $data);
+            return redirect()->route('category.index');
+        } catch (\Exception $e) {
+            Log::error('message:'. $e->getMessage());
+            Session::flash('error', 'Sửa danh mục không thành công!');
+            return redirect()->route('category.index');
+        }
     }
 
     public function destroy($id)
     {
-        $category = $this->categoryService->delete( $id);
-        return response()->json($category);
+        try {
+            $category = $this->categoryService->delete( $id);
+            Session::flash('success', 'Đưa vào thùng rác thành công!');
+            return redirect()->route('category.index');
+        } catch (\Exception $e) {
+            Log::error('message:'. $e->getMessage());
+            Session::flash('error', 'Đưa vào thùng rác không thành công!');
+            return redirect()->route('category.index');
+        }
     }
 
     public function getTrashed(){
         $categories = $this->categoryService->getTrashed();
-        return view('#',compact('categories'));
+        return view('admin.category.recycle',compact('categories'));
     }
 
     public function restore($id){
-        $this->categoryService->restore($id);
-        $notification = array(
-            'message' => 'Khôi phục danh mục thành công',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('')->with($notification);
+        try {
+            $this->categoryService->restore($id);
+            Session::flash('success', 'Khôi phục thành công!');
+            return redirect()->route('category.getTrashed');
+        } catch (\Exception $e) {
+            Log::error('message:'. $e->getMessage());
+            Session::flash('error', 'Khôi phục không thành công!');
+            return redirect()->route('category.getTrashed');
+        }
     }
 
     public function force_destroy($id){
         try {
             $category = $this->categoryService->force_destroy( $id);
-            return response()->json($category);
+            Session::flash('success', 'Xóa thành công!');
+            return redirect()->route('category.getTrashed');
         } catch (Exception $e) {
-            Log::error('errors' . $e->getMessage() . ' getLine' . $e->getLine());
-            $notification = array(
-                'message' => 'Không thể xóa vì có sản phẩm thuộc danh mục này!',
-                'alert-type' => 'error'
-            );
-            return redirect()->route('')->with($notification);
+            Log::error('message:'. $e->getMessage());
+            Session::flash('error', 'Xóa không thành công!');
+            return redirect()->route('category.getTrashed');
         }
     }
 }
