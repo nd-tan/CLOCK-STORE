@@ -2,7 +2,7 @@
 @section('content')
   <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Danh Mục</h1>
+        <h1 class="mb-1">Danh Mục</h1>
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>

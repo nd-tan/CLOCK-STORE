@@ -21,12 +21,16 @@ Route::get('/', function () {
 Route::get('/cate', function () {
     return view('admin.categories.index');
 });
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('category/getTrashed','getTrashed')->name('category.getTrashed');
+    Route::delete('category/delete/{id}','force_destroy')->name('category.delete');
+    Route::get('category/restore/{id}','restore')->name('category.restore');
+});
 Route::resource('category', CategoryController::class);
-Route::get('/getTrashed',[CategoryController::class,'getTrashed'])->name('category.getTrashed');
-Route::delete('/delete/{id}',[CategoryController::class,'force_destroy'])->name('category.delete');
-Route::get('/restore/{id}',[CategoryController::class,'restore'])->name('category.restore');
 
+Route::controller(SupplierController::class)->group(function () {
+    Route::delete('supplier/delete/{id}', 'force_destroy')->name('supplier.delete');
+    Route::get('supplier/getTrashed', 'getTrashed')->name('supplier.getTrashed');
+    Route::get('supplier/restore/{id}', 'restore')->name('supplier.restore');
+});
 Route::resource('supplier', SupplierController::class);
-Route::delete('/delete/{id}',[SupplierController::class,'force_destroy'])->name('supplier.delete');
-Route::get('/getTrashed',[SupplierController::class,'getTrashed'])->name('supplier.getTrashed');
-Route::get('/restore/{id}',[SupplierController::class,'restore'])->name('supplier.restore');

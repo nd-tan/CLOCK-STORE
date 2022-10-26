@@ -2,95 +2,54 @@
 @section('content')
   <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Danh Mục</h1>
+        <h1 class="mb-1">Nhà Cung Cấp</h1>
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="{{route('category.index')}}">Danh mục</a></li>
-            <li class="breadcrumb-item"> Thêm danh mục</a></li>
+            <li class="breadcrumb-item"><a href="{{route('supplier.index')}}">Nhà cung cấp</a></li>
+            <li class="breadcrumb-item"> Thêm nhà cung cấp</a></li>
           </ol>
         </nav>
       </div>
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Thêm Danh Mục</h5>
-
-    <!-- Multi Columns Form -->
-    <form  action="{{ route('category.store') }}" method="post">
+    <h5 class="card-title">Thêm Nhà Cung Cấp</h5>
+    <form action="{{ route('supplier.store') }}" method="post">
         @csrf
       <div class="col-md-10">
-        <label for="inputName5" class="form-label">Tên danh mục</label>
-        <input type="text" class="form-control" id="inputName5" name='name' value="{{ old('name') }}">
+        <label for="inputName5" class="form-label">Tên nhà cung cấp</label>
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="inputName5" name='name' value="{{ old('name') }}">
         @error('name')
         <div class="text text-danger">{{ $message }}</div>
-        @enderror<br>
+        @enderror
 
-      {{-- </div> --}}
-      {{-- <div class="row g-3"> --}}
-      {{-- <div class="col-md-4"> --}}
-        {{-- <label for="inputEmail5" class="form-label">Email</label> --}}
-        {{-- <input type="email" class="form-control" id="inputEmail5"> --}}
-      {{-- </div> --}}
-      {{-- <div class="col-md-4">
-        <label for="inputPassword5" class="form-label">Password</label>
-        <input type="password" class="form-control" id="inputPassword5">
+      <div class="row g-3">
+      <div class="col-md-12">
+        <label for="inputEmail5" class="form-label">Email</label>
+        <input type="email" class="form-control @error('email') is-invalid @enderror" name='email' id="inputName5" value="{{ old('email') }}">
+        @error('email')
+        <div class="text text-danger">{{ $message }}</div>
+        @enderror
       </div>
-      <div class="col-md-4">
-        <label for="inputPassword5" class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" id="inputPassword5">
+      <div class="col-md-12">
+        <label for="inputPassword5" class="form-label">Địa chỉ</label>
+        <input type="text" class="form-control @error('address') is-invalid @enderror" name='address' id="inputName5" value="{{ old('address') }}">
+        @error('address')
+        <div class="text text-danger">{{ $message }}</div>
+        @enderror
       </div>
-
-      <div class="col-12">
-        <label for="inputAddress5" class="form-label">Address</label>
-        <input type="text" class="form-control" id="inputAddres5s" placeholder="1234 Main St">
+      <div class="col-md-12">
+        <label for="inputPassword5" class="form-label">Số điện thoại</label>
+        <input type="text" class="form-control @error('phone') is-invalid @enderror" name='phone' id="inputName5" value="{{ old('phone') }}">
+        @error('phone')
+        <div class="text text-danger">{{ $message }}</div>
+        @enderror
       </div>
-      <div class="col-12">
-        <label for="inputAddress2" class="form-label">Mô Tả</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-        <textarea class="form-control" name="" id="" cols="20" rows="5"></textarea>
-      </div>
-      <div class="col-md-6">
-        <label for="inputCity" class="form-label">Ảnh</label>
-        <input type="file" class="form-control" id="inputCity">
-      </div>
-      <div class="col-md-6">
-        <label for="inputCity" class="form-label">UP Nhiều Ảnh</label>
-        <input type="file" class="form-control" id="inputCity">
-      </div>
-      <div class="col-md-4">
-        <label for="inputState" class="form-label">Tỉnh</label>
-        <select id="inputState" class="form-select">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="col-md-4">
-        <label for="inputState" class="form-label">Huyện</label>
-        <select id="inputState" class="form-select">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="col-md-4">
-        <label for="inputState" class="form-label">Xã</label>
-        <select id="inputState" class="form-select">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="col-12">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck">
-          <label class="form-check-label" for="gridCheck">
-            Check me out
-          </label>
-        </div>
-      </div> --}}
-      <div>
+      </div><br>
         <button type="submit" class="btn btn-primary">Thêm</button>
         <button type="reset" class="btn btn-secondary">Reset</button>
       </div>
-    </form><!-- End Multi Columns Form -->
+    </form>
   </div>
 </div>
 </div>

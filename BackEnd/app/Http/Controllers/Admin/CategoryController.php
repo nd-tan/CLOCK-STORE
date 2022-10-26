@@ -38,10 +38,10 @@ class CategoryController extends Controller
         $data = $request->all();
         try {
             $this->categoryService->create($data);
-            Session::flash('success', 'Tạo mới danh mục thành công!');
+            Session::flash('success', 'Tạo mới thành công!');
             return redirect()->route('category.index');
         } catch (\Exception $e) {
-            Session::flash('error', 'Tạo mới danh mục không thành công!');
+            Session::flash('error', 'Tạo mới không thành công!');
             Log::error('message:'. $e->getMessage());
             return redirect()->route('category.index');
         }
@@ -57,12 +57,12 @@ class CategoryController extends Controller
     {
         $data = $request->all();
         try {
-            Session::flash('success', 'Sửa danh mục thành công!');
+            Session::flash('success', 'Sửa thành công!');
             $this->categoryService->update( $id, $data);
             return redirect()->route('category.index');
         } catch (\Exception $e) {
             Log::error('message:'. $e->getMessage());
-            Session::flash('error', 'Sửa danh mục không thành công!');
+            Session::flash('error', 'Sửa không thành công!');
             return redirect()->route('category.index');
         }
     }

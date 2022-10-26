@@ -26,11 +26,11 @@ class UpdateSupplierRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email'=> ['required',
-            Rule::unique('suppliers')->ignore($this->supplier),
-            ],
             'address' => 'required',
-            'phone' => 'required'
+            'phone' => 'required',
+            'email'=> ['required',
+            Rule::unique('suppliers')->ignore($this->supplier)
+            ]
         ];
     }
     public function messages()
@@ -40,7 +40,7 @@ class UpdateSupplierRequest extends FormRequest
             'email.required' => 'Không được để trống!',
             'address.required' => 'Không được để trống!',
             'phone.required' => 'Không được để trống!',
-            'email.unique' => 'Đã tồn tại!',
+            // 'email.unique' => 'Đã tồn tại!',
         ];
     }
 }

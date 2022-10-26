@@ -2,7 +2,7 @@
 @section('content')
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Danh Mục</h1>
+        <h1 class="mb-1">Danh Mục</h1>
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
@@ -23,8 +23,8 @@
         {{ Session::get('error') }}
     </p>
 @endif
-    <a class='btn btn-primary'  href="{{route('category.create')}}">Thêm danh mục</a>
-    <a class='btn btn-secondary float-right'  href="{{route('category.getTrashed')}}">Thùng rác</a>
+    <a class='btn btn-primary mb-2'  href="{{route('category.create')}}">Thêm danh mục</a>
+    <a class='btn btn-secondary mb-2 float-right'  href="{{route('category.getTrashed')}}">Thùng rác</a>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -35,6 +35,7 @@
         </tr>
       </thead>
       <tbody>
+        @if (isset($categories))
           @foreach ($categories as $key => $category)
         <tr>
           <th scope="row">{{$key + 1}}</th>
@@ -51,6 +52,7 @@
           </td>
         </tr>
         @endforeach
+        @endif
       </tbody>
     </table>
     {{ $categories->onEachSide(5)->links() }}

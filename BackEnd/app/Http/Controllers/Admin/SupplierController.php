@@ -30,7 +30,7 @@ class SupplierController extends Controller
 
     public function create()
     {
-        return view('admin.supplier.add');
+        return view('admin.suppliers.add');
     }
 
     public function store(StoreSupplierRequest $request)
@@ -38,19 +38,19 @@ class SupplierController extends Controller
         $data = $request->all();
         try {
             $this->supplierService->create($data);
-            Session::flash('success', 'Tạo mới danh mục thành công!');
-            return redirect()->route('category.index');
+            Session::flash('success', 'Tạo mới thành công!');
+            return redirect()->route('supplier.index');
         } catch (\Exception $e) {
-            Session::flash('error', 'Tạo mới danh mục không thành công!');
+            Session::flash('error', 'Tạo mới không thành công!');
             Log::error('message:'. $e->getMessage());
-            return redirect()->route('category.index');
+            return redirect()->route('supplier.index');
         }
     }
 
     public function edit($id)
     {
         $item = $this->supplierService->find($id);
-        return view('admin.category.edit',compact('item'));
+        return view('admin.suppliers.edit',compact('item'));
     }
 
     public function update(UpdateSupplierRequest $request,$id)
@@ -59,11 +59,11 @@ class SupplierController extends Controller
         try {
             Session::flash('success', 'Sửa danh mục thành công!');
             $this->supplierService->update( $id, $data);
-            return redirect()->route('category.index');
+            return redirect()->route('supplier.index');
         } catch (\Exception $e) {
             Log::error('message:'. $e->getMessage());
             Session::flash('error', 'Sửa danh mục không thành công!');
-            return redirect()->route('category.index');
+            return redirect()->route('supplier.index');
         }
     }
 
@@ -72,11 +72,11 @@ class SupplierController extends Controller
         try {
             $category = $this->supplierService->delete( $id);
             Session::flash('success', 'Đưa vào thùng rác thành công!');
-            return redirect()->route('category.index');
+            return redirect()->route('supplier.index');
         } catch (\Exception $e) {
             Log::error('message:'. $e->getMessage());
             Session::flash('error', 'Đưa vào thùng rác không thành công!');
-            return redirect()->route('category.index');
+            return redirect()->route('supplier.index');
         }
     }
 
@@ -89,11 +89,11 @@ class SupplierController extends Controller
         try {
             $this->supplierService->restore($id);
             Session::flash('success', 'Khôi phục thành công!');
-            return redirect()->route('category.getTrashed');
+            return redirect()->route('supplier.getTrashed');
         } catch (\Exception $e) {
             Log::error('message:'. $e->getMessage());
             Session::flash('error', 'Khôi phục không thành công!');
-            return redirect()->route('category.getTrashed');
+            return redirect()->route('supplier.getTrashed');
         }
     }
 
@@ -101,11 +101,11 @@ class SupplierController extends Controller
         try {
             $category = $this->supplierService->force_destroy( $id);
             Session::flash('success', 'Xóa thành công!');
-            return redirect()->route('category.getTrashed');
+            return redirect()->route('supplier.getTrashed');
         } catch (Exception $e) {
             Log::error('message:'. $e->getMessage());
             Session::flash('error', 'Xóa không thành công!');
-            return redirect()->route('category.getTrashed');
+            return redirect()->route('supplier.getTrashed');
         }
     }
 }

@@ -2,7 +2,7 @@
 @section('content')
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Nhà Cung Cấp</h1>
+        <h1 class="mb-1">Nhà Cung Cấp</h1>
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
@@ -23,8 +23,8 @@
         {{ Session::get('error') }}
     </p>
 @endif
-    <a class='btn btn-primary'  href="{{route('supplier.create')}}">Thêm nhà cung cấp</a>
-    <a class='btn btn-secondary float-right'  href="#">Thùng rác</a>
+    <a class='btn btn-primary mb-2'  href="{{route('supplier.create')}}">Thêm nhà cung cấp</a>
+    <a class='btn btn-secondary mb-2 float-right'  href="{{route('supplier.getTrashed')}}">Thùng rác</a>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -41,14 +41,17 @@
         <tr>
           <th scope="row">{{$key + 1}}</th>
           <td>{{$supplier->name}}</td>
-          <td></td>
+          <td>{{$supplier->email}}</td>
+          <td>{{$supplier->address}}</td>
+          <td>{{$supplier->phone}}</td>
           <td>
             <form action="{{ route('supplier.destroy', $supplier->id) }}" method="post" >
                 @method('DELETE')
                 @csrf
             <a style='color:rgb(52,136,245)' class='btn' href="{{route('supplier.edit',$supplier->id)}}">
                 <i class='bi bi-pencil-square h4'></i></a>
-            <button onclick="return confirm('Bạn có chắc muốn đưa danh mục này vào thùng rác không?');" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+            <button onclick="return confirm('Bạn có chắc muốn đưa danh mục này vào thùng rác không?');"
+            class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
             </form>
           </td>
         </tr>
