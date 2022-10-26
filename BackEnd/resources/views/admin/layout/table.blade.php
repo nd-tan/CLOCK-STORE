@@ -1,25 +1,59 @@
-<table class="table table-bordered border-primary" style=" text-align: center">
-    <thead>
-      <tr>
-        <th scope="col">STT</th>
-        <th scope="col">Tên Danh Mục</th>
-        <th scope="col">Tùy Chọn</th>
 
-      </tr>
-    </thead>
-    <tbody>
-        @foreach ($items as $key=> $item)
-      <tr>
-        <th scope="row">{{++$key}}</th>
-        <td>{{$item->name}}</td>
-        <td>
-            <a style='color:rgb(52,136,245)' class='btn' href=""><i class='bi bi-eye h4'></i></a>
-            <a style='color:rgb(52,136,245)' class='btn' href="{{route('category.edit',$item->id)}}"><i class='bi bi-arrow-clockwise h4'></i></a>
-            <a style='color:rgb(52,136,245)' class ='btn' href=""><i class='bi bi-trash h4'></i></a>
-        </td>
-
-      </tr>
-      @endforeach
-
-    </tbody>
-  </table>
+@extends('admin.home')
+@section('content')
+<main id="main" class="main">
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Table with hoverable rows</h5>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Position</th>
+          <th scope="col">Age</th>
+          <th scope="col">Start Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Brandon Jacob</td>
+          <td>Designer</td>
+          <td>28</td>
+          <td>2016-05-25</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Bridie Kessler</td>
+          <td>Developer</td>
+          <td>35</td>
+          <td>2014-12-05</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Ashleigh Langosh</td>
+          <td>Finance</td>
+          <td>45</td>
+          <td>2011-08-12</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>Angus Grady</td>
+          <td>HR</td>
+          <td>34</td>
+          <td>2012-06-11</td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>Raheem Lehner</td>
+          <td>Dynamic Division Officer</td>
+          <td>47</td>
+          <td>2011-04-19</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</main>
+@endsection
