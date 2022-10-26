@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.home');
 });
-Route::resource('customer', CustomerController::class);
 Route::controller(CustomerController::class)->group(function (){
     Route::get('customer/trash', 'getTrash')->name('customer.trash');
     Route::get('customer/trash/restore/{id}', 'restore')->name('customer.restore');
@@ -25,3 +25,8 @@ Route::controller(CustomerController::class)->group(function (){
     Route::get('searchCustomers', 'searchByName')->name('customer.searchKey');
     Route::get('searchCustomer', 'searchCustomer')->name('customer.search');
 });
+Route::resource('customer', CustomerController::class);
+Route::delete('/delete/{id}',[CategoryController::class,'force_destroy'])->name('category.delete');
+Route::get('/getTrashed',[CategoryController::class,'getTrashed'])->name('category.getTrashed');
+Route::get('/restore/{id}',[CategoryController::class,'restore'])->name('category.restore');
+Route::resource('category', CategoryController::class);
