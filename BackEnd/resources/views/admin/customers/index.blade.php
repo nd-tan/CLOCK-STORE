@@ -13,6 +13,16 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Danh Sách Khách Hàng</h5>
+                @if (Session::has('success'))
+                <p class="text-success"><i class="fa fa-check" aria-hidden="true"></i>
+                    {{ Session::get('success') }}
+                </p>
+            @endif
+            @if (Session::has('error'))
+                <p class="text-danger"><i class="bi bi-x-circle"></i>
+                    {{ Session::get('error') }}
+                </p>
+            @endif
                 <div style="text-align: right" class="md-3 title_cate" >
                     <a href="{{ route('customer.trash') }}" class="btn btn-danger btn-rounded waves-effect waves-light ">
                         <i class=" fas fa-trash-alt"></i>
@@ -31,7 +41,6 @@
                                 <th scope="col">Họ Và Tên</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Số Điện Thoại</th>
-                                <th scope="col">Ngày Đăng Ký</th>
                                 <th scope="col">Thao Tác</th>
                             </tr>
                         </thead>
@@ -39,10 +48,9 @@
                             @foreach ($customers as $customer)
                                 <tr class="item-{{ $customer->id }}">
                                     <th scope="row">{{ $customer->id }}</th>
-                                    <td><a href="">{{ $customer->name }}</td>
+                                    <td><a href="{{ route('customer.show',$customer->id) }}">{{ $customer->name }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->phone }}</td>
-                                    <td>{{ $customer->created_at }}</td>
                                     <td>
                                         <form action="{{ route('customer.destroy',$customer->id) }}" method="post" >
                                             @method('DELETE')

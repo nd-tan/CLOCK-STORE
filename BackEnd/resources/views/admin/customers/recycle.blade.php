@@ -61,8 +61,7 @@
                     </tbody>
                 </table>
                 <div class="row">
-                    {{ $customers->onEachSide(5)->links() }}
-                   
+                    {{ $customers->onEachSide(5)->links() }}          
                 </div>
             </div>
         </div>

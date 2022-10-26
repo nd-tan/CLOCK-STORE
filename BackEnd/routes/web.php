@@ -17,9 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.home');
 });
-Route::get('customer/trash', [CustomerController::class, 'getTrash'])->name('customer.trash');
-Route::get('customer/trash/restore/{id}', [CustomerController::class, 'restore'])->name('customer.restore');
-Route::delete('customer/trash/force-delete/{id}', [CustomerController::class, 'forceDelete'])->name('customer.forceDelete');
-Route::get('searchCustomers', [CustomerController::class, 'searchByName'])->name('customer.searchKey');
-Route::get('searchCustomer', [CustomerController::class, 'searchCustomer'])->name('customer.search');
 Route::resource('customer', CustomerController::class);
+Route::controller(CustomerController::class)->group(function (){
+    Route::get('customer/trash', 'getTrash')->name('customer.trash');
+    Route::get('customer/trash/restore/{id}', 'restore')->name('customer.restore');
+    Route::delete('customer/trash/force-delete/{id}', 'forceDelete')->name('customer.forceDelete');
+    Route::get('searchCustomers', 'searchByName')->name('customer.searchKey');
+    Route::get('searchCustomer', 'searchCustomer')->name('customer.search');
+});
