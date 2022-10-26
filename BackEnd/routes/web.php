@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,7 @@ Route::get('/', function () {
 Route::get('/cate', function () {
     return view('admin.categories.index');
 });
+Route::delete('/delete/{id}',[CategoryController::class,'force_destroy'])->name('category.delete');
+Route::get('/getTrashed',[CategoryController::class,'getTrashed'])->name('category.getTrashed');
+Route::get('/restore/{id}',[CategoryController::class,'restore'])->name('category.restore');
+Route::resource('category', CategoryController::class);
