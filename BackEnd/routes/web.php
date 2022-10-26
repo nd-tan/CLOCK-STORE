@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('admin.home');
 });
 Route::get('customer/trash', [CustomerController::class, 'getTrash'])->name('customer.trash');
-Route::post('customer/trash/restore/{id}', [CustomerController::class, 'restore'])->name('customer.restore');
+Route::get('customer/trash/restore/{id}', [CustomerController::class, 'restore'])->name('customer.restore');
 Route::delete('customer/trash/force-delete/{id}', [CustomerController::class, 'forceDelete'])->name('customer.forceDelete');
 Route::get('searchCustomers', [CustomerController::class, 'searchByName'])->name('customer.searchKey');
 Route::get('searchCustomer', [CustomerController::class, 'searchCustomer'])->name('customer.search');

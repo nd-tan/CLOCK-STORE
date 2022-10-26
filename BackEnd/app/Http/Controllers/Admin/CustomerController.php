@@ -53,12 +53,11 @@ class CustomerController extends Controller
       
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
       
         try {
             DB::beginTransaction();
-            $id = $request->id;
             $customer = $this->customerService->find($id);
             $customer->delete();
             DB::commit();

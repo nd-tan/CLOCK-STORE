@@ -47,7 +47,7 @@
                                         <form action="{{ route('customer.destroy',$customer->id) }}" method="post" >
                                             @method('DELETE')
                                             @csrf
-                                            <button onclick="return confirm('Bạn có chắc xóa khách hàng '.$customer->name);" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                                            <button onclick=" return confirm('Bạn có chắc xóa khách hàng '.$customer->name);" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
                                         </form>
                                     </td>
                                 </tr>
