@@ -60,8 +60,9 @@
 
    {{-- ///////////////////////////////////////////////////////////////////// --}}
 {{-- @include('sweetalert::alert') --}}
+<main id="main" class="main">
   @yield('content')
-
+</main>
  <!-- End #main -->
 
   <!-- ======= Footer ======= -->

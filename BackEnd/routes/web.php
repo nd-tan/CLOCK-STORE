@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.home');
 });
-Route::get('/cate', function () {
-    return view('admin.categories.index');
-});
+Route::get('/cate', [CustomerController::class,'index' ]);

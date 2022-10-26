@@ -1,7 +1,6 @@
 @extends('admin.home')
 @section('content')
 <form>
-  <main id="main" class="main">
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Multi Columns Form</h5>
@@ -80,7 +79,5 @@
 
   </div>
 </div>
-
 </div>
-</main>
   @endsection

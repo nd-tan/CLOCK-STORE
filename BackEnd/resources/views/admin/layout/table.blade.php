@@ -1,7 +1,6 @@
 
 @extends('admin.home')
 @section('content')
-<main id="main" class="main">
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Table with hoverable rows</h5>
@@ -55,5 +54,4 @@
     </table>
   </div>
 </div>
-</main>
 @endsection
