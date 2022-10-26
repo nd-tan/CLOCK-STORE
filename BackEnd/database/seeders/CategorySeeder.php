@@ -29,7 +29,7 @@ class CategorySeeder extends Seeder
         ]);
         $category = Category::create([
             'id' => 4,
-            'name' => 'Đồng hồ màn hình cảm ứng',
+            'name' => 'Đồng hồ cảm ứng',
         ]);
         $category = Category::create([
             'id' => 5,
