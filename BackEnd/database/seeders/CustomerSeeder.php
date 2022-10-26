@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
 class CustomerSeeder extends Seeder
 {
     /**
@@ -13,15 +12,19 @@ class CustomerSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
-        DB::table('customers')->insert([
-            [
-                'name' => 'Mai Xuân Cường',
-                'email' => 'cuong@gmail.com',
-                'phone' => '0843442357',
-                'password' => bcrypt('123456'),
-            ]
-        ]);
+
+        $faker = \Faker\Factory::create();
+        for ($i=0; $i < 10; $i++) { 
+           
+            DB::table('customers')->insert([
+                'name' => $faker->name,
+                'email' => $faker->email,
+                'phone' => $faker->phoneNumber,
+                'password' => $faker->password,
+            ]);
+        }
     }
 }

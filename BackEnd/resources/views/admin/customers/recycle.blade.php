@@ -6,17 +6,17 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="">Order</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('customer.index') }}">Khách Hàng</a></li>
                 </ol>
             </nav>
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Danh Sách Khách Hàng</h5>
-                <div style="text-align: right" class="md-3 title_cate" >
-                    <a href="{{ route('customer.trash') }}" class="btn btn-danger btn-rounded waves-effect waves-light ">
+                <h5 class="card-title">Khách Hàng Vi Phạm</h5>
+                <div class="md-3 title_cate" >
+                    <a href="{{ route('customer.index') }}" class="btn btn-info btn-rounded waves-effect waves-light ">
                         <i class=" fas fa-trash-alt"></i>
-                        Thùng Rác</a>
+                        Khách Hàng</a>
                 </div>
                 <table style="text-align: center" class="table table-hover">
                     @if (!$customers->count())
@@ -31,7 +31,7 @@
                                 <th scope="col">Họ Và Tên</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Số Điện Thoại</th>
-                                <th scope="col">Ngày Đăng Ký</th>
+                                <th scope="col">Ngày Xóa</th>
                                 <th scope="col">Thao Tác</th>
                             </tr>
                         </thead>
@@ -42,12 +42,17 @@
                                     <td><a href="">{{ $customer->name }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->phone }}</td>
-                                    <td>{{ $customer->created_at }}</td>
+                                    <td>{{ $customer->deleted_at }}</td>
                                     <td>
-                                        <form action="{{ route('customer.destroy',$customer->id) }}" method="post" >
+
+                                        <form action="{{ route('customer.forceDelete',$customer->id) }}" method="post" >
                                             @method('DELETE')
                                             @csrf
-                                            <button onclick="return confirm('Bạn có chắc xóa khách hàng '.$customer->name);" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                                            <a onclick="return confirm('Bạn có chắc muốn khôi phục khách hàng '.$customer->name);"
+                                            style='color:rgb(52,136,245)' class='btn'
+                                            href="{{ route('customer.restore', $customer->id) }}"><i
+                                                class='bi bi-arrow-clockwise h4'></i></a>
+                                            <button onclick="return confirm('Bạn có chắc xóa hách hàng '.$customer->name);" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -55,7 +60,10 @@
                     @endif
                     </tbody>
                 </table>
+                <div class="row">
                     {{ $customers->onEachSide(5)->links() }}
+                   
+                </div>
             </div>
         </div>
     </div>
@@ -87,5 +95,6 @@
 
                     });
                 })
+            </script>
             <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  @endsection

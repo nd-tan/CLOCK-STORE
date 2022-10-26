@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Services\Customer\CustomerServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +40,7 @@ class CustomerController extends Controller
     {
         $customer =  $this->customerService->find($id);
         $params = ['customer' => $customer];
-        return view('back-end.customer.show', $params);
+        return view('admin.customers.show', $params);
     }
 
     public function edit($id)
@@ -82,7 +82,7 @@ class CustomerController extends Controller
         try {
             $customers = $this->customerService->getTrash();
             $params = ['customers' => $customers];
-            return view('back-end.customer.softDelete', $params);
+            return view('admin.customers.recycle', $params);
         } catch (Exception $e) {
             Log::error('errors' . $e->getMessage() . 'getLine' . $e->getLine());
             abort(403);
@@ -135,7 +135,7 @@ class CustomerController extends Controller
     public function searchByName(Request $request)
     {
         try {
-           $keyword = $request->input('keyword');
+        $keyword = $request->input('keyword');
         $customers = $this->customerService->searchCustomer($keyword);
         return response()->json($customers);
         } catch (Exception $e) {
@@ -154,7 +154,7 @@ class CustomerController extends Controller
             $params = [
                 'customers' => $customers
             ];
-            return  view('back-end.customer.index', $params);
+            return  view('admin.customers.index', $params);
         } catch (Exception $e) {
             Log::error('errors' . $e->getMessage() . 'getLine' . $e->getLine());
             abort(404);
