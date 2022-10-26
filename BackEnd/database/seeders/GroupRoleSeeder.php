@@ -16,11 +16,9 @@ class GroupRoleSeeder extends Seeder
     public function run()
     {
         DB::table('group_role')->insert([
-            [
-                'id' => 1,
-                'group_id'=> 1,
-                'role_id'=> 1,
-            ]
-            ]);
+            'id' => 1,
+            'group_id' => 1,
+            'role_id' => 1,
+        ]);
     }
 }

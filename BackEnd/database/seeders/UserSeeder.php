@@ -17,22 +17,19 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('user')->insert([
-            [
-                'id' => 1,
-                'name' => 'Phan Ngọc Cường',
-                'address' => '133 Lý Thường Kiệt , Thành Phố Đông Hà , Tỉnh Quảng Trị',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make(123),
-                'remember_token' => "123",
-                'birthday' => '07-07/1996',
-                'image' => 'a',
-                'gender' => 'nam',
-                'province_id' => 1,
-                'district_id' => 1,
-                'ward_id' => 1,
-                'group_id' => 1,
-
-            ]
+            'id' => 1,
+            'name' => 'Phan Ngoc Cuong',
+            'address' => '133 Ly Thuong Kiet',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make(123),
+            'remember_token' => "123",
+            'birthday' => '07-07',
+            'image' => 'a',
+            'gender' => 'nam',
+            'province_id' => 1,
+            'district_id' => 1,
+            'ward_id' => 1,
+            'group_id' => 1,
         ]);
     }
 }
