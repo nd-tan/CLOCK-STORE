@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('districts', function (Blueprint $table) {
             $table->id();
-            $table->rememberToken();
+            $table->string('name');
+            $table->string('gso_id');
+            $table->unsignedBigInteger('province_id');
+            $table->foreign('province_id')
+                ->references('id')
+                ->on('provinces')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -27,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('districts');
     }
 };

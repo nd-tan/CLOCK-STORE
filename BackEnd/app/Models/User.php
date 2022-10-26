@@ -17,12 +17,37 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
         'name',
+        'address',
         'email',
         'password',
+        'phone',
+        'birthday',
+        'image',
+        'gender',
+        'province_id',
+        'district_id',
+        'ward_id',
+        'group_id',
     ];
-
+    public function provinces()
+    {
+        return $this->belongsTo(Provinces::class);
+    }
+    public function districts()
+    {
+        return $this->belongsTo(Districts::class);
+    }
+    public function wards()
+    {
+        return $this->belongsTo(Wards::class);
+    }
+    public function groups()
+    {
+        return $this->belongsTo(Group::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,4 +66,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function hasPermission($permission = null)
+    {
+        return $this->group->roles->contains('name', $permission);
+    }
 }
