@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('price');
             $table->longText('description')->nullable();
             $table->string('image');
+            $table->string('type_gender');
             $table->tinyInteger('status')->default('0')->comment('0=Hide, 1=Show');
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('brand_id')->constrained('brands');
