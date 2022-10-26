@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,9 +16,24 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
+        $role = Role::create([
             'id' => 1,
-            'name' => 'Phan Ngoc Cuong',
+            'name' => 'Phan Ngọc Cường',
+            'group_name' => 'VIP',
+        ]);
+        $role = Role::create([
+            'id' => 2,
+            'name' => 'Phan Ngọc Cường',
+            'group_name' => 'VIP',
+        ]);
+        $role = Role::create([
+            'id' => 3,
+            'name' => 'Phan Ngọc Cường',
+            'group_name' => 'VIP',
+        ]);
+        $role = Role::create([
+            'id' => 4,
+            'name' => 'Phan Ngọc Cường',
             'group_name' => 'VIP',
         ]);
     }

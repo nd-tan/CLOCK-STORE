@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Group;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,8 +16,20 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('groups')->insert([
+        $group = Group::create([
             'id' => 1,
+            'name' => "Admin",
+        ]);
+        $group = Group::create([
+            'id' => 2,
+            'name' => "Admin",
+        ]);
+        $group = Group::create([
+            'id' => 3,
+            'name' => "Admin",
+        ]);
+        $group = Group::create([
+            'id' => 4,
             'name' => "Admin",
         ]);
     }
