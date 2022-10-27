@@ -1,5 +1,4 @@
 <main id="main" class="main">
-
     <div class="pagetitle">
       <h1>Trang chủ</h1>
       <nav>
