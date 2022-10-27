@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name_customer');
             $table->string('phone');
             $table->string('address');
+            $table->tinyInteger('status')->default('0')->comment('0=Pending, 1=Approved');
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')
                 ->references('id')

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('admin.home');
+});
+Route::controller(CustomerController::class)->group(function () {
+Route::get('customers/trash','getTrash')->name('customer.trash');
+Route::get('customers/trash/restore/{id}','restore')->name('customer.restore');
+Route::delete('customers/trash/force-delete/{id}','forceDelete')->name('customer.forceDelete');
+Route::get('searchCustomers','searchByName')->name('customer.searchKey');
+Route::get('searchCustomer','searchCustomer')->name('customer.search');
 });
 Route::resource('customer', CustomerController::class);
 Route::delete('/delete/{id}',[CategoryController::class,'force_destroy'])->name('category.delete');
@@ -38,6 +46,10 @@ Route::controller(SupplierController::class)->group(function () {
 });
 Route::resource('supplier', SupplierController::class);
 
+Route::controller(OrderController::class)->group(function () {
+    Route::put('order/updatesingle/{id}', 'updateSingle')->name('order.updatesingle');
+});
+Route::resource('order', OrderController::class);
 Route::controller(BrandController::class)->group(function () {
     Route::delete('brand/delete/{id}', 'force_destroy')->name('brand.delete');
     Route::get('brand/getTrashed', 'getTrashed')->name('brand.getTrashed');
