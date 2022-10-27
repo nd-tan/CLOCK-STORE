@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SupplierController;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,10 @@ Route::controller(SupplierController::class)->group(function () {
     Route::get('supplier/restore/{id}', 'restore')->name('supplier.restore');
 });
 Route::resource('supplier', SupplierController::class);
+
+Route::controller(BrandController::class)->group(function () {
+    Route::delete('brand/delete/{id}', 'force_destroy')->name('brand.delete');
+    Route::get('brand/getTrashed', 'getTrashed')->name('brand.getTrashed');
+    Route::get('brand/restore/{id}', 'restore')->name('brand.restore');
+});
+Route::resource('brand', BrandController::class);
