@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -23,7 +24,6 @@ Route::resource('customer', CustomerController::class);
 Route::delete('/delete/{id}',[CategoryController::class,'force_destroy'])->name('category.delete');
 Route::get('/getTrashed',[CategoryController::class,'getTrashed'])->name('category.getTrashed');
 Route::get('/restore/{id}',[CategoryController::class,'restore'])->name('category.restore');
-=======
 Route::controller(CategoryController::class)->group(function () {
     Route::get('category/getTrashed','getTrashed')->name('category.getTrashed');
     Route::delete('category/delete/{id}','force_destroy')->name('category.delete');
@@ -37,3 +37,10 @@ Route::controller(SupplierController::class)->group(function () {
     Route::get('supplier/restore/{id}', 'restore')->name('supplier.restore');
 });
 Route::resource('supplier', SupplierController::class);
+
+Route::controller(BrandController::class)->group(function () {
+    Route::delete('brand/delete/{id}', 'force_destroy')->name('brand.delete');
+    Route::get('brand/getTrashed', 'getTrashed')->name('brand.getTrashed');
+    Route::get('brand/restore/{id}', 'restore')->name('brand.restore');
+});
+Route::resource('brand', BrandController::class);

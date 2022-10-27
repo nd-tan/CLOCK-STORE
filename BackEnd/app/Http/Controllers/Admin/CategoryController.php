@@ -70,7 +70,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         try {
-            $category = $this->categoryService->delete( $id);
+            $category = $this->categoryService->delete($id);
             Session::flash('success', 'Đưa vào thùng rác thành công!');
             return redirect()->route('category.index');
         } catch (\Exception $e) {
