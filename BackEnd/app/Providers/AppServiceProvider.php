@@ -14,8 +14,13 @@ use App\Services\Supplier\SupplierServiceInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Customer\CustomerRepository;
 use App\Repositories\Customer\CustomerRepositoryInterface;
+use App\Repositories\Order\OrderRepository;
+use App\Repositories\Order\OrderRepositoryInterface;
 use App\Services\Customer\CustomerService;
 use App\Services\Customer\CustomerServiceInterface;
+use App\Services\Order\OrderService;
+use App\Services\Order\OrderServiceInterface;
+
 class AppServiceProvider extends ServiceProvider
 {
     const succes = 'Thêm thành công';
@@ -28,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(CustomerRepositoryInterface::class, CustomerRepository::class);
         $this->app->singleton(CustomerServiceInterface::class, CustomerService::class);
+           $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
+        $this->app->bind(OrderServiceInterface::class, OrderService::class);
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
         $this->app->bind(CategoryServiceInterface::class, CategoryService::class);
         $this->app->bind(SupplierRepositoryInterface::class, SupplierRepository::class);

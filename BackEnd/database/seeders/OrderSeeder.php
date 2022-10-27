@@ -15,28 +15,28 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('orders')->insert([
-            [
-                'total' => 1000000,
-                'name_customer' => 'cuong@gmail.com',
-                'phone' => '0843442358',
-                'address' => '133 lý Thường Kiệt',
-                'customer_id' => 1,
-                'province_id' => 1,
-                'district_id' => 1,
-                'ward_id' => 1,
-
-            ]
-        ]);
-        DB::table('order_detail')->insert([
-            [
-                'order_id' => 1,
-                'product_id' => 1,
-                'phone' => '0843442358',
-                'quantity' => 2,
-                'total' => 100000,
-                'price_at_time' => 50000,
-            ]
-        ]);
+        for ($i=1; $i < 7; $i++) { 
+            DB::table('orders')->insert([
+                [
+                    'total' => 1000000*$i,
+                    'name_customer' => 'Vinh'.$i,
+                    'phone' => '084344235'.$i,
+                    'address' => '133 lý Thường Kiệt',
+                    'customer_id' => 1*$i,
+                    'province_id' => 1*$i,
+                    'district_id' => 1*$i,
+                    'ward_id' => 1*$i,
+                ]
+            ]);
+            DB::table('order_details')->insert([
+                [
+                    'order_id' => 1*$i,
+                    'product_id' => $i,
+                    'quantity' => 2*$i,
+                    'total' => 100000*$i,
+                    'price_at_time' => 50000*$i,
+                ]
+            ]);
+        }
     }
 }

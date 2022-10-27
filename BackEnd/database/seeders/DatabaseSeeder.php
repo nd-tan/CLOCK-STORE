@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             GroupRoleSeeder::class,
             UserSeeder::class,
+            OrderSeeder::class,
         ]);
     }
     public function importRoles()
