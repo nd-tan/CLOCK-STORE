@@ -92,6 +92,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- Template Main JS File -->
   <script src="{{asset('assets/js/main.js')}}"></script>
+  <script src="{{ asset('assets/js/uploadFile.js') }}"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     jQuery(document).ready(function() {

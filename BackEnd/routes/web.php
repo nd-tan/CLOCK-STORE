@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,3 +45,10 @@ Route::controller(BrandController::class)->group(function () {
     Route::get('brand/restore/{id}', 'restore')->name('brand.restore');
 });
 Route::resource('brand', BrandController::class);
+
+Route::controller(ProductController::class)->group(function () {
+    Route::delete('product/delete/{id}', 'force_destroy')->name('product.delete');
+    Route::get('product/getTrashed', 'getTrashed')->name('product.getTrashed');
+    Route::get('product/restore/{id}', 'restore')->name('product.restore');
+});
+Route::resource('product', ProductController::class);

@@ -18,8 +18,13 @@ use App\Services\Supplier\SupplierServiceInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Customer\CustomerRepository;
 use App\Repositories\Customer\CustomerRepositoryInterface;
+use App\Repositories\Product\ProductRepository;
+use App\Repositories\Product\ProductRepositoryInterface;
 use App\Services\Customer\CustomerService;
 use App\Services\Customer\CustomerServiceInterface;
+use App\Services\Product\ProductService;
+use App\Services\Product\ProductServiceInterface;
+
 class AppServiceProvider extends ServiceProvider
 {
     const succes = 'Thêm thành công';
@@ -38,6 +43,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SupplierServiceInterface::class, SupplierService::class);
         $this->app->bind(BrandRepositoryInterface::class, BrandRepository::class);
         $this->app->bind(BrandServiceInterface::class, BrandService::class);
+        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+        $this->app->bind(ProductServiceInterface::class, ProductService::class);
     }
 
     /**
