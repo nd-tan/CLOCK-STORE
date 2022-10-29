@@ -8,6 +8,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface
 {
@@ -19,10 +20,42 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function all($request)
     {
         $products = $this->model->select('*');
+
         if (!empty($request->search)) {
             $search = $request->search;
-            $products = $products->search($search);
+            $products = $products->Search($search);
         }
+        if (!empty($request->category_id)) {
+            $products->NameCate($request)
+            ->filterPrice(request(['startPrice', 'endPrice']))
+            ->filterDate(request(['start_date', 'end_date']))
+            ->status($request)->Type($request);
+            // $products->NameSupp($request);
+            // $products->NameBran($request);
+        }
+        if (!empty($request->supplier_id)) {
+            $products->NameSupp($request)
+            ->filterPrice(request(['startPrice', 'endPrice']))
+            ->filterDate(request(['start_date', 'end_date']))
+            ->status($request)->Type($request);
+            // $products->NameSupp($request);
+            // $products->NameBran($request);
+        }
+        if (!empty($request->brand_id)) {
+            $products->NameBran($request)
+            ->filterPrice(request(['startPrice', 'endPrice']))
+            ->filterDate(request(['start_date', 'end_date']))
+            ->status($request)->Type($request);
+            // $products->NameSupp($request);
+            // $products->NameBran($request);
+        }
+
+        $products->filterPrice(request(['startPrice', 'endPrice']));
+        $products->filterDate(request(['start_date', 'end_date']));
+        $products->status($request);
+        $products->Type($request);
+
+        // return $products->orderBy('id', 'DESC')->paginate(5);
         return $products->orderBy('id', 'DESC')->paginate(5);
     }
     public function create($data)
@@ -33,6 +66,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product = $this->model;
             $product->name = $data['name'];
             $product->price = $data['price'];
+            $product->type_gender = $data['type_gender'];
             $product->quantity = $data['quantity'];
             $product->description = $data['description'];
             $product->supplier_id = $data['supplier_id'];
@@ -48,19 +82,14 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 $data['image'] = $newFileName;
                 $product->image = $data['image'];
             }
-            // dd($data);
             $product->save();
-            // dd(123);
 
             //create product_images
             if ($data['file_names']) {
-            // dd(456);
-
                 foreach ($data['file_names'] as $key => $file_detail) {
                     $fileExtension = $file_detail->getClientOriginalExtension();
                     $newFileName =  $key . '.' . $fileExtension;
                     $file_detail->storeAs('public/images/product', $newFileName);
-                    // $detail_path = 'storage/' . $file_detail->store('/products', 'public');
                     $product->product_images()->saveMany([
                         new ProductImage([
                             'image' => $newFileName,
@@ -78,40 +107,51 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function update($id, $data)
     {
-
         try {
             //create product
             $product = $this->model->find($id);
             $product->name = $data['name'];
             $product->price = $data['price'];
+            $product->type_gender = $data['type_gender'];
             $product->quantity = $data['quantity'];
-            $product->sale_price = $data['sale_price'];
+            $product->description = $data['description'];
+            $product->supplier_id = $data['supplier_id'];
             $product->category_id = $data['category_id'];
             $product->brand_id = $data['brand_id'];
-            $product->description = $data['description'];
-            $product->created_by = Auth::user()->id;
-            if (!empty($data['image'])) {
-                $file = $data['image'];
-                $filenameWithExt = $file->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $file->getClientOriginalExtension();
-                $fileNameToStore = $filename . '_' . date('mdYHis') . uniqid() . '.' . $extension;
-                $path = 'storage/' . $file->store('/products', 'public');
-                $product->image = $path;
+            $product->image = $data['image'];
+            // $product->created_by = Auth::user()->id;
+            if (isset($data['inputFile'])) {
+                $file = $data['inputFile'];
+                $image = 'public/images/product/'.$product->image;
+                $fileExtension = $file->getClientOriginalExtension();
+                $fileName = time(); // create file name by curent time
+                $newFileName = $fileName . '.' . $fileExtension; //45678908766.jpg
+                $data['inputFile']->storeAs('public/images/product', $newFileName); //save file in public/images/brand with newname is newFileName
+                $product->image = $newFileName;
+
             }
             $product->save();
-
-
+            if(isset($fileExtension)){
+                Storage::delete($image);
+            }
             //create product_images
-            if ($data['file_names']) {
+            if (isset($data['file_names'])) {
+                $items = ProductImage::where('product_id', '=', $product->id)->get();
+                foreach($items as $item){
+                    $im = 'public/images/product/'.$item->image;
+                    Storage::delete($im);
+                }
                 ProductImage::where('product_id', '=', $product->id)->delete();
-                foreach ($data['file_names'] as $file_detail) {
-                    // File::delete($product->file_names()->file_name);
-                    $detail_path = 'storage/' . $file_detail->store('/products', 'public');
-                    $product->file_names()->saveMany([
+                ProductImage::onlyTrashed()->where('product_id', '=', $product->id)->forceDelete();
+                foreach ($data['file_names'] as $key => $file_detail) {
+                    $fileExtension = $file_detail->getClientOriginalExtension();
+                    $fileName = time(); // create file name by curent time
+                    $newFileName =  $key .$fileName. '.' . $fileExtension;
+                    $file_detail->storeAs('public/images/product', $newFileName);
+                    $product->product_images()->saveMany([
                         new ProductImage([
                             'product_id' => $product->id,
-                            'file_name' => $detail_path,
+                            'image' => $newFileName,
                         ]),
                     ]);
                 }
@@ -151,6 +191,21 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function force_destroy($id)
     {
         $product = $this->model->onlyTrashed()->findOrFail($id);
+        $items = ProductImage::where('product_id', '=', $product->id)->get();
+        foreach($items as $item){
+            $im = 'public/images/product/'.$item->image;
+            Storage::delete($im);
+        }
+        ///xóa ảnh chi tiết trên CSDL
+        ProductImage::where('product_id', '=', $product->id)->delete();
+        ProductImage::onlyTrashed()->where('product_id', '=', $product->id)->forceDelete();
+
+        ////xóa ảnh chính ở storage
+        $image = $product->image;
+        Storage::delete($image);
+        ////xóa ảnh chi tiết ở storage
+
+
         $product->forceDelete();
         return $product;
     }

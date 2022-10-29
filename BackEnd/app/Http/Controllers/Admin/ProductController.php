@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -25,7 +27,16 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = $this->productService->all($request);
-        return view('admin.products.index', compact('products'));
+        $categories = Category::get();
+        $brands = Brand::get();
+        $suppliers = Supplier::get();
+        $params = [
+            'categories' => $categories,
+            'brands' => $brands,
+            'suppliers' => $suppliers,
+            'products' => $products
+        ];
+        return view('admin.products.index', $params);
     }
 
     public function create()
@@ -41,7 +52,7 @@ class ProductController extends Controller
         return view('admin.products.add', $params);
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         try {
             DB::beginTransaction();
@@ -60,7 +71,7 @@ class ProductController extends Controller
     public function show( $id)
     {
         $product = $this->productService->find($id);
-        return view('back-end.product.show',compact('product'));
+        return view('admin.products.detail',compact('product'));
     }
 
     public function edit($id)
@@ -80,72 +91,71 @@ class ProductController extends Controller
         return view('admin.products.edit', $params);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         try {
+            DB::beginTransaction();
             $data = $request->all();
             $this->productService->update($id, $data);
-            $notification = array(
-                'message' => 'Edited product successfully',
-                'alert-type' => 'success'
-            );
-            return redirect()->route('product.index')->with($notification);
+            Session::flash('success', config('define.update.succes'));
+            DB::commit();
+            return redirect()->route('product.index');
         } catch (Exception $e) {
+            DB::rollBack();
             Log::error('errors' . $e->getMessage() . ' getLine' . $e->getLine());
-            $notification = array(
-                'message' => 'Edited product faill',
-                'alert-type' => 'error'
-            );
-            return redirect()->back()->with($notification);
+            Session::flash('error', config('define.update.error'));
+            return redirect()->route('product.index');
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $product = $this->productService->delete($id);
-        return response()->json($product);
+        try {
+            DB::beginTransaction();
+            $this->productService->delete($id);
+            Session::flash('success', config('define.recycle.succes'));
+            DB::commit();
+            return redirect()->route('product.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('errors' . $e->getMessage() . ' getLine' . $e->getLine());
+            Session::flash('error', config('define.recycle.error'));
+            return redirect()->route('product.index');
+        }
     }
     public function getTrashed()
     {
         $products = $this->productService->getTrashed();
-        return view('back-end.product.softDelete', compact('products'));
+        return view('admin.products.recycle', compact('products'));
     }
     public function restore($id)
     {
-        $this->productService->restore($id);
-        $notification = array(
-            'message' => 'Restore product successfully',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('product.getTrashed')->with($notification);
+        try {
+            DB::beginTransaction();
+            $this->productService->restore($id);
+            Session::flash('success', config('define.restore.succes'));
+            DB::commit();
+            return redirect()->route('product.getTrashed');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('errors' . $e->getMessage() . ' getLine' . $e->getLine());
+            Session::flash('error', config('define.restore.error'));
+            return redirect()->route('product.getTrashed');
+        }
     }
     public function force_destroy($id)
     {
         try {
-
-        $product = $this->productService->force_destroy($id);
-        return response()->json($product);
-
+            DB::beginTransaction();
+            $this->productService->force_destroy($id);
+            Session::flash('success', config('define.delete.succes'));
+            DB::commit();
+            return redirect()->route('product.getTrashed');
         }catch (Exception $e) {
+            DB::rollBack();
             Log::error('errors' . $e->getMessage() . ' getLine' . $e->getLine());
-            $notification = array(
-                'message' => 'Deleted product faill',
-                'alert-type' => 'error'
-            );
-            return redirect()->back()->with($notification);
+            Session::flash('error', config('define.delete.error'));
+            return redirect()->route('product.getTrashed');
         }
     }
     public function showStatus($id){
@@ -164,4 +174,5 @@ class ProductController extends Controller
             return redirect()->back();
         }
     }
+
 }

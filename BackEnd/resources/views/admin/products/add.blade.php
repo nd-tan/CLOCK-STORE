@@ -17,54 +17,90 @@
     <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="col-md-11">
-            <label for="inputName5" class="form-label">Tên sản phẩm</label>
-            <input type="text" class="form-control" id="inputName5" name="name"><br>
+          <div class="row g-2">
 
+            <div class="col-md-6">
+                <label for="inputName5" class="form-label">Tên sản phẩm</label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="inputName5" name="name">
+                @error('name')
+                <div class="text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-md-6">
+                <label for="inputName5" class="form-label">Loại đồng hồ</label>
+                <select name="type_gender" class="form-select @error('type_gender') is-invalid @enderror">
+                    <option selected value="">-----Loại đồng hồ-----</option>
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                </select>
+                @error('type_gender')
+                <div class="text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+          </div>
           <div class="row g-3">
+              <div class="col-md-6">
+                <label for="inputEmail5" class="form-label">Giá</label>
+                <input type="number" class="form-control @error('price') is-invalid @enderror" id="inputEmail5" name="price">
+                @error('price')
+                <div class="text text-danger">{{ $message }}</div>
+                @enderror
+              </div>
+              <div class="col-md-6">
+                <label for="inputPassword5" class="form-label">Số Lượng</label>
+                <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="inputPassword5" name="quantity">
+                @error('quantity')
+                <div class="text text-danger">{{ $message }}</div>
+                @enderror
+              </div>
             <div class="col-md-4">
-                <label for="inputState" class="form-label">Nhãn hiệu</label>
-                <select id="inputState" class="form-select" name="brand_id">
-                    <option selected>-----Nhãn hiệu-----</option>
+                <label for="inputState" class="form-label">Thương hiệu</label>
+                <select id="inputState" class="form-select @error('brand_id') is-invalid @enderror" name="brand_id">
+                    <option selected value="">-----Thương hiệu-----</option>
                     @foreach($brands as $brand)
                     <option value="{{$brand->id}}">{{$brand->name}}</option>
                     @endforeach
                 </select>
+                @error('brand_id')
+                <div class="text text-danger">{{ $message }}</div>
+                @enderror
               </div>
               <div class="col-md-4">
                 <label for="inputState" class="form-label">Danh mục</label>
-                <select id="inputState" class="form-select" name="category_id">
-                    <option selected>-----Danh mục-----</option>
+                <select id="inputState" class="form-select @error('category_id') is-invalid @enderror" name="category_id">
+                    <option selected value="">-----Danh mục-----</option>
                     @foreach($categories as $category)
                     <option value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                 </select>
+                @error('category_id')
+                <div class="text text-danger">{{ $message }}</div>
+                @enderror
               </div>
               <div class="col-md-4">
                 <label for="inputState" class="form-label">Nhà cung cấp</label>
-                <select id="inputState" class="form-select" name="supplier_id">
-                    <option selected>-----Nhà cung cấp-----</option>
+                <select id="inputState" class="form-select @error('supplier_id') is-invalid @enderror" name="supplier_id">
+                    <option selected value="">-----Nhà cung cấp-----</option>
                     @foreach($suppliers as $supplier)
                         <option value="{{$supplier->id}}">{{$supplier->name}}</option>
                     @endforeach
                 </select>
+                @error('supplier_id')
+                <div class="text text-danger">{{ $message }}</div>
+            @enderror
               </div>
 
-          <div class="col-md-6">
-            <label for="inputEmail5" class="form-label">Giá</label>
-            <input type="number" class="form-control" id="inputEmail5" name="price">
-          </div>
-          <div class="col-md-6">
-            <label for="inputPassword5" class="form-label">Số Lượng</label>
-            <input type="number" class="form-control" id="inputPassword5" name="quantity">
-          </div>
           <div class="col-12">
             <label for="inputAddress2" class="form-label">Mô Tả</label>
-            <textarea name="description" class="form-control" value="{{ old('description') }}" id="ckeditor1" rows="4"
+            <textarea name="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}" id="ckeditor1" rows="4"
             style="resize: none"></textarea>
+            @error('description')
+            <div class="text text-danger">{{ $message }}</div>
+            @enderror
           </div>
           <div class="col-md-4">
             <label for="inputCity" class="form-label">Ảnh</label>
-            <input accept="image/*" type='file' id="inputFile" name="inputFile" class="form-control @error('inputFile') is-invalid @enderror">
+            <input accept="image/*" type='file' id="inputFile" name="inputFile" class="form-control @error('inputFile') is-invalid @enderror"><br>
         @error('inputFile')
         <div class="text text-danger">{{ $message }}</div>
         @enderror
@@ -74,15 +110,15 @@
           <div class="col-md-8">
             <label for="file_name" class="form-label">Ảnh Chi Tiết</label>
             <div class="card_file_name">
-                <div class="form-group form_input @error('file_names') border border-danger @enderror">
+                <div class="form-group form_input ">
                     <span class="inner"><span class="select"></span>
                     </span>
                     <input type="file" name="file_names[]" id="file_name" multiple
-                        class="form-control files @error('file_name') is-invalid @enderror">
+                        class="form-control files @error('file_names') is-invalid @enderror">
                 </div>
                 <div class="container_image">
                     @error('file_names')
-                        <div class="text text-danger">{{ $message }}</div>
+                        <div style="margin-top: 22px" class="text text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>

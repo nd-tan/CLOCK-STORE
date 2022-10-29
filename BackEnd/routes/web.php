@@ -50,5 +50,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::delete('product/delete/{id}', 'force_destroy')->name('product.delete');
     Route::get('product/getTrashed', 'getTrashed')->name('product.getTrashed');
     Route::get('product/restore/{id}', 'restore')->name('product.restore');
+    Route::get('products/showStatus/{id}','showStatus')->name('products.showStatus');
+    Route::get('products/hideStatus/{id}', 'hideStatus')->name('products.hideStatus');
 });
 Route::resource('product', ProductController::class);
