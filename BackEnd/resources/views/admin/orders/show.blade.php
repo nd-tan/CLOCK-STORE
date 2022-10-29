@@ -25,8 +25,8 @@
                         <div class="card-body">
                             <div class="mb-3 d-flex justify-content-between">
                                 <div>
-                                    <span class="me-3">Ngày Đặt: {{ $order->created_at }}</span>
-                                    <span class="me-3">Ngày Duyệt: {{ $order->updated_at }}</span>
+                                    <span class="me-3">Ngày Đặt: {{ date_format($order->created_at, "H:i:s - d/m/Y") }}</span>
+                                    <span class="me-3">Ngày Duyệt: {{ date_format($order->updated_at, "H:i:s - d/m/Y") }}</span>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -53,7 +53,7 @@
                                                 </div>
                                         <td>
                                             <h6 class="small mb-0">
-                                                <a href="" class="text-reset">{{ $orderDetail->products->name }}</a>
+                                                <a href="" class="text-reset">{{ $orderDetail->products->name.' ('.$orderDetail->products->type_gender.')' }}</a>
                                             </h6>
                                         </td>
                                         </div>
@@ -89,10 +89,14 @@
                                     <h3 class="h6">Địa Chỉ Thanh Toán</h3>
                                     <address>
                                         <div>
-                                            <strong>{{ $order->province->name }}, {{ $order->district->name }}, {{ $order->ward->name }}</strong>
+                                            <strong>{{"Vị Trí: ". $order->address }}</strong>
                                         </div>
                                         <div>
-                                            <strong>{{ $order->address }}</strong>
+                                            <strong>
+                                                {{ $order->province->name }},
+                                                {{ $order->district->name }},
+                                                {{ $order->ward->name }}
+                                                </strong>
                                         </div>
                                 </div>
                             </div>
