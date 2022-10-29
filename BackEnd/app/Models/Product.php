@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-<<<<<<< HEAD
     use HasFactory;
     use SoftDeletes;
+    protected $table = 'products';
     protected $fillable = [
         'name', 'quantity', 'price', 'description', 'image',
          'status', 'category_id', 'brand_id', 'supplier_id', 'type_gender'
@@ -23,10 +23,6 @@ class Product extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
-=======
-    use HasFactory,SoftDeletes;
-    protected $table = 'products';
->>>>>>> 65e4b3bfdf4bc64d2553e9e24543b3c781a44fb2
     public function brand()
     {
         return $this->belongsTo(Brand::class);
@@ -37,7 +33,6 @@ class Product extends Model
     public function image_products(){
         return $this->hasMany(ImageProducts::class, 'product_id','id');
     }
-<<<<<<< HEAD
     public function scopeNameCate($query, $request)
     {
         if ($request->has('category_id')) {
@@ -91,10 +86,3 @@ class Product extends Model
         return $query;
     }
 }
-=======
-    public function categories()
-    {
-        return $this->belongsTo(Category::class);
-    }
-}
->>>>>>> 65e4b3bfdf4bc64d2553e9e24543b3c781a44fb2
