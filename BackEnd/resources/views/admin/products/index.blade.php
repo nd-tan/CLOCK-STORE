@@ -29,10 +29,6 @@
             class="form-inline d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
             <div style="margin-top: 12px;" class="form-group">
                 <div class="input-group-prepend">
-                    {{-- <button class="btn btn-primary" type="button" data-toggle="modal"
-                        data-target="#searchModal">Tìm nâng cao</button> --}}
-
-
                 </div>
                 <input class="form-control" name="search" placeholder="tìm kiếm">
                 <button type="submit" class="btn btn-primary">

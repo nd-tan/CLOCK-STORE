@@ -92,9 +92,9 @@ class BrandController extends Controller
         }
     }
 
-    public function getTrashed()
+    public function getTrashed(Request $request)
     {
-        $brands = $this->brandService->getTrash();
+        $brands = $this->brandService->getTrash($request);
         return view('admin.brands.recycle',compact('brands'));
     }
 
@@ -131,33 +131,4 @@ class BrandController extends Controller
         }
     }
 
-    public function searchByName(Request $request)
-    {
-        $brands=[];
-        try {
-                   $keyword = $request->input('keyword');
-        $brands = $this->brandService->searchBrand($keyword);
-        return response()->json($brands,200);
-        } catch (Exception $e) {
-            Log::error('errors' . $e->getMessage() . 'getLine' . $e->getLine());
-            return response()->json($brands,500);
-        }
-
-    }
-    public function searchBrand(Request $request)
-    {
-        $brands=[];
-        try {
-            $keySearch=$request->keySearch;
-            $brands =$this->brandService->searchBrand($keySearch);
-        $params = [
-            'brands' => $brands
-        ];
-        return  view('back-end.brand.index', $params);
-        } catch (Exception $e) {
-            Log::error('errors' . $e->getMessage() . 'getLine' . $e->getLine());
-            return response()->json(['brands' => $brands],500);
-        }
-
-    }
 }

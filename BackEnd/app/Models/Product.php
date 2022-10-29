@@ -31,7 +31,7 @@ class Product extends Model
         return $this->hasMany(OrderDetail::class, 'product_id','id');
     }
     public function image_products(){
-        return $this->hasMany(ImageProducts::class, 'product_id','id');
+        return $this->hasMany(ProductImage::class, 'product_id','id');
     }
     public function scopeNameCate($query, $request)
     {
@@ -83,6 +83,17 @@ class Product extends Model
         if ($request->has('type_gender')) {
             $query->where('type_gender', $request->type_gender);
         };
+        return $query;
+    }
+    public function scopeSearch($query, $term)
+    {
+        if ($term) {
+            $query->where('name', 'like', '%' . $term . '%')
+                ->orWhere('price', 'like', '%' . $term . '%')
+                ->orWhere('status', 'like', '%' . $term . '%')
+                ->orWhere('quantity', 'like', '%' . $term . '%')
+                ->orWhere('id', 'like', '%' . $term . '%');
+        }
         return $query;
     }
 }

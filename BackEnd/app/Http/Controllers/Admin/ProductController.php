@@ -76,7 +76,6 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-
         $product = $this->productService->find($id);
         $categories = Category::get();
         $brands = Brand::get();

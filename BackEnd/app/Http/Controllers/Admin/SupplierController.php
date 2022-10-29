@@ -80,8 +80,8 @@ class SupplierController extends Controller
         }
     }
 
-    public function getTrashed(){
-        $suppliers = $this->supplierService->getTrashed();
+    public function getTrashed(Request $request){
+        $suppliers = $this->supplierService->getTrashed($request);
         return view('admin.suppliers.recycle',compact('suppliers'));
     }
 
