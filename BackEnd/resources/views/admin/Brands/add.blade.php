@@ -35,7 +35,7 @@
       </div>
       </div><br>
         <button type="submit" class="btn btn-primary">Thêm</button>
-        <button type="reset" class="btn btn-secondary">Reset</button>
+        <a style="float: right" href="{{route('brand.index')}}" type="button" class="btn btn-danger">Quay lại</a>
       </div>
     </form>
   </div>

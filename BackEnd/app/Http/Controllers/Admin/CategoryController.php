@@ -80,8 +80,8 @@ class CategoryController extends Controller
         }
     }
 
-    public function getTrashed(){
-        $categories = $this->categoryService->getTrashed();
+    public function getTrashed(Request $request){
+        $categories = $this->categoryService->getTrashed($request);
         return view('admin.category.recycle',compact('categories'));
     }
 

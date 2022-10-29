@@ -25,7 +25,7 @@
         @enderror<br>
       <div>
         <button type="submit" class="btn btn-primary">Sửa</button>
-        <button type="reset" class="btn btn-secondary">Reset</button>
+        <a style="float: right" href="{{route('category.index')}}" type="button" class="btn btn-danger">Quay lại</a>
       </div>
     </form>
   </div>

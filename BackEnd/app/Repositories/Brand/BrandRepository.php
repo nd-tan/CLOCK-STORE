@@ -18,7 +18,13 @@ class BrandRepository extends BaseRepository implements BrandRepositoryInterface
 
     public function all($request)
     {
-        return $this->model->latest()->paginate(8);
+        $brands = $this->model->select('*');
+
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $brands = $brands->Search($search);
+        }
+        return $brands->orderBy('id','DESC')->paginate(5);
     }
     public function create($data)
     {
@@ -47,9 +53,15 @@ class BrandRepository extends BaseRepository implements BrandRepositoryInterface
         }
         return $this->model->update($data);
     }
-    public function getTrash()
+    public function getTrash($request)
     {
-        return  $this->model->onlyTrashed()->paginate(2);
+        $query = $this->model->onlyTrashed();
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $query = $query->Search($search);
+        }
+
+        return $query->orderBy('id', 'DESC')->paginate(5);
     }
     public function restore($id){
         return  $this->model->withTrashed()->where('id', $id)->restore();
@@ -57,15 +69,6 @@ class BrandRepository extends BaseRepository implements BrandRepositoryInterface
     public function forceDelete($id)
     {
         return  $this->model->withTrashed()->where('id', $id)->forceDelete();
-
-    }
-    public function searchBrand($name){
-        $brands =  $this->model::where('name', 'like', '%' . $name . '%')
-        ->orWhere('logo', 'like', '%' . $name . '%');
-        if(Route::currentRouteName() =='brand.searchKey'){
-            return  $brands->get();
-          }
-          return  $brands->paginate(8);
     }
 
 }

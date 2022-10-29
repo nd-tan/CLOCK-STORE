@@ -30,24 +30,18 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             ->filterPrice(request(['startPrice', 'endPrice']))
             ->filterDate(request(['start_date', 'end_date']))
             ->status($request)->Type($request);
-            // $products->NameSupp($request);
-            // $products->NameBran($request);
         }
         if (!empty($request->supplier_id)) {
             $products->NameSupp($request)
             ->filterPrice(request(['startPrice', 'endPrice']))
             ->filterDate(request(['start_date', 'end_date']))
             ->status($request)->Type($request);
-            // $products->NameSupp($request);
-            // $products->NameBran($request);
         }
         if (!empty($request->brand_id)) {
             $products->NameBran($request)
             ->filterPrice(request(['startPrice', 'endPrice']))
             ->filterDate(request(['start_date', 'end_date']))
             ->status($request)->Type($request);
-            // $products->NameSupp($request);
-            // $products->NameBran($request);
         }
 
         $products->filterPrice(request(['startPrice', 'endPrice']));
@@ -55,13 +49,10 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         $products->status($request);
         $products->Type($request);
 
-        // return $products->orderBy('id', 'DESC')->paginate(5);
         return $products->orderBy('id', 'DESC')->paginate(5);
     }
     public function create($data)
     {
-        // dd($data);
-
         try {
             $product = $this->model;
             $product->name = $data['name'];

@@ -25,7 +25,7 @@
             <div class="thumbnail_images">
                 <ul style="padding-left: 0rem;" id="thumbnail">
                     <img onclick="changeImage(this)" src="{{ asset('storage/images/product/' .$product->image) }}" width="100">
-                    @foreach ($product->product_images as $file_name)
+                    @foreach ($product->image_products as $file_name)
                         <img onclick="changeImage(this)" src="{{ asset('storage/images/product/' .$file_name->image) }}"
                             width="100px">
                     @endforeach

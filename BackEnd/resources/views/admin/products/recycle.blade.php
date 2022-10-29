@@ -76,8 +76,10 @@
         </tr>
         @endforeach
       </tbody>
-    </table>
-    {{ $products->onEachSide(5)->links() }}
+    </table >
+    <div style="float: right">
+        {{ $products->onEachSide(5)->links() }}
+    </div>
   </div>
 </div>
 </main>

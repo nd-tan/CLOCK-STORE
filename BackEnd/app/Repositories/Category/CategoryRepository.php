@@ -13,12 +13,13 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     }
     public function all($request)
     {
-        $search = $request->search;
         $categories = $this->model->select('*');
-        if ($search) {
-            $categories = $categories->where('name', 'like', '%' . $search . '%');
+
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $categories = $categories->Search($search);
         }
-        return $categories->orderBy('id','DESC')->paginate(10);
+        return $categories->orderBy('id','DESC')->paginate(5);
     }
     public function update($id, $data){
 
@@ -38,11 +39,14 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         }
         return $category;
     }
-    public function getTrashed(){
+    public function getTrashed($request){
         $query = $this->model->onlyTrashed();
-        $query->orderBy('id', 'desc');
-        $category = $query->paginate(5);
-        return $category;
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $query = $query->Search($search);
+        }
+
+        return $query->orderBy('id', 'DESC')->paginate(5);
     }
     public function restore($id){
         $category = $this->model->withTrashed()->findOrFail($id);
