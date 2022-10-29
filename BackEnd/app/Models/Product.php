@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
+<<<<<<< HEAD
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [
@@ -22,24 +23,21 @@ class Product extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
+=======
+    use HasFactory,SoftDeletes;
+    protected $table = 'products';
+>>>>>>> 65e4b3bfdf4bc64d2553e9e24543b3c781a44fb2
     public function brand()
     {
         return $this->belongsTo(Brand::class);
     }
-    public function product_images()
-    {
-        return $this->hasMany(ProductImage::class);
+    public function orderDetails(){
+        return $this->hasMany(OrderDetail::class, 'product_id','id');
     }
-    public function scopeSearch($query, $term)
-    {
-        if ($term) {
-            $query->where('name', 'like', '%' . $term . '%')
-                ->orWhere('price', 'like', '%' . $term . '%')
-                ->orWhere('status', 'like', '%' . $term . '%')
-                ->orWhere('quantity', 'like', '%' . $term . '%');
-        }
-        return $query;
+    public function image_products(){
+        return $this->hasMany(ImageProducts::class, 'product_id','id');
     }
+<<<<<<< HEAD
     public function scopeNameCate($query, $request)
     {
         if ($request->has('category_id')) {
@@ -93,3 +91,10 @@ class Product extends Model
         return $query;
     }
 }
+=======
+    public function categories()
+    {
+        return $this->belongsTo(Category::class);
+    }
+}
+>>>>>>> 65e4b3bfdf4bc64d2553e9e24543b3c781a44fb2
