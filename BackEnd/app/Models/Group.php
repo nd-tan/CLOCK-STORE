@@ -9,9 +9,12 @@ class Group extends Model
 {
     use HasFactory;
     protected $table = 'groups';
-    protected $fillable = ['name'];
+    protected $fillable = ['id','name'];
     function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(User::class,'group_id','id');
+    }
+    public function roles() {
+        return $this->belongsToMany(Role::class,'group_roles','group_id','role_id');
     }
 }

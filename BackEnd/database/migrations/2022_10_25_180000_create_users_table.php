@@ -17,21 +17,29 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('email');
             $table->string('password');
             $table->string('phone');
-            $table->date('birthday');
+            $table->string('birthday');
             $table->string('image');
             $table->string('gender');
             $table->unsignedBigInteger('province_id');
-            $table->foreign('province_id')->references('id')->on('provinces');
+            $table->foreign('province_id')
+                ->references('id')
+                ->on('provinces');
             $table->unsignedBigInteger('district_id');
-            $table->foreign('district_id')->references('id')->on('districts');
+            $table->foreign('district_id')
+                ->references('id')
+                ->on('districts');
             $table->unsignedBigInteger('ward_id');
-            $table->foreign('ward_id')->references('id')->on('wards');
+            $table->foreign('ward_id')
+                ->references('id')
+                ->on('wards');
             $table->unsignedBigInteger('group_id');
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('group_id')
+                ->references('id')
+                ->on('groups');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

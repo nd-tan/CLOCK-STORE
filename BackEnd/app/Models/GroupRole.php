@@ -10,8 +10,4 @@ class GroupRole extends Model
     use HasFactory;
     protected $table = 'group_role';
     protected $fillable = ['group_id','role_id'];
-    function group()
-    {
-        return $this->belongsToMany(Group::class);
-    }
 }

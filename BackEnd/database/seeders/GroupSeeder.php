@@ -16,21 +16,6 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
-        $group = Group::create([
-            'id' => 1,
-            'name' => "Admin",
-        ]);
-        $group = Group::create([
-            'id' => 2,
-            'name' => "Admin",
-        ]);
-        $group = Group::create([
-            'id' => 3,
-            'name' => "Admin",
-        ]);
-        $group = Group::create([
-            'id' => 4,
-            'name' => "Admin",
-        ]);
+
     }
 }

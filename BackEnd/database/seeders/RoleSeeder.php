@@ -16,25 +16,6 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::create([
-            'id' => 1,
-            'name' => 'Phan Ngọc Cường',
-            'group_name' => 'VIP',
-        ]);
-        $role = Role::create([
-            'id' => 2,
-            'name' => 'Phan Ngọc Cường',
-            'group_name' => 'VIP',
-        ]);
-        $role = Role::create([
-            'id' => 3,
-            'name' => 'Phan Ngọc Cường',
-            'group_name' => 'VIP',
-        ]);
-        $role = Role::create([
-            'id' => 4,
-            'name' => 'Phan Ngọc Cường',
-            'group_name' => 'VIP',
-        ]);
+
     }
 }

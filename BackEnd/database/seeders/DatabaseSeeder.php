@@ -32,10 +32,16 @@ class DatabaseSeeder extends Seeder
             GroupRoleSeeder::class,
             UserSeeder::class,
         ]);
+        $this->importGroup();
+        // $this->importRole();
+        $this->importRoles();
+        $this->importGroupRole();
+        // $this->importGroupRole_1();
+        $this->importUser();
     }
     public function importRoles()
     {
-        $groups = ['Category', 'User', 'Supplier', 'Product', 'group'];
+        $groups = ['Category', 'User', 'Supplier', 'Product', 'Group','Brand'];
         $actions = ['viewAny', 'view', 'create', 'update', 'delete', 'restore', 'forceDelete'];
         foreach ($groups as $group) {
             foreach ($actions as $action) {
@@ -65,8 +71,8 @@ class DatabaseSeeder extends Seeder
 
     public function importGroupRole()
     {
-        for ($i = 1; $i <= 35; $i++) {
-            DB::table('Group_role')->insert([
+        for ($i = 1; $i <= 42; $i++) {
+            DB::table('group_roles')->insert([
                 'group_id' => 1,
                 'role_id' => $i,
             ]);
@@ -74,9 +80,9 @@ class DatabaseSeeder extends Seeder
     }
     public function importGroupRole_1()
     {
-        for ($i = 36; $i <= 39; $i++) {
-            DB::table('group_role')->insert([
-                'position_id' => 1,
+        for ($i = 43; $i <= 46; $i++) {
+            DB::table('group_roles')->insert([
+                'group_id' => 1,
                 'role_id' => $i,
             ]);
         }
@@ -84,22 +90,22 @@ class DatabaseSeeder extends Seeder
 
     public function importGroup()
     {
-        $userGroup = new Group();
-        $userGroup->name = 'Supper Admin';
-        $userGroup->save();
+        $group = new Group();
+        $group->name = 'Supper Admin';
+        $group->save();
 
-        $userGroup = new Group();
-        $userGroup->name = 'Quản Lý';
-        $userGroup->save();
+        $group = new Group();
+        $group->name = 'Quản Lý';
+        $group->save();
 
-        $userGroup = new Group();
-        $userGroup->name = 'Giám Đốc';
-        $userGroup->save();
+        $group = new Group();
+        $group->name = 'Giám Đốc';
+        $group->save();
 
 
-        $userGroup = new Group();
-        $userGroup->name = 'Nhân Viên';
-        $userGroup->save();
+        $group = new Group();
+        $group->name = 'Nhân Viên';
+        $group->save();
     }
 
     public function importUser()
@@ -107,11 +113,26 @@ class DatabaseSeeder extends Seeder
         $user = new User();
         $user->name = 'Phan Ngọc Cường';
         $user->email = 'cuong@gmail.com';
-        $user->password = bcrypt('123');
+        $user->password = Hash::make('123');
         $user->phone = '0337868789';
         $user->birthday = '1996/07/07';
         $user->address = 'Quảng Trị';
         $user->image = 'cuong.jpg';
+        $user->gender = 'Nam';
+        $user->province_id = '1';
+        $user->district_id = '1';
+        $user->ward_id = '1';
+        $user->group_id = '1';
+        $user->save();
+
+        $user = new User();
+        $user->name = 'Phùng Văn Phi';
+        $user->email = 'phi@gmail.com';
+        $user->password = Hash::make('123');
+        $user->phone = '0777333274';
+        $user->birthday = '2002/04/24';
+        $user->address = 'Quảng Trị';
+        $user->image = 'phi.jpg';
         $user->gender = 'Nam';
         $user->province_id = '2';
         $user->district_id = '2';
@@ -120,24 +141,9 @@ class DatabaseSeeder extends Seeder
         $user->save();
 
         $user = new User();
-        $user->name = 'Phùng Văn Phi';
-        $user->email = 'phi@gmail.com';
-        $user->password = bcrypt('123');
-        $user->phone = '0777333274';
-        $user->birthday = '2002/04/24';
-        $user->address = 'Quảng Trị';
-        $user->image = 'phi.jpg';
-        $user->gender = 'Nam';
-        $user->province_id = '3';
-        $user->district_id = '3';
-        $user->ward_id = '3';
-        $user->group_id = '3';
-        $user->save();
-
-        $user = new User();
         $user->name = 'Hoàng Thanh Hải';
         $user->email = 'hai@gmail.com';
-        $user->password = bcrypt('123');
+        $user->password = Hash::make('123');
         $user->phone = '0916663237';
         $user->birthday = '2003/06/27';
         $user->address = 'Quảng Trị';
@@ -152,7 +158,7 @@ class DatabaseSeeder extends Seeder
         $user = new User();
         $user->name = 'Nguyễn Ngọc Dương';
         $user->email = 'duong@gmail.com';
-        $user->password = bcrypt('123');
+        $user->password = Hash::make('123');
         $user->phone = '0123456789';
         $user->birthday = '2001/03/21';
         $user->address = 'Quảng Trị';
@@ -167,7 +173,7 @@ class DatabaseSeeder extends Seeder
         $user = new User();
         $user->name = 'Trần Ngọc Vinh';
         $user->email = 'vinh@gmail.com';
-        $user->password = bcrypt('123');
+        $user->password = Hash::make('123');
         $user->phone = '0123456788';
         $user->birthday = '2003/11/11';
         $user->address = 'Quảng Trị';
