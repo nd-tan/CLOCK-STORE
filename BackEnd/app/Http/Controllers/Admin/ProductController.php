@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
+use App\Models\User;
 use App\Services\Product\ProductServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -71,7 +72,8 @@ class ProductController extends Controller
     public function show( $id)
     {
         $product = $this->productService->find($id);
-        return view('admin.products.detail',compact('product'));
+        $users= User::all();
+        return view('admin.products.detail',compact('product', 'users'));
     }
 
     public function edit($id)

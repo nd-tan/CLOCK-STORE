@@ -5,8 +5,8 @@
         <h1 class="mb-1">Danh Mục</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="{{route('category.index')}}">Danh mục</a></li>
+            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{route('category.index')}}">Danh Mục</a></li>
             <li class="breadcrumb-item">Thùng Rác</li>
           </ol>
         </nav>
@@ -46,9 +46,9 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">The number of products</th>
-          <th scope="col">Action</th>
+          <th scope="col">Tên sản phẩm</th>
+          <th scope="col">Số lượng sản phẩm</th>
+          <th scope="col">Thao tác</th>
         </tr>
       </thead>
       <tbody>

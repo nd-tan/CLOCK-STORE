@@ -47,7 +47,7 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Tên danh mục</th>
-          <th scope="col">Số lượng sản phẩm</th>
+          <th  scope="col">Số lượng sản phẩm</th>
           <th scope="col">Thao tác</th>
         </tr>
       </thead>
@@ -57,7 +57,7 @@
         <tr>
           <th scope="row">{{$key + 1}}</th>
           <td>{{$category->name}}</td>
-          <td>{{$category->products->count()}}</td>
+          <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{$category->products->count()}}</td>
           <td>
             <form action="{{ route('category.destroy', $category->id) }}" method="post" >
                 @method('DELETE')

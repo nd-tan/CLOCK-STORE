@@ -5,7 +5,7 @@
         <h1 class="mb-1">Sản Phẩm</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
             <li class="breadcrumb-item"><a href="{{route('product.index')}}">Sản Phẩm</a></li>
             <li class="breadcrumb-item">Thùng Rác</a></li>
           </ol>
@@ -75,10 +75,10 @@
             <form action="{{ route('product.delete', $product->id) }}" method="post" >
                 @method('DELETE')
                 @csrf
-            <a onclick="return confirm('Bạn có chắc muốn khôi phục thương hiệu này không?');"
+            <a onclick="return confirm('Bạn có chắc muốn khôi phục sản phẩm này không?');"
             data-bs-toggle="tooltip" data-bs-placement="top" title="Khôi phục sản phẩm" style='color:rgb(52,136,245)' class='btn' href="{{route('product.restore',$product->id)}}">
                 <i class='bi bi-arrow-clockwise h4 h4'></i></a>
-            <button data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa sản phẩm" onclick="return confirm('Bạn có chắc muốn đưa danh mục này vào thùng rác không?');"
+            <button data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa sản phẩm" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
             </form>
           </td>
