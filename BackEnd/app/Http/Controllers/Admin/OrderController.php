@@ -20,7 +20,8 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
+    {
+        $this->authorize('viewAny', Order::class);
         $orders = $this->orderService->getAllWithPaginateLatest($request);
         $params = [
             'orders' => $orders,
@@ -36,7 +37,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -58,13 +59,14 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', Order::class);
         $order = $this->orderService->find($id);
         $orderDetails = $order->orderDetails;
         $params = [
             'order' => $order,
             'orderDetails' => $orderDetails,
         ];
-        // dd($orderDetails);  
+        // dd($orderDetails);
         return view('admin.orders.show', $params);
     }
 

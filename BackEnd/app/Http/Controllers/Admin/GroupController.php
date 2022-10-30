@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Session;
 
 class GroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     protected $groupService;
 
@@ -38,23 +33,12 @@ class GroupController extends Controller
         return view('admin.groups.index',$params);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $this->authorize('create', Group::class);
         return view('admin.groups.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreGroupRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreGroupRequest $request)
     {
         try {
@@ -67,23 +51,15 @@ class GroupController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Group  $user_groups
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        // $this->authorize('view', Position::class);
+        $this->authorize('view', Group::class);
         $item=Group::find($id);
 
         $current_user = Auth::user();
         $userRoles = $item->roles->pluck('id', 'name')->toArray();
-        // dd($userRoles);
         $roles = Role::all()->toArray();
         $position_names = [];
-        /////lấy tên nhóm quyền
         foreach ($roles as $role) {
             $position_names[$role['group_name']][] = $role;
         }
@@ -99,10 +75,9 @@ class GroupController extends Controller
     public function edit($id)
     {
         $item = Group::find($id);
-        $this->authorize('update',  $item);
+        $this->authorize('update', Group::class);
         $current_user = Auth::user();
         $userRoles = $item->roles->pluck('id', 'name')->toArray();
-        // dd($current_user->userGroup->roles->toArray());
         $roles = Role::all()->toArray();
         $group_names = [];
         foreach ($roles as $role) {
@@ -132,6 +107,7 @@ class GroupController extends Controller
 
     public function destroy(Request $request,$id)
     {
+        $this->authorize('delete', Group::class);
         try {
             $item = $this->groupService->delete($id);
             return redirect()->route('groups.index');
@@ -153,6 +129,7 @@ class GroupController extends Controller
 
     public function restore($id)
     {
+        $this->authorize('restore',Group::class);
         try {
             $this->groupService->restore($id);
             Session::flash('success', config('define.restore.succes'));
@@ -166,7 +143,7 @@ class GroupController extends Controller
 
     public function force_destroy($id)
     {
-
+        $this->authorize('forceDelete', Group::class);
         try {
             $Group = $this->groupService->force_destroy($id);
             Session::flash('success', config('define.delete.succes'));

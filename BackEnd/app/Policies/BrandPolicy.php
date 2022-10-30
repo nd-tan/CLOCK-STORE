@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BrandPolicy
@@ -15,9 +16,9 @@ class BrandPolicy
      * @param  \App\Models\Brand  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(Brand $brand)
+    public function viewAny(User $user)
     {
-        return $brand->hasPermission('Brand_viewAny');
+        return $user->hasPermission('Brand_viewAny');
     }
 
     /**
@@ -27,9 +28,9 @@ class BrandPolicy
      * @param  \App\Models\Brand  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Brand $brand, Brand $model)
+    public function view(User $user)
     {
-        return $brand->hasPermission('Brand_view');
+        return $user->hasPermission('Brand_view');
     }
 
     /**
@@ -38,9 +39,9 @@ class BrandPolicy
      * @param  \App\Models\Brand  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(Brand $brand)
+    public function create(User $user)
     {
-         return $brand->hasPermission('Brand_create');
+         return $user->hasPermission('Brand_create');
     }
 
     /**
@@ -50,9 +51,9 @@ class BrandPolicy
      * @param  \App\Models\Brand  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Brand $brand, Brand $model)
+    public function update(User $user)
     {
-        return $brand->hasPermission('Brand_update');
+        return $user->hasPermission('Brand_update');
     }
 
     /**
@@ -62,9 +63,9 @@ class BrandPolicy
      * @param  \App\Models\Brand  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Brand $brand, Brand $model)
+    public function delete(User $user)
     {
-        return $brand->hasPermission('Brand_delete');
+        return $user->hasPermission('Brand_delete');
     }
 
     /**
@@ -74,9 +75,9 @@ class BrandPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(Brand $brand, Brand $model)
+    public function restore(User $user)
     {
-        return $brand->hasPermission('Brand_restore');
+        return $user->hasPermission('Brand_restore');
     }
 
     /**
@@ -86,8 +87,8 @@ class BrandPolicy
      * @param  \App\Models\Brand  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(Brand $brand, Brand $model)
+    public function forceDelete(User $user)
     {
-        return $brand->hasPermission('Brand_forceDelete');
+        return $user->hasPermission('Brand_forceDelete');
     }
 }

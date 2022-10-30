@@ -22,6 +22,7 @@ class CustomerController extends Controller
 
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Customer::class);
         $customers =  $this->customerService->all($request);
         $params = ['customers' => $customers];
         return view('admin.customers.index', $params);
@@ -29,16 +30,17 @@ class CustomerController extends Controller
 
     public function create()
     {
-    
+
     }
 
     public function store(Request $request)
     {
-    
+
     }
 
     public function show($id)
     {
+        $this->authorize('view', Customer::class);
         $customer =  $this->customerService->find($id);
         $params = ['customer' => $customer];
         return view('admin.customers.show', $params);
@@ -46,17 +48,17 @@ class CustomerController extends Controller
 
     public function edit($id)
     {
-      
+
     }
 
     public function update(Request $request, $id)
     {
-      
+
     }
 
     public function destroy($id)
     {
-      
+
         try {
             DB::beginTransaction();
             $customer = $this->customerService->find($id);
@@ -74,7 +76,7 @@ class CustomerController extends Controller
         }
     }
     public function getTrash()
-    { 
+    {
         try {
             $customers = $this->customerService->getTrash();
             $params = ['customers' => $customers];
@@ -133,7 +135,7 @@ class CustomerController extends Controller
 
     public function searchCustomer(Request $request)
     {
-      
+
         try {
             $keySearch = $request->keySearch;
             $customers = $this->customerService->searchCustomer($keySearch);

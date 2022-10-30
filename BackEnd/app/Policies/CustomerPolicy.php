@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CustomerPolicy
@@ -15,9 +16,9 @@ class CustomerPolicy
      * @param  \App\Models\Customer  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(Customer $customer)
+    public function viewAny(User $user)
     {
-        return $customer->hasPermission('Customer_viewAny');
+        return $user->hasPermission('Customer_viewAny');
     }
 
     /**
@@ -27,9 +28,9 @@ class CustomerPolicy
      * @param  \App\Models\Customer  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Customer $customer, Customer $model)
+    public function view(User $user)
     {
-        return $customer->hasPermission('Customer_view');
+        return $user->hasPermission('Customer_view');
     }
 
     /**
@@ -38,9 +39,9 @@ class CustomerPolicy
      * @param  \App\Models\Customer  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(Customer $customer)
+    public function create(User $user)
     {
-         return $customer->hasPermission('Customer_create');
+         return $user->hasPermission('Customer_create');
     }
 
     /**
@@ -50,9 +51,9 @@ class CustomerPolicy
      * @param  \App\Models\Customer  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Customer $customer, Customer $model)
+    public function update(User $user)
     {
-        return $customer->hasPermission('Customer_update');
+        return $user->hasPermission('Customer_update');
     }
 
     /**
@@ -62,9 +63,9 @@ class CustomerPolicy
      * @param  \App\Models\Customer  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Customer $customer, Customer $model)
+    public function delete(User $user)
     {
-        return $customer->hasPermission('Customer_delete');
+        return $user->hasPermission('Customer_delete');
     }
 
     /**
@@ -74,9 +75,9 @@ class CustomerPolicy
      * @param  \App\Models\Customer  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(Customer $customer, Customer $model)
+    public function restore(User $user)
     {
-        return $customer->hasPermission('Customer_restore');
+        return $user->hasPermission('Customer_restore');
     }
 
     /**
@@ -86,8 +87,8 @@ class CustomerPolicy
      * @param  \App\Models\Customer  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(Customer $customer, Customer $model)
+    public function forceDelete(User $user)
     {
-        return $customer->hasPermission('Customer_forceDelete');
+        return $user->hasPermission('Customer_forceDelete');
     }
 }

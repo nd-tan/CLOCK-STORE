@@ -21,6 +21,7 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Category::class);
         $categories = $this->categoryService->all($request);
         return view('admin.category.index',compact('categories'));
     }
@@ -30,6 +31,7 @@ class CategoryController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Category::class);
         return view('admin.category.add');
     }
 
@@ -50,6 +52,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $item = $this->categoryService->find($id);
+        $this->authorize('update', Category::class);
         return view('admin.category.edit',compact('item'));
     }
 
@@ -69,6 +72,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete', Category::class);
         try {
             $category = $this->categoryService->delete($id);
             Session::flash('success', config('define.recycle.succes'));
@@ -86,6 +90,7 @@ class CategoryController extends Controller
     }
 
     public function restore($id){
+        $this->authorize('restore',Category::class);
         try {
             $this->categoryService->restore($id);
             Session::flash('success', config('define.restore.succes'));
@@ -98,6 +103,7 @@ class CategoryController extends Controller
     }
 
     public function force_destroy($id){
+        $this->authorize('forceDelete', Category::class);
         try {
             $category = $this->categoryService->force_destroy( $id);
             Session::flash('success', config('define.delete.succes'));

@@ -41,7 +41,9 @@
         {{ Session::get('error') }}
     </p>
 @endif
+@if(Auth::user()->hasPermission('Supplier_create'))
     <a class='btn btn-primary mb-2'  href="{{route('supplier.create')}}">Thêm nhà cung cấp</a>
+    @endif
     <a class='btn btn-secondary mb-2 float-right'  href="{{route('supplier.getTrashed')}}">Thùng rác</a>
     <table class="table table-hover">
       <thead>
@@ -66,10 +68,14 @@
             <form action="{{ route('supplier.destroy', $supplier->id) }}" method="post" >
                 @method('DELETE')
                 @csrf
+                @if(Auth::user()->hasPermission('Supplier_update'))
             <a style='color:rgb(52,136,245)' class='btn' href="{{route('supplier.edit',$supplier->id)}}">
                 <i class='bi bi-pencil-square h4'></i></a>
+                @endif
+                @if(Auth::user()->hasPermission('Supplier_delete'))
             <button onclick="return confirm('Bạn có chắc muốn đưa nhà cung cấp này vào thùng rác không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                @endif
             </form>
           </td>
         </tr>
