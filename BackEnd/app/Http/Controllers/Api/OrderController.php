@@ -32,6 +32,7 @@ class OrderController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
+    try{
         $provinces = Province::all();
         $district = District::all();
         $ward = Ward::all();
@@ -41,20 +42,35 @@ class OrderController extends Controller {
             'ward' => $ward,
         ];
         return response()->json($params);
+    }catch(\Exception $e){
+        Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+    }
     }
 
     function getAllProvince() {
+    try{
         $provinces = Province::all();
         return response()->json($provinces);
+    }catch(\Exception $e){
+        Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+    }
     }
 
     function getAllDistrictByProvinceId($id) {
+    try{
         $districts = District::where('province_id', '=', $id)->get();
         return response()->json($districts);
+    }catch(\Exception $e){
+        Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+    }
     }
     function getAllWardByDistrictId($id) {
+    try{
         $wards = Ward::where('district_id', '=', $id)->get();
         return response()->json($wards);
+    }catch(\Exception $e){
+        Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+    }
     }
     /**
      * Store a newly created resource in storage.
@@ -106,9 +122,13 @@ class OrderController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
+    try{
         return response()->json(Order::with(['province', 'district', 'ward', 'oderDetails' => function ($query) {
             return $query->with(['products']);
         }])->find($id));
+    }catch(\Exception $e){
+        Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+    }
     }
 
     /**
