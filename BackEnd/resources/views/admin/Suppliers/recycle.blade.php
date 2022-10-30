@@ -5,9 +5,9 @@
         <h1 class="mb-1">Nhà Cung Cấp</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('supplier.index')}}"></a>Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="">Nhà cung cấp</a></li>
-            <li class="breadcrumb-item">Thùng rác</a></li>
+            <li class="breadcrumb-item"><a href="{{route('supplier.index')}}"></a>Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="">Nhà Cung Cấp</a></li>
+            <li class="breadcrumb-item">Thùng Rác</a></li>
           </ol>
         </nav>
       </div>
@@ -69,7 +69,7 @@
                 style='color:rgb(52,136,245)' class='btn'
                 href="{{ route('supplier.restore', $supplier->id) }}"><i
                 class='bi bi-arrow-clockwise h4'></i></a>
-            <button onclick="return confirm('Bạn có chắc muốn xóa danh mục này không?');"
+            <button onclick="return confirm('Bạn có chắc muốn xóa nhà cung cấp này không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
             </form>
           </td>

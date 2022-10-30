@@ -25,6 +25,8 @@ class ProductSeeder extends Seeder
             'category_id' => '1',
             'brand_id' => '1',
             'supplier_id' => '1',
+            'user_id_ad' => '1',
+            'user_id_edit' => '2',
         ]);
         $product = Product::create([
             'id' => 2,
@@ -40,6 +42,8 @@ class ProductSeeder extends Seeder
             'category_id' => '3',
             'brand_id' => '2',
             'supplier_id' => '2',
+            'user_id_ad' => '2',
+            'user_id_edit' => '3',
         ]);
         $product = Product::create([
             'id' => 3,
@@ -54,6 +58,8 @@ class ProductSeeder extends Seeder
             'category_id' => '2',
             'brand_id' => '3',
             'supplier_id' => '3',
+            'user_id_ad' => '3',
+            'user_id_edit' => '4',
         ]);
         $product = Product::create([
             'id' => 4,
@@ -69,6 +75,8 @@ class ProductSeeder extends Seeder
             'category_id' => '4',
             'brand_id' => '4',
             'supplier_id' => '4',
+            'user_id_ad' => '4',
+            'user_id_edit' => '5',
         ]);
         $product = Product::create([
             'id' => 5,
@@ -83,6 +91,8 @@ class ProductSeeder extends Seeder
             'category_id' => '5',
             'brand_id' => '5',
             'supplier_id' => '5',
+            'user_id_ad' => '5',
+            'user_id_edit' => '2',
         ]);
 
     }

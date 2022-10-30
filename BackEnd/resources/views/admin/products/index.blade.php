@@ -13,7 +13,7 @@
         </div>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
             <li class="breadcrumb-item">Sản Phẩm</a></li>
           </ol>
         </nav>
@@ -102,7 +102,7 @@
                 @csrf
             <a data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa sản phẩm" style='color:rgb(52,136,245)' class='btn' href="{{route('product.edit',$product->id)}}">
                 <i class='bi bi-pencil-square h4'></i></a>
-            <button data-bs-toggle="tooltip" data-bs-placement="top" title="Đưa vào thùng rác" onclick="return confirm('Bạn có chắc muốn đưa danh mục này vào thùng rác không?');"
+            <button data-bs-toggle="tooltip" data-bs-placement="top" title="Đưa vào thùng rác" onclick="return confirm('Bạn có chắc muốn đưa sản phẩm này vào thùng rác không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
             </form>
           </td>
