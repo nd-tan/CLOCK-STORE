@@ -2,18 +2,35 @@
 @section('content')
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1 class="mb-1">Nhà Cung Cấp</h1>
+        <h1 class="mb-1">Chức Vụ</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('supplier.index')}}"></a>Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="">Nhà cung cấp</a></li>
-            <li class="breadcrumb-item">Thùng rác</a></li>
+            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{route('groups.index')}}">Chức Vụ</a></li>
+            <li class="breadcrumb-item">Thùng Rác</a></li>
           </ol>
         </nav>
       </div>
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Thung Rác</h5>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <h5 class="card-title">Thùng Rác</h5>
+        </div>
+        <div class="col-md-6">
+            <form style="" action="" id="form-search"
+            class="form-inline d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
+            <div style="margin-top: 12px;" class="form-group">
+                <div class="input-group-prepend">
+                </div>
+                <input class="form-control" name="search" placeholder="tìm kiếm">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div><br>
+        </form>
+        </div>
+    </div>
     @if (Session::has('success'))
     <p class="text-success"><i class="fa fa-check" aria-hidden="true"></i>
         {{ Session::get('success') }}
@@ -24,35 +41,29 @@
         {{ Session::get('error') }}
     </p>
 @endif
-    <a class='btn btn-primary mb-2'  href="{{route('supplier.index')}}">Nhà cung cấp</a>
+    <a class='btn btn-primary mb-2'  href="{{route('groups.index')}}">Chức Vụ</a>
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Tên</th>
-          <th scope="col">Email</th>
-          <th scope="col">Địa Chỉ</th>
-          <th scope="col">Số Điện Thoại</th>
-          <th scope="col">Thao tác</th>
+          <th style="text-align: center" scope="col">Thao tác</th>
         </tr>
       </thead>
       <tbody>
-          @foreach ($suppliers as $key => $supplier)
+          @foreach ($items as $key => $item)
         <tr>
           <th scope="row">{{$key + 1}}</th>
-          <td>{{$supplier->name}}</td>
-          <td>{{$supplier->email}}</td>
-          <td>{{$supplier->address}}</td>
-          <td>{{$supplier->phone}}</td>
-          <td>
-            <form action="{{ route('supplier.delete', $supplier->id) }}" method="post" >
+          <td>{{$item->name}}</td>
+          <td style="text-align: center">
+            <form action="{{ route('group.delete', $item->id) }}" method="post">
                 @method('DELETE')
                 @csrf
-                <a onclick="return confirm('Bạn có chắc muốn khôi phục nhà cung cấp này không?');"
+                <a onclick="return confirm('Bạn có chắc muốn khôi phục thương hiệu này không?');"
                 style='color:rgb(52,136,245)' class='btn'
-                href="{{ route('supplier.restore', $supplier->id) }}"><i
+                href="{{ route('group.restore', $item->id) }}"><i
                 class='bi bi-arrow-clockwise h4'></i></a>
-            <button onclick="return confirm('Bạn có chắc muốn xóa danh mục này không?');"
+            <button onclick="return confirm('Bạn có chắc muốn xóa danh mục này vào thùng rác không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
             </form>
           </td>
@@ -60,7 +71,9 @@
         @endforeach
       </tbody>
     </table>
-    {{ $suppliers->onEachSide(5)->links() }}
+    <div style="float: right">
+        {{ $items->onEachSide(5)->links() }}
+    </div>
   </div>
 </div>
 </main>

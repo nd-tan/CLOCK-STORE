@@ -11,6 +11,7 @@ use App\Services\Group\GroupServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class GroupController extends Controller
 {
@@ -74,16 +75,27 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        $item = $this->groupService->find($id);
-        return response()->json($item, 200);
+        // $this->authorize('view', Position::class);
+        $item=Group::find($id);
+
+        $current_user = Auth::user();
+        $userRoles = $item->roles->pluck('id', 'name')->toArray();
+        // dd($userRoles);
+        $roles = Role::all()->toArray();
+        $position_names = [];
+        /////lấy tên nhóm quyền
+        foreach ($roles as $role) {
+            $position_names[$role['group_name']][] = $role;
+        }
+        $params = [
+            'item' => $item,
+            'userRoles' => $userRoles,
+            'roles' => $roles,
+            'position_names' => $position_names,
+        ];
+        return view('admin.groups.detail',$params);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Group  $user_groups
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $item = Group::find($id);
@@ -105,61 +117,50 @@ class GroupController extends Controller
         return view('admin.groups.edit',$params);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatGroupRequest  $request
-     * @param  \App\Models\Group  $user_groups
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateGroupRequest $request, $id)
+    public function update( $id,Request $request)
     {
         try {
-            $item = $this->groupService->update($request->all(), $id);
-            return redirect()->route('groups.index')->with('success', 'Cập nhật nhóm' . ' ' . $request->name . ' ' .  'thành công');
+            $item = $this->groupService->update( $id, $request->roles);
+            Session::flash('success', config('define.update.succes'));
+            return redirect()->route('groups.index');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('groups.index')->with('error', 'Cập nhật nhóm' . ' ' . $request->name . ' ' .  'không thành công');
+            Session::flash('error', config('define.update.error'));
+            return redirect()->route('groups.index');
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\user_groups  $user_groups
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request,$id)
     {
         try {
             $item = $this->groupService->delete($id);
-            return redirect()->route('groups.index')->with('success', 'Xóa nhóm' . ' ' . $request->name . ' ' .  'thành công');
+            return redirect()->route('groups.index');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('groups.index')->with('error', 'Xóa nhóm' . ' ' . $request->name . ' ' .  'không thành công');
+            Session::flash('error', config('define.restore.error'));
+            return redirect()->route('groups.index');
         }
     }
 
-    // public function trashedItems()
-    // {
-    //     // dd($request);
-    //     $items = $this->groupService->trashedItems();
-    //     // dd($items);
-    //     $params = [
-    //         'items' => $items,
-    //         // 'Group'=>$Group
-    //     ];
-    //     return view('admin.groups.trash',$params);
-    // }
+    public function getTrashed()
+    {
+        $items = $this->groupService->trashedItems();
+        $params = [
+            'items' => $items,
+        ];
+        return view('admin.Groups.recycle',$params);
+    }
 
     public function restore($id)
     {
         try {
             $this->groupService->restore($id);
-            return redirect()->route('groups.trash')->with('success', 'Khôi phục thành công');
+            Session::flash('success', config('define.restore.succes'));
+            return redirect()->route('group.getTrashed');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('groups.trash')->with('success', 'Khôi phục thành công');
+            Session::flash('error', config('define.restore.error'));
+            return redirect()->route('group.getTrashed');
         }
     }
 
@@ -168,10 +169,12 @@ class GroupController extends Controller
 
         try {
             $Group = $this->groupService->force_destroy($id);
-            return redirect()->route('groups.trash')->with('success', 'Xóa' . ' ' . $Group->name . ' ' .  'thành công');
+            Session::flash('success', config('define.delete.succes'));
+            return redirect()->route('group.getTrashed');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('groups.trash')->with('error', 'Xóa' . ' ' . $Group->name . ' ' .  'không thành công');
+            Session::flash('error', config('define.delete.error'));
+            return redirect()->route('group.getTrashed');
         }
     }
 

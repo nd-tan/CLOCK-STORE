@@ -14,31 +14,24 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
     }
     public function all($request)
     {
-        $group = $this->model->all();
-        // if (isset($request->name) && $request->name) {
-        //     $name = $request->name;
-        //     $Group->where('name', 'LIKE', '%' . $name . '%'  );
-        // }
-        return $group;
+        $group = $this->model;
+        if (isset($request->name) && $request->name) {
+            $name = $request->name;
+            $group->where('name', 'LIKE', '%' . $name . '%'  );
+        }
+        return $group->paginate(5);;
     }
 
-    public function update($request, $group)
+    public function update($id, $data)
     {
-        parent::update($request, $group);
-        $group->roles()->detach();
-        //attach cập nhập các record của bảng trung gian hiện tại
-        $group->roles()->attach($request['roles']);
-        return $group;
+        $group = $this->find($id);
+        $group->roles()->sync($data);
     }
 
     public function trashedItems()
     {
-
         $query = $this->model->onlyTrashed();
-
-        $query->orderBy('id', 'desc');
-        $group = $query->paginate(10);
-        return $group;
+        return $query->orderBy('id', 'desc')->paginate(5);
     }
 
     public function restore($id)
