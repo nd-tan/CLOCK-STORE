@@ -13,12 +13,13 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
     }
     public function all($request)
     {
-        $search = $request->search;
         $suppliers = $this->model->select('*');
-        if ($search) {
-            $suppliers = $suppliers->where('name', 'like', '%' . $search . '%');
+
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $suppliers = $suppliers->Search($search);
         }
-        return $suppliers->orderBy('id','DESC')->paginate(10);
+        return $suppliers->orderBy('id','DESC')->paginate(5);
     }
     public function update($id, $data){
 
@@ -41,11 +42,13 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
         }
         return $supplier;
     }
-    public function getTrashed(){
+    public function getTrashed($request){
         $query = $this->model->onlyTrashed();
-        $query->orderBy('id', 'desc');
-        $supplier = $query->paginate(5);
-        return $supplier;
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $query = $query->Search($search);
+        }
+        return $query->orderBy('id','DESC')->paginate(5);
     }
     public function restore($id){
         $supplier = $this->model->withTrashed()->findOrFail($id);

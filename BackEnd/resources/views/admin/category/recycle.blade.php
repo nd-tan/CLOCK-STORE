@@ -13,7 +13,24 @@
       </div>
 <div class="card">
   <div class="card-body">
-      <h5 class="card-title">Thùng Rác</h5>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <h5 class="card-title">Thùng Rác</h5>
+        </div>
+        <div class="col-md-6">
+            <form style="" action="" id="form-search"
+            class="form-inline d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
+            <div style="margin-top: 12px;" class="form-group">
+                <div class="input-group-prepend">
+                </div>
+                <input class="form-control" name="search" placeholder="tìm kiếm">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div><br>
+        </form>
+        </div>
+    </div>
     @if (Session::has('success'))
     <p class="text-success"><i class="fa fa-check" aria-hidden="true"></i>
         {{ Session::get('success') }}
@@ -56,6 +73,9 @@
         @endforeach
       </tbody>
     </table>
+    <div style="float: right">
+        {{ $categories->onEachSide(5)->links() }}
+    </div>
   </div>
 </div>
 </main>

@@ -6,7 +6,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('customer.index') }}">Khách Hàng</a></li>
+                    <li class="breadcrumb-item"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Danh Sách Khách Hàng" href="{{ route('customer.index') }}">Khách Hàng</a></li>
                 </ol>
             </nav>
         </div>
@@ -14,7 +14,7 @@
             <div class="card-body">
                 <h5 class="card-title">Khách Hàng Vi Phạm</h5>
                 <div class="md-3 title_cate" >
-                    <a href="{{ route('customer.index') }}" class="btn btn-info btn-rounded waves-effect waves-light ">
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="Danh Sách Khách Hàng" href="{{ route('customer.index') }}" class="btn btn-info btn-rounded waves-effect waves-light ">
                         <i class=" fas fa-trash-alt"></i>
                         Khách Hàng</a>
                 </div>
@@ -39,7 +39,7 @@
                             @foreach ($customers as $customer)
                                 <tr class="item-{{ $customer->id }}">
                                     <th scope="row">{{ $customer->id }}</th>
-                                    <td><a href="">{{ $customer->name }}</td>
+                                    <td>{{ $customer->name }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->phone }}</td>
                                     <td>{{ $customer->deleted_at }}</td>
@@ -48,11 +48,11 @@
                                         <form action="{{ route('customer.forceDelete',$customer->id) }}" method="post" >
                                             @method('DELETE')
                                             @csrf
-                                            <a onclick="return confirm('Bạn có chắc muốn khôi phục khách hàng '.$customer->name);"
+                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Khôi Phục Tài Khoản" onclick="return confirm('Bạn có chắc muốn khôi phục khách hàng {{ $customer->name }} không?');"
                                             style='color:rgb(52,136,245)' class='btn'
                                             href="{{ route('customer.restore', $customer->id) }}"><i
                                                 class='bi bi-arrow-clockwise h4'></i></a>
-                                            <button onclick="return confirm('Bạn có chắc xóa hách hàng '.$customer->name);" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                                            <button data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa Tài Khoản Vi Phạm" onclick="return confirm('Bạn có chắc xóa khách hàng {{ $customer->name }} không?');" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -61,7 +61,7 @@
                     </tbody>
                 </table>
                 <div class="row">
-                    {{ $customers->onEachSide(5)->links() }}          
+                    {{  $customers->onEachSide(5)->links() }}          
                 </div>
             </div>
         </div>

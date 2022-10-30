@@ -5,8 +5,8 @@
             <h1>Khách Hàng</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="">Order</a></li>
+                    <li class="breadcrumb-item">Khách Hàng</li>
+                    <li class="breadcrumb-item"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Xem Đơn Hàng" href="{{ route('order.index') }}">Đơn Hàng</a></li>
                 </ol>
             </nav>
         </div>
@@ -24,7 +24,7 @@
                 </p>
             @endif
                 <div style="text-align: right" class="md-3 title_cate" >
-                    <a href="{{ route('customer.trash') }}" class="btn btn-danger btn-rounded waves-effect waves-light ">
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="Khách Hàng Vi Phạm" href="{{ route('customer.trash') }}" class="btn btn-danger btn-rounded waves-effect waves-light ">
                         <i class=" fas fa-trash-alt"></i>
                         Thùng Rác</a>
                 </div>
@@ -48,14 +48,15 @@
                             @foreach ($customers as $customer)
                                 <tr class="item-{{ $customer->id }}">
                                     <th scope="row">{{ $customer->id }}</th>
-                                    <td><a href="{{ route('customer.show',$customer->id) }}">{{ $customer->name }}</td>
+                                    <td><a data-bs-toggle="tooltip" data-bs-placement="top" title="Chi Tiết Khách Hàng" href="{{ route('customer.show',$customer->id) }}">{{ $customer->name }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->phone }}</td>
                                     <td>
                                         <form action="{{ route('customer.destroy',$customer->id) }}" method="post" >
                                             @method('DELETE')
                                             @csrf
-                                            <button onclick=" return confirm('Bạn có chắc xóa khách hàng '.$customer->name);" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                                        
+                                            <button onclick=" return confirm('Bạn có chắc xóa khách hàng {{ $customer->name }} không?');" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i data-bs-toggle="tooltip" data-bs-placement="top" title="Vô Hiệu Hóa Tài Khoản" class='bi bi-trash h4'></i></button>
                                         </form>
                                     </td>
                                 </tr>

@@ -12,9 +12,9 @@ class BrandService extends BaseService implements BrandServiceInterface {
     {
         $this->repository = $brandRepository;
     }
-    public function getTrash()
+    public function getTrash($request)
     {
-        return $this->repository->getTrash();
+        return $this->repository->getTrash($request);
 
     }
     public function restore($id)
@@ -25,8 +25,5 @@ class BrandService extends BaseService implements BrandServiceInterface {
     {
         return $this->repository->forceDelete($id);
     }
-    public function searchBrand($name)
-    {
-        return $this->repository->searchBrand($name);
-    }
+
 }

@@ -96,25 +96,25 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="">
-              <i class="bi bi-circle"></i><span>Danh mục</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
+            <a href="{{route('product.index')}}">
               <i class="bi bi-circle"></i><span>Sản Phẩm</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{{route('category.index')}}">
+              <i class="bi bi-circle"></i><span>Danh mục</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('supplier.index')}}">
               <i class="bi bi-circle"></i><span>Nhà Cung Cấp</span>
             </a>
           </li>
-          {{-- <li>
-            <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>Form Validation</span>
+          <li>
+            <a href="{{route('brand.index')}}">
+              <i class="bi bi-circle"></i><span>Thương Hiệu</span>
             </a>
-          </li> --}}
+          </li>
         </ul>
       </li><!-- End Forms Nav -->
       <li class="nav-item">

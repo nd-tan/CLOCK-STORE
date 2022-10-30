@@ -5,14 +5,31 @@
         <h1 class="mb-1">Danh Mục</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-            <li class="breadcrumb-item">Danh mục</a></li>
+            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+            <li class="breadcrumb-item">Danh Mục</a></li>
           </ol>
         </nav>
       </div>
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Danh Sách Danh Mục</h5>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <h5 class="card-title">Danh Sách Danh Mục</h5>
+        </div>
+        <div class="col-md-6">
+            <form style="" action="" id="form-search"
+            class="form-inline d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
+            <div style="margin-top: 12px;" class="form-group">
+                <div class="input-group-prepend">
+                </div>
+                <input class="form-control" name="search" placeholder="tìm kiếm">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div><br>
+        </form>
+        </div>
+    </div>
     @if (Session::has('success'))
     <p class="text-success"><i class="fa fa-check" aria-hidden="true"></i>
         {{ Session::get('success') }}
@@ -55,7 +72,9 @@
         @endif
       </tbody>
     </table>
-    {{ $categories->onEachSide(5)->links() }}
+    <div style="float: right">
+        {{ $categories->onEachSide(5)->links() }}
+    </div>
   </div>
 </div>
 </main>
