@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Providers;
+
+use App\Repositories\Api\Product\ApiProductRepository;
+use App\Repositories\Api\Product\ApiProductRepositoryInterface;
 use Illuminate\Pagination\Paginator;
 
 use App\Repositories\Brand\BrandRepository;
@@ -26,6 +29,8 @@ use App\Services\Product\ProductService;
 use App\Services\Product\ProductServiceInterface;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\Order\OrderRepositoryInterface;
+use App\Services\Api\Product\ApiProductService;
+use App\Services\Api\Product\ApiProductServiceInterface;
 use App\Services\Order\OrderService;
 use App\Services\Order\OrderServiceInterface;
 
@@ -51,6 +56,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(BrandServiceInterface::class, BrandService::class);
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(ProductServiceInterface::class, ProductService::class);
+
+        $this->app->bind(ApiProductRepositoryInterface::class, ApiProductRepository::class);
+        $this->app->bind(ApiProductServiceInterface::class, ApiProductService::class);
     }
 
     /**

@@ -3,15 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Banner;
+use App\Models\Brand;
 use App\Models\Category;
-use App\Models\Customer;
-use App\Models\Product;
 use App\Services\Api\Product\ApiProductServiceInterface;
-use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-
 class ApiProductController extends Controller
 {
     private $FeproductService;
@@ -30,10 +25,14 @@ class ApiProductController extends Controller
             $products = $this->FeproductService->search($request);
             return response()->json($products, 200);
     }
-
     public function product_detail($id)
     {
         $product = $this->FeproductService->find($id);
+        return response()->json($product, 200);
+    }
+    public function image_detail($id)
+    {
+        $product = $this->FeproductService->find_images($id);
         return response()->json($product, 200);
     }
     public function category_list()
@@ -41,15 +40,15 @@ class ApiProductController extends Controller
         $categories = Category::with('products')->take(10)->get();
         return response()->json($categories, 200);
     }
+    public function brand_list()
+    {
+        $brands = Brand::with('products')->take(10)->get();
+        return response()->json($brands, 200);
+    }
     public function trendingProduct()
     {
         $products = $this->FeproductService->trendingProduct();
         return response()->json($products, 200);
     }
 
-    public function getCustomer()
-    {
-        $customer = Customer::get();
-        return response()->json($customer, 200);
-    }
 }

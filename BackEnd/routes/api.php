@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiProductController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
@@ -32,4 +33,12 @@ Route::get('order/list-ward/{id}', [OrderController::class, 'getAllWardByDistric
 Route::post('order/store', [OrderController::class, 'store']);
 Route::get('order/show/{id}', [OrderController::class, 'show']);
 
-Route::get('order/show/{id}', [ProductController::class, 'show']);
+Route::get('product_list',[ApiProductController::class,'product_list']);
+Route::get('product_list/search',[ApiProductController::class,'search']);
+
+Route::get('product_detail/{id}',[ApiProductController::class,'product_detail']);
+Route::get('product_images/{id}',[ApiProductController::class,'image_detail']);
+
+Route::get('category_list',[ApiProductController::class,'category_list']);
+Route::get('brand_list',[ApiProductController::class,'brand_list']);
+Route::get('trendingProduct',[ApiProductController::class,'trendingProduct']);
