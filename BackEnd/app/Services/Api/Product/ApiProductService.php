@@ -5,7 +5,7 @@ namespace App\Services\Api\Product;
 use App\Services\Api\BaseService;
 use App\Repositories\Api\Product\ApiProductRepositoryInterface;
 
-class FeProductService extends BaseService implements ApiProductServiceInterface {
+class ApiProductService extends BaseService implements ApiProductServiceInterface {
 
     public $repository;
     public function __construct(ApiProductRepositoryInterface $productRepository)
@@ -27,5 +27,8 @@ class FeProductService extends BaseService implements ApiProductServiceInterface
     public function trendingProduct()
     {
         return $this->repository->trendingProduct();
+    }
+    public function find_images($id){
+        return $this->repository->find_images($id);
     }
 }
