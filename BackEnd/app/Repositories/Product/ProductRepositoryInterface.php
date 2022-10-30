@@ -5,7 +5,7 @@ use App\Repositories\RepositoryInterface;
 
 interface ProductRepositoryInterface extends RepositoryInterface{
     public function all($request);
-    public function getTrashed();
+    public function getTrashed($request);
     public function restore($id);
     public function force_destroy($id);
 

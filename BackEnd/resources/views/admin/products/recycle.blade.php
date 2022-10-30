@@ -18,16 +18,25 @@
             <h5 class="card-title">Thùng Rác</h5>
         </div>
         <div class="col-md-6">
-            <form action="" id="form-search"
-            class="form-inline d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <form style="" action="" id="form-search"
+            class="form-inline d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
             <div style="margin-top: 12px;" class="form-group">
-                <input style="height:40px" type="button" class="btn btn-primary" value="Tìm kiếm nâng cao">
-                <input class="form-control" name="key" placeholder="tìm kiếm">
+                <div class="input-group-prepend">
+                </div>
+                <input class="form-control" name="search" placeholder="tìm kiếm">
                 <button type="submit" class="btn btn-primary">
                     <i class="bi bi-search"></i>
                 </button>
+
             </div><br>
         </form>
+        <div style="margin-top: 12px; float: right" class="md-3 title_cate">
+            <button href="" class="btn btn-primary  waves-effect waves-light"
+                data-bs-toggle="modal" data-bs-target="#searchModal">
+                Tìm kiếm nâng cao
+            </button>
+            @include('admin.products.advanceSearch')
+        </div>
         </div>
     </div>
     @if (Session::has('success'))
