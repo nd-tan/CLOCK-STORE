@@ -14,17 +14,17 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label class="form-label" for="name">Khoảng giá (VND)
+                                <label class="form-label" for="name">Tổng Tiền Đơn Hàng <span class="badge bg-success rounded-pill">VNĐ</span>
                                 </label>
                                 <input type="number"  class="form-control"
-                                    name="startPrice" id="startPrice" placeholder="từ">
+                                    name="startPrice" id="startPrice" placeholder="Từ">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label class="form-label" for="name">&nbsp</label>
-                                <input type="text"  class="form-control" name="endPrice"
-                                    id="endPrice" placeholder="đến">
+                                <input type="number"  class="form-control" name="endPrice"
+                                    id="endPrice" placeholder="Đến">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -46,9 +46,9 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
-                                <p><b>Trạng thái:</b></p>
+                                <p><b>Trạng Thái Đơn:</b></p>
                                 <input type="radio" name="status" value="1">
-                                <label for="html">Duyệt </label>&nbsp&nbsp&nbsp
+                                <label for="html">Đã Duyệt </label>&nbsp&nbsp&nbsp
                                 <input type="radio"  name="status" value="0">
                                 <label for="css">Chưa Duyệt</label><br>
                             </div>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
-                                <p><b>Loại:</b></p>
+                                <p><b>Loại Đồng Hồ:</b></p>
                                 <input type="radio" name="gender" value="Nam">
                                 <label for="html">Nam </label>&nbsp&nbsp&nbsp
                                 <input type="radio" name="gender" value="Nữ">

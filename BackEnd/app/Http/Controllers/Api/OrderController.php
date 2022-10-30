@@ -83,7 +83,7 @@ class OrderController extends Controller {
                 'price_at_time' => $cart['price'],
                 'quantity' => $cart['quantity'],
                 'product_id' => $productId,
-                'total' => $request->total,
+                'total' => $cart['price'] * $cart['quantity'],
                 'order_id' => $order->id,
             ]);
             Product::where('id', $productId)->decrement('quantity', $cart['quantity']);

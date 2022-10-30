@@ -24,7 +24,7 @@
                 </p>
             @endif
                 <div style="text-align: right" class="md-3 title_cate" >
-                    <a href="{{ route('customer.trash') }}" class="btn btn-danger btn-rounded waves-effect waves-light ">
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="Khách Hàng Vi Phạm" href="{{ route('customer.trash') }}" class="btn btn-danger btn-rounded waves-effect waves-light ">
                         <i class=" fas fa-trash-alt"></i>
                         Thùng Rác</a>
                 </div>

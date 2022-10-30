@@ -31,23 +31,14 @@ class Order extends Model
     public function scopeSearch($query, $term)
     {
         if ($term) {
-            $query->join('customers','customers.id','orders.customer_id')->where('name_customer', 'like', '%' . $term . '%')
-                ->orWhere('phone', 'like', '%' . $term . '%')
-                ->orWhere('id', 'like', '%' . $term . '%')
-                ->orWhere('total', 'like', '%' . $term . '%');
+            $query
+                ->where('name_customer', 'like', '%' . $term . '%')
+                ->orWhere('orders.phone', 'like', '%' . $term . '%')
+                ->orWhere('orders.id', 'like', '%' . $term . '%')
+                ->orWhere('orders.total', 'like', '%' . $term . '%');
         }
         return $query;
     }
-    // $orders = $this->model->select('*');
-    // if (!empty($request->search)) {
-    //     $search = $request->search;
-    //     $orders = $orders->Search($search);
-    // }
-    // $orders->filterPrice(request(['startPrice', 'endPrice']));
-    // $orders->filterDate(request(['start_date', 'end_date']));
-    // $orders->status($request);
-    // $orders->Type($request);
-    // return $orders->orderBy('id', 'DESC')->paginate(5);
     public function scopeFilterPrice($query, array $filters)
     {
         if (isset($filters['startPrice']) && isset($filters['endPrice'])) {
