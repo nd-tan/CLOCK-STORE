@@ -102,7 +102,7 @@ Route::resource('category', CategoryController::class);
 
 });
 Route::get('/export-order',[OrdersExport::class,'exportOrder'] )->name('export-order');
-Route::get('/export-orderdetail',[OrderDetailsExport::class,'exportOrderDetail'] )->name('export-orderdetail');
+Route::get('/export-orderdetail/{id}',[OrderDetailsExport::class,'exportOrderDetail'] )->name('export-orderdetail');
 Route::controller(OrderController::class)->group(function () {
     Route::put('order/updatesingle/{id}', 'updateSingle')->name('order.updatesingle');
 });
