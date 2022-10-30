@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\Order;
 use App\Models\OrderDetail;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Facades\Excel;
@@ -10,16 +11,22 @@ class OrderDetailsExport implements FromCollection,WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
-    */
-    public function exportOrderDetail(){
-
-        return Excel::download(new OrderDetailsExport, 'Xuat_Don_Dat_Hang_Chi_Tiet_'.date("d_m_Y").'.xlsx');
+    */  
+    public function __construct(int $id = 1) {
+    	$this->id = $id;
+    }
+    public function exportOrderDetail($id){
+        $order = Order::findOrFail($id);
+        return Excel::download(new OrderDetailsExport($id), 'KH_'.$order->name_customer.'_'.date("d_m_Y").'.xlsx');
     }
     public function headings() :array {
-    	return ["STT", "Tên Khách Hàng", "Số Điện Thoại","Tên Sản Phẩm","Số Lượng", "Tổng Tiền"];
+    	return ["STT", "Tên Khách Hàng", "Số Điện Thoại","Tên Sản Phẩm","Giá Sản Phẩm","Số Lượng", "Tổng Tiền"];
     }
     public function collection()
     {   
-        return OrderDetail::join('orders','orders.id','order_details.order_id')->join('products','products.id','order_details.product_id')->select('order_details.id','orders.name_customer','orders.phone','products.name','order_details.quantity','order_details.total')->get();
+        return OrderDetail::join('orders','orders.id','order_details.order_id')
+        ->join('products','products.id','order_details.product_id')
+        ->select('order_details.id','orders.name_customer','orders.phone','products.name','products.price','order_details.quantity','order_details.total')
+        ->where('order_details.order_id',$this->id)->get();
     }
 }
