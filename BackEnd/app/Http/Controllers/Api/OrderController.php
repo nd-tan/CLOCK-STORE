@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SendMail;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -13,6 +14,7 @@ use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Province;
 use App\Models\Ward;
+use App\Services\Order\OrderServiceInterface;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
@@ -22,6 +24,10 @@ class OrderController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct(OrderServiceInterface $orderService)
+    {
+        $this->orderService = $orderService;
+    }
     public function index() {
         //
     }
@@ -104,12 +110,27 @@ class OrderController extends Controller {
             ]);
             Product::where('id', $productId)->decrement('quantity', $cart['quantity']);
         }
+        $id_order = $order->id;
         $order->total= $order_total_price;
         $order->save();
         Cache::forget('carts');
         $carts = Cache::get('carts');
+        $order = $this->orderService->find($id_order);
+        $customer = Customer::findOrFail($request->customer_id);
+        $orderDetails = $order->orderDetails;
+        $params = [
+            'order' => $order,
+            'orderDetails' => $orderDetails,
+        ];
+       
+        Mail::send('admin.emails.orders', compact('params'), function ($email) use($customer) {
+            $email->subject('TCC-Shop');
+            $email->to($customer->email,$customer->name);
+        });
+      
+        return response()->json(Order::with(['oderDetails'])->find($order->id));
+        
 
-            return response()->json(Order::with(['oderDetails'])->find($order->id));
         }catch(\Exception $e){
             Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
         }
@@ -138,7 +159,7 @@ class OrderController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+       
     }
 
     /**

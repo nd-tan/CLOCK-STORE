@@ -75,6 +75,7 @@ class OrderController extends Controller
     }catch(\Exception $e){
         Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
     }
+
     }
 
     /**

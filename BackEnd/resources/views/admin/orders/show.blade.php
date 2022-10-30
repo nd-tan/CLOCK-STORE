@@ -7,7 +7,7 @@
                 <h1 class="mb-1">Khách Hàng</h1>
             </div>
             <div class="col-md-6">
-                <a style="float: right" href="{{ route('export-orderdetail') }}"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Xuất File Excel" class="bi bi-printer-fill h3"></i></a>
+                <a style="float: right" href="{{ route('export-orderdetail',$order->id) }}"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Xuất File Excel" class="bi bi-printer-fill h3"></i></a>
             </div>
         </div>
         <nav>

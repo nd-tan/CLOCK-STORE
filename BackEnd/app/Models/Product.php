@@ -30,7 +30,7 @@ class Product extends Model
     public function orderDetails(){
         return $this->hasMany(OrderDetail::class, 'product_id','id');
     }
-    public function image_products(){
+    public function product_images(){
         return $this->hasMany(ProductImage::class, 'product_id','id');
     }
     public function scopeNameCate($query, $request)
