@@ -122,10 +122,19 @@ class ProductController extends Controller
             return redirect()->route('product.index');
         }
     }
-    public function getTrashed()
+    public function getTrashed(Request $request)
     {
-        $products = $this->productService->getTrashed();
-        return view('admin.products.recycle', compact('products'));
+        $products = $this->productService->getTrashed($request);
+        $categories = Category::get();
+        $brands = Brand::get();
+        $suppliers = Supplier::get();
+        $params = [
+            'categories' => $categories,
+            'brands' => $brands,
+            'suppliers' => $suppliers,
+            'products' => $products
+        ];
+        return view('admin.products.recycle', $params);
     }
     public function restore($id)
     {

@@ -14,7 +14,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="nameVi">Danh mục</label>
                                 <select class=" form-select" name="category_id" id="category_id" style="width: 470px">
-                                    <option value="">-----Chọn danh mục-----</option>
+                                    <option style="text-align: center" value="">-----Chọn danh mục-----</option>
                                     @foreach ($categories as $category)
                                         <option value="{{  $category->id }}">{{ $category->name }} </option>
                                     @endforeach
@@ -25,7 +25,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="nameVi">Thương hiệu</label>
                                 <select class=" form-select" name="brand_id" id="brand_id" style="width: 220px">
-                                    <option value="">---Chọn thương hiệu---</option>
+                                    <option value="">--Chọn thương hiệu--</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{  $brand->id }}">{{ $brand->name }} </option>
                                     @endforeach
@@ -36,7 +36,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="nameVi">Nhà cung cấp</label>
                                 <select class=" form-select" name="supplier_id" id="supplier_id" style="width: 220px">
-                                    <option value="">---Chọn nhà cung cấp---</option>
+                                    <option value="">--Chọn nhà cung cấp--</option>
                                     @foreach ($suppliers as $supplier)
                                         <option value="{{  $supplier->id }}">{{ $supplier->name }} </option>
                                     @endforeach

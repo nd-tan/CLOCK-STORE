@@ -166,12 +166,37 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         }
         return $product;
     }
-    public function getTrashed()
+    public function getTrashed($request)
     {
-        $query = $this->model->onlyTrashed();
-        $query->orderBy('id', 'desc');
-        $product = $query->paginate(5);
-        return $product;
+        $products = $this->model->onlyTrashed($request);
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $products = $products->Search($search);
+        }
+        if (!empty($request->category_id)) {
+            $products->NameCate($request)
+            ->filterPrice(request(['startPrice', 'endPrice']))
+            ->filterDate(request(['start_date', 'end_date']))
+            ->status($request)->Type($request);
+        }
+        if (!empty($request->supplier_id)) {
+            $products->NameSupp($request)
+            ->filterPrice(request(['startPrice', 'endPrice']))
+            ->filterDate(request(['start_date', 'end_date']))
+            ->status($request)->Type($request);
+        }
+        if (!empty($request->brand_id)) {
+            $products->NameBran($request)
+            ->filterPrice(request(['startPrice', 'endPrice']))
+            ->filterDate(request(['start_date', 'end_date']))
+            ->status($request)->Type($request);
+        }
+
+        $products->filterPrice(request(['startPrice', 'endPrice']));
+        $products->filterDate(request(['start_date', 'end_date']));
+        $products->status($request);
+        $products->Type($request);
+        return $products->orderBy('id', 'DESC')->paginate(5);
     }
     public function restore($id)
     {
