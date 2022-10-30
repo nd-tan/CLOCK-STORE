@@ -33,8 +33,6 @@ use App\Services\User\UserService;
 use App\Services\User\UserServiceInterface;
 use App\Repositories\Product\ProductRepository;
 use App\Repositories\Product\ProductRepositoryInterface;
-use App\Services\Customer\CustomerService;
-use App\Services\Customer\CustomerServiceInterface;
 use App\Services\Product\ProductService;
 use App\Services\Product\ProductServiceInterface;
 use App\Repositories\Order\OrderRepository;
