@@ -25,9 +25,9 @@ class OrderController extends Controller
         $params = [
             'orders' => $orders,
         ];
-        // dd($orders);
         return view('admin.orders.index', $params);
     }
+
 
     /**
      * Show the form for creating a new resource.

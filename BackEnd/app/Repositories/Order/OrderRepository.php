@@ -8,16 +8,18 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     function getModel(){
         return Order::class;
     }
-    function getAllWithPaginateLatest($request){
-        $orders = $this->model->latest()->paginate(10);
-        if(isset($request->search)){
-            $orders = $this->model
-            ->where('name_customer', 'LIKE', '%'.$request->search.'%')
-            ->orWhere('id', 'LIKE', '%'.$request->search.'%')
-            ->orWhere('phone', 'LIKE', '%'.$request->search.'%')
-            ->paginate(10);
+    public function getAllWithPaginateLatest($request)
+    {
+        $orders = $this->model->select('*');
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $orders = $orders->Search($search);
         }
-        return $orders;
+        $orders->filterPrice(request(['startPrice', 'endPrice']));
+        $orders->filterDate(request(['start_date', 'end_date']));
+        $orders->status($request);
+        $orders->Type($request);
+        return $orders->orderBy('orders.id', 'DESC')->paginate(5);
     }
     function updateSingle($id){
         $order = $this->model->find($id);

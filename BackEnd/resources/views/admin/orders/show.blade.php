@@ -2,7 +2,14 @@
 @section('content')
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Khách Hàng</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="mb-1">Khách Hàng</h1>
+            </div>
+            <div class="col-md-6">
+                <a style="float: right" href="{{ route('export-orderdetail') }}"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Xuất File Excel" class="bi bi-printer-fill h3"></i></a>
+            </div>
+        </div>
         <nav>
             <ol class="breadcrumb">
                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Xem Khách Hàng" class="breadcrumb-item"><a href="{{ route('customer.index') }}">Khách Hàng</a></li>
@@ -25,16 +32,16 @@
                         <div class="card-body">
                             <div class="mb-3 d-flex justify-content-between">
                                 <div>
-                                    <span class="me-3">Ngày Đặt: {{ $order->created_at }}</span>
-                                    <span class="me-3">Ngày Duyệt: {{ $order->updated_at }}</span>
+                                    <span class="me-3 fw-bold">Ngày Đặt: {{ date_format($order->created_at, "H:i:s - d/m/Y") }}</span>
+                                    <span class="me-3 fw-bold">Ngày Duyệt: {{ date_format($order->updated_at, "H:i:s - d/m/Y") }}</span>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <span class="me-3">Người Mua: {{ $order->name_customer }}</span>
+                                <span data-bs-toggle="tooltip" data-bs-placement="top" title="Chi Tiết Tài Khoản" class="me-3 fw-bold">Người Mua: <a href="{{ route('customer.show',$order->customer->id) }}" style="color: rgb(8, 0, 255)">{{ $order->customer->name }}</a></span>
                             </div>
                             <table class="table table-borderless">
                                 <tbody>
-                                    <tr>
+                                    <tr class="fw-bold">
                                         <td>Ảnh</td>
                                         <td>Sản phẩm</td>
                                         <td>Số Lượng</td>
@@ -53,7 +60,7 @@
                                                 </div>
                                         <td>
                                             <h6 class="small mb-0">
-                                                <a href="" class="text-reset">{{ $orderDetail->products->name }}</a>
+                                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="Xem Chi Tiết Sản Phẩm" href="{{ route('product.show',$orderDetail->products->id) }}" class="text-reset">{{ $orderDetail->products->name.' ('.$orderDetail->products->type_gender.')' }}</a>
                                             </h6>
                                         </td>
                                         </div>
@@ -89,10 +96,14 @@
                                     <h3 class="h6">Địa Chỉ Thanh Toán</h3>
                                     <address>
                                         <div>
-                                            <strong>{{ $order->province->name }}, {{ $order->district->name }}, {{ $order->ward->name }}</strong>
+                                            <strong>{{$order->address}},</strong>
                                         </div>
                                         <div>
-                                            <strong>{{ $order->address }}</strong>
+                                            <strong>
+                                                {{ $order->ward->name }}.
+                                                {{ $order->district->name }},
+                                                {{ $order->province->name }}
+                                                </strong>
                                         </div>
                                 </div>
                             </div>
