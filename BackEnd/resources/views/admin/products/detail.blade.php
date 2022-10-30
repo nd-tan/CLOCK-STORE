@@ -85,6 +85,10 @@
                 <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
                     aria-controls="review" aria-selected="false">Nhân viên thêm</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                    aria-controls="review" aria-selected="false">Nhân viên sửa</a>
+            </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="description" role="tabpanel"
