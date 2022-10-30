@@ -26,7 +26,6 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
             'birth_day' => 'required',
             'address' => 'required',
             'avatar' => 'required',
@@ -40,7 +39,6 @@ class StoreUserRequest extends FormRequest
         return [
             'name.required' => 'Vui lòng không được để trống',
             'email.required' => 'Vui lòng không được để trống',
-            'password.required' => 'Vui lòng không được để trống',
             'birth_day.required' => 'Vui lòng không được để trống',
             'address.required' => 'Vui lòng không được để trống',
             'avatar.required' => 'Vui lòng không được để trống',

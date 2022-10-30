@@ -60,7 +60,7 @@ class UserController extends Controller
      * @param \Illuminate\Http\StoreUserRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         try {
             $this->userService->create($request);
