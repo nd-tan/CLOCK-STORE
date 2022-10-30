@@ -23,12 +23,14 @@ class BrandController extends Controller
 
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Brand::class);
         $brands = $this->brandService->all($request);
         return  view('admin.brands.index', compact('brands'));
     }
 
     public function create()
     {
+        $this->authorize('create', Brand::class);
         return view('admin.brands.add');
     }
 
@@ -57,6 +59,7 @@ class BrandController extends Controller
     public function edit($id)
     {
         $brand = $this->brandService->find($id);
+        $this->authorize('update', Brand::class);
         return view('admin.brands.edit',compact('brand'));
     }
 
@@ -78,6 +81,7 @@ class BrandController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete', Brand::class);
         try {
             DB::beginTransaction();
             $brand = $this->brandService->delete($id);
@@ -100,6 +104,7 @@ class BrandController extends Controller
 
     public function restore($id)
     {
+        $this->authorize('restore',Brand::class);
         try {
             DB::beginTransaction();
             $this->brandService->restore($id);
@@ -116,6 +121,7 @@ class BrandController extends Controller
 
     public function force_destroy(Request $request)
     {
+        $this->authorize('forceDelete', Brand::class);
         try {
             DB::beginTransaction();
             $id = $request->id;

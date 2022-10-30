@@ -21,7 +21,8 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
+    {
+        $this->authorize('viewAny', Order::class);
     try{
         $orders = $this->orderService->getAllWithPaginateLatest($request);
         $params = [
@@ -41,7 +42,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -63,6 +64,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', Order::class);
     try{
         $order = $this->orderService->find($id);
         $orderDetails = $order->orderDetails;
@@ -70,7 +72,7 @@ class OrderController extends Controller
             'order' => $order,
             'orderDetails' => $orderDetails,
         ];
-        // dd($orderDetails);  
+        // dd($orderDetails);
         return view('admin.orders.show', $params);
     }catch(\Exception $e){
         Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());

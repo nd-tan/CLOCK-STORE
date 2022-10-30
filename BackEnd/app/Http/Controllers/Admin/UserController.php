@@ -22,27 +22,14 @@ class UserController extends Controller
         $this->groupService = $groupService;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
+        $this->authorize('viewAny', User::class);
         $this->authorize('viewAny', User::class );
         $users = $this->userService->all($request);
-
-        // dd($users);
-        // $groups = $this->groupService->all($request);
-        // dd(Auth::user()->user_group_id);
         return view('admin.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         $this->authorize('create', User::class );
@@ -54,12 +41,6 @@ class UserController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\StoreUserRequest $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try {
@@ -72,39 +53,19 @@ class UserController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
+        $this->authorize('update', User::class);
         $users = $this->userService->find($id);
         $groups = $this->groupService->all($id);
-
-        $this->authorize('update', $users);
         return view('admin.users.edit', compact('groups', 'users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         try {
@@ -116,14 +77,9 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
+        $this->authorize('delete', User::class);
         try {
             $this->userService->delete($id);
             return redirect()->route('users.index')->with('success', ' Xóa  phòng thành công ');
@@ -135,9 +91,7 @@ class UserController extends Controller
 
     public function getTrashed()
     {
-        // dd($request);
         $users = $this->userService->getTrashed();
-        // dd($items);
         $params = [
             'users' => $users,
         ];
@@ -146,6 +100,7 @@ class UserController extends Controller
 
     public function restore($id)
     {
+        $this->authorize('restore', User::class);
         try {
             $this->userService->restore($id);
             return redirect()->route('users.getTrashed')->with('success', 'Khôi phục thành công');
@@ -157,6 +112,7 @@ class UserController extends Controller
 
     public function force_destroy($id)
     {
+        $this->authorize('forceDelete', User::class);
         try {
             $user = $this->userService->force_destroy($id);
             return redirect()->route('users.getTrashed')->with('success' . 'Xóa thành công');

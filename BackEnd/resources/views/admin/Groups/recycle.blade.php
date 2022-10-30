@@ -59,12 +59,16 @@
             <form action="{{ route('group.delete', $item->id) }}" method="post">
                 @method('DELETE')
                 @csrf
+                @if (Auth::user()->hasPermission('Group_restore'))
                 <a onclick="return confirm('Bạn có chắc muốn khôi phục thương hiệu này không?');"
                 style='color:rgb(52,136,245)' class='btn'
                 href="{{ route('group.restore', $item->id) }}"><i
                 class='bi bi-arrow-clockwise h4'></i></a>
+                @endif
+                @if (Auth::user()->hasPermission('Group_forceDelete'))
             <button onclick="return confirm('Bạn có chắc muốn xóa danh mục này vào thùng rác không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                @endif
             </form>
           </td>
         </tr>

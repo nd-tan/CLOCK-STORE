@@ -75,11 +75,15 @@
             <form action="{{ route('product.delete', $product->id) }}" method="post" >
                 @method('DELETE')
                 @csrf
+                @if (Auth::user()->hasPermission('Product_restore'))
             <a onclick="return confirm('Bạn có chắc muốn khôi phục sản phẩm này không?');"
             data-bs-toggle="tooltip" data-bs-placement="top" title="Khôi phục sản phẩm" style='color:rgb(52,136,245)' class='btn' href="{{route('product.restore',$product->id)}}">
                 <i class='bi bi-arrow-clockwise h4 h4'></i></a>
+                @endif
+                @if (Auth::user()->hasPermission('Product_forceDelete'))
             <button data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa sản phẩm" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                @endif
             </form>
           </td>
         </tr>
