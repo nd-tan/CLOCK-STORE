@@ -1,5 +1,7 @@
 <?php
 
+use App\Exports\OrderDetailsExport;
+use App\Exports\OrdersExport;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -47,6 +49,8 @@ Route::controller(SupplierController::class)->group(function () {
 });
 Route::resource('supplier', SupplierController::class);
 
+Route::get('/export-order',[OrdersExport::class,'exportOrder'] )->name('export-order');
+Route::get('/export-orderdetail',[OrderDetailsExport::class,'exportOrderDetail'] )->name('export-orderdetail');
 Route::controller(OrderController::class)->group(function () {
     Route::put('order/updatesingle/{id}', 'updateSingle')->name('order.updatesingle');
 });
