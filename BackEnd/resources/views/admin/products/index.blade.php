@@ -7,7 +7,7 @@
                 <h1 class="mb-1">Sản Phẩm</h1>
             </div>
             <div class="col-md-6">
-                <a style="float: right" href="#"><i class="bi bi-printer-fill h3"></i></a>
+                <a style="float: right" href="{{route('products.exportExcel')}}"><i class="bi bi-printer-fill h3"></i></a>
             </div>
 
         </div>
