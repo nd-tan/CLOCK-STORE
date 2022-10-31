@@ -34,10 +34,10 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
         ]);
         $this->importGroup();
-        // $this->importRole();
         $this->importRoles();
+        $this->importRole();
         $this->importGroupRole();
-        // $this->importGroupRole_1();
+        $this->importGroupRole_1();
         $this->importUser();
     }
     public function importRoles()

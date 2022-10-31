@@ -33,6 +33,10 @@ class Product extends Model
     public function product_images(){
         return $this->hasMany(ProductImage::class, 'product_id','id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id_ad', 'id');
+    }
     public function scopeNameCate($query, $request)
     {
         if ($request->has('category_id')) {

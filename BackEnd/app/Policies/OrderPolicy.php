@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class OrderPolicy
@@ -15,9 +16,9 @@ class OrderPolicy
      * @param  \App\Models\Order  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(Order $order)
+    public function viewAny(User $user)
     {
-        return $order->hasPermission('Order_viewAny');
+        return $user->hasPermission('Order_viewAny');
     }
 
     /**
@@ -27,9 +28,9 @@ class OrderPolicy
      * @param  \App\Models\Order  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Order $order, Order $model)
+    public function view(User $user)
     {
-        return $order->hasPermission('Order_view');
+        return $user->hasPermission('Order_view');
     }
 
     /**
@@ -38,9 +39,9 @@ class OrderPolicy
      * @param  \App\Models\Order  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(Order $order)
+    public function create(User $user)
     {
-         return $order->hasPermission('Order_create');
+         return $user->hasPermission('Order_create');
     }
 
     /**
@@ -50,9 +51,9 @@ class OrderPolicy
      * @param  \App\Models\Order  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Order $order, Order $model)
+    public function update(User $user)
     {
-        return $order->hasPermission('Order_update');
+        return $user->hasPermission('Order_update');
     }
 
     /**
@@ -62,9 +63,9 @@ class OrderPolicy
      * @param  \App\Models\Order  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Order $order, Order $model)
+    public function delete(User $user)
     {
-        return $order->hasPermission('Order_delete');
+        return $user->hasPermission('Order_delete');
     }
 
     /**
@@ -74,9 +75,9 @@ class OrderPolicy
      * @param  \App\Models\Order  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(Order $order, Order $model)
+    public function restore(User $user)
     {
-        return $order->hasPermission('Order_restore');
+        return $user->hasPermission('Order_restore');
     }
 
     /**
@@ -86,8 +87,8 @@ class OrderPolicy
      * @param  \App\Models\Order  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(Order $order, Order $model)
+    public function forceDelete(User $user)
     {
-        return $order->hasPermission('Order_forceDelete');
+        return $user->hasPermission('Order_forceDelete');
     }
 }

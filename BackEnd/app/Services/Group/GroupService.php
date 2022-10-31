@@ -30,11 +30,11 @@ class GroupService extends BaseService implements GroupServiceInterface
         return $user;
     }
 
-    public function update($request, $id)
-    {
-        return $this->repository->update($request, $id);
+    // public function update($request, $id)
+    // {
+    //     return $this->repository->update($request, $id);
 
-    }
+    // }
 
     public function delete($id)
     {

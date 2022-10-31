@@ -40,14 +40,16 @@
         {{ Session::get('error') }}
     </p>
 @endif
+@if(Auth::user()->hasPermission('Category_create'))
     <a class='btn btn-primary mb-2'  href="{{route('category.create')}}">Thêm danh mục</a>
+@endif
     <a class='btn btn-secondary mb-2 float-right'  href="{{route('category.getTrashed')}}">Thùng rác</a>
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Tên danh mục</th>
-          <th scope="col">Số lượng sản phẩm</th>
+          <th  scope="col">Số lượng sản phẩm</th>
           <th scope="col">Thao tác</th>
         </tr>
       </thead>
@@ -57,14 +59,18 @@
         <tr>
           <th scope="row">{{$key + 1}}</th>
           <td>{{$category->name}}</td>
-          <td>{{$category->products->count()}}</td>
+          <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{$category->products->count()}}</td>
           <td>
             <form action="{{ route('category.destroy', $category->id) }}" method="post" >
                 @method('DELETE')
                 @csrf
+                @if(Auth::user()->hasPermission('Category_update'))
             <a style='color:rgb(52,136,245)' class='btn' href="{{route('category.edit',$category->id)}}">
                 <i class='bi bi-pencil-square h4'></i></a>
+                @endif
+                @if(Auth::user()->hasPermission('Category_delete'))
             <button onclick="return confirm('Bạn có chắc muốn đưa danh mục này vào thùng rác không?');" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                @endif
             </form>
           </td>
         </tr>

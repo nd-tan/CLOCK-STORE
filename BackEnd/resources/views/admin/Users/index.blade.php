@@ -23,7 +23,9 @@
         {{ Session::get('error') }}
     </p>
 @endif
+@if(Auth::user()->hasPermission('User_create'))
     <a class='btn btn-primary mb-2'  href="{{route('users.create')}}">Thêm nhân viên</a>
+@endif
     <a class='btn btn-secondary mb-2 float-right'  href="{{route('user.getTrashed')}}">Thùng rác</a>
     <table class="table table-hover">
       <thead>
@@ -56,10 +58,14 @@
             <form action="{{ route('user.delete', $user->id) }}" method="post" >
                 @method('DELETE')
                 @csrf
+                @if(Auth::user()->hasPermission('User_update'))
             <a style='color:rgb(52,136,245)' class='btn' href="{{route('users.edit',$user->id)}}">
                 <i class='bi bi-pencil-square h4'></i></a>
+                @endif
+                @if(Auth::user()->hasPermission('User_delete'))
             <button onclick="return confirm('Bạn có chắc muốn đưa danh mục này vào thùng rác không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                @endif
             </form>
           </td>
         </tr>
