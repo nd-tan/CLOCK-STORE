@@ -41,7 +41,13 @@ class UserController extends Controller
 
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\StoreUserRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreUserRequest $request)
     {
         try {
             $this->userService->create($request);

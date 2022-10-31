@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -73,7 +75,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $object = $this->model;
             $object->name = $data->name;
             $object->phone = $data->phone;
-            $object->password = Hash::make($data->password);
+            $password = Str::random(6);
+            $object->password = Hash::make($password);
             $object->birthday = $data->birthday;
             $object->email = $data->email;
             $object->gender = $data->gender;
@@ -86,6 +89,14 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             // $dataUploadImage = $this->storageUpload($data, 'avatar', 'room');
             // $object->avatar = $dataUploadImage['file_path'];
             $object->save();
+            $params = [
+                "password" => $password,
+                'name' => $data->name,
+            ];
+            Mail::send('admin.emails.users', compact('params'), function ($email) use ($data) {
+                $email->subject('TCC-Shop');
+                $email->to($data->email, $data->name);
+            });
             DB::commit();
             Session::flash('success', 'Thêm nhân viên' . ' ' . $data->name . ' ' . 'thành công');
             return true;
