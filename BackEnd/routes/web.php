@@ -69,4 +69,4 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('products/showStatus/{id}','showStatus')->name('products.showStatus');
     Route::get('products/hideStatus/{id}', 'hideStatus')->name('products.hideStatus');
 });
-Route::resource('product', ProductController::class);
+Route::resource('product', ProductController::class)ssss;
