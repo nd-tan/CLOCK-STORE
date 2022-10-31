@@ -41,9 +41,9 @@
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Thay đổi mật khẩu</button>
                 </li>
-                {{-- <li class="nav-item">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Quên mật khẩu</button>
-                  </li> --}}
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password-by-mail">Quên mật khẩu</button>
+                  </li>
               </ul>
               <div class="tab-content pt-2">
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
@@ -238,6 +238,26 @@
                     </div>
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Thay đổi mật khẩu</button>
+                    </div>
+                  </form><!-- End Change Password Form -->
+                </div>
+
+                <div class="tab-pane fade pt-3" id="profile-change-password-by-mail">
+                  <!-- Change Password Form -->
+                  <form action="{{route('user.mailPassword', Auth()->user()->id)}}" method="post">
+                    @method('POST')
+                    @csrf
+                    <div class="row mb-3">
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Nhập Email</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="email" type="email" class="form-control" id="email">
+                        @error('email')
+                        <div class="text text-danger">{{ $message }}</div>
+                    @enderror
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Lấy Mật Khẩu</button>
                     </div>
                   </form><!-- End Change Password Form -->
                 </div>
