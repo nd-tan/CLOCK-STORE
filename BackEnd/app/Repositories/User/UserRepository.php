@@ -30,67 +30,59 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function all($request)
     {
+        $users = $this->model->select('*');
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $users = $users->where('name', 'like', '%' . $search . '%')
+                ->orWhere('id', 'like', '%' . $search . '%')
+                ->orWhere('group_id', 'like', '%' . $search . '%');
 
-        $users = User::with('provinces','groups');
-        // if (isset($request->name) && $request->name) {
-        //     $name = $request->name;
-        //     $user->where('name', 'LIKE', '%' . $name . '%');
-        // }
-        // if (isset($request->phone) && $request->phone) {
-        //     $phone = $request->phone;
-        //     $user->where('phone', 'LIKE', '%' . $phone . '%');
-        // }
-        // if (isset($request->address) && $request->address) {
-        //     $address = $request->address;
-        //     $user->where('address', 'LIKE', '%' . $address . '%');
-        // }
-        // if (isset($request->group_id) && $request->group_id) {
-        //     $group_id = $request->user_group_id;
-        //     $user->where('group_id', 'LIKE', '%' . $group_id . '%');
-        // }
-        // dd($user);
-        // $user->orderBy('id', 'desc');
-        // $users = $user->paginate(3);
-        // dd($users);
-        return $users->orderBy('id', 'DESC')->paginate(5);
+        }
+
+        return $users->orderBy('id', 'DESC')->paginate(3);
     }
-
     public function delete($id)
     {
-        $users = $this->model->find($id);
+        $user = $this->model->findOrFail($id);
         try {
-            $users->delete();
+            $user->delete();
             return true;
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return false;
         }
-        return $users;
+        return $user;
     }
 
     public function create($data)
     {
-        // dd($data->all());
+        // dd($data);
         try {
             DB::beginTransaction();
-            $object = $this->model;
-            $object->name = $data->name;
-            $object->phone = $data->phone;
-            $password = Str::random(6);
-            $object->password = Hash::make($password);
-            $object->birthday = $data->birthday;
-            $object->email = $data->email;
-            $object->gender = $data->gender;
-            $object->address = $data->address;
-            $object->province_id = $data->province_id;
-            $object->group_id = $data->group_id;
-            $object->ward_id = $data->ward_id;
-            $object->district_id = $data->district_id;
-            $object->image = $data->image;
-            // $dataUploadImage = $this->storageUpload($data, 'avatar', 'room');
-            // $object->avatar = $dataUploadImage['file_path'];
-            $object->save();
-            $params = [
+            $user = $this->model;
+            $user->name = $data->name;
+            $user->phone = $data->phone;
+            $user->password = Hash::make($data->password);
+            $user->birthday = $data->birthday;
+            $user->email = $data->email;
+            $user->gender = $data->gender;
+            $user->address = $data->address;
+            $user->province_id = $data->province_id;
+            $user->group_id = $data->group_id;
+            $user->ward_id = $data->ward_id;
+            $user->district_id = $data->district_id;
+            $user->image = $data->image;
+            if ($data['inputFile']) {
+                $file = $data['inputFile'];
+                $fileExtension = $file->getClientOriginalExtension();
+                $fileName = time(); // create file name by curent time
+                $newFileName = $fileName . '.' . $fileExtension; //45678908766.jpg
+                $data['inputFile']->storeAs('public/images/user', $newFileName); //save file in public/images/brand with newname is newFileName
+                $data['image'] = $newFileName;
+                $user->image = $data['image'];
+            }
+            $user->save();
+                $params = [
                 "password" => $password,
                 'name' => $data->name,
             ];
@@ -98,6 +90,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 $email->subject('TCC-Shop');
                 $email->to($data->email, $data->name);
             });
+
             DB::commit();
             Session::flash('success', 'Thêm nhân viên' . ' ' . $data->name . ' ' . 'thành công');
             return true;
@@ -105,27 +98,31 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             DB::rollBack();
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
         }
-        return $object;
+        return $user;
     }
 
 
     public function update($request, $id)
     {
-
+        // dd($request);
         try {
             DB::beginTransaction();
-            $object = $this->model->find($id);
+            $user = $this->model->find($id);
             // dd(  $object);
-            $object->name = $request->name;
-            $object->phone = $request->phone;
+            $user->name = $request->name;
+            $user->phone = $request->phone;
             if ($request->password) {
-                $object->password = Hash::make($request->password);
+                $user->password = Hash::make($request->password);
             }
-            $object->birthday = $request->birthday;
-            $object->email = $request->email;
-            $object->gender = $request->gender;
-            $object->address = $request->address;
-            // $object->group_id = $request->group_id;
+            $user->image = $request->image;
+            $user->birthday = $request->birthday;
+            $user->email = $request->email;
+            $user->gender = $request->gender;
+            $user->address = $request->address;
+            $user->province_id = $request->province_id;
+            $user->ward_id = $request->ward_id;
+            $user->district_id = $request->district_id;
+            $user->group_id = $request->group_id;
             // if ($request->avatar) {
             //     $dataUploadImage = $this->storageUpload($request, 'avatar', 'room');
             //     $object->avatar = $dataUploadImage['file_path'];
@@ -133,8 +130,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             //     $object->avatar = $object->avatar;
             // }
 
-            // dd($object);
-            $object->save();
+            $user->save();
             DB::commit();
             Session::flash('success', 'Chỉnh sửa nhân viên' . ' ' . $request->name . ' ' . 'thành công');
             return true;
@@ -142,15 +138,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             DB::rollBack();
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
         }
-        return $object;
+        return $user;
     }
-
     public function getTrashed()
     {
-        $query = $this->model->onlyTrashed();
-        $query->orderBy('id', 'desc');
-        $user = $query->paginate(5);
-        return $user;
+        $users = $this->model->onlyTrashed();
+        return $users->orderBy('id', 'DESC')->paginate(3);
     }
 
     public function restore($id)
@@ -169,28 +162,27 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function force_destroy($id)
     {
         $user = $this->model->onlyTrashed()->findOrFail($id);
-        try {
-            $user->forceDelete();
-            return $user;
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return $user;
-        }
+        // try {
+        //     $user->forceDelete();
+        //     return $user;
+        // } catch (\Exception $e) {
+        //     Log::error($e->getMessage());
+        //     return $user;
+        // }
+        $user->forceDelete();
+        return $user;
     }
     public function provinces()
     {
-       return Province::orderBy('id', 'DESC')->get();
-
+        return Province::orderBy('id', 'DESC')->get();
     }
     public function districts()
     {
-       return District::orderBy('id', 'DESC')->get();
-
+        return District::orderBy('id', 'DESC')->get();
     }
     public function wards()
     {
-       return Ward::orderBy('id', 'DESC')->get();
-
+        return Ward::orderBy('id', 'DESC')->get();
     }
     public function update_info($request,$id)
     {

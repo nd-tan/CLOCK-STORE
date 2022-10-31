@@ -177,6 +177,7 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
+
               <h6>{{Auth()->user()->name}}</h6>
               <span>{{Auth()->user()->groups->name}}</span>
             </li>
@@ -215,7 +216,7 @@
             </li> --}}
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="logout">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Đăng xuất</span>
               </a>

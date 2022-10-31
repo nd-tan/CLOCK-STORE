@@ -31,7 +31,8 @@ class StoreGroupRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập tên nhóm nhân viên',
+            'name.required' => 'Không được để trống!',
+            'name.unique' => 'Đã tồn tại!',
         ];
 
     }
