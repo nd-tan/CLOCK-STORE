@@ -81,9 +81,6 @@ Route::group([
         Route::post('user/updatePass/{id}', 'change_password')->name('user.change_password');
     });
     Route::resource('users', UserController::class);
-Route::get('/', function () {
-    return view('admin.home');
-});
 Route::controller(CustomerController::class)->group(function () {
 Route::get('customers/trash','getTrash')->name('customer.trash');
 Route::get('customers/trash/restore/{id}','restore')->name('customer.restore');
