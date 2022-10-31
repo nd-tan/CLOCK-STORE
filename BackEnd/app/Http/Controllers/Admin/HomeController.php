@@ -1,14 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
-use App\Models\Booking;
-use App\Models\Customers;
-use App\Models\Room;
-use App\Models\User;
-use App\Models\UserGroup;
-
+use App\Models\Customer;
+use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     public function index()
@@ -34,7 +29,30 @@ class HomeController extends Controller
         //     'roomtype_vip'=>$roomtype_vip,
         //     'order_room'=>$order_room,
         // ];
-
-        return view('admin.home');
+        $totalPrice  =  Order::pluck('total')->sum();
+        $totalOrders  =  Order::pluck('id')->count();
+        $totalCustomer  =  Customer::pluck('id')->count();
+        $topProducts = DB::table('order_details')
+            ->leftJoin('products', 'products.id', '=', 'order_details.product_id')
+            ->selectRaw('products.*, sum(order_details.quantity) totalProduct, sum(order_details.total) totalPrice')
+            ->groupBy('order_details.product_id')
+            ->orderBy('totalProduct', 'desc')
+            ->take(5)
+            ->get();
+            $topCustomer = DB::table('customers')
+            ->join('orders', 'customers.id', '=', 'orders.customer_id')
+            ->selectRaw('customers.*, sum(orders.total) totalOrder')
+            ->groupBy('customers.id')
+            ->orderBy('totalOrder', 'desc')
+            ->take(5)
+            ->get();
+        $params = [
+            'totalPrice' => $totalPrice,
+            'totalOrders' => $totalOrders,
+            'totalCustomer' => $totalCustomer,
+            'topProducts' => $topProducts,
+            'topCustomer' => $topCustomer,
+        ];
+        return view('admin.layout.content', $params);
     }
 }
