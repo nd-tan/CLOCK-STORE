@@ -3,6 +3,9 @@
 <main id="main" class="main">
     <div class="pagetitle">
         <h1 class="mb-1">Nhân viên</h1>
+        <div class="col-md-6">
+            <a style="float: right" href="{{ route('export-user') }}"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Xuất File Excel" class="bi bi-printer-fill h3"></i></a>
+        </div>
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>

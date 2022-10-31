@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Exports\OrderDetailsExport;
 use App\Exports\OrdersExport;
+use App\Exports\UserExport;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -77,33 +78,32 @@ Route::group([
         Route::get('user/getTrashed', 'getTrashed')->name('user.getTrashed');
         Route::get('user/restore/{id}', 'restore')->name('user.restore');
         Route::get('user/info', 'info')->name('user.info');
+        Route::get('/export-user', [UserExport::class, 'exportUser'])->name('export-user');
         Route::post('user/updateInfo/{id}', 'update_info')->name('user.update_info');
         Route::post('user/updatePass/{id}', 'change_password')->name('user.change_password');
     });
     Route::resource('users', UserController::class);
-Route::get('/', function () {
-    return view('admin.home');
+    Route::get('/', function () {
+        return view('admin.home');
+    });
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('customers/trash', 'getTrash')->name('customer.trash');
+        Route::get('customers/trash/restore/{id}', 'restore')->name('customer.restore');
+        Route::delete('customers/trash/force-delete/{id}', 'forceDelete')->name('customer.forceDelete');
+    });
+    Route::resource('customer', CustomerController::class);
+    Route::delete('/delete/{id}', [CategoryController::class, 'force_destroy'])->name('category.delete');
+    Route::get('/getTrashed', [CategoryController::class, 'getTrashed'])->name('category.getTrashed');
+    Route::get('/restore/{id}', [CategoryController::class, 'restore'])->name('category.restore');
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('category/getTrashed', 'getTrashed')->name('category.getTrashed');
+        Route::delete('category/delete/{id}', 'force_destroy')->name('category.delete');
+        Route::get('category/restore/{id}', 'restore')->name('category.restore');
+    });
+    Route::resource('category', CategoryController::class);
 });
-Route::controller(CustomerController::class)->group(function () {
-Route::get('customers/trash','getTrash')->name('customer.trash');
-Route::get('customers/trash/restore/{id}','restore')->name('customer.restore');
-Route::delete('customers/trash/force-delete/{id}','forceDelete')->name('customer.forceDelete');
-});
-Route::resource('customer', CustomerController::class);
-Route::delete('/delete/{id}',[CategoryController::class,'force_destroy'])->name('category.delete');
-Route::get('/getTrashed',[CategoryController::class,'getTrashed'])->name('category.getTrashed');
-Route::get('/restore/{id}',[CategoryController::class,'restore'])->name('category.restore');
-Route::controller(CategoryController::class)->group(function () {
-    Route::get('category/getTrashed','getTrashed')->name('category.getTrashed');
-    Route::delete('category/delete/{id}','force_destroy')->name('category.delete');
-    Route::get('category/restore/{id}','restore')->name('category.restore');
-});
-Route::resource('category', CategoryController::class);
-
-
-});
-Route::get('/export-order',[OrdersExport::class,'exportOrder'] )->name('export-order');
-Route::get('/export-orderdetail/{id}',[OrderDetailsExport::class,'exportOrderDetail'] )->name('export-orderdetail');
+Route::get('/export-order', [OrdersExport::class, 'exportOrder'])->name('export-order');
+Route::get('/export-orderdetail/{id}', [OrderDetailsExport::class, 'exportOrderDetail'])->name('export-orderdetail');
 Route::controller(OrderController::class)->group(function () {
     Route::put('order/updatesingle/{id}', 'updateSingle')->name('order.updatesingle');
 });
@@ -119,7 +119,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::delete('product/delete/{id}', 'force_destroy')->name('product.delete');
     Route::get('product/getTrashed', 'getTrashed')->name('product.getTrashed');
     Route::get('product/restore/{id}', 'restore')->name('product.restore');
-    Route::get('products/showStatus/{id}','showStatus')->name('products.showStatus');
+    Route::get('products/showStatus/{id}', 'showStatus')->name('products.showStatus');
     Route::get('products/hideStatus/{id}', 'hideStatus')->name('products.hideStatus');
     Route::get('products/exportExcel', 'exportExcel')->name('products.exportExcel');
 });
