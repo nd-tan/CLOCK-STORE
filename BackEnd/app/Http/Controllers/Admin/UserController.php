@@ -4,12 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserInfeRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 use App\Services\Group\GroupServiceInterface;
 use App\Services\User\UserServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -125,6 +131,44 @@ class UserController extends Controller
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return redirect()->route('users.getTrashed')->with('error', 'Xóa không thành công');
+        }
+    }
+    public function info()
+    {
+        $item = Auth()->user();
+        return view('admin.Users.infor', compact('item'));
+    }
+
+    public function update_info(UpdateUserInfeRequest $request,$id)
+    {
+        try {
+            $item= $this->userService->update_info($request, $id);
+            $item->save();
+            Session::flash('success', config('define.update.succes'));
+            return redirect()->route('user.info');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', config('define.update.error'));
+            return redirect()->route('user.info',Auth()->user()->id);
+        }
+    }
+    public function change_password(UpdateUserPasswordRequest $request)
+    {
+        if($request->renewpassword==$request->newpassword)
+        {
+            if ((Hash::check($request->password, Auth::user()->password))) {
+                $item=User::find(Auth()->user()->id);
+                $item->password= bcrypt($request->newpassword);
+                $item->save();
+                Session::flash('success', config('define.update.succes'));
+                return redirect()->route('user.info');
+            }else{
+            Session::flash('error', config('define.update.error'));
+                return redirect()->route('user.info');
+            }
+        }else{
+            Session::flash('error', config('define.update.error'));
+            return redirect()->route('user.info');
         }
     }
 }

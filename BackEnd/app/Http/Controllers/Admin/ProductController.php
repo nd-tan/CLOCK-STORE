@@ -194,7 +194,7 @@ class ProductController extends Controller
         }
     }
     public function exportExcel(){
-        return Excel::download(new ProductExport, 'users.xlsx');
+        return Excel::download(new ProductExport, 'products.xlsx');
     }
 
 }

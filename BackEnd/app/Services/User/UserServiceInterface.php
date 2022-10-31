@@ -12,4 +12,5 @@ interface UserServiceInterface extends ServiceInterface
     public function wards();
     public function restore($id);
     public function force_destroy($id);
+    public function update_info($request,$id);
 }
