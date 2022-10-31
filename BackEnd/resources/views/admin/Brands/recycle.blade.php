@@ -65,7 +65,7 @@
                 style='color:rgb(52,136,245)' class='btn'
                 href="{{ route('brand.restore', $brand->id) }}"><i
                 class='bi bi-arrow-clockwise h4'></i></a>
-            <button onclick="return confirm('Bạn có chắc muốn xóa danh mục này vào thùng rác không?');"
+            <button onclick="return confirm('Bạn có chắc muốn xóa thương hiệu này không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
             </form>
           </td>

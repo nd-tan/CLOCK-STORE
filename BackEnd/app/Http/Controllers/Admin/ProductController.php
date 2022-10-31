@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
+use App\Models\User;
 use App\Services\Product\ProductServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Product::class);
         $products = $this->productService->all($request);
         $categories = Category::get();
         $brands = Brand::get();
@@ -41,6 +43,7 @@ class ProductController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Product::class);
         $categories = Category::get();
         $brands = Brand::get();
         $suppliers = Supplier::get();
@@ -70,12 +73,15 @@ class ProductController extends Controller
 
     public function show( $id)
     {
+        $this->authorize('view', Product::class);
         $product = $this->productService->find($id);
-        return view('admin.products.detail',compact('product'));
+        $users= User::all();
+        return view('admin.products.detail',compact('product', 'users'));
     }
 
     public function edit($id)
     {
+        $this->authorize('update', Product::class);
         $product = $this->productService->find($id);
         $categories = Category::get();
         $brands = Brand::get();
@@ -109,6 +115,7 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete', Product::class);
         try {
             DB::beginTransaction();
             $this->productService->delete($id);
@@ -138,6 +145,7 @@ class ProductController extends Controller
     }
     public function restore($id)
     {
+        $this->authorize('restore', Product::class);
         try {
             DB::beginTransaction();
             $this->productService->restore($id);
@@ -153,6 +161,7 @@ class ProductController extends Controller
     }
     public function force_destroy($id)
     {
+        $this->authorize('forceDelete', Product::class);
         try {
             DB::beginTransaction();
             $this->productService->force_destroy($id);

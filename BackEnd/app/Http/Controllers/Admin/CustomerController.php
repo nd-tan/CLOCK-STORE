@@ -22,6 +22,7 @@ class CustomerController extends Controller
 
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Customer::class);
         try{
             $customers =  $this->customerService->all($request);
             $params = ['customers' => $customers];
@@ -35,16 +36,17 @@ class CustomerController extends Controller
 
     public function create()
     {
-    
+
     }
 
     public function store(Request $request)
     {
-    
+
     }
 
     public function show($id)
     {
+        $this->authorize('view', Customer::class);
         try{
             $customer =  $this->customerService->find($id);
             $params = ['customer' => $customer];
@@ -56,17 +58,17 @@ class CustomerController extends Controller
 
     public function edit($id)
     {
-      
+
     }
 
     public function update(Request $request, $id)
     {
-      
+
     }
 
     public function destroy($id)
     {
-      
+
         try {
             DB::beginTransaction();
             $customer = $this->customerService->find($id);
@@ -84,7 +86,7 @@ class CustomerController extends Controller
         }
     }
     public function getTrash()
-    { 
+    {
         try {
             $customers = $this->customerService->getTrash();
             $params = ['customers' => $customers];
@@ -127,32 +129,5 @@ class CustomerController extends Controller
             return redirect()->route('customer.index');
         }
     }
-    // public function searchByName(Request $request)
-    // {
-    //     try {
-    //     $keyword = $request->input('keyword');
-    //     $customers = $this->customerService->searchCustomer($keyword);
-    //     return response()->json($customers);
-    //     } catch (Exception $e) {
-    //         Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
-    //         abort(404);
-    //     }
-
-    // }
-
-    // public function searchCustomer(Request $request)
-    // {
-      
-    //     try {
-    //         $keySearch = $request->keySearch;
-    //         $customers = $this->customerService->searchCustomer($keySearch);
-    //         $params = [
-    //             'customers' => $customers
-    //         ];
-    //         return  view('admin.customers.index', $params);
-    //     } catch (Exception $e) {
-    //         Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
-    //         abort(404);
-    //     }
-    // }
+   
 }

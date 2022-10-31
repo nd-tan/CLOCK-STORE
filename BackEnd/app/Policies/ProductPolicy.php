@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProductPolicy
@@ -15,9 +16,9 @@ class ProductPolicy
      * @param  \App\Models\Product  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(Product $product)
+    public function viewAny(User $user)
     {
-        return $product->hasPermission('Product_viewAny');
+        return $user->hasPermission('Product_viewAny');
     }
 
     /**
@@ -27,9 +28,9 @@ class ProductPolicy
      * @param  \App\Models\Product  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Product $product, Product $model)
+    public function view(User $user)
     {
-        return $product->hasPermission('Product_view');
+        return $user->hasPermission('Product_view');
     }
 
     /**
@@ -38,9 +39,9 @@ class ProductPolicy
      * @param  \App\Models\Product  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(Product $product)
+    public function create(User $user)
     {
-         return $product->hasPermission('Product_create');
+         return $user->hasPermission('Product_create');
     }
 
     /**
@@ -50,9 +51,9 @@ class ProductPolicy
      * @param  \App\Models\Product  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Product $product, Product $model)
+    public function update(User $user)
     {
-        return $product->hasPermission('Product_update');
+        return $user->hasPermission('Product_update');
     }
 
     /**
@@ -62,9 +63,9 @@ class ProductPolicy
      * @param  \App\Models\Product  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Product $product, Product $model)
+    public function delete(User $user)
     {
-        return $product->hasPermission('Product_delete');
+        return $user->hasPermission('Product_delete');
     }
 
     /**
@@ -74,9 +75,9 @@ class ProductPolicy
      * @param  \App\Models\Product  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(Product $product, Product $model)
+    public function restore(User $user)
     {
-        return $product->hasPermission('Product_restore');
+        return $user->hasPermission('Product_restore');
     }
 
     /**
@@ -86,8 +87,8 @@ class ProductPolicy
      * @param  \App\Models\Product  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(Product $product, Product $model)
+    public function forceDelete(User $user)
     {
-        return $product->hasPermission('Product_forceDelete');
+        return $user->hasPermission('Product_forceDelete');
     }
 }

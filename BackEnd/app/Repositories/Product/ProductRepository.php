@@ -63,7 +63,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product->supplier_id = $data['supplier_id'];
             $product->category_id = $data['category_id'];
             $product->brand_id = $data['brand_id'];
-            // $product->created_by = Auth::user()->id;
+            $product->user_id_ad = Auth::user()->id;
             if ($data['inputFile']) {
                 $file = $data['inputFile'];
                 $fileExtension = $file->getClientOriginalExtension();
@@ -110,6 +110,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product->category_id = $data['category_id'];
             $product->brand_id = $data['brand_id'];
             $product->image = $data['image'];
+            $product->user_id_edit= Auth::user()->id;
             // $product->created_by = Auth::user()->id;
             if (isset($data['inputFile'])) {
                 $file = $data['inputFile'];

@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SupplierPolicy
@@ -15,9 +16,9 @@ class SupplierPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(Supplier $supplier)
+    public function viewAny(User $user)
     {
-        return $supplier->hasPermission('Supplier_viewAny');
+        return $user->hasPermission('Supplier_viewAny');
     }
 
     /**
@@ -27,9 +28,9 @@ class SupplierPolicy
      * @param  \App\Models\Supplier  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Supplier $supplier, Supplier $model)
+    public function view(User $user)
     {
-        return $supplier->hasPermission('Supplier_view');
+        return $user->hasPermission('Supplier_view');
     }
 
     /**
@@ -38,9 +39,9 @@ class SupplierPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(Supplier $supplier)
+    public function create(User $user)
     {
-         return $supplier->hasPermission('Supplier_create');
+         return $user->hasPermission('Supplier_create');
     }
 
     /**
@@ -50,9 +51,9 @@ class SupplierPolicy
      * @param  \App\Models\Supplier  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Supplier $supplier, Supplier $model)
+    public function update(User $user)
     {
-        return $supplier->hasPermission('Supplier_update');
+        return $user->hasPermission('Supplier_update');
     }
 
     /**
@@ -62,9 +63,9 @@ class SupplierPolicy
      * @param  \App\Models\Supplier  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Supplier $supplier, Supplier $model)
+    public function delete(User $user)
     {
-        return $supplier->hasPermission('Supplier_delete');
+        return $user->hasPermission('Supplier_delete');
     }
 
     /**
@@ -74,9 +75,9 @@ class SupplierPolicy
      * @param  \App\Models\Supplier  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(Supplier $supplier, Supplier $model)
+    public function restore(User $user)
     {
-        return $supplier->hasPermission('Supplier_restore');
+        return $user->hasPermission('Supplier_restore');
     }
 
     /**
@@ -86,9 +87,9 @@ class SupplierPolicy
      * @param  \App\Models\Supplier  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(Supplier $supplier, Supplier $model)
+    public function forceDelete(User $user)
     {
-        return $supplier->hasPermission('Supplier_forceDelete');
+        return $user->hasPermission('Supplier_forceDelete');
     }
 }
 

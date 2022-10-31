@@ -42,8 +42,8 @@
     </p>
 @endif
     <a class='btn btn-primary mb-2'  href="{{route('brand.create')}}">Thêm thương hiệu</a>
-    <a class='btn btn-secondary mb-2 float-right'  href="{{route('brand.getTrashed')}}">Thùng rác</a>
-    <table class="table table-hover">
+    <a class='btn btn-secondary mb-2 float-right'  href="{{route('brand.getTrashed')}}">Thùng ác</a>
+    <table class="table table-hover" >
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -64,7 +64,7 @@
                 @csrf
             <a style='color:rgb(52,136,245)' class='btn' href="{{route('brand.edit',$brand->id)}}">
                 <i class='bi bi-pencil-square h4'></i></a>
-            <button onclick="return confirm('Bạn có chắc muốn đưa danh mục này vào thùng rác không?');"
+            <button onclick="return confirm('Bạn có chắc muốn đưa thương hiệu này vào thùng rác không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
             </form>
           </td>

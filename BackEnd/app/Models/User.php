@@ -53,6 +53,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Group::class,'group_id','id');
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'user_id_ad', 'id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
