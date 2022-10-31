@@ -62,6 +62,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $user = $this->model;
             $user->name = $data->name;
             $user->phone = $data->phone;
+            $password=$data->password;
             $user->password = Hash::make($data->password);
             $user->birthday = $data->birthday;
             $user->email = $data->email;

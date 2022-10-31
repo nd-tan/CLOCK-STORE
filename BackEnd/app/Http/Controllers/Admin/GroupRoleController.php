@@ -34,7 +34,7 @@ class GroupRoleController extends Controller
      * @param  \App\Http\Requests\StoreGroupRoleRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreGroupRoleRequest $request)
+    public function store()
     {
         //
     }
@@ -68,7 +68,7 @@ class GroupRoleController extends Controller
      * @param  \App\Models\GroupRole  $user_group_role
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGroupRoleRequest $request, GroupRole $grouprole)
+    public function update( GroupRole $grouprole)
     {
         //
     }

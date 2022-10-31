@@ -60,7 +60,8 @@
 
    {{-- ///////////////////////////////////////////////////////////////////// --}}
 {{-- @include('sweetalert::alert') --}}
-  @yield('content1')
+@include("admin.layout.content")
+
  <!-- End #main -->
 
   <!-- ======= Footer ======= -->

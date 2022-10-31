@@ -73,7 +73,7 @@ class ProductController extends Controller
         }
     }
 
-    public function show( $id)
+    public function show($id)
     {
         $this->authorize('view', Product::class);
         $product = $this->productService->find($id);

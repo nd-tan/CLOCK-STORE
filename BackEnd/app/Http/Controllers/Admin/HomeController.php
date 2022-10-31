@@ -53,6 +53,6 @@ class HomeController extends Controller
             'topProducts' => $topProducts,
             'topCustomer' => $topCustomer,
         ];
-        return view('admin.layout.content', $params);
+        return view('admin.home', $params);
     }
 }

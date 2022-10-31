@@ -40,7 +40,7 @@ class SupplierController extends Controller
         $data = $request->all();
         try {
             $this->supplierService->create($data);
-             Session::flash('success', config('define.update.succes'));
+             Session::flash('success', config('define.store.succes'));
             return redirect()->route('supplier.index');
         } catch (\Exception $e) {
             Session::flash('error',  config('define.store.error'));
