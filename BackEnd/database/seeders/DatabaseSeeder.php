@@ -135,10 +135,10 @@ class DatabaseSeeder extends Seeder
         $user->address = 'Quảng Trị';
         $user->image = 'phi.jpg';
         $user->gender = 'Nam';
-        $user->province_id = '2';
-        $user->district_id = '2';
-        $user->ward_id = '2';
-        $user->group_id = '2';
+        $user->province_id = '1';
+        $user->district_id = '1';
+        $user->ward_id = '1';
+        $user->group_id = '1';
         $user->save();
 
         $user = new User();

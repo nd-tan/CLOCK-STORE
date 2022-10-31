@@ -25,12 +25,19 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'address' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'birth_day' => 'required',
-            'address' => 'required',
-            'avatar' => 'required',
+            'phone' => 'required',
+            'birthday' => 'required',
+            'image' => 'required',
+            'gender' => 'required',
+            'province_id' => 'required',
+            'district_id' => 'required',
+            'ward_id' => 'required',
+            'group_id' => 'required',
             'phone' => 'required|unique:users',
+            'inputFile' => 'required',
 
         ];
     }
@@ -38,14 +45,21 @@ class StoreUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng không được để trống',
-            'email.required' => 'Vui lòng không được để trống',
-            'password.required' => 'Vui lòng không được để trống',
-            'birth_day.required' => 'Vui lòng không được để trống',
-            'address.required' => 'Vui lòng không được để trống',
-            'avatar.required' => 'Vui lòng không được để trống',
-            'phone.required' => 'Vui lòng không được để trống',
+            'name.required' => 'Không được để trống!',
+            'address.required' => 'Không được để trống!',
+            'email.required' => 'Không được để trống!',
+            'password.required' => 'Không được để trống!',
+            'birthday.required' => 'Không được để trống!',
+            'phone.required' => 'Không được để trống!',
+            'image.required' => 'Không được để trống!',
+            'gender.required' => 'Không được để trống!',
+            'province_id.required' => 'Không được để trống!',
+            'district_id.required' => 'Không được để trống!',
+            'ward_id.required' => 'Không được để trống!',
+            'group_id.required' => 'Không được để trống!',
+            'inputFile.required' => 'Không được để trống!',
             'phone.unique' => 'Số điện thoại đã tồn tại',
+            'name.unique' => 'Đã tồn tại!',
         ];
 
     }

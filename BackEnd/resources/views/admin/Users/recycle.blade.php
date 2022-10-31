@@ -28,11 +28,13 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">Mã nhân viên</th>
+          <th scope="col">Ảnh đại diện</th>
           <th scope="col">Tên</th>
-          <th scope="col">Email</th>
-          <th scope="col">Địa Chỉ</th>
-          <th scope="col">Số Điện Thoại</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Địa chỉ</th>
+          <th scope="col">Số điện thoại</th>
+          <th scope="col">Nhóm nhân viên</th>
           <th scope="col">Thao tác</th>
         </tr>
       </thead>
@@ -40,19 +42,24 @@
           @foreach ($users as $key => $user)
         <tr>
           <th scope="row">{{$key + 1}}</th>
+          <td>
+            <img style="width:120px; height:100px" src="{{ asset('storage/images/user/' . $user->image) }}" alt=""class="image_photo">
+          </td>
           <td>{{$user->name}}</td>
           <td>{{$user->email}}</td>
           <td>{{$user->address}}</td>
           <td>{{$user->phone}}</td>
+          <td>{{$user->group_id}}</td>
+
           <td>
-            <form action="{{ route('users.delete', $user->id) }}" method="post" >
+            <form action="{{ route('user.force_destroy', $user->id) }}" method="post" >
                 @method('DELETE')
                 @csrf
-                <a onclick="return confirm('Bạn có chắc muốn khôi phục nhà cung cấp này không?');"
+                <a onclick="return confirm('Bạn có chắc muốn khôi phục nhân viên này không?');"
                 style='color:rgb(52,136,245)' class='btn'
-                href="{{ route('users.restore', $user->id) }}"><i
+                href="{{ route('user.restore', $user->id) }}"><i
                 class='bi bi-arrow-clockwise h4'></i></a>
-            <button onclick="return confirm('Bạn có chắc muốn xóa danh mục này không?');"
+            <button onclick="return confirm('Bạn có chắc muốn xóa nhân viên này không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
             </form>
           </td>
@@ -60,7 +67,7 @@
         @endforeach
       </tbody>
     </table>
-    {{-- {{ $users->onEachSide(5)->links() }} --}}
+    {{ $users->onEachSide(5)->links() }}
   </div>
 </div>
 </main>

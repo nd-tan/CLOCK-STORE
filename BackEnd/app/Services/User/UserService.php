@@ -9,14 +9,17 @@ class UserService extends BaseService implements UserServiceInterface
 {
     public $repository;
 
-    public function __construct(UserRepositoryInterface $UserRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->repository = $UserRepository;
+        $this->repository = $userRepository;
     }
 
     public function all($request)
     {
         return $this->repository->all($request);
+    }
+    public function addAvatar($data){
+        return $this->repository->addAvatar($data);
     }
     public function create($request)
     {

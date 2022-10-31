@@ -53,6 +53,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Group::class,'group_id','id');
     }
+    public function scopeSearch($query, $term)
+    {
+        if ($term) {
+            $query->where('name', 'like', '%' . $term . '%')
+                ->orWhere('group_id', 'like', '%' . $term . '%')
+                ->orWhere('id', 'like', '%' . $term . '%');
+        }
+        return $query;
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

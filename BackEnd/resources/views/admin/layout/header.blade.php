@@ -176,7 +176,7 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>tên user</h6>
+              <h6></h6>
               <span>chức vụ</span>
             </li>
             <li>
@@ -214,7 +214,7 @@
             </li> --}}
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="logout">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Đăng xuất</span>
               </a>
