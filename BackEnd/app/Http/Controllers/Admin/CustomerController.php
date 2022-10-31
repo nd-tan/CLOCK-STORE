@@ -22,9 +22,15 @@ class CustomerController extends Controller
 
     public function index(Request $request)
     {
-        $customers =  $this->customerService->all($request);
-        $params = ['customers' => $customers];
-        return view('admin.customers.index', $params);
+        try{
+            $customers =  $this->customerService->all($request);
+            $params = ['customers' => $customers];
+            return view('admin.customers.index', $params);
+        }catch(\Exception $e){
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+        }
+
+        
     }
 
     public function create()
@@ -39,9 +45,13 @@ class CustomerController extends Controller
 
     public function show($id)
     {
-        $customer =  $this->customerService->find($id);
-        $params = ['customer' => $customer];
-        return view('admin.customers.show', $params);
+        try{
+            $customer =  $this->customerService->find($id);
+            $params = ['customer' => $customer];
+            return view('admin.customers.show', $params);
+        }catch(\Exception $e){
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+        }
     }
 
     public function edit($id)
@@ -117,32 +127,32 @@ class CustomerController extends Controller
             return redirect()->route('customer.index');
         }
     }
-    public function searchByName(Request $request)
-    {
-        try {
-        $keyword = $request->input('keyword');
-        $customers = $this->customerService->searchCustomer($keyword);
-        return response()->json($customers);
-        } catch (Exception $e) {
-            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
-            abort(404);
-        }
+    // public function searchByName(Request $request)
+    // {
+    //     try {
+    //     $keyword = $request->input('keyword');
+    //     $customers = $this->customerService->searchCustomer($keyword);
+    //     return response()->json($customers);
+    //     } catch (Exception $e) {
+    //         Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+    //         abort(404);
+    //     }
 
-    }
+    // }
 
-    public function searchCustomer(Request $request)
-    {
+    // public function searchCustomer(Request $request)
+    // {
       
-        try {
-            $keySearch = $request->keySearch;
-            $customers = $this->customerService->searchCustomer($keySearch);
-            $params = [
-                'customers' => $customers
-            ];
-            return  view('admin.customers.index', $params);
-        } catch (Exception $e) {
-            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
-            abort(404);
-        }
-    }
+    //     try {
+    //         $keySearch = $request->keySearch;
+    //         $customers = $this->customerService->searchCustomer($keySearch);
+    //         $params = [
+    //             'customers' => $customers
+    //         ];
+    //         return  view('admin.customers.index', $params);
+    //     } catch (Exception $e) {
+    //         Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+    //         abort(404);
+    //     }
+    // }
 }

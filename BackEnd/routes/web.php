@@ -85,8 +85,6 @@ Route::controller(CustomerController::class)->group(function () {
 Route::get('customers/trash','getTrash')->name('customer.trash');
 Route::get('customers/trash/restore/{id}','restore')->name('customer.restore');
 Route::delete('customers/trash/force-delete/{id}','forceDelete')->name('customer.forceDelete');
-Route::get('searchCustomers','searchByName')->name('customer.searchKey');
-Route::get('searchCustomer','searchCustomer')->name('customer.search');
 });
 Route::resource('customer', CustomerController::class);
 Route::delete('/delete/{id}',[CategoryController::class,'force_destroy'])->name('category.delete');

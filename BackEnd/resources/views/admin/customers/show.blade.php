@@ -15,20 +15,20 @@
         <div class="container col-xl-6">
         <div class="row">
         <div class="card card-body pt-10">
-                    <button>Thông Tin</button>
+                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Thông Tin Khách Hàng" class="btn">Thông Tin</button>
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                         <h5 class="card-title">Hồ Sơ</h5>
                         <div class="row">
                             <div class="col-md-4 label">Họ Và Tên:</div>
-                            <div class="col-md-4 label">{{ $customer->name }}</div>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Tên Khách Hàng" class="col-md-4 label">{{ $customer->name }}</div>
                         </div>
                         <div class="row">
                             <div class="col-md-4 label">Số Điên Thoại:</div>
-                            <div class="col-md-4 label">{{ $customer->phone }}</div>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Số Điện Thoại Khách Hàng" class="col-md-4 label">{{ $customer->phone }}</div>
                         </div>
                         <div class="row">
                             <div class="col-md-4 label">Email:</div>
-                            <div class="col-md-4 label">{{ $customer->email }}</div>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Email Khách Hàng" class="col-md-4 label">{{ $customer->email }}</div>
                         </div>
                         <div class="row">
                             <div class="col-md-4 label">Ngày Đăng Ký:</div>
