@@ -144,7 +144,7 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->all();
-            $this->userService->update($id, $data);
+            $this->userService->update($data, $id);
             Session::flash('success', config('define.update.succes'));
             DB::commit();
             return redirect()->route('users.index');
@@ -219,20 +219,4 @@ class UserController extends Controller
             return redirect()->route('user.getTrashed');
         }
     }
-    // public function showStatus($id){
-
-    //     $user = User::findOrFail($id);
-    //     $user->status = '1';
-    //     if ($user->save()) {
-    //         return redirect()->back();
-    //     }
-    // }
-    // public function hideStatus($id){
-
-    //     $user = User::findOrFail($id);
-    //     $user->status = '0';
-    //     if ($user->save()) {
-    //         return redirect()->back();
-    //     }
-
 }

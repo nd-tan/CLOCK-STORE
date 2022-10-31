@@ -43,6 +43,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name.required' => 'Không được để trống!',
+            'image.required' => 'Không được để trống!',
             'address.required' => 'Không được để trống!',
             'email.required' => 'Không được để trống!',
             'password.required' => 'Không được để trống!',
@@ -54,9 +55,7 @@ class UpdateUserRequest extends FormRequest
             'district_id.required' => 'Không được để trống!',
             'ward_id.required' => 'Không được để trống!',
             'group_id.required' => 'Không được để trống!',
-            'inputFile.required' => 'Không được để trống!',
-            'phone.unique' => 'Số điện thoại đã tồn tại',
-            'name.unique' => 'Đã tồn tại!',
+            // 'inputFile.required' => 'Không được để trống!',
         ];
 
     }

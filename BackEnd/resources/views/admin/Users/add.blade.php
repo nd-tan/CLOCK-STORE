@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPassword5" class="form-label">Mật khẩu</label>
-                                <input type="text" class="form-control @error('password') is-invalid @enderror"
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name='password' id="inputName5" value="{{ old('password') }}">
                                 @error('password')
                                     <div class="text text-danger">{{ $message }}</div>
@@ -61,13 +61,15 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="inputCity" class="form-label">Ảnh đại diện</label>
-                                <input accept="image/*" type='file' id="inputFile" name="inputFile" class="form-control @error('inputFile') is-invalid @enderror"><br>
-                            @error('inputFile')
-                            <div class="text text-danger">{{ $message }}</div>
-                            @enderror
-                            <br>
-                            <img type="hidden" width="120px" height="120px" id="blah" src="" alt="" />
-                              </div>
+                                <input accept="image/*" type='file' id="inputFile" name="inputFile"
+                                    class="form-control @error('inputFile') is-invalid @enderror"><br>
+                                @error('inputFile')
+                                    <div class="text text-danger">{{ $message }}</div>
+                                @enderror
+                                <br>
+                                <img type="hidden" width="120px" height="120px" id="blah" src=""
+                                    alt="" />
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tỉnh/Thành phố</label>
@@ -92,8 +94,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Phường/Xã</label>
-                                    <select name="ward_id" class="form-control ward_id" aria-label="Default select example"
-                                        id="ward_id">
+                                    <select name="ward_id" class="form-control ward_id"
+                                        aria-label="Default select example" id="ward_id">
                                         <option selected="" value="">Vui lòng chọn</option>
                                     </select>
                                 </div>

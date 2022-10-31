@@ -55,41 +55,10 @@
                             <th scope="col">Mã Nhân Viên</th>
                             <th scope="col">Ảnh Đại Diện</th>
                             <th scope="col">Tên Nhân Viên</th>
-                            {{-- <th scope="col">Địa Chỉ</th> --}}
-                            {{-- <th scope="col">Số Điện Thoại</th> --}}
-                            {{-- <th scope="col">Tỉnh</th>
-          <th scope="col">Quận</th>
-          <th scope="col">Xã</th> --}}
                             <th scope="col">Nhóm Nhân Viên</th>
-                            <th scope="col">Xem chi tiết</th>
                             <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
-          @foreach ($users as $key => $user)
-        <tr>
-          <th scope="row">{{$key + 1}}</th>
-          <td>
-            <img style="width:120px; height:100px" src="{{ asset('storage/images/user/' . $user->image) }}" alt=""class="image_photo">
-          </td>
-          <td>{{$user->name}}</td>
-          <td>{{$user->address}}</td>
-          <td>{{$user->phone}}</td>
-          <td>{{$user->group_id}}</td>
-
-          <td>
-            <form action="{{ route('user.delete', $user->id) }}" method="post" >
-                @method('DELETE')
-                @csrf
-            <a style='color:rgb(52,136,245)' class='btn' href="{{route('users.edit',$user->id)}}">
-                <i class='bi bi-pencil-square h4'></i></a>
-            <button onclick="return confirm('Bạn có chắc muốn đưa danh mục này vào thùng rác không?');"
-            class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
-            </form>
-          </td>
-        </tr>
-        @endforeach
-      </tbody> --}}
                     <tbody>
                         @if (!$users->count())
                             <tr>
@@ -104,7 +73,7 @@
                                             src="{{ asset('storage/images/user/' . $user->image) }}"
                                             alt=""class="image_photo">
                                     </td>
-                                    <td><a data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết sản phẩm"
+                                    <td><a data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết nhân viên"
                                             href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
                                     <td>{{ $user->group_id }}</td>
                                     <td>

@@ -53,6 +53,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function create($data)
     {
+        // dd($data);
         try {
             DB::beginTransaction();
             $user = $this->model;
@@ -91,7 +92,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function update($request, $id)
     {
-
+        // dd($request);
         try {
             DB::beginTransaction();
             $user = $this->model->find($id);
@@ -101,11 +102,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             if ($request->password) {
                 $user->password = Hash::make($request->password);
             }
-            // $object->birthday = $request->birthday;
-            // $object->email = $request->email;
-            // $object->gender = $request->gender;
-            // $object->address = $request->address;
-            // $object->group_id = $request->group_id;
+            $user->image = $request->image;
+            $user->birthday = $request->birthday;
+            $user->email = $request->email;
+            $user->gender = $request->gender;
+            $user->address = $request->address;
+            $user->province_id = $request->province_id;
+            $user->ward_id = $request->ward_id;
+            $user->district_id = $request->district_id;
+            $user->group_id = $request->group_id;
             // if ($request->avatar) {
             //     $dataUploadImage = $this->storageUpload($request, 'avatar', 'room');
             //     $object->avatar = $dataUploadImage['file_path'];
@@ -113,7 +118,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             //     $object->avatar = $object->avatar;
             // }
 
-            // dd($object);
             $user->save();
             DB::commit();
             Session::flash('success', 'Chỉnh sửa nhân viên' . ' ' . $request->name . ' ' . 'thành công');

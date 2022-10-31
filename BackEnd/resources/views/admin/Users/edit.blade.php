@@ -15,7 +15,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Sửa nhân viên</h5>
-                <form action="{{ route('users.update', $users->id) }}" method="post">
+                <form action="{{ route('users.update', $users->id) }}" method="post" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="col-md-11">
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail5" class="form-label">Mật khẩu</label>
-                                <input type="text" class="form-control @error('password') is-invalid @enderror"
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name='password' id="inputName5" value="{{ old('password') ?? $users->password }}">
                                 @error('password')
                                     <div class="text text-danger">{{ $message }}</div>
