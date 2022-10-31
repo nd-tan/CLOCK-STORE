@@ -57,5 +57,10 @@ class UserService extends BaseService implements UserServiceInterface
     {
         return $this->repository->wards();
     }
+    public function update_info($request,$id)
+    {
+        return $this->repository->update_info($request,$id);
+    }
+
 
 }

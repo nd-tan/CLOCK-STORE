@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -79,6 +82,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 $user->image = $data['image'];
             }
             $user->save();
+                $params = [
+                "password" => $password,
+                'name' => $data->name,
+            ];
+            Mail::send('admin.emails.users', compact('params'), function ($email) use ($data) {
+                $email->subject('TCC-Shop');
+                $email->to($data->email, $data->name);
+            });
+
             DB::commit();
             Session::flash('success', 'Thêm nhân viên' . ' ' . $data->name . ' ' . 'thành công');
             return true;
@@ -171,5 +183,39 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function wards()
     {
         return Ward::orderBy('id', 'DESC')->get();
+    }
+    public function update_info($request,$id)
+    {
+        $item=User::find($id);
+        $item->name = $request->name;
+        $item->address = $request->address;
+        $item->phone = $request->phone;
+        $item->email = $request->email;
+        $item->gender = $request->gender;
+        $item->birthday = $request->birth_day;
+        $item->province_id = $request->province_id;
+        $item->district_id = $request->district_id;
+        $item->ward_id = $request->ward_id;
+
+        $file = $request->inputFile;
+        if ($request->hasFile('inputFile')) {
+            $images = 'public/images_admin/'.$item->image;
+            $fileExtension = $file->getClientOriginalName();
+            //Lưu file vào thư mục storage/app/public/image với tên mới
+            $request->file('inputFile')->storeAs('public/images_admin', $fileExtension);
+            // Gán trường image của đối tượng task với tên mới
+            $item->image = $fileExtension;
+        }
+        try {
+            $item->save();
+            if(isset($fileExtension)){
+                Storage::delete($images);
+            }
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            $image = 'public/images_admin/'.$fileExtension;
+            Storage::delete($image);
+        }
+        return $item;
     }
 }

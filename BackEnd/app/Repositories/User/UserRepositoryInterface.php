@@ -16,4 +16,5 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function districts();
     public function wards();
     // public function delete($id);
+    public function update_info($request, $id);
 }

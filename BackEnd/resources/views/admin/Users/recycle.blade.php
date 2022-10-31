@@ -55,12 +55,16 @@
             <form action="{{ route('user.force_destroy', $user->id) }}" method="post" >
                 @method('DELETE')
                 @csrf
-                <a onclick="return confirm('Bạn có chắc muốn khôi phục nhân viên này không?');"
+                @if(Auth::user()->hasPermission('User_restore'))
+                <a onclick="return confirm('Bạn có chắc muốn khôi phục nhà cung cấp này không?');"
                 style='color:rgb(52,136,245)' class='btn'
                 href="{{ route('user.restore', $user->id) }}"><i
                 class='bi bi-arrow-clockwise h4'></i></a>
-            <button onclick="return confirm('Bạn có chắc muốn xóa nhân viên này không?');"
+                @endif
+                @if(Auth::user()->hasPermission('User_forceDelete'))
+            <button onclick="return confirm('Bạn có chắc muốn xóa danh mục này không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                @endif
             </form>
           </td>
         </tr>

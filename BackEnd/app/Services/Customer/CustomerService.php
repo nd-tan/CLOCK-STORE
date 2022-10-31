@@ -26,10 +26,12 @@ class CustomerService extends BaseService implements CustomerServiceInterface {
     {
         return $this->repository->forceDelete($id);
     }
-    public function searchCustomer($name)
+    public function all($request)
     {
-        return $this->repository->searchCustomer($name);
+        return $this->repository->all($request);
     }
+    
+   
 
 
 

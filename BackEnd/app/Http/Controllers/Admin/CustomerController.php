@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Services\Customer\CustomerServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Tymon\JWTAuth\Claims\Custom;
 
 class CustomerController extends Controller
 {
@@ -22,41 +24,53 @@ class CustomerController extends Controller
 
     public function index(Request $request)
     {
-        $customers =  $this->customerService->all($request);
-        $params = ['customers' => $customers];
-        return view('admin.customers.index', $params);
+        $this->authorize('viewAny', Customer::class);
+        try{
+            $customers =  $this->customerService->all($request);
+            $params = ['customers' => $customers];
+            return view('admin.customers.index', $params);
+        }catch(\Exception $e){
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+        }
+
+
     }
 
     public function create()
     {
-    
+
     }
 
     public function store(Request $request)
     {
-    
+
     }
 
     public function show($id)
     {
-        $customer =  $this->customerService->find($id);
-        $params = ['customer' => $customer];
-        return view('admin.customers.show', $params);
+        $this->authorize('view', Customer::class);
+        try{
+            $customer =  $this->customerService->find($id);
+            $params = ['customer' => $customer];
+            return view('admin.customers.show', $params);
+        }catch(\Exception $e){
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+        }
     }
 
     public function edit($id)
     {
-      
+
     }
 
     public function update(Request $request, $id)
     {
-      
+
     }
 
     public function destroy($id)
     {
-      
+        $this->authorize('delete', Customer::class);
         try {
             DB::beginTransaction();
             $customer = $this->customerService->find($id);
@@ -67,25 +81,25 @@ class CustomerController extends Controller
             return redirect()->route('customer.index');
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('messages' . $e->getMessage() . '.Line________' . $e->getLine() . ' .File ' . $e->getFile());
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
             $messages = 'Xóa không thành công ' . $customer->name;
             Session::flash('error',$messages );
             return redirect()->route('customer.index');
         }
     }
     public function getTrash()
-    { 
+    {
         try {
             $customers = $this->customerService->getTrash();
             $params = ['customers' => $customers];
             return view('admin.customers.recycle', $params);
         } catch (Exception $e) {
-            Log::error('errors' . $e->getMessage() . 'getLine' . $e->getLine());
-            abort(403);
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
         }
     }
     public function restore($id)
     {
+        $this->authorize('restore',Customer::class);
         try {
             DB::beginTransaction();
             $this->customerService->restore($id);
@@ -95,7 +109,7 @@ class CustomerController extends Controller
             return redirect()->route('customer.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('messages' . $e->getMessage() . 'line________' . $e->getLine() . 'file ' . $e->getFile());
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
             $messages = 'Khôi phục không thành công ';
             Session::flash('error',$messages );
             return redirect()->route('customer.index');
@@ -103,6 +117,7 @@ class CustomerController extends Controller
     }
     public function forceDelete($id)
     {
+        $this->authorize('forceDelete', Customer::class);
         try {
             DB::beginTransaction();
             $this->customerService->forceDelete($id);
@@ -112,38 +127,11 @@ class CustomerController extends Controller
             return redirect()->route('customer.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('messages' . $e->getMessage() . 'line________' . $e->getLine() . 'file ' . $e->getFile());
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
             $messages = 'Xóa không thành công ';
             Session::flash('error',$messages );
             return redirect()->route('customer.index');
         }
     }
-    public function searchByName(Request $request)
-    {
-        try {
-        $keyword = $request->input('keyword');
-        $customers = $this->customerService->searchCustomer($keyword);
-        return response()->json($customers);
-        } catch (Exception $e) {
-            Log::error('errors' . $e->getMessage() . 'getLine' . $e->getLine());
-            abort(404);
-        }
 
-    }
-
-    public function searchCustomer(Request $request)
-    {
-      
-        try {
-            $keySearch = $request->keySearch;
-            $customers = $this->customerService->searchCustomer($keySearch);
-            $params = [
-                'customers' => $customers
-            ];
-            return  view('admin.customers.index', $params);
-        } catch (Exception $e) {
-            Log::error('errors' . $e->getMessage() . 'getLine' . $e->getLine());
-            abort(404);
-        }
-    }
 }

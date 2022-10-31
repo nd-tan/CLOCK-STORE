@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ApiProductController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\AuthCustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+    Route::post('/login-customer', [AuthCustomerController::class, 'login']);
+    Route::post('/register', [AuthCustomerController::class, 'register']);
+    Route::post('/logout', [AuthCustomerController::class, 'logout']);
+    Route::post('/refresh', [AuthCustomerController::class, 'refresh']);
+    Route::get('/user-profile', [AuthCustomerController::class, 'userProfile']);
+    Route::post('/change-pass', [AuthCustomerController::class, 'changePassWord']);    
+});
+
 Route::get('list-cart', [CartController::class, 'getAllCart']);
 Route::get('add-to-cart/{id}', [CartController::class, 'addToCart']);
 Route::get('remove-to-cart/{id}', [CartController::class, 'removeToCart']);

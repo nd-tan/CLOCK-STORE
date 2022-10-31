@@ -5,8 +5,8 @@
         <h1 class="mb-1">Danh Mục</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="{{route('category.index')}}">Danh mục</a></li>
+            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{route('category.index')}}">Danh Mục</a></li>
             <li class="breadcrumb-item">Thùng Rác</li>
           </ol>
         </nav>
@@ -46,9 +46,9 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">The number of products</th>
-          <th scope="col">Action</th>
+          <th scope="col">Tên sản phẩm</th>
+          <th scope="col">Số lượng sản phẩm</th>
+          <th scope="col">Thao tác</th>
         </tr>
       </thead>
       <tbody>
@@ -61,12 +61,16 @@
             <form action="{{ route('category.delete', $category->id) }}" method="post" >
                 @method('DELETE')
                 @csrf
+                @if (Auth::user()->hasPermission('Category_restore'))
                 <a onclick="return confirm('Bạn có chắc muốn khôi phục danh mục này không?');"
                     style='color:rgb(52,136,245)' class='btn'
                     href="{{ route('category.restore', $category->id) }}"><i
                     class='bi bi-arrow-clockwise h4'></i></a>
+                @endif
+                @if (Auth::user()->hasPermission('Category_forceDelete'))
                 <button onclick="return confirm('Bạn có chắc muốn xóa danh mục này không?');"
                     class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                @endif
             </form>
           </td>
         </tr>

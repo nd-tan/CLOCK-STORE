@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdatePasswordByMailRequets;
+use App\Http\Requests\UpdateUserInfeRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\District;
 use App\Models\Ward;
 use App\Models\User;
+
 
 use App\Services\Group\GroupServiceInterface;
 use App\Services\User\UserServiceInterface;
@@ -15,8 +19,13 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -29,27 +38,13 @@ class UserController extends Controller
         $this->groupService = $groupService;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $this->authorize('viewAny', User::class);
         $users = $this->userService->all($request);
-
-        // dd($users);
-        // $groups = $this->groupService->all($request);
-        // dd(Auth::user()->user_group_id);
         return view('admin.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         $this->authorize('create', User::class);
@@ -121,8 +116,10 @@ class UserController extends Controller
         return view('admin.users.detail', compact('user'));
     }
 
+
     public function edit($id)
     {
+        $this->authorize('update', User::class);
         $users = $this->userService->find($id);
         $groups = $this->groupService->all($id);
         $provinces = $this->userService->provinces();
@@ -140,6 +137,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request, $id)
+
     {
         try {
             DB::beginTransaction();
@@ -156,14 +154,9 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
+        $this->authorize('delete', User::class);
         try {
             DB::beginTransaction();
             $this->userService->delete($id);
@@ -179,9 +172,7 @@ class UserController extends Controller
     }
     public function getTrashed()
     {
-        // dd($request);
         $users = $this->userService->getTrashed();
-        // dd($items);
         $params = [
             'users' => $users,
         ];
@@ -190,6 +181,7 @@ class UserController extends Controller
 
     public function restore($id)
     {
+        $this->authorize('restore', User::class);
         try {
             DB::beginTransaction();
             $this->userService->restore($id);
@@ -206,6 +198,7 @@ class UserController extends Controller
 
     public function force_destroy($id)
     {
+        $this->authorize('forceDelete', User::class);
         try {
             DB::beginTransaction();
             $this->userService->force_destroy($id);
@@ -218,5 +211,87 @@ class UserController extends Controller
             Session::flash('error', config('define.delete.error'));
             return redirect()->route('user.getTrashed');
         }
+    }
+    public function info()
+    {
+        $item = Auth()->user();
+        return view('admin.Users.infor', compact('item'));
+    }
+
+    public function update_info(UpdateUserInfeRequest $request,$id)
+    {
+        try {
+            $item= $this->userService->update_info($request, $id);
+            $item->save();
+            Session::flash('success', config('define.update.succes'));
+            return redirect()->route('user.info');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', config('define.update.error'));
+            return redirect()->route('user.info',Auth()->user()->id);
+        }
+    }
+    public function change_password(UpdateUserPasswordRequest $request)
+    {
+        if($request->renewpassword==$request->newpassword)
+        {
+            if ((Hash::check($request->password, Auth::user()->password))) {
+                $item=User::find(Auth()->user()->id);
+                $item->password= bcrypt($request->newpassword);
+                $item->save();
+                Session::flash('success', config('define.update.succes'));
+                return redirect()->route('user.info');
+            }else{
+            Session::flash('error', config('define.update.error'));
+                return redirect()->route('user.info');
+            }
+        }else{
+            Session::flash('error', config('define.update.error'));
+            return redirect()->route('user.info');
+        }
+    }
+    public function password_by_email(UpdatePasswordByMailRequets $request)
+    {
+            if ($request->email == Auth()->user()->email) {
+                $password = Str::random(6);
+                $item=User::find(Auth()->user()->id);
+                $item->password= bcrypt($password);
+                $item->save();
+                $params = [
+                    'name' => Auth()->user()->name,
+                    'password' => $password,
+                ];
+                Mail::send('admin.emails.password', compact('params'), function ($email) {
+                    $email->subject('TCC-Shop');
+                    $email->to(Auth()->user()->email, Auth()->user()->name);
+                });
+                Session::flash('success', config('define.update.succes'));
+                return redirect()->route('user.info');
+            }else{
+            Session::flash('error', config('define.update.error'));
+                return redirect()->route('user.info');
+            }
+    }
+    public function accountByEmail(UpdatePasswordByMailRequets $request){
+        $user = DB::table('users')->where('email', $request->email)->first();
+        if($request->email == $user->email){
+            $password = Str::random(6);
+            $item=User::find($user->id);
+            $item->password= bcrypt($password);
+            $item->save();
+            $params = [
+                'name' => $user->name,
+                'password' => $password,
+            ];
+            Mail::send('admin.emails.password', compact('params'), function ($email) use($user) {
+                $email->subject('TCC-Shop');
+                $email->to($user->email, $user->name);
+            });
+            Session::flash('success', config('define.update.succes'));
+            return redirect()->route('login');
+        } else{
+            Session::flash('error', config('define.update.error'));
+                return redirect()->route('login');
+            }
     }
 }

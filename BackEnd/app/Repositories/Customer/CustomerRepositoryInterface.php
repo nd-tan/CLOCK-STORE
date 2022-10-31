@@ -8,6 +8,6 @@ interface CustomerRepositoryInterface extends RepositoryInterface{
     public function getTrash();
     public function restore($id);
     public function forceDelete($id);
-    public function searchCustomer($name);
+    public function all($request);
 
 }

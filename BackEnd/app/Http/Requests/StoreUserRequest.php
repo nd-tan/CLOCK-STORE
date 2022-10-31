@@ -37,6 +37,7 @@ class StoreUserRequest extends FormRequest
             'group_id' => 'required',
             'inputFile' => 'required',
 
+
         ];
     }
 
@@ -57,6 +58,7 @@ class StoreUserRequest extends FormRequest
             'inputFile.required' => 'Không được để trống!',
             // 'email.unique' => 'Đã tồn tại!',
             // 'phone.unique' => 'Đã tồn tại!',
+
 
         ];
 

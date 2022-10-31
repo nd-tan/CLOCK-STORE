@@ -15,11 +15,11 @@
                 <li class="breadcrumb-item"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Xem Khách Hàng" href="{{ route('customer.index') }}">Khách Hàng</a></li>
                 <li class="breadcrumb-item">Đơn Đặt</li>
             </ol>
-            
+
         </nav>
-        
+
     </div>
-    
+
     <div class="card">
         <div class="card-body">
             <div class="row g-3">
@@ -69,22 +69,27 @@
                             <th scope="col">STT</th>
                             <th scope="col">Họ Và Tên</th>
                             <th scope="col">Số Điện Thoại</th>
-                            <th scope="col">Trạng Thái Đơn Hàng</th>            
+                            <th scope="col">Trạng Thái Đơn Hàng</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($orders as $order)
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td><a  data-bs-toggle="tooltip" data-bs-placement="top" title="Chi Tiết Đơn Hàng" href="{{ route('order.show',$order->id) }}">{{ $order->name_customer }}</a></td>
+                                    <td>@if(Auth::user()->hasPermission('Order_view'))
+                                        <a  data-bs-toggle="tooltip" data-bs-placement="top" title="Chi Tiết Đơn Hàng" href="{{ route('order.show',$order->id) }}">
+                                        @endif
+                                            {{ $order->name_customer }}</a></td>
                                     <td>{{ $order->phone }}</td>
                                     <td>
+                                    @if(Auth::user()->hasPermission('Order_status'))
                                     @if($order->status)
                                         <i data-bs-toggle="tooltip" data-bs-placement="top" title="Đã Duyệt" class="bi bi-check-circle text-success"></i>
                                     @else
                                         <i data-bs-toggle="tooltip" data-bs-placement="top" title="Chờ Duyệt" class="bi bi-x-circle text-danger"></i>
                                     @endif
+                                    @endif
+
                                     </td>
-                                    
                             </tr>
                         @endforeach
                 @endif

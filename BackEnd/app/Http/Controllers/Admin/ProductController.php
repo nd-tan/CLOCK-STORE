@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ProductExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -9,12 +10,14 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
+use App\Models\User;
 use App\Services\Product\ProductServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -26,6 +29,7 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Product::class);
         $products = $this->productService->all($request);
         $categories = Category::get();
         $brands = Brand::get();
@@ -41,6 +45,7 @@ class ProductController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Product::class);
         $categories = Category::get();
         $brands = Brand::get();
         $suppliers = Supplier::get();
@@ -70,12 +75,15 @@ class ProductController extends Controller
 
     public function show( $id)
     {
+        $this->authorize('view', Product::class);
         $product = $this->productService->find($id);
-        return view('admin.products.detail',compact('product'));
+        $users= User::all();
+        return view('admin.products.detail',compact('product', 'users'));
     }
 
     public function edit($id)
     {
+        $this->authorize('update', Product::class);
         $product = $this->productService->find($id);
         $categories = Category::get();
         $brands = Brand::get();
@@ -109,6 +117,7 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete', Product::class);
         try {
             DB::beginTransaction();
             $this->productService->delete($id);
@@ -138,6 +147,7 @@ class ProductController extends Controller
     }
     public function restore($id)
     {
+        $this->authorize('restore', Product::class);
         try {
             DB::beginTransaction();
             $this->productService->restore($id);
@@ -153,6 +163,7 @@ class ProductController extends Controller
     }
     public function force_destroy($id)
     {
+        $this->authorize('forceDelete', Product::class);
         try {
             DB::beginTransaction();
             $this->productService->force_destroy($id);
@@ -166,21 +177,26 @@ class ProductController extends Controller
             return redirect()->route('product.getTrashed');
         }
     }
-    public function showStatus($id){
-
+    public function showStatus($id)
+    {
+        $this->authorize('status', Product::class);
         $product = Product::findOrFail($id);
         $product->status = '1';
         if ($product->save()) {
             return redirect()->back();
         }
     }
-    public function hideStatus($id){
-
+    public function hideStatus($id)
+    {
+        $this->authorize('status', Product::class);
         $product = Product::findOrFail($id);
         $product->status = '0';
         if ($product->save()) {
             return redirect()->back();
         }
+    }
+    public function exportExcel(){
+        return Excel::download(new ProductExport, 'products.xlsx');
     }
 
 }

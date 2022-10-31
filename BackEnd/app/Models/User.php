@@ -61,6 +61,9 @@ class User extends Authenticatable
                 ->orWhere('id', 'like', '%' . $term . '%');
         }
         return $query;
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'user_id_ad', 'id');
     }
     /**
      * The attributes that should be hidden for serialization.

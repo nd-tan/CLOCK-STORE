@@ -3,91 +3,45 @@
 namespace App\Policies;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CategoryPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\Category  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(Category $category)
+    public function viewAny(User $user)
     {
-        return $category->hasPermission('Category_viewAny');
+        return $user->hasPermission('Category_viewAny');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\Category  $user
-     * @param  \App\Models\Category  $model
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(Category $category, Category $model)
+    public function view(User $user)
     {
-        return $category->hasPermission('Category_view');
+        return $user->hasPermission('Category_view');
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\Category  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(Category $category)
+    public function create(User $user)
     {
-         return $category->hasPermission('Category_create');
+         return $user->hasPermission('Category_create');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\Category  $user
-     * @param  \App\Models\Category  $model
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function update(Category $category, Category $model)
+    public function update(User $user)
     {
-        return $category->hasPermission('Category_update');
+        return $user->hasPermission('Category_update');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\Category  $user
-     * @param  \App\Models\Category  $model
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(Category $category, Category $model)
+    public function delete(User $user)
     {
-        return $category->hasPermission('Category_delete');
+        return $user->hasPermission('Category_delete');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\Category  $user
-     * @param  \App\Models\Category  $model
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(Category $category, Category $model)
+    public function restore(User $user)
     {
-        return $category->hasPermission('Category_restore');
+        return $user->hasPermission('Category_restore');
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\Category  $user
-     * @param  \App\Models\Category  $model
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(Category $category, Category $model)
+    public function forceDelete(User $user)
     {
-        return $category->hasPermission('Category_forceDelete');
+        return $user->hasPermission('Category_forceDelete');
     }
 }

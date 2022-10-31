@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Services\Order\OrderServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -20,12 +21,17 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
+    {
+        $this->authorize('viewAny', Order::class);
+    try{
         $orders = $this->orderService->getAllWithPaginateLatest($request);
         $params = [
             'orders' => $orders,
         ];
         return view('admin.orders.index', $params);
+    }catch(\Exception $e){
+        Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+    }
     }
 
 
@@ -36,7 +42,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -58,14 +64,20 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', Order::class);
+    try{
         $order = $this->orderService->find($id);
         $orderDetails = $order->orderDetails;
         $params = [
             'order' => $order,
             'orderDetails' => $orderDetails,
         ];
-        // dd($orderDetails);  
+        // dd($orderDetails);
         return view('admin.orders.show', $params);
+    }catch(\Exception $e){
+        Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+    }
+
     }
 
     /**
@@ -92,8 +104,13 @@ class OrderController extends Controller
     }
 
     function updateSingle($id){
+        $this->authorize('status', Order::class);
+    try{
         $this->orderService->updateSingle($id);
         return redirect()->route('order.index');
+    }catch(\Exception $e){
+        Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+    }
     }
 
     /**
