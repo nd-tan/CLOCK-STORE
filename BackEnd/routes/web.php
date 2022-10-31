@@ -118,5 +118,6 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('product/restore/{id}', 'restore')->name('product.restore');
     Route::get('products/showStatus/{id}','showStatus')->name('products.showStatus');
     Route::get('products/hideStatus/{id}', 'hideStatus')->name('products.hideStatus');
+    Route::get('products/exportExcel', 'exportExcel')->name('products.exportExcel');
 });
 Route::resource('product', ProductController::class);
