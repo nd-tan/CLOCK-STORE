@@ -15,7 +15,15 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
 
     public function all($request)
     {
-        return  $this->model->latest()->paginate(8);
+        $customers = $this->model->select('*');
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $customers = $customers->Search($search);
+        }
+        $customers->filterName($request);
+        $customers->filterPhone($request);
+        $customers->Email($request);
+        return $customers->orderBy('customers.id', 'DESC')->paginate(5);
     }
 
     public function changeStatus($id,$data){
@@ -35,15 +43,5 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
         return  $this->model->withTrashed()->where('id', $id)->forceDelete();
 
     }
-    public function searchCustomer($name){
-       $customer = $this->model::where('name', 'like', '%' . $name . '%')
-                            ->orWhere('phone', 'like', '%' . $name . '%')
-                            ->orWhere('email', 'like', '%' . $name . '%')
-                            ->orWhere('provider', 'like', '%' . $name . '%')
-                            ->orWhere('provider_id', 'like', '%' . $name . '%');
-        if(Route::currentRouteName() =='customer.searchKey'){
-          return  $customer   ->get();
-        }
-        return  $customer   ->paginate(8);
-    }
+
 }

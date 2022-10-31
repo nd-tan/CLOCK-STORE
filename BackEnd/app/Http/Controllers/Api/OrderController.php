@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOrderRequest;
 use App\Mail\SendMail;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -83,8 +84,8 @@ class OrderController extends Controller {
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request) {
+     */ 
+    public function store(StoreOrderRequest $request) {
         try{
         $order = new Order;
         $order->note = $request->note;
@@ -95,7 +96,7 @@ class OrderController extends Controller {
         $order->name_customer = $request->name_customer;
         $order->customer_id = $request->customer_id;
         $order->phone = $request->phone;
-        $order->total = $request->total;
+        $order->total = 0;
         $order->save();
         $carts = Cache::get('carts');
         $order_total_price = 0;
