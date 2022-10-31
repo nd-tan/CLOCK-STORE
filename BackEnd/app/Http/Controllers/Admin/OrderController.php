@@ -104,6 +104,7 @@ class OrderController extends Controller
     }
 
     function updateSingle($id){
+        $this->authorize('status', Order::class);
     try{
         $this->orderService->updateSingle($id);
         return redirect()->route('order.index');

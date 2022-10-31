@@ -177,16 +177,18 @@ class ProductController extends Controller
             return redirect()->route('product.getTrashed');
         }
     }
-    public function showStatus($id){
-
+    public function showStatus($id)
+    {
+        $this->authorize('status', Product::class);
         $product = Product::findOrFail($id);
         $product->status = '1';
         if ($product->save()) {
             return redirect()->back();
         }
     }
-    public function hideStatus($id){
-
+    public function hideStatus($id)
+    {
+        $this->authorize('status', Product::class);
         $product = Product::findOrFail($id);
         $product->status = '0';
         if ($product->save()) {

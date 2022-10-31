@@ -62,9 +62,9 @@
                             </div>
                         </div>
                         <div class="form-actions">
-                            {{-- @if (Auth::user()->hasPermission('Position_update')) --}}
+                            @if (Auth::user()->hasPermission('Group_update'))
                             <button  class="btn btn-primary ml-auto mr-2" type="submit">Lưu</button>
-                            {{-- @endif --}}
+                            @endif
                             <a style="float: right;" class="btn btn-danger float-right " href="{{route('groups.index')}}">Hủy</a>
                         </div>
                     </div>
