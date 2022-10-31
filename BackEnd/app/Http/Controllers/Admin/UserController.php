@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdatePasswordByMailRequets;
 use App\Http\Requests\UpdateUserInfeRequest;
 use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -12,10 +13,13 @@ use App\Services\Group\GroupServiceInterface;
 use App\Services\User\UserServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -170,5 +174,49 @@ class UserController extends Controller
             Session::flash('error', config('define.update.error'));
             return redirect()->route('user.info');
         }
+    }
+    public function password_by_email(UpdatePasswordByMailRequets $request)
+    {
+            if ($request->email == Auth()->user()->email) {
+                $password = Str::random(6);
+                $item=User::find(Auth()->user()->id);
+                $item->password= bcrypt($password);
+                $item->save();
+                $params = [
+                    'name' => Auth()->user()->name,
+                    'password' => $password,
+                ];
+                Mail::send('admin.emails.password', compact('params'), function ($email) {
+                    $email->subject('TCC-Shop');
+                    $email->to(Auth()->user()->email, Auth()->user()->name);
+                });
+                Session::flash('success', config('define.update.succes'));
+                return redirect()->route('user.info');
+            }else{
+            Session::flash('error', config('define.update.error'));
+                return redirect()->route('user.info');
+            }
+    }
+    public function accountByEmail(UpdatePasswordByMailRequets $request){
+        $user = DB::table('users')->where('email', $request->email)->first();
+        if($request->email == $user->email){
+            $password = Str::random(6);
+            $item=User::find($user->id);
+            $item->password= bcrypt($password);
+            $item->save();
+            $params = [
+                'name' => $user->name,
+                'password' => $password,
+            ];
+            Mail::send('admin.emails.password', compact('params'), function ($email) use($user) {
+                $email->subject('TCC-Shop');
+                $email->to($user->email, $user->name);
+            });
+            Session::flash('success', config('define.update.succes'));
+            return redirect()->route('login');
+        } else{
+            Session::flash('error', config('define.update.error'));
+                return redirect()->route('login');
+            }
     }
 }

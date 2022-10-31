@@ -30,7 +30,7 @@
                     @endif
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
                         @if(isset($params['password']))
-                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="#" style="color:#ee4c50;text-decoration:underline;"><b style="color: blue"><i>Mật khẩu: </i></b>{{ $params['password'] }}<br></a></p>
+                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="#" style="color:#ee4c50;text-decoration:underline;"><b style="color: blue"><i>Mật Khẩu Mới: </i></b>{{ $params['password'] }}<br></a></p>
                     @endif
                 </td>
                 </tr>
@@ -43,13 +43,12 @@
                           <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><b><i>*Hãy Dùng Mật Khẩu Này Để Truy Cập Tài Khoản Của Bạn.</i></b><br><br>
                             <b><i>Chúc Bạn Một Ngày Làm Việc Vui Vẻ!.</i></b><br><br>
                             <b><i>Thân Ái!.</i></b><br>
-                          
+                            
                         </td>
-                        <td style="width:20px;padding:0;font-size:0;line-height:0;">&nbsp;</td>
                         <td style="width:260px;padding:0;vertical-align:top;color:#153643;">
-                          <p style="margin:0 0 14px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://img4.thuthuatphanmem.vn/uploads/2020/08/28/background-chao-mung-powerpoint_090351149.jpg" alt="" width="260" style="height:auto;display:block;" /></p>
-                          <p style="margin:0 0 -110px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><b><i>*Chào Mừng Bạn Đã Gia Nhập Vào Công Ty Của Chúng Tôi.</i></b><br><br>
-                            <b><i>Chúng Tôi Rất Mong Muốn Bạn Luôn Đồng Hành Cùng Chúng Tôi Và Cống Hiến Hiến Mình.<br><br> Mọi Nổ Lực Của Bạn Sẽ Được Đền Đáp.</i></b><br></p></p>
+                          <p style="margin:0 0 -11px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://dynamic.brandcrowd.com/asset/logo/bc454755-12ee-48df-b8d6-55f239240b65/logo-search-grid-1x?v=637867253697330000&text=password" alt="" width="260" style="height:auto;display:block;" /></p>
+                          <p style="margin:0 0 -100px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><b><i>*Bạn Đã Gửi Yêu Cầu Thay Đổi Mật Khẩu</i></b><br><br>
+                            <b><i>Vì Vậy Để Xác Minh Đó Là Bạn Vì Vậy <br><br>Chúng Tôi Đã Gửi Mật Khẩu Đăng Nhập về Mail Của Bạn</i></b><br></p></p>
                         </td>
                       </tr>
                     </table>
@@ -63,7 +62,7 @@
             <table>
                 <tr>
                     <td colspan="2">
-                        <i style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><br><a href="#" style="color:#ee4c50;text-decoration:underline;">Email: <a href="mailto:maixuancuong2906@gamil.com" style="color:rgb(17,85,204)"
+                        <i style="margin:0;font-size:16px;line-height:0px;font-family:Arial,sans-serif;"><br><a href="#" style="color:#ee4c50;text-decoration:underline;">Email: <a href="mailto:maixuancuong2906@gamil.com" style="color:rgb(17,85,204)"
                             target="_blank">maixuancuong2906@gmail.com</a></a></i>
                             <i style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><br><a href="#" style="color:#ee4c50;text-decoration:underline;">Phone: <a href="tel:0843442357" style="color:rgb(17,85,204)"
                                 target="_blank">+84 83442357</a></a></i><br>

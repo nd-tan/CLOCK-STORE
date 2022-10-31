@@ -79,6 +79,8 @@ Route::group([
         Route::get('user/info', 'info')->name('user.info');
         Route::post('user/updateInfo/{id}', 'update_info')->name('user.update_info');
         Route::post('user/updatePass/{id}', 'change_password')->name('user.change_password');
+        Route::post('user/PassByEmail/{id}', 'password_by_email')->name('user.mailPassword');
+        
     });
     Route::resource('users', UserController::class);
 Route::controller(CustomerController::class)->group(function () {
