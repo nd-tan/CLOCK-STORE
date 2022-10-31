@@ -82,8 +82,9 @@
                                         <form action="{{ route('customer.destroy',$customer->id) }}" method="post" >
                                             @method('DELETE')
                                             @csrf
-
+                                            @if(Auth::user()->hasPermission('Customer_delete'))
                                             <button onclick=" return confirm('Bạn có chắc xóa khách hàng {{ $customer->name }} không?');" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i data-bs-toggle="tooltip" data-bs-placement="top" title="Vô Hiệu Hóa Tài Khoản" class='bi bi-trash h4'></i></button>
+                                            @endif
                                         </form>
                                     </td>
                                 </tr>

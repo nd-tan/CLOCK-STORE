@@ -91,15 +91,17 @@
             <img style="width:120px; height:100px" src="{{ asset('storage/images/product/' . $product->image) }}" alt=""class="image_photo">
           </td>
           <td >
+            @if (Auth::user()->hasPermission('Product_status'))
             @if ($product->status == '1')
             <a href="{{ route('products.hideStatus', $product->id) }}">
                 <i class="bi bi-eye-fill h4 text-success"></i>
             </a>
-        @else
+            @else
             <a href="{{ route('products.showStatus', $product->id) }}">
                 <i class="bi bi-eye-slash-fill h4 text-danger"></i>
             </a>
-        @endif
+            @endif
+            @endif
           </td>
           <td>
             <form action="{{ route('product.destroy', $product->id) }}" method="post" >

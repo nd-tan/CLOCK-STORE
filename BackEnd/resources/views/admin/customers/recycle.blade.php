@@ -48,11 +48,15 @@
                                         <form action="{{ route('customer.forceDelete',$customer->id) }}" method="post" >
                                             @method('DELETE')
                                             @csrf
+                                            @if(Auth::user()->hasPermission('Customer_restore'))
                                             <a data-bs-toggle="tooltip" data-bs-placement="top" title="Khôi Phục Tài Khoản" onclick="return confirm('Bạn có chắc muốn khôi phục khách hàng {{ $customer->name }} không?');"
                                             style='color:rgb(52,136,245)' class='btn'
                                             href="{{ route('customer.restore', $customer->id) }}"><i
                                                 class='bi bi-arrow-clockwise h4'></i></a>
+                                                @endif
+                                                @if(Auth::user()->hasPermission('Customer_forceDelete'))
                                             <button data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa Tài Khoản Vi Phạm" onclick="return confirm('Bạn có chắc xóa khách hàng {{ $customer->name }} không?');" class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
+                                                @endif
                                         </form>
                                     </td>
                                 </tr>
@@ -61,7 +65,7 @@
                     </tbody>
                 </table>
                 <div class="row">
-                    {{  $customers->onEachSide(5)->links() }}          
+                    {{  $customers->onEachSide(5)->links() }}
                 </div>
             </div>
         </div>

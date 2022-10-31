@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Services\Customer\CustomerServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Tymon\JWTAuth\Claims\Custom;
 
 class CustomerController extends Controller
 {
@@ -31,7 +33,7 @@ class CustomerController extends Controller
             Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
         }
 
-        
+
     }
 
     public function create()
@@ -68,7 +70,7 @@ class CustomerController extends Controller
 
     public function destroy($id)
     {
-
+        $this->authorize('delete', Customer::class);
         try {
             DB::beginTransaction();
             $customer = $this->customerService->find($id);
@@ -97,6 +99,7 @@ class CustomerController extends Controller
     }
     public function restore($id)
     {
+        $this->authorize('restore',Customer::class);
         try {
             DB::beginTransaction();
             $this->customerService->restore($id);
@@ -114,6 +117,7 @@ class CustomerController extends Controller
     }
     public function forceDelete($id)
     {
+        $this->authorize('forceDelete', Customer::class);
         try {
             DB::beginTransaction();
             $this->customerService->forceDelete($id);
@@ -129,5 +133,5 @@ class CustomerController extends Controller
             return redirect()->route('customer.index');
         }
     }
-   
+
 }

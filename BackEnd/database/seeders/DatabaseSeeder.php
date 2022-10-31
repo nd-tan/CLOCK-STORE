@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
         $this->importGroup();
         $this->importRoles();
         $this->importRole();
+        $this->importRole2();
+        $this->importRole3();
         $this->importGroupRole();
         $this->importGroupRole_1();
         $this->importUser();
@@ -69,6 +71,34 @@ class DatabaseSeeder extends Seeder
             }
         }
     }
+    public function importRole2()
+    {
+        $groups = ['Product', 'Order'];
+        $actions = ['status'];
+        foreach ($groups as $group) {
+            foreach ($actions as $action) {
+                DB::table('roles')->insert([
+                    'name' => $group . '_' . $action,
+                    'group_name' => $group,
+
+                ]);
+            }
+        }
+    }
+    public function importRole3()
+    {
+        $groups = ['Customer'];
+        $actions = ['delete','restore','forceDelete'];
+        foreach ($groups as $group) {
+            foreach ($actions as $action) {
+                DB::table('roles')->insert([
+                    'name' => $group . '_' . $action,
+                    'group_name' => $group,
+
+                ]);
+            }
+        }
+    }
 
     public function importGroupRole()
     {
@@ -81,7 +111,7 @@ class DatabaseSeeder extends Seeder
     }
     public function importGroupRole_1()
     {
-        for ($i = 43; $i <= 46; $i++) {
+        for ($i = 43; $i <= 51; $i++) {
             DB::table('group_roles')->insert([
                 'group_id' => 1,
                 'role_id' => $i,
@@ -118,7 +148,7 @@ class DatabaseSeeder extends Seeder
         $user->phone = '0337868789';
         $user->birthday = '1996/07/07';
         $user->address = 'Quảng Trị';
-        $user->image = 'cuong.jpg';
+        $user->image = 'aluy.jpg';
         $user->gender = 'Nam';
         $user->province_id = '1';
         $user->district_id = '1';
@@ -133,7 +163,7 @@ class DatabaseSeeder extends Seeder
         $user->phone = '0777333274';
         $user->birthday = '2002/04/24';
         $user->address = 'Quảng Trị';
-        $user->image = 'phi.jpg';
+        $user->image = 'cuong.jpg';
         $user->gender = 'Nam';
         $user->province_id = '2';
         $user->district_id = '2';
@@ -148,7 +178,7 @@ class DatabaseSeeder extends Seeder
         $user->phone = '0916663237';
         $user->birthday = '2003/06/27';
         $user->address = 'Quảng Trị';
-        $user->image = 'hai.jpg';
+        $user->image = 'fgr.jpg';
         $user->gender = 'Nam';
         $user->province_id = '4';
         $user->district_id = '4';
@@ -163,7 +193,7 @@ class DatabaseSeeder extends Seeder
         $user->phone = '0123456789';
         $user->birthday = '2001/03/21';
         $user->address = 'Quảng Trị';
-        $user->image = 'duong.jpg';
+        $user->image = 'phi.jpg';
         $user->gender = 'Nam';
         $user->province_id = '5';
         $user->district_id = '5';

@@ -81,13 +81,15 @@
                                             {{ $order->name_customer }}</a></td>
                                     <td>{{ $order->phone }}</td>
                                     <td>
+                                    @if(Auth::user()->hasPermission('Order_status'))
                                     @if($order->status)
                                         <i data-bs-toggle="tooltip" data-bs-placement="top" title="Đã Duyệt" class="bi bi-check-circle text-success"></i>
                                     @else
                                         <i data-bs-toggle="tooltip" data-bs-placement="top" title="Chờ Duyệt" class="bi bi-x-circle text-danger"></i>
                                     @endif
-                                    </td>
+                                    @endif
 
+                                    </td>
                             </tr>
                         @endforeach
                 @endif
