@@ -13,7 +13,7 @@ return [
     ],
     'delete' => [
         'succes' => 'Xóa thành công!',
-        'error' => 'Xóa nhật thất bại!'
+        'error' => 'Xóa thất bại!'
     ],
     'restore' => [
         'succes' => 'Khôi phục thành công!',

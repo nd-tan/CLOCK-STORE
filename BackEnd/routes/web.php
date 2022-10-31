@@ -76,6 +76,9 @@ Route::group([
         Route::delete('user/delete/{id}', 'force_destroy')->name('user.delete');
         Route::get('user/getTrashed', 'getTrashed')->name('user.getTrashed');
         Route::get('user/restore/{id}', 'restore')->name('user.restore');
+        Route::get('user/info', 'info')->name('user.info');
+        Route::post('user/updateInfo/{id}', 'update_info')->name('user.update_info');
+        Route::post('user/updatePass/{id}', 'change_password')->name('user.change_password');
     });
     Route::resource('users', UserController::class);
 Route::get('/', function () {

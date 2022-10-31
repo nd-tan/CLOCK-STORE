@@ -14,4 +14,5 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function provinces();
     public function districts();
     public function wards();
+    public function update_info($request, $id);
 }
