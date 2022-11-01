@@ -75,7 +75,9 @@
                                     </td>
                                     <td><a data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết nhân viên"
                                             href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
+                                            @if(isset($user->groups->name))
                                     <td>{{ $user->groups->name }}</td>
+                                    @endif
                                     <td>
                                         <form action="{{ route('users.destroy', $user->id) }}" method="post">
                                             @method('DELETE')
