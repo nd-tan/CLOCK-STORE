@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');
+Route::post('/postchangpassword', function(){
+    return view('admin.Auth.changepassword');
+})->name('postchange');
 
 Route::prefix('/admin')->middleware(['auth', 'prevent-back-history'])->group(function () {
 

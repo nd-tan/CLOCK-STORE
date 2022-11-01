@@ -214,7 +214,6 @@
     .text--center {
         text-align: center;
     }
-
 </style>
 
 <body class="align">
@@ -247,7 +246,7 @@
             </div>
         </form>
 
-        <p class="text--center">Not a member? <a href="">Sign up now</a> <svg class="icon">
+        <p class="text--center">Not a member? <a href="#">Sign up now</a> <svg class="icon">
                 <use xlink:href="#icon-arrow-right"></use>
             </svg></p>
 
