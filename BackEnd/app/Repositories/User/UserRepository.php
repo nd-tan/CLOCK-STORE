@@ -38,6 +38,16 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 ->orWhere('group_id', 'like', '%' . $search . '%');
 
         }
+        if (!empty($request->group_id)) {
+            $users->NameGroup($request)
+            ->Type($request);
+        }
+        if (!empty($request->province_id)) {
+            $users->NameProv($request)
+            ->Type($request);
+        }
+
+        $users->Type($request);
 
         return $users->orderBy('id', 'DESC')->paginate(3);
     }
@@ -62,8 +72,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $user = $this->model;
             $user->name = $data->name;
             $user->phone = $data->phone;
-            $password=$data->password;
-            $user->password = Hash::make($data->password);
+            $password = Str::random(6);
+            $user->password = Hash::make($password);
             $user->birthday = $data->birthday;
             $user->email = $data->email;
             $user->gender = $data->gender;
@@ -105,17 +115,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function update($request, $id)
     {
-        // dd($request);
         try {
             DB::beginTransaction();
+
             $user = $this->model->find($id);
-            // dd(  $object);
             $user->name = $request->name;
             $user->phone = $request->phone;
-            if ($request->password) {
-                $user->password = Hash::make($request->password);
-            }
-            $user->image = $request->image;
             $user->birthday = $request->birthday;
             $user->email = $request->email;
             $user->gender = $request->gender;
@@ -124,13 +129,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $user->ward_id = $request->ward_id;
             $user->district_id = $request->district_id;
             $user->group_id = $request->group_id;
-            // if ($request->avatar) {
-            //     $dataUploadImage = $this->storageUpload($request, 'avatar', 'room');
-            //     $object->avatar = $dataUploadImage['file_path'];
-            // } else {
-            //     $object->avatar = $object->avatar;
-            // }
-
+            if ($request['inputFile']) {
+                $file = $request['inputFile'];
+                $fileExtension = $file->getClientOriginalExtension();
+                $fileName = time(); // create file name by curent time
+                $newFileName = $fileName . '.' . $fileExtension; //45678908766.jpg
+                $request['inputFile']->storeAs('public/images/user', $newFileName); //save file in public/images/brand with newname is newFileName
+                $data['image'] = $newFileName;
+                $user->image = $data['image'];
+            }
             $user->save();
             DB::commit();
             Session::flash('success', 'Chỉnh sửa nhân viên' . ' ' . $request->name . ' ' . 'thành công');
@@ -163,13 +170,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function force_destroy($id)
     {
         $user = $this->model->onlyTrashed()->findOrFail($id);
-        // try {
-        //     $user->forceDelete();
-        //     return $user;
-        // } catch (\Exception $e) {
-        //     Log::error($e->getMessage());
-        //     return $user;
-        // }
         $user->forceDelete();
         return $user;
     }
@@ -200,7 +200,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         $file = $request->inputFile;
         if ($request->hasFile('inputFile')) {
-            $images = 'public/images_admin/'.$item->image;
+            $images = 'public/images/user/'.$item->image;
             $fileExtension = $file->getClientOriginalName();
             //Lưu file vào thư mục storage/app/public/image với tên mới
             $request->file('inputFile')->storeAs('public/images_admin', $fileExtension);

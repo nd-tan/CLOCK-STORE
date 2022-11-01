@@ -30,10 +30,7 @@
         <tr>
           <th scope="col">Mã nhân viên</th>
           <th scope="col">Ảnh đại diện</th>
-          <th scope="col">Tên</th>
-          <th scope="col">E-mail</th>
-          <th scope="col">Địa chỉ</th>
-          <th scope="col">Số điện thoại</th>
+          <th scope="col">Tên Nhân Viên</th>
           <th scope="col">Nhóm nhân viên</th>
           <th scope="col">Thao tác</th>
         </tr>
@@ -46,10 +43,7 @@
             <img style="width:120px; height:100px" src="{{ asset('storage/images/user/' . $user->image) }}" alt=""class="image_photo">
           </td>
           <td>{{$user->name}}</td>
-          <td>{{$user->email}}</td>
-          <td>{{$user->address}}</td>
-          <td>{{$user->phone}}</td>
-          <td>{{$user->group_id}}</td>
+          <td>{{$user->groups->name}}</td>
 
           <td>
             <form action="{{ route('user.force_destroy', $user->id) }}" method="post" >

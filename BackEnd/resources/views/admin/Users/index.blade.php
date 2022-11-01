@@ -48,7 +48,7 @@
                     </p>
                 @endif
                 <a class='btn btn-primary mb-2' href="{{ route('users.create') }}">Thêm nhân viên</a>
-                <a class='btn btn-secondary mb-2 float-right' href="{{ route('user.getTrashed') }}">Thùng rác</a>
+                <a class='btn btn-danger mb-2 float-right' href="{{ route('user.getTrashed') }}">Thùng rác</a>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -70,12 +70,12 @@
                                     <th scope="row">{{ $key + 1 }}</th>
                                     <td>
                                         <img style="width:120px; height:100px"
-                                            src="{{ asset('storage/images/user/' . $user->image) }}"
+                                            src="{{asset('storage/images/user/' . $user->image)  }}"
                                             alt=""class="image_photo">
                                     </td>
                                     <td><a data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết nhân viên"
                                             href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
-                                    <td>{{ $user->group_id }}</td>
+                                    <td>{{ $user->groups->name }}</td>
                                     <td>
                                         <form action="{{ route('users.destroy', $user->id) }}" method="post">
                                             @method('DELETE')
@@ -96,7 +96,9 @@
                         @endif
                     </tbody>
                 </table>
-                {{ $users->onEachSide(3)->links() }}
+                <div style="float: right">
+                    {{ $users->onEachSide(5)->links() }}
+                </div>
             </div>
         </div>
         @include('admin.users.advanceSearch')
