@@ -177,24 +177,20 @@ class ProductController extends Controller
             return redirect()->route('product.getTrashed');
         }
     }
-    public function showStatus($id)
+    public function updateStatus($id, $status)
     {
         $this->authorize('status', Product::class);
         $product = Product::findOrFail($id);
-        $product->status = '1';
-        if ($product->save()) {
-            return redirect()->back();
+        if($status){
+            $product->status = 0;
+        }else{
+            $product->status = 1;
         }
+        $product->save();
+        return redirect()->route('product.index');
+
     }
-    public function hideStatus($id)
-    {
-        $this->authorize('status', Product::class);
-        $product = Product::findOrFail($id);
-        $product->status = '0';
-        if ($product->save()) {
-            return redirect()->back();
-        }
-    }
+
     public function exportExcel(){
         return Excel::download(new ProductExport, 'products.xlsx');
     }

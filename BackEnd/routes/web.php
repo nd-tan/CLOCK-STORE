@@ -75,8 +75,8 @@ Route::prefix('/admin')->middleware(['auth', 'prevent-back-history'])->group(fun
         Route::delete('product/delete/{id}', 'force_destroy')->name('product.delete');
         Route::get('product/getTrashed', 'getTrashed')->name('product.getTrashed');
         Route::get('product/restore/{id}', 'restore')->name('product.restore');
-        Route::get('products/showStatus/{id}', 'showStatus')->name('products.showStatus');
-        Route::get('products/hideStatus/{id}', 'hideStatus')->name('products.hideStatus');
+        Route::post('products/updateStatus/{id}/{status?}', 'updateStatus')->name('products.updateStatus');
+        // Route::get('products/hideStatus/{id}', 'hideStatus')->name('products.hideStatus');
         Route::get('products/exportExcel', 'exportExcel')->name('products.exportExcel');
     });
     Route::resource('product', ProductController::class);
