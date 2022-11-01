@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');
+Route::get('/postchangpassword', function(){
+    return view('admin.Auth.changepassword');
+})->name('postchange');
+Route::post('user/accountByEmail', [UserController::class,'accountByEmail'])->name('user.accountPassword');
 
 Route::prefix('/admin')->middleware(['auth', 'prevent-back-history'])->group(function () {
 
@@ -49,7 +53,7 @@ Route::prefix('/admin')->middleware(['auth', 'prevent-back-history'])->group(fun
         Route::post('user/updateInfo/{id}', 'update_info')->name('user.update_info');
         Route::post('user/updatePass/{id}', 'change_password')->name('user.change_password');
         Route::post('user/PassByEmail', 'password_by_email')->name('user.mailPassword');
-        Route::post('user/accountByEmail', 'accountByEmail')->name('user.accountPassword');
+        
 
         Route::delete('users/force_destroy/{id}', 'force_destroy')->name('user.force_destroy');
     });
