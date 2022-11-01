@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateUserInfeRequest;
 use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\District;
+use App\Models\Group;
+use App\Models\Province;
 use App\Models\Ward;
 use App\Models\User;
 
@@ -19,6 +21,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -40,9 +43,11 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
+        $groups=Group::get();
+        $provinces=Province::get();
         $this->authorize('viewAny', User::class);
         $users = $this->userService->all($request);
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users','groups','provinces'));
     }
 
     public function create(Request $request)
@@ -121,6 +126,7 @@ class UserController extends Controller
     {
         $this->authorize('update', User::class);
         $users = $this->userService->find($id);
+        // dd($users);
         $groups = $this->groupService->all($id);
         $provinces = $this->userService->provinces();
         $districts = $this->userService->districts();
@@ -141,8 +147,7 @@ class UserController extends Controller
     {
         try {
             DB::beginTransaction();
-            $data = $request->all();
-            $this->userService->update($data, $id);
+            $this->userService->update($request,$id);
             Session::flash('success', config('define.update.succes'));
             DB::commit();
             return redirect()->route('users.index');

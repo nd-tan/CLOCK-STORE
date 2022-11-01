@@ -5,7 +5,7 @@
         <h1 class="mb-1">Thương Hiệu</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">Trang Chủ</a></li>
             <li class="breadcrumb-item">Thương Hiệu</a></li>
           </ol>
         </nav>
@@ -42,7 +42,7 @@
     </p>
 @endif
     <a class='btn btn-primary mb-2'  href="{{route('brand.create')}}">Thêm thương hiệu</a>
-    <a class='btn btn-secondary mb-2 float-right'  href="{{route('brand.getTrashed')}}">Thùng ác</a>
+    <a class='btn btn-danger mb-2 float-right'  href="{{route('brand.getTrashed')}}">Thùng ác</a>
     <table class="table table-hover" >
       <thead>
         <tr>

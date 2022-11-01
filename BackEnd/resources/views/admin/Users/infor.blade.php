@@ -5,7 +5,7 @@
       <h1>Thông Tin Tài Khoản</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+          <li class="breadcrumb-item"><a href="{{route('home')}}">Trang chủ</a></li>
           <li class="breadcrumb-item">Thông Tin Tài Khoản</li>
         </ol>
       </nav>
@@ -15,7 +15,7 @@
         <div class="col-xl-4">
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <img src="{{ asset('storage/images_admin/' . $item->image)}}" alt="Profile" class="rounded-circle">
+              <img src="{{ asset('storage/images/user/' . $item->image)}}" alt="Profile" class="rounded-circle">
               <h2>{{$item->name}}</h2>
               <h3>{{$item->groups->name}}</h3>
               <div class="social-links mt-2">
@@ -157,7 +157,7 @@
                       <label for="Country" class="col-md-4 col-lg-3 col-form-label">Hình ảnh</label>
                       <div class="col-md-8 col-lg-9">
                         <input accept="image/*" type='file' id="inputFile" name="inputFile"  /><br><br>
-                        <img type="hidden" width="90px" height="90px" id="blah1" src="{{ asset('storage/images_admin/' . Auth()->user()->image) ?? asset('storage/images_admin/'.$request->inputFile) }}" alt=""  />
+                        <img type="hidden" width="90px" height="90px" id="blah1" src="{{ asset('storage/images/user/' . Auth()->user()->image) ?? asset('storage/images_admin/'.$request->inputFile) }}" alt=""  />
                     </div>
                     </div>
                     <div class="text-center">

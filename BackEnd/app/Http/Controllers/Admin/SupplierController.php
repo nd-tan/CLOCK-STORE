@@ -58,8 +58,10 @@ class SupplierController extends Controller
 
     public function update(UpdateSupplierRequest $request,$id)
     {
+        // dd($request);
         $data = $request->all();
         try {
+            $this->supplierService->update($data, $id);
             Session::flash('success', config('define.update.succes'));
             return redirect()->route('supplier.index');
         } catch (\Exception $e) {

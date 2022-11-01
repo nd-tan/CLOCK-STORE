@@ -5,7 +5,7 @@
         <h1 class="mb-1">Sản Phẩm</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">Trang Chủ</a></li>
             <li class="breadcrumb-item"><a href="{{route('product.index')}}">Sản Phẩm</a></li>
             <li class="breadcrumb-item">Thùng Rác</a></li>
           </ol>

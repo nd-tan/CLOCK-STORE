@@ -16,8 +16,8 @@
             <h1>Chức Vụ</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="#">Chức vụ</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('groups.index')}}">Chức vụ</a></li>
                     <li class="breadcrumb-item active">Sửa chức vụ</li>
                 </ol>
             </nav>

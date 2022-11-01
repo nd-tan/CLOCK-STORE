@@ -5,7 +5,7 @@
             <h1 class="mb-1">Sản Phẩm</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">Trang chủ</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Nhân viên</a></li>
                     <li class="breadcrumb-item"> Chi tiết nhân viên</a></li>
                 </ol>
@@ -17,14 +17,14 @@
                 <div class="row g-0">
                     <div class="col-md-6">
                         <div class="d-flex flex-column justify-content-center">
-                            <div class="main_image"> <img src="{{ asset('storage/images/user/' . $user->image) }}"
+                            <div class="main_image"> <img style="margin-top:30px" src="{{ asset('storage/images/user/' . $user->image) }}"
                                     id="main_user_image" height="300" width="412">
                             </div><br>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="p-3 right-side">
-                            <div class="mt-2"> <span class="fw-bold">Thông tin chi tiết:</span><br><br>
+                            <div class="mt-2"> <span class="fw-bold">Thông tin chi tiết:</span>
                                 <table class="table table-striped">
                                     <tbody>
                                         <tr>
@@ -38,10 +38,6 @@
                                         <tr>
                                             <td>E-mail</td>
                                             <td>{{ $user->email }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mật khẩu</td>
-                                            <td>{{ $user->password }}</td>
                                         </tr>
                                         <tr>
                                             <td>Số điện thoại</td>

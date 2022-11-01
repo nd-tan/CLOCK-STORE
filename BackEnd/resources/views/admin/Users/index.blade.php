@@ -5,7 +5,7 @@
             <h1 class="mb-1">Nhân viên</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">Trang chủ</a></li>
                     <li class="breadcrumb-item">Nhân viên</a></li>
                 </ol>
             </nav>
@@ -48,7 +48,7 @@
                     </p>
                 @endif
                 <a class='btn btn-primary mb-2' href="{{ route('users.create') }}">Thêm nhân viên</a>
-                <a class='btn btn-secondary mb-2 float-right' href="{{ route('user.getTrashed') }}">Thùng rác</a>
+                <a class='btn btn-danger mb-2 float-right' href="{{ route('user.getTrashed') }}">Thùng rác</a>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -75,12 +75,14 @@
                                     </td>
                                     <td><a data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết nhân viên"
                                             href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
-                                    <td>{{ $user->group_id }}</td>
+                                            @if(isset($user->groups->name))
+                                    <td>{{ $user->groups->name}}</td>
+                                    @endif
                                     <td>
                                         <form action="{{ route('users.destroy', $user->id) }}" method="post">
                                             @method('DELETE')
                                             @csrf
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa sản phẩm"
+                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa nhân viên"
                                                 style='color:rgb(52,136,245)' class='btn'
                                                 href="{{ route('users.edit', $user->id) }}">
                                                 <i class='bi bi-pencil-square h4'></i></a>
@@ -96,7 +98,9 @@
                         @endif
                     </tbody>
                 </table>
-                {{ $users->onEachSide(3)->links() }}
+                <div style="float: right">
+                    {{ $users->onEachSide(5)->links() }}
+                </div>
             </div>
         </div>
         @include('admin.users.advanceSearch')

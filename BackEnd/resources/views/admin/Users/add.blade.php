@@ -51,14 +51,14 @@
                                     <div class="text text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label for="inputPassword5" class="form-label">Mật khẩu</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name='password' id="inputName5" value="{{ old('password') }}">
                                 @error('password')
                                     <div class="text text-danger">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <label for="inputCity" class="form-label">Ảnh đại diện</label>
                                 <input accept="image/*" type='file' id="inputFile" name="inputFile"
@@ -70,6 +70,14 @@
                                 <img type="hidden" width="120px" height="120px" id="blah" src=""
                                     alt="" />
                             </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword5" class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                    name='address' id="inputName5" value="{{ old('address') }}">
+                                @error('address')
+                                    <div class="text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tỉnh/Thành phố</label>
@@ -80,6 +88,9 @@
                                             <option value="{{ $province->id }}">{{ $province->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('province_id')
+                                    <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -89,6 +100,9 @@
                                         aria-label="Default select example">
                                         <option selected="" value="">Vui lòng chọn</option>
                                     </select>
+                                    @error('district_id')
+                                    <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -98,16 +112,12 @@
                                         aria-label="Default select example" id="ward_id">
                                         <option selected="" value="">Vui lòng chọn</option>
                                     </select>
+                                    @error('ward_id')
+                                    <div class="text text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <label for="inputPassword5" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    name='address' id="inputName5" value="{{ old('address') }}">
-                                @error('address')
-                                    <div class="text text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+
                             <div class="col-md-4">
                                 <label for="inputPassword5" class="form-label">Ngày sinh</label>
                                 <input type="date" class="form-control @error('birthday') is-invalid @enderror"
@@ -119,11 +129,15 @@
                             <div class="col-md-4">
                                 <label for="exampleFormControlSelect1">Nhóm nhân viên</label>
                                 <select class="form-control" name="group_id" id="exampleFormControlSelect1">
+                                    <option selected value="">--Chọn chức vụ--</option>
                                     @foreach ($groups as $group)
                                         <option value="{{ $group->id }}" @selected(old('group_id') == $group->id)>
                                             {{ $group->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('group_id')
+                                <div class="text text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                             <div class="col-md-4">
                                 <label>Giới tính</label><br>

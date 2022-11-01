@@ -5,8 +5,8 @@
         <h1 class="mb-1">Thùng rác</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('users.index')}}"></a>Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="">Nhân viên</a></li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}"></a>Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{route('users.index')}}">Nhân viên</a></li>
             <li class="breadcrumb-item">Thùng rác</a></li>
           </ol>
         </nav>

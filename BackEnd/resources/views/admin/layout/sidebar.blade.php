@@ -3,7 +3,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="#">
+        <a class="nav-link " href="{{route('home')}}">
           <i class="bi bi-grid"></i>
           <span>Trang Chủ</span>
         </a>

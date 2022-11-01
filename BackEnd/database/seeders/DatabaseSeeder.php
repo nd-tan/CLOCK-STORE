@@ -178,7 +178,7 @@ class DatabaseSeeder extends Seeder
         $user->phone = '0916663237';
         $user->birthday = '2003/06/27';
         $user->address = 'Quảng Trị';
-        $user->image = 'fgr.jpg';
+        $user->image = 'phi.jpg';
         $user->gender = 'Nam';
         $user->province_id = '4';
         $user->district_id = '4';
@@ -193,12 +193,12 @@ class DatabaseSeeder extends Seeder
         $user->phone = '0123456789';
         $user->birthday = '2001/03/21';
         $user->address = 'Quảng Trị';
-        $user->image = 'phi.jpg';
+        $user->image = 'vinh.jpg';
         $user->gender = 'Nam';
         $user->province_id = '5';
         $user->district_id = '5';
         $user->ward_id = '5';
-        $user->group_id = '5';
+        $user->group_id = '2';
         $user->save();
 
         $user = new User();
@@ -208,12 +208,12 @@ class DatabaseSeeder extends Seeder
         $user->phone = '0123456788';
         $user->birthday = '2003/11/11';
         $user->address = 'Quảng Trị';
-        $user->image = 'vinh.jpg';
+        $user->image = 'fgr.jpg';
         $user->gender = 'Nam';
         $user->province_id = '6';
         $user->district_id = '6';
         $user->ward_id = '6';
-        $user->group_id = '6';
+        $user->group_id = '2';
         $user->save();
     }
 }

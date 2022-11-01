@@ -5,7 +5,7 @@
         <h1 class="mb-1">Nhân viên</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="{{route('groups.index')}}">Nhân viên</a></li>
             <li class="breadcrumb-item"> Thêm nhân viên</a></li>
           </ol>

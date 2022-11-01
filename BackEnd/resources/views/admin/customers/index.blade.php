@@ -92,7 +92,9 @@
                     @endif
                     </tbody>
                 </table>
-                    {{ $customers->onEachSide(5)->links() }}
+                    <div style="float: right">
+                        {{ $customers->onEachSide(5)->links() }}
+                    </div>
             </div>
         </div>
     </div>

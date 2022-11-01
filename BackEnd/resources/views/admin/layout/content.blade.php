@@ -1,5 +1,4 @@
-{{-- @extends('admin.home') --}}
-{{-- @section('content1') --}}
+
 <main id="main" class="main">
     <div class="pagetitle">
       <h1>Trang chủ</h1>
@@ -91,7 +90,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{-- @if(isset($topProducts))
+                    @if(isset($topProducts))
                     @foreach($topProducts as $product)
                     <tr>
                       <th scope="row"><a href="{{ route('product.show',$product->id) }}"><img src="{{ asset('storage/images/product/' . $product->image) }}" alt=""></a></th>
@@ -101,7 +100,7 @@
                       <td><i data-bs-toggle="tooltip" data-bs-placement="top" title="Doanh Thu">{{number_format($product->totalPrice)}} <span class="badge bg-success rounded-pill">VNĐ</span></i></td>
                     </tr>
                     @endforeach
-                   @endif --}}
+                   @endif
                   </tbody>
                 </table>
 
@@ -122,7 +121,7 @@
             <h5 class="card-title">Top 5 Khách Hàng <span>| Thân Thiết</span></h5>
 
             <div class="activity">
-              {{-- @if(isset($topCustomer))
+              @if(isset($topCustomer))
               @foreach($topCustomer as $customer)
               <div class="activity-item d-flex">
                 <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
@@ -131,7 +130,7 @@
                 </div>
               </div><!-- End activity item-->
               @endforeach
-              @endif --}}
+              @endif
 
 
             </div>

@@ -13,7 +13,7 @@
         </div>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">Trang Chủ</a></li>
             <li class="breadcrumb-item">Sản Phẩm</a></li>
           </ol>
         </nav>
@@ -59,7 +59,7 @@
 @if (Auth::user()->hasPermission('Product_create'))
     <a class='btn btn-primary mb-2'  href="{{route('product.create')}}">Thêm sản phẩm</a>
     @endif
-    <a class='btn btn-secondary mb-2 float-right'  href="{{route('product.getTrashed')}}">Thùng rác</a>
+    <a class='btn btn-danger mb-2 float-right'  href="{{route('product.getTrashed')}}">Thùng rác</a>
     <table class="table table-hover" style="text-align: center">
       <thead>
         <tr>
