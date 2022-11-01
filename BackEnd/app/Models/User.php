@@ -88,4 +88,27 @@ class User extends Authenticatable
     // {
     //     return $this->group->roles->contains('name', $permission);
     // }
+    public function scopeNameGroup($query, $request)
+    {
+        if ($request->has('group_id')) {
+            return $query->whereHas('groups', function ($query) use ($request) {
+                $query->where('group_id', $request->group_id);
+            });
+        }
+    }
+    public function scopeNameProv($query, $request)
+    {
+        if ($request->has('province_id')) {
+            return $query->whereHas('provinces', function ($query) use ($request) {
+                $query->where('province_id', $request->province_id);
+            });
+        }
+    }
+    public function scopeType($query, $request)
+    {
+        if ($request->has('gender')) {
+            $query->where('gender', $request->gender);
+        };
+        return $query;
+    }
 }

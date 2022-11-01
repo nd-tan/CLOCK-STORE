@@ -39,10 +39,7 @@
                                             <td>E-mail</td>
                                             <td>{{ $user->email }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Mật khẩu</td>
-                                            <td>{{ $user->password }}</td>
-                                        </tr>
+
                                         <tr>
                                             <td>Số điện thoại</td>
                                             <td>{{ $user->phone }}</td>
@@ -67,7 +64,6 @@
                 </div>
             </div>
         </div>
-        </div>
-        </div>
+    </div>
     </main>
 @endsection

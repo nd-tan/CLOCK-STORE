@@ -15,7 +15,7 @@
         <div class="col-xl-4">
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <img src="{{ asset('storage/images_admin/' . $item->image)}}" alt="Profile" class="rounded-circle">
+              <img src="{{ asset('storage/images/user/' . $item->image)}}" alt="Profile" class="rounded-circle">
               <h2>{{$item->name}}</h2>
               <h3>{{$item->groups->name}}</h3>
               <div class="social-links mt-2">

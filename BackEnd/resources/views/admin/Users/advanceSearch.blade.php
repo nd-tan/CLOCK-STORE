@@ -11,10 +11,10 @@
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label class="form-label" for="nameVi">Danh sách nhân viên</label>
-                                <select class=" form-select" name="users" id="users" style="width: 470px">
+                                <select class=" form-select" name="group_id" id="users" style="width: 470px">
                                     <option style="text-align: center" value="">Nhân viên</option>
-                                    @foreach ($users as $user)
-                                        <option value="{{  $user->id }}">{{ $user->name }} </option>
+                                    @foreach ($groups as $group)
+                                        <option value="{{  $group->id }}">{{ $group->name }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -22,10 +22,10 @@
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label class="form-label" for="nameVi">Địa chỉ</label>
-                                <select class=" form-select" name="users" id="users" style="width: 470px">
+                                <select class=" form-select" name="province_id" id="users" style="width: 470px">
                                     <option style="text-align: center" value="">Địa chỉ</option>
-                                    @foreach ($users as $user)
-                                        <option value="{{  $user->address }}"></option>
+                                    @foreach ($provinces as $province)
+                                        <option value="{{  $province->id }}">{{$province->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -33,9 +33,9 @@
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <p><b>Giới tính</b></p>
-                                <input type="radio" name="type_gender" value="Nam">
+                                <input type="radio" name="gender" value="Nam">
                                 <label for="html">Nam </label>&nbsp&nbsp&nbsp
-                                <input type="radio" name="type_gender" value="Nữ">
+                                <input type="radio" name="gender" value="Nữ">
                                 <label for="css">Nữ</label><br>
                             </div>
 

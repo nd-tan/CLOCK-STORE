@@ -52,19 +52,28 @@
                                     <div class="text text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label for="inputEmail5" class="form-label">Mật khẩu</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name='password' id="inputName5" value="{{ old('password') ?? $users->password }}">
                                 @error('password')
                                     <div class="text text-danger">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <label for="inputEmail5" class="form-label">Ảnh đại diện</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                    name='image' id="inputName5" value="{{ old('image') ?? $users->image }}">
-                                @error('image')
+                                <input accept="image/*" type='file' id="inputFile" name="inputFile"
+                                    class="form-control @error('inputFile') is-invalid @enderror"><br>
+                                @error('inputFile')
+                                    <div class="text text-danger">{{ $message }}</div>
+                                @enderror
+                                <input name = "image1" type="hidden" value="{{$users->image}}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputEmail5" class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                    name='address' id="inputName5" value="{{ old('address') ?? $users->address }}">
+                                @error('address')
                                     <div class="text text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -78,6 +87,9 @@
                                             <option value="{{ $province->id }}">{{ $province->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('province_id')
+                                    <div class="text text-danger">{{ $message }}</div>
+                                @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -87,6 +99,9 @@
                                         aria-label="Default select example">
                                         <option selected="" value="">Vui lòng chọn</option>
                                     </select>
+                                    @error('district_id')
+                                    <div class="text text-danger">{{ $message }}</div>
+                                @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -96,16 +111,12 @@
                                         id="ward_id">
                                         <option selected="" value="">Vui lòng chọn</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputEmail5" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    name='address' id="inputName5" value="{{ old('address') ?? $users->address }}">
-                                @error('address')
+                                    @error('ward_id')
                                     <div class="text text-danger">{{ $message }}</div>
                                 @enderror
+                                </div>
                             </div>
+
                             <div class="col-md-4">
                                 <label for="inputPassword5" class="form-label">Ngày Sinh</label>
                                 <input type="date" class="form-control @error('birthday') is-invalid @enderror"
@@ -127,7 +138,6 @@
                               </div>
                             <div class="col-md-4">
                                 <label>Giới tính</label><br />
-                                <br />
                                 <label class="form-radio-label">
                                     <input class="form-radio-input" type="radio" name="gender" value="Nam"
                                         checked="Nam">
