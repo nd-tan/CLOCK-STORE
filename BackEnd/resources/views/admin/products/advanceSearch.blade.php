@@ -16,7 +16,7 @@
                                 <select class=" form-select" name="category_id" id="category_id" style="width: 470px">
                                     <option style="text-align: center" value="">-----Chọn danh mục-----</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{  $category->id }}">{{ $category->name }} </option>
+                                        <option <?= request()->category_id == $category->id ? 'selected' : '' ?> value="{{  $category->id }}">{{ $category->name }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -27,7 +27,7 @@
                                 <select class=" form-select" name="brand_id" id="brand_id" style="width: 220px">
                                     <option value="">--Chọn thương hiệu--</option>
                                     @foreach ($brands as $brand)
-                                        <option value="{{  $brand->id }}">{{ $brand->name }} </option>
+                                        <option <?= request()->brand_id == $brand->id ? 'selected' : '' ?> value="{{  $brand->id }}">{{ $brand->name }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -38,7 +38,7 @@
                                 <select class=" form-select" name="supplier_id" id="supplier_id" style="width: 220px">
                                     <option value="">--Chọn nhà cung cấp--</option>
                                     @foreach ($suppliers as $supplier)
-                                        <option value="{{  $supplier->id }}">{{ $supplier->name }} </option>
+                                        <option <?= request()->supplier_id == $supplier->id ? 'selected' : '' ?> value="{{  $supplier->id }}">{{ $supplier->name }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -48,14 +48,14 @@
                             <div class="mb-3">
                                 <label class="form-label" for="name">Khoảng giá (VND)
                                 </label>
-                                <input type="number"  class="form-control"
+                                <input type="number"  class="form-control" value="{{ request()->startPrice }}"
                                     name="startPrice" id="startPrice" placeholder="từ">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label class="form-label" for="name">&nbsp</label>
-                                <input type="text"  class="form-control" name="endPrice"
+                                <input type="text"  class="form-control" name="endPrice" value="{{ request()->endPrice }}"
                                     id="endPrice" placeholder="đến">
                             </div>
                         </div>
@@ -72,16 +72,16 @@
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label class="form-label" for="quantity">&nbsp</label>
-                                <input type="date" class="form-control" name="end_date" placeholder="dd/mm/yyyy"
+                                <input type="date" value="{{ request()->end_date }}" class="form-control" name="end_date" placeholder="dd/mm/yyyy"
                                     class="form-control end_date" value="#">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <p><b>Trạng thái:</b></p>
-                                <input type="radio" name="status" value="1">
+                                <input type="radio" <?= request()->status == '1' ? 'checked' : '' ?>  name="status" value="1">
                                 <label for="html">Hiện </label>&nbsp&nbsp&nbsp
-                                <input type="radio"  name="status" value="0">
+                                <input type="radio" <?= request()->status == '0' ? 'checked' : '' ?>   name="status" value="0">
                                 <label for="css">Ẩn</label><br>
                             </div>
 
@@ -89,9 +89,9 @@
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <p><b>Loại:</b></p>
-                                <input type="radio" name="type_gender" value="Nam">
+                                <input type="radio" <?= request()->type_gender == 'Nam' ? 'checked' : '' ?>  name="type_gender" value="Nam">
                                 <label for="html">Nam </label>&nbsp&nbsp&nbsp
-                                <input type="radio" name="type_gender" value="Nữ">
+                                <input type="radio" <?= request()->type_gender == 'Nữ' ? 'checked' : '' ?>  name="type_gender" value="Nữ">
                                 <label for="css">Nữ</label><br>
                             </div>
 
@@ -100,6 +100,7 @@
 
                 </div>
                 <div class="modal-footer">
+                    <a href="{{route('product.index')}}" style="float: left" type="submit" class="btn btn-danger">Đặt lại</a>
                     <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                 </div>
             </div>

@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                       
+
 
                         <div class="col-lg-6">
                             <div class="mb-3">
@@ -65,7 +65,6 @@
 
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <a href="{{ route('order.index') }}" class="btn btn-warning">Đặt Lại</a>
