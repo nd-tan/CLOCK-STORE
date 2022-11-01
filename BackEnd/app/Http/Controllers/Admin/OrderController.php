@@ -14,6 +14,7 @@ class OrderController extends Controller
     function __construct(OrderServiceInterface $orderService)
     {
         $this->orderService = $orderService;
+        dd($this->orderService);
     }
     /**
      * Display a listing of the resource.
