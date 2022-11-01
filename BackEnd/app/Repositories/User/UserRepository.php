@@ -170,13 +170,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function force_destroy($id)
     {
         $user = $this->model->onlyTrashed()->findOrFail($id);
-        // try {
-        //     $user->forceDelete();
-        //     return $user;
-        // } catch (\Exception $e) {
-        //     Log::error($e->getMessage());
-        //     return $user;
-        // }
         $user->forceDelete();
         return $user;
     }
@@ -207,7 +200,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         $file = $request->inputFile;
         if ($request->hasFile('inputFile')) {
-            $images = 'public/images_admin/'.$item->image;
+            $images = 'public/images/user/'.$item->image;
             $fileExtension = $file->getClientOriginalName();
             //Lưu file vào thư mục storage/app/public/image với tên mới
             $request->file('inputFile')->storeAs('public/images_admin', $fileExtension);

@@ -70,13 +70,13 @@
                                     <th scope="row">{{ $key + 1 }}</th>
                                     <td>
                                         <img style="width:120px; height:100px"
-                                            src="{{ asset('storage/images/user/' . $user->image) }}"
+                                            src="{{asset('storage/images/user/' . $user->image)  }}"
                                             alt=""class="image_photo">
                                     </td>
                                     <td><a data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết nhân viên"
                                             href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
-                                            @if(isset($user->groups->name))
-                                    <td>{{ $user->groups->name}}</td>
+                                        @if(isset($user->groups->name))
+                                    <td>{{ $user->groups->name }}</td>
                                     @endif
                                     <td>
                                         <form action="{{ route('users.destroy', $user->id) }}" method="post">

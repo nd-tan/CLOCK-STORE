@@ -16,14 +16,14 @@
                             <div class="mb-3">
                                 <label class="form-label" for="name">Tổng Tiền Đơn Hàng <span class="badge bg-success rounded-pill">VNĐ</span>
                                 </label>
-                                <input type="number"  class="form-control"
+                                <input type="number" value="{{ request()->startPrice }}"  class="form-control"
                                     name="startPrice" id="startPrice" placeholder="Từ">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label class="form-label" for="name">&nbsp</label>
-                                <input type="number"  class="form-control" name="endPrice"
+                                <input type="number" value="{{ request()->endPrice }}"  class="form-control" name="endPrice"
                                     id="endPrice" placeholder="Đến">
                             </div>
                         </div>
@@ -40,16 +40,16 @@
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label class="form-label" for="quantity">&nbsp</label>
-                                <input type="date" class="form-control" name="end_date" placeholder="dd/mm/yyyy"
+                                <input type="date" value="{{ request()->end_date }}" class="form-control" name="end_date" placeholder="dd/mm/yyyy"
                                     class="form-control end_date" value="#">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <p><b>Trạng Thái Đơn:</b></p>
-                                <input type="radio" name="status" value="1">
+                                <input <?= request()->status == '1' ? 'checked' : '' ?> type="radio"  name="status" value="1">
                                 <label for="html">Đã Duyệt </label>&nbsp&nbsp&nbsp
-                                <input type="radio"  name="status" value="0">
+                                <input <?= request()->status == '0' ? 'checked' : '' ?> type="radio"  name="status" value="0">
                                 <label for="css">Chưa Duyệt</label><br>
                             </div>
 
@@ -57,9 +57,9 @@
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <p><b>Loại Đồng Hồ:</b></p>
-                                <input type="radio" name="gender" value="Nam">
+                                <input <?= request()->gender == 'Nam' ? 'checked' : '' ?> type="radio" name="gender" value="Nam">
                                 <label for="html">Nam </label>&nbsp&nbsp&nbsp
-                                <input type="radio" name="gender" value="Nữ">
+                                <input <?= request()->gender == 'Nữ' ? 'checked' : '' ?> type="radio" name="gender" value="Nữ">
                                 <label for="css">Nữ</label><br>
                             </div>
 
@@ -68,6 +68,7 @@
 
                 </div>
                 <div class="modal-footer">
+                    <a href="{{ route('order.index') }}" class="btn btn-warning">Đặt Lại</a>
                     <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                 </div>
             </div>
