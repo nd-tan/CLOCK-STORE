@@ -5,7 +5,7 @@
             <h1>Khách Hàng</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">Trang chủ</a></li>
                     <li class="breadcrumb-item"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Danh Sách Khách Hàng" href="{{ route('customer.index') }}">Khách Hàng</a></li>
                 </ol>
             </nav>
@@ -64,8 +64,8 @@
                     @endif
                     </tbody>
                 </table>
-                <div class="row">
-                    {{  $customers->onEachSide(5)->links() }}
+                <div style="float: right">
+                    {{ $customers->onEachSide(5)->links() }}
                 </div>
             </div>
         </div>

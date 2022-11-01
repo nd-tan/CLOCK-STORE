@@ -28,27 +28,27 @@
                     @if(isset($params['name']))
                     <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;"><h2>Kính Chào: <i>{{ $params['name'] }}</i></h2></h1>
                     @endif
-                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
-                        @if(isset($params['password']))
-                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="#" style="color:#ee4c50;text-decoration:underline;"><b style="color: blue"><i>Mật Khẩu Mới: </i></b>{{ $params['password'] }}<br></a></p>
-                    @endif
+
                 </td>
                 </tr>
                 <tr>
                   <td  style="padding:0;">
                     <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
                       <tr>
-                        <td colspan="" style="width:260px;padding:0;vertical-align:top;color:#153643;">
+                        <td style="width:260px;padding:0;vertical-align:top;color:#153643;">
                           <p style="margin:0 0 25px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://png.pngtree.com/png-vector/20220619/ourmid/pngtree-cartoon-asian-businessman-shows-both-hands-a-sign-thumb-up-png-image_5227065.png" alt="" width="260" style="height:auto;display:block;" /></p>
-                          <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><b><i>*Hãy Dùng Mật Khẩu Này Để Truy Cập Tài Khoản Của Bạn.</i></b><br><br>
-                            <b><i>Chúc Bạn Một Ngày Làm Việc Vui Vẻ!.</i></b><br><br>
+                          <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><i>*Bạn Đã Gửi Yêu Cầu Thay Đổi Mật Khẩu,</i><br>
+                            <i>Vì Vậy Để Xác Minh Đó Là Bạn Vì Vậy <br>Chúng Tôi Đã Gửi Mật Khẩu Đăng Nhập về Mail Của Bạn.</i><br></p>
+                            <i>Chúc Bạn Một Ngày Làm Việc Vui Vẻ!.</i><br><br>
                             <b><i>Thân Ái!.</i></b><br>
-                            
+
                         </td>
                         <td style="width:260px;padding:0;vertical-align:top;color:#153643;">
                           <p style="margin:0 0 -11px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://dynamic.brandcrowd.com/asset/logo/bc454755-12ee-48df-b8d6-55f239240b65/logo-search-grid-1x?v=637867253697330000&text=password" alt="" width="260" style="height:auto;display:block;" /></p>
-                          <p style="margin:0 0 -100px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><b><i>*Bạn Đã Gửi Yêu Cầu Thay Đổi Mật Khẩu</i></b><br><br>
-                            <b><i>Vì Vậy Để Xác Minh Đó Là Bạn Vì Vậy <br><br>Chúng Tôi Đã Gửi Mật Khẩu Đăng Nhập về Mail Của Bạn</i></b><br></p></p>
+                          <p style="margin:0 0 -100px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><i>*Hãy Dùng Mật Khẩu Này Để Truy Cập Tài Khoản Của Bạn.</i><br><br>
+                            @if(isset($params['password']))
+                            <a href="#" style="color:#ee4c50;text-decoration:underline;"><b style="color: blue"><i>Mật Khẩu Mới: </i></b>{{ $params['password'] }}<br></a>
+                            @endif
                         </td>
                       </tr>
                     </table>

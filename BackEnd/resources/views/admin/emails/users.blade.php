@@ -28,10 +28,7 @@
                     @if(isset($params['name']))
                     <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;"><h2>Kính Chào: <i>{{ $params['name'] }}</i></h2></h1>
                     @endif
-                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
-                        @if(isset($params['password']))
-                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="#" style="color:#ee4c50;text-decoration:underline;"><b style="color: blue"><i>Mật khẩu: </i></b>{{ $params['password'] }}<br></a></p>
-                    @endif
+
                 </td>
                 </tr>
                 <tr>
@@ -40,16 +37,19 @@
                       <tr>
                         <td colspan="" style="width:260px;padding:0;vertical-align:top;color:#153643;">
                           <p style="margin:0 0 25px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://png.pngtree.com/png-vector/20220619/ourmid/pngtree-cartoon-asian-businessman-shows-both-hands-a-sign-thumb-up-png-image_5227065.png" alt="" width="260" style="height:auto;display:block;" /></p>
-                          <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><b><i>*Hãy Dùng Mật Khẩu Này Để Truy Cập Tài Khoản Của Bạn.</i></b><br><br>
-                            <b><i>Chúc Bạn Một Ngày Làm Việc Vui Vẻ!.</i></b><br><br>
+                          <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><i>*Chào Mừng Bạn Đã Gia Nhập Vào Công Ty Của Chúng Tôi.</i><br><br>
+                            <i>Chúng Tôi Rất Mong Muốn Bạn Luôn Đồng Hành Cùng Chúng Tôi Và Cống Hiến Hiến Mình.<br><br> Mọi Nổ Lực Của Bạn Sẽ Được Đền Đáp.</i><br></p></p>
+                            <i>Chúc Bạn Một Ngày Làm Việc Vui Vẻ!.</i><br><br>
                             <b><i>Thân Ái!.</i></b><br>
-                          
+
                         </td>
                         <td style="width:20px;padding:0;font-size:0;line-height:0;">&nbsp;</td>
                         <td style="width:260px;padding:0;vertical-align:top;color:#153643;">
                           <p style="margin:0 0 14px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://img4.thuthuatphanmem.vn/uploads/2020/08/28/background-chao-mung-powerpoint_090351149.jpg" alt="" width="260" style="height:auto;display:block;" /></p>
-                          <p style="margin:0 0 -110px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><b><i>*Chào Mừng Bạn Đã Gia Nhập Vào Công Ty Của Chúng Tôi.</i></b><br><br>
-                            <b><i>Chúng Tôi Rất Mong Muốn Bạn Luôn Đồng Hành Cùng Chúng Tôi Và Cống Hiến Hiến Mình.<br><br> Mọi Nổ Lực Của Bạn Sẽ Được Đền Đáp.</i></b><br></p></p>
+                          <p style="margin:0 0 -110px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><i>*Hãy Dùng Mật Khẩu Này Để Truy Cập Tài Khoản Của Bạn.</i><br><br>
+                            @if(isset($params['password']))
+                            <a href="#" style="color:#ee4c50;text-decoration:underline;"><b style="color: blue"><i>Mật khẩu: </i></b>{{ $params['password'] }}<br></a>
+                            @endif
                         </td>
                       </tr>
                     </table>

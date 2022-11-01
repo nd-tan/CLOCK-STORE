@@ -27,7 +27,7 @@ class StoreSupplierRequest extends FormRequest
             'name' => 'required',
             'email'=> 'required|unique:suppliers',
             'address' => 'required',
-            'phone' => 'required'
+            'phone' => 'required|unique:suppliers'
         ];
     }
     public function messages()

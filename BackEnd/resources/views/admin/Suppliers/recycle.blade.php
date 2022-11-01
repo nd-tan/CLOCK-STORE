@@ -5,8 +5,8 @@
         <h1 class="mb-1">Nhà Cung Cấp</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('supplier.index')}}"></a>Trang Chủ</a></li>
-            <li class="breadcrumb-item"><a href="">Nhà Cung Cấp</a></li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}"></a>Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{route('supplier.index')}}">Nhà Cung Cấp</a></li>
             <li class="breadcrumb-item">Thùng Rác</a></li>
           </ol>
         </nav>

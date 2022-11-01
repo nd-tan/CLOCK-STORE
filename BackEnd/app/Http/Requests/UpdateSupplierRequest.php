@@ -27,7 +27,9 @@ class UpdateSupplierRequest extends FormRequest
         return [
             'name' => 'required',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => ['required',
+            Rule::unique('suppliers')->ignore($this->supplier)
+            ],
             'email'=> ['required',
             Rule::unique('suppliers')->ignore($this->supplier)
             ]

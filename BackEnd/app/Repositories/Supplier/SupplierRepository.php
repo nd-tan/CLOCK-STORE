@@ -21,14 +21,20 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
         }
         return $suppliers->orderBy('id','DESC')->paginate(5);
     }
-    public function update($id, $data){
+    public function update($data, $id ){
 
         $supplier = $this->model->find($id);
-        $supplier->name = $data['name'];
-        $supplier->name = $data['email'];
-        $supplier->name = $data['address'];
-        $supplier->name = $data['phone'];
-        $supplier->save();
+        try {
+            $supplier->name = $data['name'];
+            $supplier->email = $data['email'];
+            $supplier->address = $data['address'];
+            $supplier->phone = $data['phone'];
+            $supplier->save();
+            return true;
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return false;
+        }
         return $supplier;
     }
     public function delete($id){

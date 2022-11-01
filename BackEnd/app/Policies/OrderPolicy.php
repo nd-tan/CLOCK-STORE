@@ -91,4 +91,8 @@ class OrderPolicy
     {
         return $user->hasPermission('Order_forceDelete');
     }
+    public function status(User $user)
+    {
+        return $user->hasPermission('Order_status');
+    }
 }
