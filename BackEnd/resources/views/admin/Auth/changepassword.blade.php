@@ -1,7 +1,5 @@
 <style>
-    @use postcss-preset-env {
-        stage: 0;
-    }
+  
 
     /* config.css */
 
@@ -220,7 +218,7 @@
 
     <div class="grid">
 
-        <form action="{{ route('postlogin') }}" method="POST" class="form login">
+        <form action="{{ route('user.accountPassword') }}" method="POST" class="form login">
             @csrf
             <div class="form__field">
                 <label for="login__username"><svg class="icon">
@@ -233,20 +231,11 @@
                 <p style="color:red">{{ $errors->first('email') }}</p>
             @endif
             <div class="form__field">
-                <label for="login__password"><svg class="icon">
-                        <use xlink:href="#icon-lock"></use>
-                    </svg><span class="hidden">Password</span></label>
-                <input id="login__password" type="password" name="password" class="form__input" placeholder="Mật khẩu">
-            </div>
-            @if ($errors->any())
-                <p style="color:red">{{ $errors->first('password') }}</p>
-            @endif
-            <div class="form__field">
                 <input type="submit" value="Đăng Nhập">
             </div>
         </form>
 
-        <p class="text--center">Not a member? <a href="#">Sign up now</a> <svg class="icon">
+        <p class="text--center">Đã Có Tài Khoản? <a href="{{ route('login') }}">Đăng Nhập</a> <svg class="icon">
                 <use xlink:href="#icon-arrow-right"></use>
             </svg></p>
 

@@ -56,7 +56,7 @@
                                         <td>
                                                 <div class="flex-shrink-0">
                                                     @if(isset($orderDetail->products->image))
-                                                    <img src="{{ asset($orderDetail->products->image) }}"
+                                                    <img src="{{ asset('storage/images/product/'.$orderDetail->products->image) }}"
                                                         alt="" width="75" class="img-fluid">
                                                         @endif
                                                 </div>

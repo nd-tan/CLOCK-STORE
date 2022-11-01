@@ -1,7 +1,4 @@
 <style>
-    @use postcss-preset-env {
-        stage: 0;
-    }
 
     /* config.css */
 
@@ -247,7 +244,7 @@
             </div>
         </form>
 
-        <p class="text--center">Not a member? <a href="">Sign up now</a> <svg class="icon">
+        <p class="text--center">Bạn Quên Mật Khẩu? <a href="{{ route('postchange') }}">Truy Cập Ngay</a> <svg class="icon">
                 <use xlink:href="#icon-arrow-right"></use>
             </svg></p>
 
