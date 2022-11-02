@@ -20,4 +20,12 @@ class Group extends Model
     public function roles() {
         return $this->belongsToMany(Role::class,'group_roles','group_id','role_id');
     }
+    public function scopeSearch($query, $term)
+    {
+        if ($term) {
+            $query->where('name', 'like', '%' . $term . '%')
+                ->orWhere('id', 'like', '%' . $term . '%');
+        }
+        return $query;
+    }
 }
