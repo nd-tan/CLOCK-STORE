@@ -14,12 +14,15 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
     }
     public function all($request)
     {
-        $group = $this->model;
-        if (isset($request->name) && $request->name) {
-            $name = $request->name;
-            $group->where('name', 'LIKE', '%' . $name . '%'  );
+        $group = $this->model->select('*');
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $group = $group->where('name', 'like', '%' . $search . '%')
+                ->orWhere('id', 'like', '%' . $search . '%');
+
         }
-        return $group->paginate(5);;
+        return $group->orderBy('id', 'DESC')->paginate(5);
+
     }
 
     public function update($id, $data)
