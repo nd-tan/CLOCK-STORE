@@ -119,7 +119,9 @@ class OrderController extends Controller {
         $order = $this->orderService->find($id_order);
         $customer = Customer::findOrFail($request->customer_id);
         $orderDetails = $order->orderDetails;
+        $orderStatus = 'Bạn Đã Đặt Mua Những Sản Phẩm Sau:';
         $params = [
+            'ordercheck' => $orderStatus,
             'order' => $order,
             'orderDetails' => $orderDetails,
         ];

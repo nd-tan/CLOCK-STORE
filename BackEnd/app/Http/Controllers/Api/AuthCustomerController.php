@@ -18,7 +18,7 @@ class AuthCustomerController extends Controller
     protected $customerService;
     public function __construct(CustomerServiceInterface $customerService)
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register','logout','refresh','userProfile','changePassWord']]);
         $this->customerService = $customerService;
     }
 
@@ -90,7 +90,7 @@ class AuthCustomerController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth('api')->logout();
 
         return response()->json(['message' => 'User successfully signed out']);
     }
@@ -112,7 +112,7 @@ class AuthCustomerController extends Controller
      */
     public function userProfile()
     {
-        return response()->json(auth()->user());
+        return response()->json(auth('api')->user());
     }
 
     /**
@@ -128,7 +128,7 @@ class AuthCustomerController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'user' => auth('api')->user()
         ]);
     }
 
@@ -136,13 +136,13 @@ class AuthCustomerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'old_password' => 'required|string|min:6',
-            'new_password' => 'required|string|confirmed|min:6',
+            'new_password' => 'required|string|min:6',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
-        $userId = auth()->user()->id;
+        $userId = auth('api')->user()->id;
 
         $user = User::where('id', $userId)->update(
             ['password' => bcrypt($request->new_password)]
