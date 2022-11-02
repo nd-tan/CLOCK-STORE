@@ -23,18 +23,19 @@
           <tr>
             <td style="padding:36px 30px 42px 30px;">
               <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
-                @if(isset($params['order']) && isset($params['orderDetails']))
+                @if(isset($params['order']) && isset($params['orderDetails']) && isset($params['orderStatus']))
                 @php
                 $order = $params['order'];
                 $orderDetails = $params['orderDetails'];
+                $orderStatus = $params['orderStatus'];
                 $totalPriceOrder = 0;
                 @endphp
                 @endif
 
                 <tr>
-                  <td colspan="2" style="padding:0 0 1px 0;color:#153643;">
+                  <td colspan="3" style="padding:0 0 1px 0;color:#153643;">
                     <h1 style="font-size:24px;margin:0 0 -40px 0;font-family:Arial,sans-serif;"><h3>Kính Chào: <i>{{ $order->name_customer }}</i></h3></h1>
-                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;color:rgb(0, 255, 42)">Bạn Đã Đặt Mua Những Sản Phẩm</p><br>
+                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;color:rgb(18, 168, 255)">{{ $orderStatus }}</p><br>
                     <tr>
                         <td style="width: 200px"><b>Sản phẩm</b></td>
                         <td style="width: 100px"><b>Số Lượng</b></td>

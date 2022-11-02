@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Services\Order\OrderServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -107,6 +109,20 @@ class OrderController extends Controller
         $this->authorize('status', Order::class);
     try{
         $this->orderService->updateSingle($id);
+        $order = $this->orderService->find($id);
+        $customer = Customer::findOrFail($order->customer->id);
+        $orderDetails = $order->orderDetails;
+        $orderStatus = 'Đơn hàng đã được duyệt, bàn giao cho đơn vị vận chuyển.';
+        $params = [
+            'orderStatus' => $orderStatus,
+            'order' => $order,
+            'orderDetails' => $orderDetails,
+        ];
+       
+        Mail::send('admin.emails.orders', compact('params'), function ($email) use($customer) {
+            $email->subject('TCC-Shop');
+            $email->to($customer->email,$customer->name);
+        });
         return redirect()->route('order.index');
     }catch(\Exception $e){
         Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
