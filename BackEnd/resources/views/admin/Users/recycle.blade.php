@@ -6,8 +6,8 @@
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}"></a>Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="{{route('users.index')}}">Nhân viên</a></li>
-            <li class="breadcrumb-item">Thùng rác</a></li>
+            <li class="breadcrumb-item"><a href="{{route('users.index')}}">Danh sách nhân viên</a></li>
+            <li class="breadcrumb-item"><a href="{{route('user.getTrashed')}}">Thùng rác</a></li>
           </ol>
         </nav>
       </div>
@@ -24,7 +24,7 @@
         {{ Session::get('error') }}
     </p>
 @endif
-    <a class='btn btn-primary mb-2'  href="{{route('users.index')}}">Nhân viên</a>
+    <a class='btn btn-primary mb-2'  href="{{route('users.index')}}">Danh sách nhân viên</a>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -50,13 +50,13 @@
                 @method('DELETE')
                 @csrf
                 @if(Auth::user()->hasPermission('User_restore'))
-                <a onclick="return confirm('Bạn có chắc muốn khôi phục nhà cung cấp này không?');"
+                <a onclick="return confirm('Bạn có chắc muốn khôi phục nhân viên này không?');"
                 style='color:rgb(52,136,245)' class='btn'
                 href="{{ route('user.restore', $user->id) }}"><i
                 class='bi bi-arrow-clockwise h4'></i></a>
                 @endif
                 @if(Auth::user()->hasPermission('User_forceDelete'))
-            <button onclick="return confirm('Bạn có chắc muốn xóa danh mục này không?');"
+            <button onclick="return confirm('Bạn có chắc muốn xóa nhân viên này không?');"
             class ='btn' style='color:rgb(52,136,245)' type="submit" ><i class='bi bi-trash h4'></i></button>
                 @endif
             </form>

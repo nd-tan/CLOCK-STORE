@@ -5,8 +5,8 @@
             <h1 class="mb-1">Nhân viên</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">Trang chủ</a></li>
-                    <li class="breadcrumb-item">Nhân viên</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">Trang Chủ</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('users.index')}}">Danh sách nhân viên</a></li>
                 </ol>
             </nav>
         </div>
@@ -22,7 +22,7 @@
                             <div style="margin-top: 12px;" class="form-group">
                                 <div class="input-group-prepend">
                                 </div>
-                                <input class="form-control" name="search" placeholder="tìm kiếm">
+                                <input class="form-control" name="search" placeholder="Tìm kiếm">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="bi bi-search"></i>
                                 </button>
@@ -88,7 +88,7 @@
                                                 <i class='bi bi-pencil-square h4'></i></a>
                                             <button data-bs-toggle="tooltip" data-bs-placement="top"
                                                 title="Đưa vào thùng rác"
-                                                onclick="return confirm('Bạn có chắc muốn đưa danh mục này vào thùng rác không?');"
+                                                onclick="return confirm('Bạn có chắc muốn đưa nhân viên này vào thùng rác không?');"
                                                 class='btn' style='color:rgb(52,136,245)' type="submit"><i
                                                     class='bi bi-trash h4'></i></button>
                                         </form>

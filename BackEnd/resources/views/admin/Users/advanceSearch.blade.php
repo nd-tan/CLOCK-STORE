@@ -10,9 +10,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label class="form-label" for="nameVi">Danh sách nhân viên</label>
+                                <label class="form-label" for="nameVi">Danh sách chức vụ:</label>
                                 <select class=" form-select" name="group_id" id="users" style="width: 470px">
-                                    <option style="text-align: center" value="">Nhân viên</option>
+                                    <option style="text-align: center" value="" disabled
+                                    selected>Vui lòng chọn</option>
                                     @foreach ($groups as $group)
                                         <option value="{{  $group->id }}">{{ $group->name }} </option>
                                     @endforeach
@@ -21,9 +22,10 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label class="form-label" for="nameVi">Địa chỉ</label>
+                                <label class="form-label" for="nameVi">Tỉnh/Thành phố</label>
                                 <select class=" form-select" name="province_id" id="users" style="width: 470px">
-                                    <option style="text-align: center" value="">Địa chỉ</option>
+                                    <option style="text-align: center" value="" disabled
+                                    selected>Vui lòng chọn</option>
                                     @foreach ($provinces as $province)
                                         <option value="{{  $province->id }}">{{$province->name}}</option>
                                     @endforeach
