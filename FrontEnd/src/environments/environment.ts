@@ -2,8 +2,21 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+let urlApi = 'http://127.0.0.1:8000/api/auth/';
 export const environment = {
-  production: false
+  production: false,
+  url:'http://127.0.0.1:8000/',
+  urlAllProducts : urlApi+'product_list',
+  urlIdProduct : urlApi+'product_detail',
+  urlAllCategories : urlApi+'category_list',
+  urlTrendingPro : urlApi+'trendingProduct',
+  urlRegister : urlApi+'register',
+  urlLogin : urlApi+'login',
+  urlCustomer : urlApi+'getCustomer',
+  urlGetAllBrand : urlApi+'brand',
+  urlGoogleLogin : 'http://127.0.0.1:8000/auth/redirect/google',
+  urlSearch : urlApi,
+
 };
 
 /*
