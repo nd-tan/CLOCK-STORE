@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGroupRequest;
-use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Role;
 use App\Models\Group;
 use App\Services\Group\GroupServiceInterface;
@@ -42,36 +41,15 @@ class GroupController extends Controller
     public function store(StoreGroupRequest $request)
     {
         try {
-            $item = $this->groupService->create($request->all());
-            return redirect()->route('groups.index')->with('success', 'Thêm nhóm' . ' ' . $item->name . ' ' .  'thành công');
+            $this->groupService->create($request->all());
+            Session::flash('success', config('define.store.succes'));
+            return redirect()->route('groups.index');
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return redirect()->route('groups.index')->with('error', 'Thêm nhóm' . ' ' . $item->name . ' ' .  'không thành công');
+            Session::flash('error', config('define.store.error'));
+            Log::error('message:'. $e->getMessage());
+            return redirect()->route('groups.index');
         }
-
     }
-
-    public function show($id)
-    {
-        $this->authorize('view', Group::class);
-        $item=Group::find($id);
-
-        $current_user = Auth::user();
-        $userRoles = $item->roles->pluck('id', 'name')->toArray();
-        $roles = Role::all()->toArray();
-        $position_names = [];
-        foreach ($roles as $role) {
-            $position_names[$role['group_name']][] = $role;
-        }
-        $params = [
-            'item' => $item,
-            'userRoles' => $userRoles,
-            'roles' => $roles,
-            'position_names' => $position_names,
-        ];
-        return view('admin.groups.detail',$params);
-    }
-
     public function edit($id)
     {
         $item = Group::find($id);
@@ -110,10 +88,11 @@ class GroupController extends Controller
         $this->authorize('delete', Group::class);
         try {
             $item = $this->groupService->delete($id);
+            Session::flash('success', config('define.recycle.succes'));
             return redirect()->route('groups.index');
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            Session::flash('error', config('define.restore.error'));
+            Log::error('message:'. $e->getMessage());
+            Session::flash('error', config('define.recycle.error'));
             return redirect()->route('groups.index');
         }
     }

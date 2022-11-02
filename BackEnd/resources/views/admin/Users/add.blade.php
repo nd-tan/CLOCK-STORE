@@ -6,9 +6,9 @@
             <h1 class="mb-1">Nhân Viên</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Nhân viên</a></li>
-                    <li class="breadcrumb-item"> Thêm nhân viên</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">Trang Chủ</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Danh sách nhân viên</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('users.create') }}">Thêm nhân viên</a></li>
                 </ol>
             </nav>
         </div>
