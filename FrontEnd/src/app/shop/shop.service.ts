@@ -28,6 +28,7 @@ export class ShopService {
   }
   product_detail(id:any): Observable<Product>{
     return this.http.get<Product>(environment.urlIdProduct+'/'+id)
+  }
   addToCart(id: number){
     return this.http.get(environment.urlAddToCart+id);
   }
@@ -43,7 +44,7 @@ export class ShopService {
   deleteAllCart(){
     return this.http.get(environment.urlDeleteAllCart);
   }
-  
+
   createOrder(){
     return this.http.get(environment.urlCreateOrder);
   }
