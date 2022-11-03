@@ -23,5 +23,39 @@ export class ShopService {
   tranding_top(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.urlTrendingPro);
   }
+  addToCart(id: number){
+    return this.http.get(environment.urlAddToCart+id);
+  }
+  getAllCart(){
+    return this.http.get(environment.urlGetAllCart);
+  }
+  updateQuantity(id: any, quantity: any){
+    return this.http.get(environment.urlUpdateCart+id+'/'+quantity);
+  }
+  deleteCart(id: any){
+    return this.http.get(environment.urlDeleteCart+id);
+  }
+  deleteAllCart(){
+    return this.http.get(environment.urlDeleteAllCart);
+  }
+  
+  createOrder(){
+    return this.http.get(environment.urlCreateOrder);
+  }
+  getAllProvince(){
+    return this.http.get(environment.urlGetAllProvince);
+  }
+  getAllDistrictByProvinceId(id: any){
+    return this.http.get(environment.urlGetAllDistrictByProvince+id);
+  }
+  getAllWardByDistrictById(id: any){
+    return this.http.get(environment.urlGetAllWardByDistrict+id);
+  }
+  storeOrder(request: any){
+    return this.http.post(environment.urlOrderStore, request, {responseType: 'text'});
+  }
+  showOrder(id: any){
+    return this.http.get(environment.urlOrderShow+id);
+  }
 
 }

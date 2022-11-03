@@ -10,6 +10,7 @@ import { Confirm } from '../confirm.component';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
+
   constructor(
     private _Router: Router,
     private _AuthService: AuthService,
@@ -39,6 +40,12 @@ export class RegisterComponent implements OnInit {
     },[Confirm.confirm('password', 'confirmPassword')])
     
   }
+  get passwordMatchError() {
+    return (
+      this.registerForm.getError('mismatch') &&
+      this.registerForm.get('confirmPassword')?.touched
+    );
+  }
   onSubmit():void{
 
       let data = this.registerForm.value;
@@ -57,5 +64,6 @@ export class RegisterComponent implements OnInit {
         this._Router.navigate(['home']);
         alert("Đăng Nhập Thành Công")
       });
+   
   }
 }
