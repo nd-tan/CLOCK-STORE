@@ -17,6 +17,7 @@ export const environment = {
   urlGetAllBrand : urlApi+'brand_list',
   urlGoogleLogin : 'http://127.0.0.1:8000/auth/redirect/google',
   urlSearch : urlApi,
+  urlAllImage : urlApi + 'product_images'
 
 };
 

@@ -10,6 +10,7 @@ export class ProductListComponent implements OnInit {
   constructor(private shopService : ShopService ) { }
   brand_id: any;
   cate_id: any;
+  product_id: any;
   products: any[] = [];
   brands: any[] = [];
   categories: any[] = [];
