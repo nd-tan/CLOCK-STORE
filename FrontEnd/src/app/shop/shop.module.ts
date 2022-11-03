@@ -14,6 +14,7 @@ import { LoginComponent } from './components/login.component';
 import { OrderDetailComponent } from './components/order-detail.component';
 import { ShopRoutingModule } from './shop-routing.module';
 
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -24,6 +25,7 @@ import { ShopRoutingModule } from './shop-routing.module';
     RegisterComponent,
     LoginComponent,
     OrderDetailComponent,
+
   ],
   imports: [
     CommonModule,
