@@ -67,7 +67,7 @@
                   <img [src]="url+'storage/images/product/'+product.image" [alt]="product.name" />
                   <div class="inner">
                     <h3>
-                      <a href="single-product.html">{{product.name}}</a>
+                      <a routerLink='/product-detail/{{product.id}}'>{{product.name}}</a>
                     </h3>
                     <span>{{product.price | currency }}(VND)</span>
                   </div>
@@ -113,3 +113,4 @@
     </div>
   </div>
 </div>
+

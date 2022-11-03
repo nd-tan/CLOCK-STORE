@@ -31,3 +31,7 @@ export interface Brand {
   logo: any;
   status: any;
 }
+
+export interface Images{
+  name: any
+}
