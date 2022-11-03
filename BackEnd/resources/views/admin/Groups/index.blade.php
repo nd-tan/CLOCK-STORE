@@ -2,11 +2,11 @@
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1 class="mb-1">Nhân Viên</h1>
+            <h1 class="mb-1">Chức vụ</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Trang Chủ</a></li>
-                    <li class="breadcrumb-item">Nhân Viên</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('groups.index')}}">Chức vụ</a></li>
                 </ol>
             </nav>
         </div>
@@ -14,7 +14,7 @@
             <div class="card-body">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <h5 class="card-title">Danh Sách Chức Vụ</h5>
+                        <h5 class="card-title">Danh sách chức vụ</h5>
                     </div>
                     <div class="col-md-6">
                         <form style="" action="" id="form-search"
@@ -22,7 +22,7 @@
                         <div style="margin-top: 12px;" class="form-group">
                             <div class="input-group-prepend">
                             </div>
-                            <input class="form-control" name="search" placeholder="tìm kiếm">
+                            <input class="form-control" name="search" placeholder="Tìm kiếm">
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-search"></i>
                             </button>
@@ -48,8 +48,8 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tên</th>
+                            <th scope="col">Mã chức vụ</th>
+                            <th scope="col">Tên chức vụ</th>
                             <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
@@ -58,7 +58,7 @@
                             <tr>
                                 <th scope="row">{{ $key + 1 }}</th>
                                 <td>@if (Auth::user()->hasPermission('Group_view'))
-                                    <a href="{{route('groups.show', $item->id)}}">
+                                    {{-- <a href="{{route('groups.show', $item->id)}}"> --}}
                                     @endif
                                         {{ $item->name }}</a></td>
                                 <td>
@@ -73,7 +73,7 @@
                                         @if ($item->name != 'Supper Admin')
                                         @if (Auth::user()->hasPermission('Group_delete'))
                                         <button
-                                            onclick="return confirm('Bạn có chắc muốn đưa danh mục này vào thùng rác không?');"
+                                            onclick="return confirm('Bạn có chắc muốn đưa chức vụ này vào thùng rác không?');"
                                             class='btn' style='color:rgb(52,136,245)' type="submit"><i
                                                 class='bi bi-trash h4'></i></button>
                                             @endif

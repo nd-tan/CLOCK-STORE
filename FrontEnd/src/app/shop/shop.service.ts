@@ -23,4 +23,5 @@ export class ShopService {
   tranding_top(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.urlTrendingPro);
   }
+
 }
