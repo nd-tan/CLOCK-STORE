@@ -7,7 +7,8 @@ import { environment } from 'src/environments/environment'; '';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor(private shopService : ShopService ) { }
+  constructor(private shopService : ShopService,
+     ) { }
   brand_id: any;
   cate_id: any;
   product_id: any;
@@ -66,5 +67,12 @@ export class ProductListComponent implements OnInit {
       this.trending_top = res;
     })
   }
+  addToCart(id: number) {
+    this.shopService.addToCart(id).subscribe(res => {
+      this.shopService.getAllCart();
+      alert('Thêm vào giỏ thành công');
+    })
+  }
+
 
 }

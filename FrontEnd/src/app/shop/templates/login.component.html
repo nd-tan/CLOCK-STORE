@@ -3,13 +3,14 @@
   <div class="d-table-cell">
   <div class="container">
   <div class="title-content">
-  <h2>Login</h2>
+  <h2>Đăng nhập</h2>
   <ul>
   <li>
-  <a href="index.html">Home</a>
+  <a [routerLink]="['/home']">Trang chủ</a>
+
   </li>
   <li>
-  <span>Login</span>
+  <span>Đăng nhập</span>
   </li>
   </ul>
   </div>
@@ -28,6 +29,7 @@
   <div class="user-area ptb-100">
   <div class="container">
   <div class="user-item">
+
     <div class="form-group">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-horizontal">
         <input formControlName="email" type="email" id="email" class="form-control" name="email" placeholder="email"><br>
@@ -59,12 +61,14 @@
   <li>
   <a href="#">
   <i class='bx bxl-facebook'></i>
+
   Đăng Nhập Facebook
   </a>
   </li>
   <li>
   <a href="#">
   <i class='bx bxl-google'></i>
+
   Đăng Nhập Google
   </a>
   </li>
