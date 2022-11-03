@@ -9,4 +9,5 @@ import { Brand, Category, Product, Register} from './shop';
 export class ShopService {
 
   constructor() { }
+  
 }
