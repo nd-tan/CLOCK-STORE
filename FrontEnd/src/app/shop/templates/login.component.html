@@ -7,6 +7,7 @@
   <ul>
   <li>
   <a [routerLink]="['/home']">Trang chủ</a>
+
   </li>
   <li>
   <span>Đăng nhập</span>
@@ -28,6 +29,7 @@
   <div class="user-area ptb-100">
   <div class="container">
   <div class="user-item">
+
     <div class="form-group">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-horizontal">
         <input formControlName="email" type="email" id="email" class="form-control" name="email" placeholder="email"><br>
@@ -59,12 +61,14 @@
   <li>
   <a href="#">
   <i class='bx bxl-facebook'></i>
+
   Đăng Nhập Facebook
   </a>
   </li>
   <li>
   <a href="#">
   <i class='bx bxl-google'></i>
+
   Đăng Nhập Google
   </a>
   </li>
