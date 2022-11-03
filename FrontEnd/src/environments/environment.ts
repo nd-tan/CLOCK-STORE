@@ -13,7 +13,7 @@ export const environment = {
   urlRegister : urlApi+'register',
   urlLogin : urlApi+'login',
   urlCustomer : urlApi+'getCustomer',
-  urlGetAllBrand : urlApi+'brand',
+  urlGetAllBrand : urlApi+'brand_list',
   urlGoogleLogin : 'http://127.0.0.1:8000/auth/redirect/google',
   urlSearch : urlApi,
 
