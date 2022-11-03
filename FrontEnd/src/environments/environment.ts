@@ -14,7 +14,7 @@ export const environment = {
   urlLogin : urlApi+'login-customer',
   urlLogout : urlApi+'logout',
   urlCustomer : urlApi+'getCustomer',
-  urlGetAllBrand : urlApi+'brand',
+  urlGetAllBrand : urlApi+'brand_list',
   urlGoogleLogin : 'http://127.0.0.1:8000/auth/redirect/google',
   urlSearch : urlApi,
 
