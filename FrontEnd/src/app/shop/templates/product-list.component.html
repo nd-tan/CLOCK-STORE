@@ -28,20 +28,30 @@
 </div>
 
 
-<div class="products-area ptb-100">
+<div style="padding-top:50px ;" class="products-area ptb-100">
+  <div class="row">
+    <div style="margin-left:150px; margin-right:150px " class="container">
+      <a style="width: 150px; height: 40px;margin-left: 280px;" class="btn btn-info" href="">Đồng Hồ Nam</a>
+      <a (click)="product_list()" style="width: 150px; height: 40px; margin-left: 165px;" class="btn btn-info">Tất Cả Sản Phẩm</a>
+      <a style="float: right ; width: 150px; height: 40px; margin-right: 290px;" class="btn btn-info" href="">Đồng Hồ Nữ</a>
+    </div>
+  </div><br>
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
         <div >
           <div >
-            <h3 (click)="product_list()" class="btn btn-danger">Tất Cả Sản Phẩm</h3>
             <h3>Danh Mục</h3>
-            <ul class="list">
+            <div *ngFor="let category of categories" style="margin: 10px;"  class="col" style="width:100px; height: 100px;">
+              <a style="color: red ;" (click)="product_OfBrand(category.id)" type="button">{{category.name}}</a>
+            </div>
+
+            <!-- <ul class="list">
                 <li *ngFor="let category of categories" style="margin: 10px;">
                   <a style="color: red ;" (click)="product_OfBrand(category.id)" type="button">{{category.name}}</a>
                   <span>({{ category.products.length }})</span>
                 </li>
-            </ul>
+            </ul> -->
           </div>
           <div>
             <h3>Thương Hiệu</h3>

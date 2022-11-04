@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<div class="nav-top-area two">
+<div style="padding-top:4px; padding-bottom:4px" class="nav-top-area two">
   <div class="container-fluid">
     <div class="row align-items-center">
       <div class="col-lg-2">
@@ -267,37 +267,9 @@
                 >Danh mục sản phẩm <i class="bx bx-chevron-down"></i
               ></a>
               <ul class="dropdown-menu">
-                <li class="nav-item">
-                  <a href="shop.html" class="nav-link">Đồng hồ pin</a>
+                <li class="nav-item" *ngFor="let category of listCate">
+                  <a (click)="a(category.id)" class="nav-link">{{category.name}}</a>
                 </li>
-                <li class="nav-item">
-                  <a href="checkout.html" class="nav-link">Đồng hồ cảm ứng</a>
-                </li>
-                <li class="nav-item">
-                  <a href="single-product.html" class="nav-link"
-                    >Đồng hồ cảm ứng</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="products-on-sale.html" class="nav-link"
-                    >Đồng hồ cơ</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="order-tracking.html" class="nav-link"
-                    >Đồng hồ thông minh</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="order-tracking.html" class="nav-link"
-                    >Đồng hồ thời trang</a
-                  >
-                </li>
-                <!-- <li class="nav-item">
-                  <a href="customer-service.html" class="nav-link"
-                    >Customer Service</a
-                  >
-                </li> -->
               </ul>
             </li>
             <li class="nav-item">
@@ -305,26 +277,8 @@
                 >Thương hiệu <i class="bx bx-chevron-down"></i
               ></a>
               <ul class="dropdown-menu">
-                <li class="nav-item">
-                  <a href="shop.html" class="nav-link">Tissot</a>
-                </li>
-                <li class="nav-item">
-                  <a href="checkout.html" class="nav-link">Seiko</a>
-                </li>
-                <li class="nav-item">
-                  <a href="single-product.html" class="nav-link"
-                    >Casio</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="products-on-sale.html" class="nav-link"
-                    >Citizen</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="order-tracking.html" class="nav-link"
-                    >Orient</a
-                  >
+                <li class="nav-item" *ngFor="let brand of listBrand">
+                  <a routerLink='/product-list/brand/{{brand.id}}' class="nav-link">{{brand.name}}</a>
                 </li>
               </ul>
             </li>
@@ -376,7 +330,6 @@
     </div>
   </div>
 </div>
-
 
 <div
 class="modal fade modal-right popup-modal"

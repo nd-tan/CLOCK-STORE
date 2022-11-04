@@ -5,12 +5,17 @@ import { ShopService } from '../shop.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ShopService } from '../shop.service';
+import { ProductListComponent } from './product-list.component';
+
 @Component({
   selector: 'app-header',
   templateUrl: '../templates/header.component.html',
 })
 export class HeaderComponent implements OnInit {
-  listCart: any;
+  id:any;
+  listCate: any;
+  listBrand: any;
   listCartByLike: any;
   url: any = environment.url;
   cartSubtotal: number = 0;
@@ -19,12 +24,13 @@ export class HeaderComponent implements OnInit {
     private _AuthService: AuthService,
     private _ShopService: ShopService,
     private _Router: Router,
-  ) { }
+    ) { }
   check: any = this._AuthService.checkAuth();
   ngOnInit(): void {
     this.getAllCart();
     this.getAllCartBylike();
-
+    this.getBrands();
+    this.getCategories();
   }
   changeCart(){
     this.ngOnInit();
@@ -33,7 +39,6 @@ export class HeaderComponent implements OnInit {
     this._AuthService.logout();
     this._Router.navigate(['login']);
   }
-
 
   getAllCart() {
     this._ShopService.getAllCart().subscribe(res => {
@@ -44,6 +49,20 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
+  
+  getBrands(){
+    this._ShopService.brand_list().subscribe(res =>{
+      this.listBrand = res;
+    })
+  }
+  
+  getCategories(){
+    this._ShopService.cate_list().subscribe(res =>{
+      this.listCate = res;
+    })
+  }
+  a(id :any){
+    this._Router.navigate(['/product-list/cate/'+id]);
   updateQuantity(id: any, quantity: any) {
     this._ShopService.updateQuantity(id, quantity).subscribe(res => {
       this.getAllCart();

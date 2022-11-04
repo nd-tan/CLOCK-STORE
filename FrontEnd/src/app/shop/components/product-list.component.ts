@@ -1,15 +1,19 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ShopService } from './../shop.service';
 import { environment } from 'src/environments/environment';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from './header.component';
 @Component({
   selector: 'app-product-list',
   templateUrl: '../templates/product-list.component.html',
 })
 export class ProductListComponent implements OnInit {
-  constructor(
-    private shopService : ShopService,
+  constructor(private shopService : ShopService,
+   private _route: ActivatedRoute
      ) { }
+
+  id: any;
+  search: any;
   brand_id: any;
   cate_id: any;
   product_id: any;
@@ -22,19 +26,31 @@ export class ProductListComponent implements OnInit {
   listCartByLike: any;
   cartSubtotal: number = 0;
   cartSubByLiketotal: number = 0;
+  
   ngOnInit(): void {
     this.product_list();
     this.band_list();
     this.cate_list();
-    this.trending();
+    if(this._route.snapshot.params['id'] && this._route.snapshot.params['search'] ){
+      this.id = this._route.snapshot.params['id'];
+      this.search = this._route.snapshot.params['search'];
+      console.log(this.id);
+      console.log(this.search);
+      if(this.search=="cate")
+      {
+        this.product_OfCate(this.id)
+      }else if( this.search == "brand"){
+        this.product_OfBrand(this.id)
+      }else {
+        this.trending();
+      }
+    }
     
   }
 
   product_list(){
     this.shopService.product_list().subscribe(res =>{
       this.products = res;
-      console.log(res.length);
-
     })
   }
   band_list(){

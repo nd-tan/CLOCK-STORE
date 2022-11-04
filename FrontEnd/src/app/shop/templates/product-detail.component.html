@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="product-details-area ptb-100">
+<div style="padding-top: 0px;" class="product-details-area ptb-100">
   <div class="container">
     <div class="top">
       <div class="row align-items-center">
@@ -32,25 +32,23 @@
           <div class="outer">
             <div class="row">
               <div class="main_image"> <img
-                [src]="url+'storage/images/product/'+ product.image"
-                id="main_product_image" height="480" width="600">
+                [src]="image1"
+                id="current" alt="#" height="450" width="600">
               </div>
-            </div>
+            </div><br>
             <div class="row">
-              <div class="thumbnail_images">
-                <ul style="padding-left: 0rem;" id="thumbnail">
-                  <img  [src]="url+'storage/images/product/'+ product.image"
+              <div class="images">
+                  <img (click)="changeImage(product.image)" [src]="url+'storage/images/product/'+ product.image"
                   width="100px">
-                    <ng-container *ngFor="let image of images">
-                        <img  [src]="url+'storage/images/product/'+image.product_images"
-                            width="100px">
+                    <ng-container *ngFor="let image of images; let i=index">
+                        <img (click)="changeImage(image.product_images)"  [src]="url+'storage/images/product/'+image.product_images"
+                          class="img" alt="#"  width="100px">
                     </ng-container>
-                </ul>
               </div>
             </div>
           </div>
         </div>
-        <div style="margin-top:0px" class="col-lg-5">
+        <div style="margin-top:100px" class="col-lg-5">
           <div class="top-content">
             <h2> Đồng hồ {{product.name}} - {{product.type_gender}}</h2>
             <ul class="reviews">
@@ -88,26 +86,20 @@
             </ul>
             <ul class="cart">
               <li>
-                <ul class="number">
-                  <li>
-                    <span class="minus">-</span>
-                    <input style="width: 50px ;" type="number" value="1"/>
-                    <span class="plus">+</span>
-                  </li>
-                </ul>
-              </li>
-              <li>
                 <a class="common-btn" href="#">
                   Thêm giỏ hàng
                   <img src="assets/images/shape1.png" alt="Shape" />
                   <img src="assets/images/shape2.png" alt="Shape" />
                 </a>
               </li>
+              <li>
+                <a class="wishlist-btn common-btn" href="#">
+                  <i class="bx bx-heart"></i>Yêu thích
+                  <img src="assets/images/shape1.png" alt="Shape" />
+                  <img src="assets/images/shape2.png" alt="Shape" />
+                </a>
+              </li>
             </ul>
-            <a class="wishlist-btn" href="#">
-              <i class="bx bx-heart"></i>
-              Yêu thích
-            </a>
           </div>
         </div>
       </div>
@@ -145,3 +137,4 @@
     </div>
   </div>
 </div>
+
