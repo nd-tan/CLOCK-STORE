@@ -39,6 +39,47 @@ class CartController extends Controller {
         }
         Cache::put('carts', $carts);
     }
+    function addToCartBylike($id){
+        $product = Product::find($id);
+        $carts = Cache::get('productslike');
+        if(isset($carts[$id])){
+            $carts[$id]['quantity']++;
+            $carts[$id]['price'] = $product->price;
+        }else{
+            $carts[$id] = [
+                'id' => $id,
+                'quantity' => 1,
+                'name' => $product->name,
+                'price' => $product->price,
+                'image' => $product->image,
+            ];
+        }
+        Cache::put('productslike', $carts);
+    }
+    
+    function removeToCartBylike($id){
+        try{
+            $carts = Cache::get('productslike');
+            unset($carts[$id]);
+            Cache::put('productslike', $carts);
+        }catch(\Exception $e){
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+        }
+        }
+
+    function getAllCartByLike(){
+        try{
+            $carts = Cache::get('productslike');
+            if($carts){
+                $carts = array_values($carts);
+            }else{
+                $carts = [];
+            }
+            return response()->json($carts);
+        }catch(\Exception $e){
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+        }
+    }
     function removeToCart($id){
     try{
         $carts = Cache::get('carts');
