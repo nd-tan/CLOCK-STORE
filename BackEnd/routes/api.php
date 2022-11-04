@@ -39,6 +39,10 @@ Route::group([
     Route::get('remove-all-cart', [CartController::class, 'removeAllCart']);
     Route::get('update-cart/{id}/{quantity}', [CartController::class, 'updateCart']);
 
+    Route::get('add-to-cart-by-like/{id}', [CartController::class, 'addToCartBylike']);
+    Route::get('remove-to-cart-by-like/{id}', [CartController::class, 'removeToCartBylike']);
+    Route::get('list-cart-by-like', [CartController::class, 'getAllCartByLike']);
+
     Route::get('order/create', [OrderController::class, 'create']);
     Route::get('order/list-province', [OrderController::class, 'getAllProvince']);
     Route::get('order/list-district/{id}', [OrderController::class, 'getAllDistrictByProvinceId']);
