@@ -57,5 +57,15 @@ export class ShopService {
   showOrder(id: any){
     return this.http.get(environment.urlOrderShow+id);
   }
-
+  
+  addToCartByLike(id: number){
+    return this.http.get(environment.urlAddToCartByLike+id);
+  }
+  deleteCartByLike(id: any){
+    return this.http.get(environment.urlDeleteCartByLike+id);
+  }
+  getAllCartByLike(){
+    return this.http.get(environment.urlGetAllCartByLike);
+  }
+  
 }

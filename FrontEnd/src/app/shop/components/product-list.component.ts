@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ShopService } from './../shop.service';
-import { environment } from 'src/environments/environment'; '';
+import { environment } from 'src/environments/environment';
+import { HeaderComponent } from './header.component';
 @Component({
   selector: 'app-product-list',
   templateUrl: '../templates/product-list.component.html',
 })
 export class ProductListComponent implements OnInit {
-
-  constructor(private shopService : ShopService,
+  constructor(
+    private shopService : ShopService,
      ) { }
   brand_id: any;
   cate_id: any;
@@ -16,12 +17,18 @@ export class ProductListComponent implements OnInit {
   categories: any[] = [];
   trending_top:any[] =[];
   url: string = environment.url;
+  listCart: any;
+  listCartByLike: any;
+  cartSubtotal: number = 0;
+  cartSubByLiketotal: number = 0;
   ngOnInit(): void {
     this.product_list();
     this.band_list();
     this.cate_list();
     this.trending();
+    
   }
+
   product_list(){
     this.shopService.product_list().subscribe(res =>{
       this.products = res;
@@ -68,10 +75,32 @@ export class ProductListComponent implements OnInit {
   }
   addToCart(id: number) {
     this.shopService.addToCart(id).subscribe(res => {
-      this.shopService.getAllCart();
+      this.shopService.getAllCart()
       alert('Thêm vào giỏ thành công');
     })
   }
-
-
+  addToCartByLike(id: number) {
+    this.shopService.addToCartByLike(id).subscribe(res => {
+      this.shopService.getAllCartByLike();
+      alert('Thêm vào giỏ yêu thích thành công');
+    })
+  }
+  getAllCart() {
+    this.shopService.getAllCart().subscribe(res => {
+      this.listCart = res;
+      this.cartSubtotal = 0;
+      for (let cart of this.listCart) {
+        this.cartSubtotal += cart.price * cart.quantity;
+      }
+    });
+  }
+  getAllCartBylike() {
+    this.shopService.getAllCartByLike().subscribe(res => {
+      this.listCartByLike = res;
+      this.cartSubByLiketotal = 0;
+      for (let cartlike of this.listCartByLike) {
+        this.cartSubByLiketotal += cartlike.price * cartlike.quantity;
+      }
+    });
+  }
 }

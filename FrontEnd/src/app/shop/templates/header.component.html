@@ -46,8 +46,8 @@
     <div class="row align-items-center">
       <div class="col-lg-2">
         <div class="left">
-          <a href="index.html">
-            <img src="assets/images/logo-shop.png" width="100" height="50" alt="Logo" />
+          <a href="">
+            <img src="" width="100" height="50" alt="Logo" />
           </a>
         </div>
       </div>
@@ -99,9 +99,11 @@
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
                 data-bs-whatever="@mdo"
+                (click)="changeCart()"
               >
-                <i class="bx bxs-cart"></i>
-                <span>{{ listCart.length }}</span>
+                <i class="bx bxs-cart" ></i>
+                <span *ngIf="listCart && listCart.length ">{{ listCart?.length }}</span>
+               
               </button>
             </li>
             <li>
@@ -111,9 +113,10 @@
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModalWishlist"
                 data-bs-whatever="@mdo"
+                (click)="changeCart()"
               >
-                <i class="bx bx-heart"></i>
-                <span>2</span>
+                <i class="bx bx-heart" ></i>
+                <span *ngIf="listCart && listCart.length">{{ listCartByLike?.length }}</span>
               </button>
             </li>
             <li *ngIf="!check">
@@ -141,8 +144,8 @@
 
 <div class="navbar-area sticky-top">
   <div class="mobile-nav">
-    <a href="index.html" class="logo">
-      <img src="assets/images/logo-two.png" alt="Logo" />
+    <a href="" class="logo">
+      <img src="" alt="Logo" />
     </a>
   </div>
 
@@ -370,6 +373,121 @@
           </div>
         </div>
       </nav>
+    </div>
+  </div>
+</div>
+
+
+<div
+class="modal fade modal-right popup-modal"
+id="exampleModal"
+tabindex="-1"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Giỏ hàng <span *ngIf="listCart && listCart.length">{{ listCart.length }}</span></h2>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body" *ngFor="let cart of listCart">
+      <div class="cart-table">
+        <table class="table" >
+          <tbody>
+            <tr >
+              <th scope="row">
+                <img [src]="url+'storage/images/product/'+ cart.image" alt="Cart" />
+              </th>
+              <td>
+                <h3>{{ cart.name }}</h3>
+                <span class="rate">{{ cart.price | number }} VND</span>
+              </td>
+              <td>
+                <ul class="number">
+                  <li>
+                    <a onclick="this.parentNode.querySelector('input[type=number]').stepDown();"
+                          (click)="updateQuantity(cart.id, quantity.value)">
+                          <span class="minus">-</span>
+                      </a>
+                    <input #quantity name="quantity" min="1" style="width: 60px;" type="number" value="{{ cart.quantity }}" />
+                    <a onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                          (click)="updateQuantity(cart.id, quantity.value)">
+                          <span class="plus">+</span>
+                      </a>
+                  </li>
+               
+                </ul>
+              </td>
+              <td>
+                <a class="remove-item" (click)="deleteCart(cart.id)"><i class="bx bx-x"></i></a>
+              </td>
+            </tr>
+           
+          </tbody>
+        </table>
+        <div class="total-amount">
+          <h3>Tổng: <span>{{ cart.price * cart.quantity| number }} VND</span></h3>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <button [routerLink]="['/checkout']" class="btn common-btn btn-info">Kiểm Tra Giỏ Hàng</button>
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div
+  class="modal fade modal-right popup-modal wishlist-modal"
+  id="exampleModalWishlist"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Yêu Thích <span *ngIf="listCartByLike && listCartByLike.length ">{{ listCartByLike.length }}</span></h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" *ngFor="let cartlike of listCartByLike">
+        <div class="cart-table">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">
+                  <img [src]="url+'storage/images/product/'+ cartlike.image" alt="Cart" />
+                </th>
+                <td>
+                  <h3>{{ cartlike.name }}</h3>
+                  <span class="rate">{{ cartlike.price | number }} VND x {{ cartlike.quantity }}</span>
+                </td>
+                <td>
+                  <a class="common-btn" (click)="addToCart(cartlike.id)">
+                    Thêm vào giỏ
+                    <img src="assets/images/shape1.png" alt="Shape" />
+                    <img src="assets/images/shape2.png" alt="Shape" />
+                  </a>
+                </td>
+                <td>
+                  <a class="remove-item" (click)="deleteCartByLike(cartlike.id)"><i class="bx bx-x"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
