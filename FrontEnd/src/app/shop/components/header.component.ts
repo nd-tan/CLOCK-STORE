@@ -5,7 +5,6 @@ import { ShopService } from '../shop.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ShopService } from '../shop.service';
 import { ProductListComponent } from './product-list.component';
 
 @Component({
@@ -15,6 +14,7 @@ import { ProductListComponent } from './product-list.component';
 export class HeaderComponent implements OnInit {
   id:any;
   listCate: any;
+  listCart: any;
   listBrand: any;
   listCartByLike: any;
   url: any = environment.url;
@@ -49,13 +49,13 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-  
+
   getBrands(){
     this._ShopService.brand_list().subscribe(res =>{
       this.listBrand = res;
     })
   }
-  
+
   getCategories(){
     this._ShopService.cate_list().subscribe(res =>{
       this.listCate = res;
@@ -63,6 +63,7 @@ export class HeaderComponent implements OnInit {
   }
   a(id :any){
     this._Router.navigate(['/product-list/cate/'+id]);
+  }
   updateQuantity(id: any, quantity: any) {
     this._ShopService.updateQuantity(id, quantity).subscribe(res => {
       this.getAllCart();
@@ -95,6 +96,6 @@ export class HeaderComponent implements OnInit {
       alert('Thêm vào giỏ thành công');
     })
   }
-}
 
+}
 
