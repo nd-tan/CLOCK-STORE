@@ -55,7 +55,9 @@ export class ProductDetailComponent implements OnInit {
       this.shopService.getAllCart()
       alert('Thêm vào giỏ thành công');
     })
+  }
   changeImage(image:any){
     this.image1 = this.url_image + image;
   }
+
 }
