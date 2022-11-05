@@ -45,6 +45,7 @@ return [
             'provider' => 'customers',
             'hash' => false,
         ],
+        
     ],
 
     /*

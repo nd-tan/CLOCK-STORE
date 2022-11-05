@@ -69,7 +69,7 @@ export class ShopService {
     return this.http.get(environment.urlGetAllWardByDistrict+id);
   }
   storeOrder(request: any){
-    return this.http.post(environment.urlOrderStore, request, {responseType: 'text'});
+    return this.http.post(environment.urlOrderStore, request);
   }
   showOrder(id: any){
     return this.http.get(environment.urlOrderShow+id);

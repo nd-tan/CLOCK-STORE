@@ -6,9 +6,9 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class JWTInterceptorService implements HttpInterceptor {
+export class JWTInterceptorService implements HttpInterceptor{
 
-  constructor(private UserService: AuthService) { }
+  constructor(private customerService: AuthService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Get access_token from localStorage
     const access_token = localStorage.getItem('access_token');

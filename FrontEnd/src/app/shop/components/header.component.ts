@@ -35,13 +35,14 @@ export class HeaderComponent implements OnInit {
     this.getBrands();
     this.getCategories();
   }
-  changeCart(){
-    this.ngOnInit();
-  }
   logout() {
     this._AuthService.logout();
     this._Router.navigate(['login']);
   }
+  changeCart(){
+    this.ngOnInit();
+  }
+
 
   getAllCart() {
     this._ShopService.getAllCart().subscribe(res => {
@@ -99,6 +100,7 @@ export class HeaderComponent implements OnInit {
       alert('Thêm vào giỏ thành công');
     })
   }
+
 
 }
 

@@ -35,6 +35,7 @@ class CartController extends Controller {
                 'name' => $product->name,
                 'price' => $product->price,
                 'image' => $product->image,
+                'quantity_product' => $product->quantity,
             ];
         }
         Cache::put('carts', $carts);
@@ -52,6 +53,7 @@ class CartController extends Controller {
                 'name' => $product->name,
                 'price' => $product->price,
                 'image' => $product->image,
+                'quantity_product' => $product->quantity,
             ];
         }
         Cache::put('productslike', $carts);
