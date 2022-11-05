@@ -1,15 +1,21 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ShopService } from './../shop.service';
 import { environment } from 'src/environments/environment';
-import { HeaderComponent } from './header.component';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-product-list',
   templateUrl: '../templates/product-list.component.html',
 })
 export class ProductListComponent implements OnInit {
-  constructor(
-    private shopService : ShopService,
+  constructor(private shopService : ShopService,
+   private _route: ActivatedRoute,
+   private fb: FormBuilder,
      ) { }
+
+  data: any;
+  id: any;
+  search: any;
   brand_id: any;
   cate_id: any;
   product_id: any;
@@ -22,21 +28,61 @@ export class ProductListComponent implements OnInit {
   listCartByLike: any;
   cartSubtotal: number = 0;
   cartSubByLiketotal: number = 0;
+  serachForm!: FormGroup;
+  page: number = 1;
+  count:number =0;
+  tableSize: number=8;
+  tableSizes:any = [5,10,15,20];
+  color_1:any = 'dark';
+  color_2:any = 'dark';
+  color_3:any = 'dark';
+
+
   ngOnInit(): void {
     this.product_list();
     this.band_list();
     this.cate_list();
-    this.trending();
-    
-  }
+    this.serachForm = this.fb.group({
+      search: [''],
+    })
+    if(this._route.snapshot.params['id'] && this._route.snapshot.params['search'] ){
+      this.id = this._route.snapshot.params['id'];
+      this.search = this._route.snapshot.params['search'];
+      console.log(this.id);
+      console.log(this.search);
+      if(this.search=="cate")
+      {
+        this.product_OfCate(this.id)
+      }else if( this.search == "brand"){
+        this.product_OfBrand(this.id)
+      }else {
+        this.trending();
+      }
+    }
 
+  }
+  reset_color(){
+    this.color_1 = 'dark';
+    this.color_2 = 'dark';
+    this.color_3 = 'dark';
+  }
   product_list(){
+    this.reset_color();
     this.shopService.product_list().subscribe(res =>{
       this.products = res;
-      console.log(res.length);
-
+      this.color_1='warning';
     })
   }
+  ontableDataChange(event: any){
+    this.page = event;
+    this.product_list;
+  }
+  onTableSizeChange(event:any):void{
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.product_list();
+  }
+
   band_list(){
     this.shopService.brand_list().subscribe(res => {
       this.brands = res;
@@ -104,4 +150,95 @@ export class ProductListComponent implements OnInit {
       }
     });
   }
+  product_male(gender:any){
+    this.reset_color();
+    if(gender == 'Nam'){
+      this.color_2 = 'warning';
+    }else{
+      this.color_3 = 'warning';
+    }
+    this.shopService.product_list().subscribe(res =>{
+    this.products = res;
+    let array: any[] = [];
+      for(let product of this.products){
+        if(product.type_gender == gender)
+        {
+          array.push(product);
+        }
+      }
+      this.products=array;
+    });
+  }
+
+  product_by_price(price:any){
+    this.shopService.product_list().subscribe(res =>{
+    this.products = res;
+    let array: any[] = [];
+      switch(price){
+        case '2t' :
+          for(let product of this.products){
+            if(product.price < 2000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          break;
+        case '2t-5t':
+          for(let product of this.products){
+            if(product.price >= 2000000 && product.price <= 5000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          break;
+        case '5t-10t':
+          for(let product of this.products){
+            if(product.price >= 5000000 && product.price <= 10000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          break;
+        case '10t-20t':
+          for(let product of this.products){
+            if(product.price >= 10000000 && product.price <= 20000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          break;
+        case '20t-50t':
+          for(let product of this.products){
+            if(product.price >= 20000000 && product.price <= 50000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          break;
+        case '50t':
+          for(let product of this.products){
+            if(product.price > 50000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          break;
+      }
+
+    });
+  }
+  product_search(search : any){
+    let keywork = this.serachForm.value.search;
+    this.shopService.product_search(keywork).then(res => {
+    this.data = res;
+    this.products = this.data
+    })
+  }
+
 }

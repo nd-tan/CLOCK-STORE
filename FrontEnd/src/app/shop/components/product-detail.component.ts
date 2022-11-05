@@ -23,7 +23,11 @@ export class ProductDetailComponent implements OnInit {
   product: any;
   images:any;
   trending_top :any[]=[];
-  main_prodcut_image = document.querySelector('img#main_product_image');
+  image1:any;
+  url_image = this.url+'storage/images/product/';
+  image_2 :any;
+
+
   ngOnInit(): void {
     this.id = this._route.snapshot.params['id'];
 
@@ -31,6 +35,7 @@ export class ProductDetailComponent implements OnInit {
       this.products = res;
       for( let product of this.products){
         this.product = product;
+         this.image1 = this.url_image+this.product.image
       }
       this.trending();
     });
@@ -50,5 +55,7 @@ export class ProductDetailComponent implements OnInit {
       this.shopService.getAllCart()
       alert('Thêm vào giỏ thành công');
     })
+  changeImage(image:any){
+    this.image1 = this.url_image + image;
   }
 }

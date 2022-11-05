@@ -103,184 +103,18 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 col-lg-3">
+      <div class="col-sm-6 col-lg-3" *ngFor="let product of trending_top">
         <div class="products-item">
           <div class="top">
             <a class="wishlist" href="#">
               <i class="bx bx-heart"></i>
             </a>
-            <img
-              src="assets/images/products/products14.png"
-              alt="Products"
-            />
+            <img [src]="url+'storage/images/product/'+product.image" [alt]="product.name"/>
             <div class="inner">
               <h3>
-                <a href="single-product.html">Red AKG Headphones</a>
+                <a routerLink='/product-detail/{{product.id}}'>{{product.name}}</a>
               </h3>
-              <span>2,000,000 VNĐ</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
-            </a>
-            <img
-              src="assets/images/products/products15.png"
-              alt="Products"
-            />
-            <div class="inner">
-              <h3>
-                <a href="single-product.html">Corsair Gaming Keyboard</a>
-              </h3>
-              <span>1,800,000 VNĐ</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
-            </a>
-            <img
-              src="assets/images/products/products16.png"
-              alt="Products"
-            />
-            <div class="inner">
-              <h3>
-                <a href="single-product.html"
-                  >Apple MacBook Air 13.3-Inch</a
-                >
-              </h3>
-              <span>1,700,000 VNĐ</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
-            </a>
-            <img
-              src="assets/images/products/products17.png"
-              alt="Products"
-            />
-            <div class="inner">
-              <h3>
-                <a href="single-product.html">Apple iMac 27", Core i5</a>
-              </h3>
-              <span>1,900,000 VNĐ</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
-            </a>
-            <img
-              src="assets/images/products/products18.png"
-              alt="Products"
-            />
-            <div class="inner">
-              <h3>
-                <a href="single-product.html">Canon EF-S 18-55mm Lens</a>
-              </h3>
-              <span>1,600,000 VNĐ</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
-            </a>
-            <img
-              src="assets/images/products/products19.png"
-              alt="Products"
-            />
-            <div class="inner">
-              <h3>
-                <a href="single-product.html">A4 Tech Bloody G520S</a>
-              </h3>
-              <span>1,200,000 VNĐ</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
-            </a>
-            <img
-              src="assets/images/products/products20.png"
-              alt="Products"
-            />
-            <div class="inner">
-              <h3>
-                <a href="single-product.html">Havit AM100 Microphone</a>
-              </h3>
-              <span>2,500,000 VNĐ</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
-            </a>
-            <img
-              src="assets/images/products/products21.png"
-              alt="Products"
-            />
-            <div class="inner">
-              <h3>
-                <a href="single-product.html">Canon Eos 4000D Camera</a>
-              </h3>
-              <span>2,100,000 VNĐ</span>
+              <span>{{product.price | number }}(VND)</span>
             </div>
           </div>
           <div class="bottom">
@@ -291,7 +125,7 @@
       </div>
     </div>
     <div class="text-center">
-      <a class="common-btn two" href="shop.html">
+      <a class="common-btn two" routerLink='/product-list'>
         Xem thêm sản phẩm
         <img src="assets/images/shape1.png" alt="Shape" />
         <img src="assets/images/shape2.png" alt="Shape" />
@@ -536,96 +370,24 @@
   </div>
 </section>
 
-<div class="products-area two pb-70">
+<!-- <div class="products-area two pb-70">
   <div class="container">
     <div class="section-title">
       <h2>Các sản phẩm bán chạy nhất</h2>
     </div>
     <div class="row">
-      <div class="col-sm-6 col-lg-3">
+      <div *ngFor="let trending of trending_top" class="col-sm-6 col-lg-3">
         <div class="products-item">
           <div class="top">
             <a class="wishlist" href="#">
               <i class="bx bx-heart"></i>
             </a>
-            <img
-              src="assets/images/products/products22.png"
-              alt="Products"
-            />
+            <img [src]="url+'storage/images/product/'+trending.image" [alt]="trending.name" />
             <div class="inner">
               <h3>
-                <a href="single-product.html">Bionic Thunder Headphones</a>
+                <a routerLink='/product-detail/{{trending.id}}'>{{trending.name}}</a>
               </h3>
-              <span>2,000,000 VNĐ</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
-            </a>
-            <img
-              src="assets/images/products/products23.png"
-              alt="Products"
-            />
-            <div class="inner">
-              <h3>
-                <a href="single-product.html">Xiaomi A1821 Smart Watch</a>
-              </h3>
-              <span>1,800,000 VNĐ</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
-            </a>
-            <img
-              src="assets/images/products/products24.png"
-              alt="Products"
-            />
-            <div class="inner">
-              <h3>
-                <a href="single-product.html">Nikon D5600 DSLR Camera</a>
-              </h3>
-              <span>1,700,000 VNĐ</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
-            </a>
-            <img
-              src="assets/images/products/products25.png"
-              alt="Products"
-            />
-            <div class="inner">
-              <h3>
-                <a href="single-product.html">Delux OM02 Keyboard</a>
-              </h3>
-              <span>1,900,000 VNĐ</span>
+              <span>{{trending.price | number }}(VND)</span>
             </div>
           </div>
           <div class="bottom">
@@ -636,7 +398,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- <div class="testimonials-area two pb-100">
   <div class="container">
