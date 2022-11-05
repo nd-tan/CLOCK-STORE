@@ -13,6 +13,8 @@ import { RegisterComponent } from './components/register.component';
 import { LoginComponent } from './components/login.component';
 import { OrderDetailComponent } from './components/order-detail.component';
 import { ShopRoutingModule } from './shop-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { ShopRoutingModule } from './shop-routing.module';
     BrowserAnimationsModule,
     FormsModule,
     ShopRoutingModule,
+    NgxPaginationModule
   ],
   providers: [],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

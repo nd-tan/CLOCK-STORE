@@ -30,49 +30,74 @@
 
 <div style="padding-top:50px ;" class="products-area ptb-100">
   <div class="row">
-    <div style="margin-left:150px; margin-right:150px " class="container">
-      <a style="width: 150px; height: 40px;margin-left: 280px;" class="btn btn-info" href="">Đồng Hồ Nam</a>
-      <a (click)="product_list()" style="width: 150px; height: 40px; margin-left: 165px;" class="btn btn-info">Tất Cả Sản Phẩm</a>
-      <a style="float: right ; width: 150px; height: 40px; margin-right: 290px;" class="btn btn-info" href="">Đồng Hồ Nữ</a>
-    </div>
+        <div class="col-lg-3">
+          <form action="#"  [formGroup]="serachForm">
+            <input style="margin-left:97px" type="text" formControlName="search" placeholder="Tìm kiếm...">
+            <button (click)="product_search($event)" type="submit" ><i class="bx bx-search"></i></button>
+          </form>
+      </div>
+      <div class="col-lg-9">
+        <a (click)="product_list()" style="width: 150px; height: 40px; margin-left: 85px;" class="btn btn-{{color_1}}">Tất Cả Sản Phẩm</a>
+        <a (click)="product_male('Nam')" style="width: 150px; height: 40px;margin-left: 166px;" class="btn btn-{{color_2}}">Đồng Hồ Nam</a>
+        <a (click)="product_male('Nữ')" style="float: right ; width: 150px; height: 40px; margin-right: 140px;" class="btn btn-{{color_3}}">Đồng Hồ Nữ</a>
+      </div>
   </div><br>
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
         <div >
-          <div >
-            <h3>Danh Mục</h3>
-            <div *ngFor="let category of categories" style="margin: 10px;"  class="col" style="width:100px; height: 100px;">
-              <a style="color: red ;" (click)="product_OfBrand(category.id)" type="button">{{category.name}}</a>
-            </div>
-
-            <!-- <ul class="list">
-                <li *ngFor="let category of categories" style="margin: 10px;">
-                  <a style="color: red ;" (click)="product_OfBrand(category.id)" type="button">{{category.name}}</a>
-                  <span>({{ category.products.length }})</span>
-                </li>
-            </ul> -->
-          </div>
           <div>
             <h3>Thương Hiệu</h3>
-            <ul class="list">
-                <li *ngFor="let brand of brands" style="margin: 10px;">
-                  <a style="color: red ;" (click)="product_OfBrand(brand.id)" type="button">{{ brand.name }}</a>
-                  <span>({{ brand.products.length }})</span>
-                </li>
-            </ul>
+            <div class="container">
+              <div *ngFor="let brand of brands" style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
+                <a style=" width: 170px;" (click)="product_OfBrand(brand.id)" type="button">Thương hiệu {{brand.name}}</a>
+              </div>
             </div>
+          </div>
+          <div >
+            <h3>Danh Mục</h3>
+            <div class="container">
+              <div *ngFor="let category of categories" style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
+                <a style=" width: 170px;" (click)="product_OfCate(category.id)" type="button">{{category.name}}</a>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3>Lọc Theo Giá</h3>
+              <div class="container">
+                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
+                  <a style=" width: 170px;" (click)="product_by_price('2t')" type="button">Dưới 2 triệu</a>
+                </div>
+                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
+                  <a style=" width: 170px;" (click)="product_by_price('2t-5t')" type="button">Từ 2 - 5 triệu</a>
+                </div>
+                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
+                  <a style=" width: 170px;" (click)="product_by_price('5t-10t')" type="button">Từ 5 - 10 triệu</a>
+                </div>
+                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
+                  <a style=" width: 170px;" (click)="product_by_price('10t-20t')" type="button">Từ 10 - 20 triệu</a>
+                </div>
+                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
+                  <a style=" width: 170px;" (click)="product_by_price('20t-50t')" type="button">Từ 20 - 50 triệu</a>
+                </div>
+                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
+                  <a style=" width: 170px;" (click)="product_by_price('50t')" type="button">Trên 50 triệu</a>
+                </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="col-lg-9">
         <div class="container">
           <div class="row">
-            <div class="col-sm-6 col-lg-3" *ngFor="let product of products">
+            <div class="col-sm-6 col-lg-3" *ngFor="let product of products | paginate:{
+              itemsPerPage: tableSize, currentPage: page, totalItems: count
+            }; let i = index">
               <div class="products-item">
                 <div class="top">
                   <a class="wishlist" (click)="addToCartByLike(product.id)">
-                    
+
                     <i class="bx bx-heart"></i>
                   </a>
                   <img [src]="url+'storage/images/product/'+product.image" [alt]="product.name" />
@@ -89,6 +114,14 @@
                 </div>
               </div>
             </div>
+
+            <pagination-controls style="margin-left:200px ;"
+            previousLabel="Trang sau"
+            nextLabel="Trang tiếp"
+            (pageChange)="ontableDataChange($event)"
+            >
+
+            </pagination-controls>
           </div>
         </div>
       </div>
@@ -97,9 +130,6 @@
 </div>
 <div class="products-area pb-70">
   <div class="container">
-    <div class="section-title">
-      <h2>Được Săn Đón</h2>
-    </div>
     <div class="row">
       <div  *ngFor="let trending of trending_top" class="col-sm-6 col-lg-3">
         <div class="products-item">

@@ -5,7 +5,6 @@ import { ShopService } from '../shop.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProductListComponent } from './product-list.component';
 
 @Component({
   selector: 'app-header',
@@ -20,11 +19,15 @@ export class HeaderComponent implements OnInit {
   url: any = environment.url;
   cartSubtotal: number = 0;
   cartSubByLiketotal: number = 0;
+
   constructor(
     private _AuthService: AuthService,
     private _ShopService: ShopService,
     private _Router: Router,
     ) { }
+    ngAfterViewInit(){
+
+    }
   check: any = this._AuthService.checkAuth();
   ngOnInit(): void {
     this.getAllCart();

@@ -14,6 +14,17 @@ export class ShopService {
   product_list(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.urlAllProducts);
   }
+  product_search(name:string){
+    const response = new Promise(resolve => {
+      this.http.get(environment.urlSearch+`product_list/search?
+      search=${name}`).subscribe(data => {
+        resolve(data)
+      }, err => {
+        console.log(err);
+      });
+    });
+    return response;
+  }
   brand_list(): Observable<Brand[]> {
     return this.http.get<Brand[]>(environment.urlGetAllBrand);
   }
@@ -63,7 +74,7 @@ export class ShopService {
   showOrder(id: any){
     return this.http.get(environment.urlOrderShow+id);
   }
-  
+
   addToCartByLike(id: number){
     return this.http.get(environment.urlAddToCartByLike+id);
   }
@@ -73,5 +84,5 @@ export class ShopService {
   getAllCartByLike(){
     return this.http.get(environment.urlGetAllCartByLike);
   }
-  
+
 }

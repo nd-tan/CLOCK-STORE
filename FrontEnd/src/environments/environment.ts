@@ -19,12 +19,12 @@ export const environment = {
   urlGetAllWardByDistrict : urlApi+'order/list-ward/',
   urlOrderStore : urlApi+'order/store/',
   urlOrderShow : urlApi+' order/show/',
- 
+
   urlAddToCartByLike : urlApi+'add-to-cart-by-like/',
   urlDeleteCartByLike : urlApi+'remove-to-cart-by-like/',
   urlGetAllCartByLike : urlApi+'list-cart-by-like',
 
-  
+
 
   urlAllCategories : urlApi+'category_list',
   urlTrendingPro : urlApi+'trendingProduct',
