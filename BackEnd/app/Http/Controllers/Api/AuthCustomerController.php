@@ -18,7 +18,7 @@ class AuthCustomerController extends Controller
     protected $customerService;
     public function __construct(CustomerServiceInterface $customerService)
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register','logout','refresh','userProfile','changePassWord']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
         $this->customerService = $customerService;
     }
 
@@ -31,14 +31,14 @@ class AuthCustomerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required|string|min:6',
+            'password' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        if (!$token = auth('api')->attempt($validator->validated())) {
+        if (! $token = auth('api')->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 

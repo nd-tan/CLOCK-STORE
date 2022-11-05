@@ -97,7 +97,7 @@
                 </ul>
               </li>
               <li>
-                <a class="common-btn" href="#">
+                <a class="common-btn" (click)="addToCart(product.id)">
                   Thêm giỏ hàng
                   <img src="assets/images/shape1.png" alt="Shape" />
                   <img src="assets/images/shape2.png" alt="Shape" />
@@ -137,7 +137,7 @@
             </div>
           </div>
           <div class="bottom">
-            <a class="cart-text" href="#">Thêm giỏ vào hàng</a>
+            <a class="cart-text" (click)="addToCart(product.id)">Thêm giỏ vào hàng</a>
             <i class="bx bx-plus"></i>
           </div>
         </div>

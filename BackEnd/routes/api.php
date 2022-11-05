@@ -29,7 +29,7 @@ Route::group([
     Route::post('/register', [AuthCustomerController::class, 'register']);
     Route::post('/logout', [AuthCustomerController::class, 'logout']);
     Route::post('/refresh', [AuthCustomerController::class, 'refresh']);
-    Route::get('/user-profile', [AuthCustomerController::class, 'userProfile']);
+    Route::get('/profile', [AuthCustomerController::class, 'userProfile']);
     Route::post('/change-pass', [AuthCustomerController::class, 'changePassWord']);    
     Route::post('/change-pass-mail', [AuthCustomerController::class, 'changePassByMail']);    
 

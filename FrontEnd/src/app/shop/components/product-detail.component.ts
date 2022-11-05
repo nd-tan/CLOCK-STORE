@@ -45,4 +45,10 @@ export class ProductDetailComponent implements OnInit {
       this.trending_top = res;
     })
   }
+  addToCart(id: number) {
+    this.shopService.addToCart(id).subscribe(res => {
+      this.shopService.getAllCart()
+      alert('Thêm vào giỏ thành công');
+    })
+  }
 }

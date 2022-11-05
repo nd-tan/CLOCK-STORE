@@ -102,7 +102,7 @@
                 (click)="changeCart()"
               >
                 <i class="bx bxs-cart" ></i>
-                <span *ngIf="listCart && listCart.length ">{{ listCart?.length }}</span>
+                <span *ngIf="listCart && listCart?.length ">{{ listCart?.length }}</span>
                
               </button>
             </li>
@@ -116,7 +116,7 @@
                 (click)="changeCart()"
               >
                 <i class="bx bx-heart" ></i>
-                <span *ngIf="listCart && listCart.length">{{ listCartByLike?.length }}</span>
+                <span *ngIf="listCart && listCartByLike?.length">{{ listCartByLike?.length }}</span>
               </button>
             </li>
             <li *ngIf="!check">
@@ -387,7 +387,7 @@ aria-hidden="true"
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Giỏ hàng <span *ngIf="listCart && listCart.length">{{ listCart.length }}</span></h2>
+      <h2>Giỏ hàng <span *ngIf="listCart && listCart.length">{{ listCart?.length }}</span></h2>
       <button
         type="button"
         class="btn-close"
@@ -414,7 +414,7 @@ aria-hidden="true"
                           (click)="updateQuantity(cart.id, quantity.value)">
                           <span class="minus">-</span>
                       </a>
-                    <input #quantity name="quantity" min="1" style="width: 60px;" type="number" value="{{ cart.quantity }}" />
+                    <input #quantity name="quantity" min="1" max="{{ cart.quantity_product }}" style="width: 60px;" type="number" value="{{ cart.quantity }}" />
                     <a onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                           (click)="updateQuantity(cart.id, quantity.value)">
                           <span class="plus">+</span>
@@ -436,7 +436,7 @@ aria-hidden="true"
       </div>
     </div>
     <div class="modal-footer">
-          <button [routerLink]="['/checkout']" class="btn common-btn btn-info">Kiểm Tra Giỏ Hàng</button>
+          <button [routerLink]="['/checkout']" class="btn common-btn btn-info" data-bs-dismiss="modal" aria-label="Close">Kiểm Tra Giỏ Hàng</button>
 
     </div>
   </div>
@@ -453,7 +453,7 @@ aria-hidden="true"
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Yêu Thích <span *ngIf="listCartByLike && listCartByLike.length ">{{ listCartByLike.length }}</span></h2>
+        <h2>Yêu Thích <span *ngIf="listCartByLike && listCartByLike.length ">{{ listCartByLike?.length }}</span></h2>
         <button
           type="button"
           class="btn-close"
