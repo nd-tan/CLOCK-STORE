@@ -1,7 +1,7 @@
 import { HttpClientModule, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +28,8 @@ import { ListorderComponent } from './shop/components/listorder.component';
     HttpClientModule,
     ShopModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorService, multi: true },],

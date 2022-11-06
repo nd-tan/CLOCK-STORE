@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
   addToCart(id: number) {
     this.shopService.addToCart(id).subscribe(res => {
-      this.shopService.getAllCart()
+      this.shopService.getAllCart();
       alert('Thêm vào giỏ thành công');
     })
   }
@@ -32,5 +32,4 @@ export class HomeComponent implements OnInit {
       alert('Thêm vào giỏ yêu thích thành công');
     })
   }
-
 }

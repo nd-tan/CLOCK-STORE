@@ -29,5 +29,8 @@ export class AuthService {
   profile():Observable<User>{
     return this._HttpClient.get<User>(environment.urlProfile);
   }
+  changePassByMail(request: any){
+    return this._HttpClient.post(environment.urlChangePassByMail, request);
+  }
 
 }

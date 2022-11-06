@@ -32,7 +32,7 @@
 
     <div class="form-group">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-horizontal">
-        <input formControlName="email" type="email" id="email" class="form-control" name="email" placeholder="email"><br>
+        <input formControlName="email" type="email" id="email" class="form-control" name="email" placeholder="Tài khoản"><br>
         <small class="label label-danger"
         *ngIf="!loginForm.controls['email']?.valid && (loginForm.controls['email']?.dirty
         ||loginForm.controls['email']?.touched) && loginForm.controls['email']?.errors?.['required']"
@@ -40,8 +40,8 @@
         <small class="label label-danger"
         *ngIf="!loginForm.controls['email']?.valid && (loginForm.controls['email']?.dirty
         ||loginForm.controls['email']?.touched) && loginForm.controls['email']?.errors?.['email']"
-        class="help-block text-danger">Email không đúng địng dạng!</small>
-        <input formControlName="password" type="password" id="password" class="form-control" name="password" placeholder="password"><br>
+        class="help-block text-danger">Email không đúng định dạng!</small>
+        <input formControlName="password" type="password" id="password" class="form-control" name="password" placeholder="Mật khẩu"><br>
         <small class="label label-danger"
         *ngIf="!loginForm.controls['password']?.valid && (loginForm.controls['password']?.dirty
         ||loginForm.controls['password']?.touched) && loginForm.controls['password']?.errors?.['required']"
@@ -53,7 +53,7 @@
         <small class="label label-danger"
         *ngIf="error"
         class="help-block text-danger">Tài Khoản hoặc Mật Khẩu Không Đúng</small><br>
-        <input type="submit" [disabled]="!loginForm.valid" class="btn common-btn btn-info" value="Đăng Nhập">
+        <input type="submit" [disabled]="!loginForm.valid" class="btn common-btn btn-info" value="Đăng nhập">
   <img src="assets/images/shape1.png" alt="Shape">
   <img src="assets/images/shape2.png" alt="Shape">
   <h4>Hoặc</h4>
@@ -73,8 +73,35 @@
   </a>
   </li>
   </ul>
-  <h5>Bạn chưa đã có tài khoản ? <a [routerLink]="['/register']">Đăng ký</a></h5>
-  </form>
+</form>
+  <h5>Bạn chưa có tài khoản ? <a [routerLink]="['/register']">Đăng ký</a></h5><br>
+      <form [formGroup]="ChangePassForm" (ngSubmit)="Submit()" class="form-horizontal">
+      <h6 class="title collapsed text-center btn-warning" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+          aria-expanded="false" aria-controls="collapseFour">Quên mật khẩu</h6>
+      <section class="checkout-steps-form-content collapse" id="collapseFour"
+          aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+          <div class="row">
+              <div class="col-md-8">
+                  <div class="single-form form-default">
+                      <input type="email" class="form-control" formControlName="email" placeholder="Nhập email nhận mật khẩu" >
+                      <small class="label label-danger"
+                      *ngIf="!ChangePassForm.controls['email']?.valid && (ChangePassForm.controls['email']?.dirty
+                      ||ChangePassForm.controls['email']?.touched) && ChangePassForm.controls['email']?.errors?.['required']"
+                      class="help-block text-danger">Email không được để trống!</small>
+                      <small class="label label-danger"
+                      *ngIf="!ChangePassForm.controls['email']?.valid && (ChangePassForm.controls['email']?.dirty
+                      ||ChangePassForm.controls['email']?.touched) && ChangePassForm.controls['email']?.errors?.['email']"
+                      class="help-block text-danger">Email không đúng định dạng!</small>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                <div class="single-form form-default">
+                    <input type="submit" class="btn btn-info" value="Gửi yêu cầu">
+                </div>
+            </div>
+          </div>
+      </section>
+    </form>
   </div>
   </div>
   </div>

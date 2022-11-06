@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './components/cart.component';
 import { CheckoutComponent } from './components/checkout.component';
+import { HeaderComponent } from './components/header.component';
 import { HomeComponent } from './components/home.component';
 import { ListorderComponent } from './components/listorder.component';
 import { LoginComponent } from './components/login.component';

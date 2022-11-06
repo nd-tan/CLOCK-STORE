@@ -34,13 +34,13 @@
 
                 <tr>
                   <td colspan="3" style="padding:0 0 1px 0;color:#153643;">
-                    <h1 style="font-size:24px;margin:0 0 -40px 0;font-family:Arial,sans-serif;"><h3>Kính Chào: <i>{{ $order->name_customer }}</i></h3></h1>
+                    <h1 style="font-size:24px;margin:0 0 -40px 0;font-family:Arial,sans-serif;"><h3>Kính chào: <i>{{ $order->name_customer }}</i></h3></h1>
                     <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;color:rgb(18, 168, 255)">{{ $orderStatus }}</p><br>
                     <tr>
                         <td style="width: 200px"><b>Sản phẩm</b></td>
-                        <td style="width: 100px"><b>Số Lượng</b></td>
+                        <td style="width: 100px"><b>Số lượng</b></td>
                         <td style="width: 100px"><b>Giá</b></td>
-                        <td style="width: 100px"><b>Tổng Phụ</b></td>
+                        <td style="width: 100px"><b>Tổng phụ</b></td>
                     </tr>
                     @foreach ($orderDetails as $orderDetail)
                     <tr>                    
@@ -54,7 +54,7 @@
                     </tr>
                     @endforeach 
                     <tr>
-                        <td colspan="3"><br><b>Tổng Tiền Cần Thanh Toán:</b></td>
+                        <td colspan="3"><br><b>Tổng tiền cần thanh toán:</b></td>
                         <td><br><b style="color:rgb(34, 0, 255) ">{{ number_format($totalPriceOrder)}} VNĐ</b><br></td>
                     </tr>
                     
@@ -65,14 +65,14 @@
                     <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
                       <tr>
                         <td style="width:500px;padding:0;vertical-align:top;color:#153643;">
-                            <br><i>TCC-Shop Cảm Ơn Bạn Đã Tin Dùng Sản Phẩm</i><br>
-                            <br><b><i>Thân Ái!.</i></b><br>
+                            <br><i>TCC-Shop cảm ơn bạn đã tin dùng sản phẩm</i><br>
+                            <br><b><i>Thân ái!.</i></b><br>
                           <i style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><br><a href="#" style="color:#ee4c50;text-decoration:underline;">Email: <a href="mailto:maixuancuong2906@gamil.com" style="color:rgb(17,85,204)"
                             target="_blank">maixuancuong2906@gmail.com</a></a></i>
                             <i style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><br><a href="#" style="color:#ee4c50;text-decoration:underline;">Phone: <a href="tel:0843442357" style="color:rgb(17,85,204)"
                                 target="_blank">+84 83442357</a></a></i><br>
-                            <br><i>Địa Chỉ: </i><i>133 Lý Thường Kiệt-Thành Phố Đông Hà-Tỉnh Quảng Trị|<a href="https://www.google.com/maps/place/133+L%C3%BD+Th%C6%B0%E1%BB%9Dng+Ki%E1%BB%87t,+%C4%90%C3%B4ng+H%E1%BA%A3i,+%C4%90%C3%B4ng+H%C3%A0,+Qu%E1%BA%A3ng+Tr%E1%BB%8B,+Vi%E1%BB%87t+Nam/@16.802374,107.1092616,17z/data=!3m1!4b1!4m5!3m4!1s0x3140e584960ba903:0x5c5e139c80555b93!8m2!3d16.8023689!4d107.1114503"
-                              style="color:rgb(17,85,204)" target="_blank">Xem Bản Đồ</a></i>
+                            <br><i>Địa Chỉ: </i><i>133 Lý Thường Kiệt-thành phố Đông Hà-tỉnh Quảng Trị|<a href="https://www.google.com/maps/place/133+L%C3%BD+Th%C6%B0%E1%BB%9Dng+Ki%E1%BB%87t,+%C4%90%C3%B4ng+H%E1%BA%A3i,+%C4%90%C3%B4ng+H%C3%A0,+Qu%E1%BA%A3ng+Tr%E1%BB%8B,+Vi%E1%BB%87t+Nam/@16.802374,107.1092616,17z/data=!3m1!4b1!4m5!3m4!1s0x3140e584960ba903:0x5c5e139c80555b93!8m2!3d16.8023689!4d107.1114503"
+                              style="color:rgb(17,85,204)" target="_blank">Xem bản đồ</a></i>
                         </td>
                      
                       </tr>

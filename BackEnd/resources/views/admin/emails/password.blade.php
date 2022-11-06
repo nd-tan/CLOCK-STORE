@@ -37,17 +37,17 @@
                       <tr>
                         <td style="width:260px;padding:0;vertical-align:top;color:#153643;">
                           <p style="margin:0 0 25px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://png.pngtree.com/png-vector/20220619/ourmid/pngtree-cartoon-asian-businessman-shows-both-hands-a-sign-thumb-up-png-image_5227065.png" alt="" width="260" style="height:auto;display:block;" /></p>
-                          <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><i>*Bạn Đã Gửi Yêu Cầu Thay Đổi Mật Khẩu,</i><br>
-                            <i>Vì Vậy Để Xác Minh Đó Là Bạn Vì Vậy <br>Chúng Tôi Đã Gửi Mật Khẩu Đăng Nhập về Mail Của Bạn.</i><br></p>
-                            <i>Chúc Bạn Một Ngày Làm Việc Vui Vẻ!.</i><br><br>
+                          <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><i>*Bạn đã gửi yêu cầu thay đổi mật khẩu,</i><br>
+                            <i>Vì vậy để xác minh đó là bạn,<br>chúng tôi đã gửi mật khẩu đăng nhập về mail của bạn.</i><br></p>
+                            <i>Chúc bạn một ngày làm việc vui vẻ!.</i><br><br>
                             <b><i>Thân Ái!.</i></b><br>
 
                         </td>
                         <td style="width:260px;padding:0;vertical-align:top;color:#153643;">
-                          <p style="margin:0 0 -11px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://dynamic.brandcrowd.com/asset/logo/bc454755-12ee-48df-b8d6-55f239240b65/logo-search-grid-1x?v=637867253697330000&text=password" alt="" width="260" style="height:auto;display:block;" /></p>
-                          <p style="margin:0 0 -100px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><i>*Hãy Dùng Mật Khẩu Này Để Truy Cập Tài Khoản Của Bạn.</i><br><br>
+                          <p style="margin:0 0 -11px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://dynamic.brandcrowd.com/asset/logo/bc454755-12ee-48df-b8d6-55f239240b65/logo-search-grid-1x?v=637867253697330000&text=password" alt="" width="205" style="height:auto;display:block;" /></p>
+                          <p style="margin:0 0 -100px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><i>*Hãy dùng mật khẩu này để truy cập tài khoản của bạn.</i><br><br>
                             @if(isset($params['password']))
-                            <a href="#" style="color:#ee4c50;text-decoration:underline;"><b style="color: blue"><i>Mật Khẩu Mới: </i></b>{{ $params['password'] }}<br></a>
+                            <a href="#" style="color:#ee4c50;text-decoration:underline;"><b style="color: blue"><i>Mật khẩu mới: </i></b>{{ $params['password'] }}<br></a>
                             @endif
                         </td>
                       </tr>

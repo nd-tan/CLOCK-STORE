@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'failover'),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,9 +40,9 @@ return [
             'port' => 587,
             'encryption' => 'tls',
             'username' => 'maixuancuong2906@gmail.com',
-            'password' => 'uxokspxwxdscqqdg',
+            'password' => 'hxynewovkhlsmdru',
             'timeout' => null,
-            'local_domain' => null,
+            'local_domain' => 'your-mailgun-domain',
         ],
 
         'ses' => [
@@ -55,6 +55,7 @@ return [
 
         'postmark' => [
             'transport' => 'postmark',
+            'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
         ],
 
         'sendmail' => [
@@ -76,6 +77,9 @@ return [
             'mailers' => [
                 'smtp',
                 'log',
+                'postmark',
+                'mailgun',
+                'sendmail',
             ],
         ],
     ],

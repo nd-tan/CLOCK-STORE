@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Api\ApiProductController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
@@ -31,7 +32,7 @@ Route::group([
     Route::post('/refresh', [AuthCustomerController::class, 'refresh']);
     Route::get('/profile', [AuthCustomerController::class, 'userProfile']);
     Route::post('/change-pass', [AuthCustomerController::class, 'changePassWord']);    
-    Route::post('/change-pass-mail', [AuthCustomerController::class, 'changePassByMail']);    
+    Route::post('/change-pass-mail', [UserController::class, 'changePassByEmailCustomer']);    
 
     Route::get('list-cart', [CartController::class, 'getAllCart']);
     Route::get('add-to-cart/{id}', [CartController::class, 'addToCart']);

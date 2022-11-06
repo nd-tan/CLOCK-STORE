@@ -84,24 +84,32 @@
                 <span *ngIf="listCart && listCartByLike?.length">{{ listCartByLike?.length }}</span>
               </button>
             </li>
-            <li *ngIf="!check">
-              <a class="join" [routerLink]="['login']">
+            <li *ngIf="check">
+              <a style="text-decoration: none" class="btn btn-warning">
                 <i
                   class="flaticon-round-account-button-with-user-inside"
                 ></i>
-                Đăng Nhập
+                {{ name }}
+              </a>
+            </li>
+            <li *ngIf="!check">
+              <a style="text-decoration: none" class="join"  [routerLink]="['login']">
+                <i
+                  class="flaticon-round-account-button-with-user-inside"
+                ></i>
+                Đăng nhập
               </a>
             </li>
             <li *ngIf="check">
-              <a class="join" (click)="logout()">
+              <a style="text-decoration: none" class="join" (click)="logout()">
                 <i
                   class="flaticon-round-account-button-with-user-inside"
                 ></i>
-                Đăng Xuất
+                Đăng xuất
               </a>
             </li>
           </ul>
-        </div>
+        </div >
       </div>
     </div>
   </div>

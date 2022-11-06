@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ShopService } from '../shop.service';
@@ -10,12 +10,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   selector: 'app-header',
   templateUrl: '../templates/header.component.html',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, DoCheck {
   id:any;
   id_user:any;
   name:any;
   email:any;
-  
   listCate: any;
   listCart: any;
   listBrand: any;
@@ -23,33 +22,47 @@ export class HeaderComponent implements OnInit {
   url: any = environment.url;
   cartSubtotal: number = 0;
   cartSubByLiketotal: number = 0;
-
+  check: any;
   constructor(
     private _AuthService: AuthService,
     private _ShopService: ShopService,
     private _Router: Router,
     ) { }
-    ngAfterViewInit(){
-
-    }
+    
   
-  check: any = this._AuthService.checkAuth();
   ngOnInit(): void {
-    this.getAllCart();
-    this.getAllCartBylike();
+      this.check;
+    if(this.check){
+      this.getAllCart();
+      this.getAllCartBylike();
+      this.profile();
+    }
     this.getBrands();
     this.getCategories();
-    this.profile();
+  }
+  ngDoCheck(): void{
+      if(!this.check){
+        this.check = this._AuthService.checkAuth();
+      }
+      if(this.check && !this.name && !this.id_user){
+        this.getAllCart();
+        this.getAllCartBylike();
+        this.profile();
+      }
+      
   }
   logout() {
     this._AuthService.logout();
+    this.check = this._AuthService.checkAuth();
+    this.listCartByLike = [];
+    this.listCart = [];
     this._Router.navigate(['login']);
   }
   changeCart(){
-    this.ngOnInit();
+    this.getAllCart();
+    this.getAllCartBylike();
+    this.check = this._AuthService.checkAuth();
   }
-
-
   getAllCart() {
     this._ShopService.getAllCart().subscribe(res => {
       this.listCart = res;
