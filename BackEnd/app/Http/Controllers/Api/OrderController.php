@@ -126,12 +126,12 @@ class OrderController extends Controller {
             'orderDetails' => $orderDetails,
         ];
        
-        Mail::send('admin.emails.orders', compact('params'), function ($email) use($customer) {
-            $email->subject('TCC-Shop');
-            $email->to($customer->email,$customer->name);
-        });
+        // Mail::send('admin.emails.orders', compact('params'), function ($email) use($customer) {
+        //     $email->subject('TCC-Shop');
+        //     $email->to($customer->email,$customer->name);
+        // });
       
-        return response()->json(Order::with(['oderDetails'])->find($order->id));
+        return response()->json(Order::with(['orderDetails'])->find($order->id));
         
 
         }catch(\Exception $e){
@@ -147,7 +147,7 @@ class OrderController extends Controller {
      */
     public function show($id) {
     try{
-        return response()->json(Order::with(['province', 'district', 'ward', 'oderDetails' => function ($query) {
+        return response()->json(Order::with(['province', 'district', 'ward', 'orderDetails' => function ($query) {
             return $query->with(['products']);
         }])->find($id));
     }catch(\Exception $e){
@@ -184,5 +184,16 @@ class OrderController extends Controller {
      */
     public function destroy($id) {
         //
+    }
+    public function listorder($id){
+        try{
+            return response()->json(Customer::with(['orders' => function ($query) {
+                return $query->with(['orderDetails'=> function ($query) {
+                    return $query->with(['products']);
+                }]);
+            }])->find($id));
+        }catch(\Exception $e){
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+        }
     }
 }

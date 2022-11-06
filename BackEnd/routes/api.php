@@ -49,6 +49,7 @@ Route::group([
     Route::get('order/list-ward/{id}', [OrderController::class, 'getAllWardByDistrictId']);
     Route::post('order/store', [OrderController::class, 'store']);
     Route::get('order/show/{id}', [OrderController::class, 'show']);
+    Route::get('listorder/{id}', [OrderController::class, 'listorder']);
 
     Route::get('product_list',[ApiProductController::class,'product_list']);
     Route::get('product_list/search',[ApiProductController::class,'search']);

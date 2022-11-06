@@ -20,5 +20,17 @@ export class HomeComponent implements OnInit {
       this.trending_top = res;
     })
   }
+  addToCart(id: number) {
+    this.shopService.addToCart(id).subscribe(res => {
+      this.shopService.getAllCart()
+      alert('Thêm vào giỏ thành công');
+    })
+  }
+  addToCartByLike(id: number) {
+    this.shopService.addToCartByLike(id).subscribe(res => {
+      this.shopService.getAllCartByLike();
+      alert('Thêm vào giỏ yêu thích thành công');
+    })
+  }
 
 }

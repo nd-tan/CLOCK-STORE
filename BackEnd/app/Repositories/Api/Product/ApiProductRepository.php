@@ -19,7 +19,7 @@ class ApiProductRepository extends BaseRepository implements ApiProductRepositor
     }
     public function getAll()
     {
-        $products = $this->model->where('status', '=', '1')->where('quantity', '>', '0')->take(15)->get();
+        $products = $this->model->where('status', '=', '1')->where('quantity', '>', '0')->get();
         return $products;
     }
     public function search($request)
@@ -29,8 +29,6 @@ class ApiProductRepository extends BaseRepository implements ApiProductRepositor
         if ($data) {
             $query->where('status', '=', '1')->where('quantity', '>', '0')
             ->whereRaw("name Like '%" . $data . "%' ")
-                ->orWhereRaw("price Like '%" .$data . "%' ")
-                // ->orWhereRaw("description Like '%" .$data . "%' ")
             ;
         }
         return $query->get();

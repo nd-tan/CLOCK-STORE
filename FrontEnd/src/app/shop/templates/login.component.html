@@ -45,14 +45,14 @@
         <small class="label label-danger"
         *ngIf="!loginForm.controls['password']?.valid && (loginForm.controls['password']?.dirty
         ||loginForm.controls['password']?.touched) && loginForm.controls['password']?.errors?.['required']"
-        class="help-block text-danger">Password không được để trống!</small>
+        class="help-block text-danger">Mật khẩu không được để trống!</small>
         <small class="label label-danger"
         *ngIf="!loginForm.controls['password']?.valid && (loginForm.controls['password']?.dirty
         ||loginForm.controls['password']?.touched) && loginForm.controls['password']?.errors?.['minlength']"
-        class="help-block text-danger">Password tối thiểu 5 ký tự!</small><br>
+        class="help-block text-danger">Mật khẩu tối thiểu 6 ký tự!</small><br>
         <small class="label label-danger"
         *ngIf="error"
-        class="help-block text-danger">Tài Khoản Or Mật Khẩu Không Đúng</small><br>
+        class="help-block text-danger">Tài Khoản hoặc Mật Khẩu Không Đúng</small><br>
         <input type="submit" [disabled]="!loginForm.valid" class="btn common-btn btn-info" value="Đăng Nhập">
   <img src="assets/images/shape1.png" alt="Shape">
   <img src="assets/images/shape2.png" alt="Shape">
