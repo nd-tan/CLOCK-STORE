@@ -1,80 +1,124 @@
-<div class="page-title-area">
+<!-- <div class="page-title-area">
   <div class="d-table">
-  <div class="d-table-cell">
+    <div class="d-table-cell">
+      <div class="container">
+        <div class="title-content">
+          <h2>Đăng nhập</h2>
+          <ul>
+            <li>
+              <a [routerLink]="['/home']">Trang chủ</a>
+            </li>
+            <li>
+              <span>Đăng nhập</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="user-area ptb-100"><br>
   <div class="container">
-  <div class="title-content">
-  <h2>Đăng nhập</h2>
-  <ul>
-  <li>
-  <a [routerLink]="['/home']">Trang chủ</a>
-
-  </li>
-  <li>
-  <span>Đăng nhập</span>
-  </li>
-  </ul>
-  </div>
-  </div>
-  </div>
-  </div>
-  <div class="title-img">
-  <img src="assets/images/page-title1.jpg" alt="About">
-  <img src="assets/images/shape16.png" alt="Shape">
-  <img src="assets/images/shape17.png" alt="Shape">
-  <img src="assets/images/shape18.png" alt="Shape">
-  </div>
-  </div>
-
-
-  <div class="user-area ptb-100">
-  <div class="container">
-  <div class="user-item">
-
-    <div class="form-group">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-horizontal">
-        <input formControlName="email" type="email" id="email" class="form-control" name="email" placeholder="email"><br>
-        <small class="label label-danger"
-        *ngIf="!loginForm.controls['email']?.valid && (loginForm.controls['email']?.dirty
+    <div class="user-item">
+      <div class="title-content">
+        <h2>Đăng nhập</h2>
+        <ul>
+          <!-- <li>
+            <a [routerLink]="['/home']">Trang chủ</a>
+          </li> -->
+          <!-- <li>
+            <span>Đăng nhập</span>
+          </li> -->
+        </ul>
+      </div>
+      <div class="form-group">
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="onSubmit()"
+          class="form-horizontal"
+        >
+          <input
+            formControlName="email"
+            type="email"
+            id="email"
+            class="form-control"
+            name="email"
+            placeholder="E-mail"
+          /><br />
+          <small
+            class="label label-danger"
+            *ngIf="!loginForm.controls['email']?.valid && (loginForm.controls['email']?.dirty
         ||loginForm.controls['email']?.touched) && loginForm.controls['email']?.errors?.['required']"
-        class="help-block text-danger">Email không được để trống!</small>
-        <small class="label label-danger"
-        *ngIf="!loginForm.controls['email']?.valid && (loginForm.controls['email']?.dirty
+            class="help-block text-danger"
+            >Email không được để trống!</small
+          >
+          <small
+            class="label label-danger"
+            *ngIf="!loginForm.controls['email']?.valid && (loginForm.controls['email']?.dirty
         ||loginForm.controls['email']?.touched) && loginForm.controls['email']?.errors?.['email']"
-        class="help-block text-danger">Email không đúng địng dạng!</small>
-        <input formControlName="password" type="password" id="password" class="form-control" name="password" placeholder="password"><br>
-        <small class="label label-danger"
-        *ngIf="!loginForm.controls['password']?.valid && (loginForm.controls['password']?.dirty
+            class="help-block text-danger"
+            >Email không đúng địng dạng!</small
+          >
+          <input
+            formControlName="password"
+            type="password"
+            id="password"
+            class="form-control"
+            name="password"
+            placeholder="Mật khẩu"
+          /><br />
+          <small
+            class="label label-danger"
+            *ngIf="!loginForm.controls['password']?.valid && (loginForm.controls['password']?.dirty
         ||loginForm.controls['password']?.touched) && loginForm.controls['password']?.errors?.['required']"
-        class="help-block text-danger">Mật khẩu không được để trống!</small>
-        <small class="label label-danger"
-        *ngIf="!loginForm.controls['password']?.valid && (loginForm.controls['password']?.dirty
+            class="help-block text-danger"
+            >Mật khẩu không được để trống!</small
+          >
+          <small
+            class="label label-danger"
+            *ngIf="!loginForm.controls['password']?.valid && (loginForm.controls['password']?.dirty
         ||loginForm.controls['password']?.touched) && loginForm.controls['password']?.errors?.['minlength']"
-        class="help-block text-danger">Mật khẩu tối thiểu 6 ký tự!</small><br>
-        <small class="label label-danger"
-        *ngIf="error"
-        class="help-block text-danger">Tài Khoản hoặc Mật Khẩu Không Đúng</small><br>
-        <input type="submit" [disabled]="!loginForm.valid" class="btn common-btn btn-info" value="Đăng Nhập">
-  <img src="assets/images/shape1.png" alt="Shape">
-  <img src="assets/images/shape2.png" alt="Shape">
-  <h4>Hoặc</h4>
-  <ul>
-  <li>
-  <a href="#">
-  <i class='bx bxl-facebook'></i>
+            class="help-block text-danger"
+            >Mật khẩu tối thiểu 6 ký tự!</small
+          ><br />
+          <small
+            class="label label-danger"
+            *ngIf="error"
+            class="help-block text-danger"
+            >Tài Khoản hoặc Mật Khẩu Không Đúng</small
+          ><br />
+          <input
+            type="submit"
+            [disabled]="!loginForm.valid"
+            class="btn common-btn btn-info"
+            value="Đăng Nhập"
+          />
+          <img src="assets/images/shape1.png" alt="Shape" />
+          <img src="assets/images/shape2.png" alt="Shape" />
+          <h4>Hoặc</h4>
+          <ul>
+            <li>
+              <a href="#">
+                <i class="bx bxl-facebook"></i>
 
-  Đăng Nhập Facebook
-  </a>
-  </li>
-  <li>
-  <a href="#">
-  <i class='bx bxl-google'></i>
+                Đăng Nhập Facebook
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="bx bxl-google"></i>
 
-  Đăng Nhập Google
-  </a>
-  </li>
-  </ul>
-  <h5>Bạn chưa đã có tài khoản ? <a [routerLink]="['/register']">Đăng ký</a></h5>
-  </form>
+                Đăng Nhập Google
+              </a>
+            </li>
+          </ul>
+          <h5>
+            Bạn chưa đã có tài khoản ?
+            <a [routerLink]="['/register']">Đăng ký</a>
+          </h5>
+        </form>
+      </div>
+    </div>
   </div>
-  </div>
-  </div>
+</div>
