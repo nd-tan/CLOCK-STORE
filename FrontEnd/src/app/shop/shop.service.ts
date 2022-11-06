@@ -84,5 +84,8 @@ export class ShopService {
   getAllCartByLike(){
     return this.http.get(environment.urlGetAllCartByLike);
   }
+  getListOrder(id: any){
+    return this.http.get(environment.urlListOrder+id);
+  }
 
 }

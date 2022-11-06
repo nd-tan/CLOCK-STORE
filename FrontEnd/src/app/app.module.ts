@@ -12,12 +12,14 @@ import { JWTInterceptorService } from './shop/jwtinterceptor.service';
 import { ShopRoutingModule } from './shop/shop-routing.module';
 import { ShopModule } from './shop/shop.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ListorderComponent } from './shop/components/listorder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    ListorderComponent,
   ],
   imports: [
     BrowserModule,

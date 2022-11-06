@@ -59,5 +59,11 @@ export class ProductDetailComponent implements OnInit {
   changeImage(image:any){
     this.image1 = this.url_image + image;
   }
+  addToCartByLike(id: number) {
+    this.shopService.addToCartByLike(id).subscribe(res => {
+      this.shopService.getAllCartByLike();
+      alert('Thêm vào giỏ yêu thích thành công');
+    })
+  }
 
 }

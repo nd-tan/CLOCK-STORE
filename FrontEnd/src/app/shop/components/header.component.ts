@@ -12,6 +12,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class HeaderComponent implements OnInit {
   id:any;
+  id_user:any;
+  name:any;
+  email:any;
+  
   listCate: any;
   listCart: any;
   listBrand: any;
@@ -28,12 +32,14 @@ export class HeaderComponent implements OnInit {
     ngAfterViewInit(){
 
     }
+  
   check: any = this._AuthService.checkAuth();
   ngOnInit(): void {
     this.getAllCart();
     this.getAllCartBylike();
     this.getBrands();
     this.getCategories();
+    this.profile();
   }
   logout() {
     this._AuthService.logout();
@@ -100,7 +106,20 @@ export class HeaderComponent implements OnInit {
       alert('Thêm vào giỏ thành công');
     })
   }
-
+  profile(){
+    if(this._AuthService.checkAuth()) {
+        this._AuthService.profile().subscribe(res =>{
+          this.id_user = res.id;
+          this.name = res.name;
+          this.email = res.email;
+        },e=>{
+          console.log(e);
+        })
+    }
+    else{
+      this._Router.navigate(['/login']);
+    }
+  }
 
 }
 

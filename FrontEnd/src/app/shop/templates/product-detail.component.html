@@ -86,15 +86,6 @@
             </ul>
             <ul class="cart">
               <li>
-                <ul class="number">
-                  <li>
-                    <span class="minus">-</span>
-                    <input style="width: 50px ;" type="number" value="1"/>
-                    <span class="plus">+</span>
-                  </li>
-                </ul>
-              </li>
-              <li>
                 <a class="common-btn" (click)="addToCart(product.id)">
 
                   Thêm giỏ hàng
@@ -103,7 +94,7 @@
                 </a>
               </li>
               <li>
-                <a class="wishlist-btn common-btn" href="#">
+                <a class="wishlist-btn common-btn" (click)="addToCartByLike(product.id)">
                   <i class="bx bx-heart"></i>Yêu thích
                   <img src="assets/images/shape1.png" alt="Shape" />
                   <img src="assets/images/shape2.png" alt="Shape" />
@@ -127,7 +118,7 @@
       <div class="col-sm-6 col-lg-3"  *ngFor="let trending of trending_top" >
         <div class="products-item">
           <div class="top">
-            <a class="wishlist" href="#">
+            <a class="wishlist" (click)="addToCartByLike(trending.id)">
               <i class="bx bx-heart"></i>
             </a>
             <img [src]="url+'storage/images/product/'+trending.image" alt="Products" />
@@ -139,7 +130,7 @@
             </div>
           </div>
           <div class="bottom">
-            <a class="cart-text" (click)="addToCart(product.id)">Thêm giỏ vào hàng</a>
+            <a class="cart-text" (click)="addToCart(trending.id)">Thêm giỏ vào hàng</a>
             <i class="bx bx-plus"></i>
           </div>
         </div>

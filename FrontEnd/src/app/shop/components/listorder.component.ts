@@ -4,12 +4,12 @@ import { environment } from 'src/environments/environment';
 import { ShopService } from '../shop.service';
 
 @Component({
-  selector: 'app-order-detail',
-  templateUrl: '../templates/order-detail.component.html',
+  selector: 'app-listorder',
+  templateUrl: './../templates/listorder.component.html',
 })
-export class OrderDetailComponent implements OnInit {
+export class ListorderComponent implements OnInit {
 
-  orderId: any;
+  customer_id: any;
   order: any;
   totalPrice: number = 0;
   url: string = environment.url;
@@ -20,12 +20,14 @@ export class OrderDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.orderId = this.route.snapshot.params['id'];
-    this.ShopService.showOrder(this.orderId).subscribe(res => {
+    this.customer_id = this.route.snapshot.params['id'];
+    this.ShopService.getListOrder(this.customer_id).subscribe(res => {
       this.order = res;
-      for(let orderDetail of this.order.order_details){
+      // console.log(this.order);
+      for(let orderDetail of this.order.orders.order_details) {
         this.totalPrice += parseInt(orderDetail.price_at_time) * parseInt(orderDetail.quantity);
       }
     })
   }
+
 }

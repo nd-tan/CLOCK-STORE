@@ -37,7 +37,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule,
     FormsModule,
     ShopRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
