@@ -1,484 +1,376 @@
 <div class="sale-area">
   <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-sm-6 col-lg-4">
-        <div class="sale-item sale-bg-one">
-          <img src="assets/images/sale-main2.png" alt="Sale" />
-          <div class="inner">
-            <h3>
-              <span class="percent">20%</span> Ngày tết
-              <span>Hạ giá</span>
-            </h3>
-            <p>Tất cả đồng hồ thời trang</p>
-            <a href="#">Mua sắm ngay bây giờ</a>
+    <div
+      class="page-title-area"
+      style="background-image: url('assets/images/background-list-1.jpg')"
+    ></div>
+
+  </div>
+
+  <div class="products-area two pb-100">
+    <div class="container">
+      <div class="sorting-slider owl-theme owl-carousel">
+        <div class="products-thumb">
+          <a href="#">
+            <img src="assets/images/products/shape1.png" alt="Shape" />
+            <img src="assets/images/products/shape2.png" alt="Shape" />
+            <i class="flaticon-square"></i>
+            <span>Tất cả</span>
+          </a>
+        </div>
+        <div class="products-thumb">
+          <a href="#">
+            <img src="assets/images/products/shape1.png" alt="Shape" />
+            <img src="assets/images/products/shape2.png" alt="Shape" />
+            <i class="flaticon-headphones"></i>
+            <span>Headphones</span>
+          </a>
+        </div>
+        <div class="products-thumb">
+          <a href="#">
+            <img src="assets/images/products/shape1.png" alt="Shape" />
+            <img src="assets/images/products/shape2.png" alt="Shape" />
+            <i class="flaticon-microphone"></i>
+            <span>Microphones</span>
+          </a>
+        </div>
+        <div class="products-thumb">
+          <a href="#">
+            <img src="assets/images/products/shape1.png" alt="Shape" />
+            <img src="assets/images/products/shape2.png" alt="Shape" />
+            <i class="flaticon-laptop"></i>
+            <span>Laptop</span>
+          </a>
+        </div>
+        <div class="products-thumb">
+          <a href="#">
+            <img src="assets/images/products/shape1.png" alt="Shape" />
+            <img src="assets/images/products/shape2.png" alt="Shape" />
+            <i class="flaticon-monitor"></i>
+            <span>Desktop</span>
+          </a>
+        </div>
+        <div class="products-thumb">
+          <a href="#">
+            <img src="assets/images/products/shape1.png" alt="Shape" />
+            <img src="assets/images/products/shape2.png" alt="Shape" />
+            <i class="flaticon-camera"></i>
+            <span>Camera</span>
+          </a>
+        </div>
+        <div class="products-thumb">
+          <a href="#">
+            <img src="assets/images/products/shape1.png" alt="Shape" />
+            <img src="assets/images/products/shape2.png" alt="Shape" />
+            <i class="flaticon-smartwatch"></i>
+            <span>Smart Watch</span>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-lg-3" *ngFor="let product of trending_top">
+          <div class="products-item">
+            <div class="top">
+              <a class="wishlist" href="#">
+                <i class="bx bx-heart"></i>
+              </a>
+              <img
+                [src]="url + 'storage/images/product/' + product.image"
+                [alt]="product.name"
+              />
+              <div class="inner">
+                <h3>
+                  <a routerLink="/product-detail/{{ product.id }}">{{
+                    product.name
+                  }}</a>
+                </h3>
+                <span>{{ product.price | number }}(VND)</span>
+              </div>
+            </div>
+            <div class="bottom">
+              <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
+              <i class="bx bx-plus"></i>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="sale-item sale-bg-two">
-          <img src="assets/images/sale-main2.png" alt="Sale" />
-          <div class="inner">
-            <h3>
-              <span class="percent">5%</span> Giáng sinh <span>Hạ giá</span>
-            </h3>
-            <p>Tất cả đồng hồ thông minh</p>
-            <a href="#">Mua sắm ngay bây giờ</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="sale-item sale-bg-three">
-          <img src="assets/images/sale-main2.png" alt="Sale" />
-          <div class="inner">
-            <h3>
-              <span class="percent">10%</span> Mùa đông <span>Hạ giá</span>
-            </h3>
-            <p>Tất cả đồng hồ cơ</p>
-            <a href="#">Mua sắm ngay bây giờ</a>
-          </div>
-        </div>
+      <div class="text-center">
+        <a class="common-btn two" routerLink="/product-list">
+          Xem thêm sản phẩm
+          <img src="assets/images/shape1.png" alt="Shape" />
+          <img src="assets/images/shape2.png" alt="Shape" />
+        </a>
       </div>
     </div>
   </div>
-</div>
 
-<div class="products-area two pb-100">
-  <div class="container">
-    <div class="sorting-slider owl-theme owl-carousel">
-      <div class="products-thumb">
-        <a href="#">
-          <img src="assets/images/products/shape1.png" alt="Shape" />
-          <img src="assets/images/products/shape2.png" alt="Shape" />
-          <i class="flaticon-square"></i>
-          <span>Tất cả</span>
-        </a>
-      </div>
-      <div class="products-thumb">
-        <a href="#">
-          <img src="assets/images/products/shape1.png" alt="Shape" />
-          <img src="assets/images/products/shape2.png" alt="Shape" />
-          <i class="flaticon-headphones"></i>
-          <span>Headphones</span>
-        </a>
-      </div>
-      <div class="products-thumb">
-        <a href="#">
-          <img src="assets/images/products/shape1.png" alt="Shape" />
-          <img src="assets/images/products/shape2.png" alt="Shape" />
-          <i class="flaticon-microphone"></i>
-          <span>Microphones</span>
-        </a>
-      </div>
-      <div class="products-thumb">
-        <a href="#">
-          <img src="assets/images/products/shape1.png" alt="Shape" />
-          <img src="assets/images/products/shape2.png" alt="Shape" />
-          <i class="flaticon-laptop"></i>
-          <span>Laptop</span>
-        </a>
-      </div>
-      <div class="products-thumb">
-        <a href="#">
-          <img src="assets/images/products/shape1.png" alt="Shape" />
-          <img src="assets/images/products/shape2.png" alt="Shape" />
-          <i class="flaticon-monitor"></i>
-          <span>Desktop</span>
-        </a>
-      </div>
-      <div class="products-thumb">
-        <a href="#">
-          <img src="assets/images/products/shape1.png" alt="Shape" />
-          <img src="assets/images/products/shape2.png" alt="Shape" />
-          <i class="flaticon-camera"></i>
-          <span>Camera</span>
-        </a>
-      </div>
-      <div class="products-thumb">
-        <a href="#">
-          <img src="assets/images/products/shape1.png" alt="Shape" />
-          <img src="assets/images/products/shape2.png" alt="Shape" />
-          <i class="flaticon-smartwatch"></i>
-          <span>Smart Watch</span>
-        </a>
-      </div>
+  <div class="buy-area two ptb-100">
+    <div class="buy-shape">
+      <img src="assets/images/shape6.png" alt="Shape" />
+      <img src="assets/images/shape7.png" alt="Shape" />
     </div>
-    <div class="row">
-      <div class="col-sm-6 col-lg-3" *ngFor="let product of trending_top">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" (click)="addToCartByLike(product.id)">
-              <i class="bx bx-heart"></i>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="buy-content">
+            <h2>Mua đồng hồ tốt nhất đang được giảm giá</h2>
+            <p>Jacques Lemans Limited</p>
+            <ul>
+              <li>19,600,000 VNĐ</li>
+              <li>
+                <del>22,500,000 VNĐ</del>
+              </li>
+            </ul>
+            <a class="common-btn two" href="shop.html">
+              Mua sắm ngay bây giờ
+              <img src="assets/images/.png" alt="Shape" />
+              <img src="assets/images/shape2.png" alt="Shape" />
             </a>
-            <img [src]="url+'storage/images/product/'+product.image" [alt]="product.name"/>
-            <div class="inner">
-              <h3>
-                <a routerLink='/product-detail/{{product.id}}'>{{product.name}}</a>
-              </h3>
-              <span>{{product.price | number }}(VND)</span>
-            </div>
           </div>
-          <div class="bottom">
-            <a class="cart-text" (click)="addToCart(product.id)">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
+        </div>
+        <div class="col-lg-6">
+          <div class="buy-img">
+            <img src="assets/images/seiko.jpg" alt="Buy" />
           </div>
         </div>
       </div>
     </div>
-    <div class="text-center">
-      <a class="common-btn two" routerLink='/product-list'>
-        Xem thêm sản phẩm
-        <img src="assets/images/shape1.png" alt="Shape" />
-        <img src="assets/images/shape2.png" alt="Shape" />
-      </a>
-    </div>
   </div>
-</div>
 
-<div class="buy-area two ptb-100">
-  <div class="buy-shape">
-    <img src="assets/images/shape6.png" alt="Shape" />
-    <img src="assets/images/shape7.png" alt="Shape" />
-  </div>
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6">
-        <div class="buy-content">
-          <h2>Mua đồng hồ tốt nhất đang được giảm giá</h2>
-          <p>Seiko 5 Sport</p>
-          <ul>
-            <li>1,600,000 VNĐ</li>
-            <li>
-              <del>2,500,000 VNĐ</del>
-            </li>
-          </ul>
-          <a class="common-btn two" href="shop.html">
-            Mua sắm ngay bây giờ
-            <img src="assets/images/.png" alt="Shape" />
-            <img src="assets/images/shape2.png" alt="Shape" />
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="buy-img">
-          <img src="assets/images/seiko.jpg" alt="Buy" />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="deal-area pt-100 pb-70">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="section-title">
-          <h2>Ưu đãi trong ngày</h2>
-        </div>
-        <div class="deal-item">
-          <span class="percent">-20%</span>
-          <a class="deal-btn" href="single-product.html">
-            <i class="bx bx-right-arrow-alt"></i>
-          </a>
-          <div class="inner align-items-center">
-            <div class="left">
-              <img src="assets/images/deal-main1.png" alt="Deal" />
-            </div>
-            <div class="right">
-              <ul class="reviews">
-                <li>
-                  <i class="bx bxs-star checked"></i>
-                </li>
-                <li>
-                  <i class="bx bxs-star checked"></i>
-                </li>
-                <li>
-                  <i class="bx bxs-star checked"></i>
-                </li>
-                <li>
-                  <i class="bx bxs-star checked"></i>
-                </li>
-                <li>
-                  <i class="bx bxs-star"></i>
-                </li>
-                <li>
-                  <span>(4 nhận xét)</span>
-                </li>
-              </ul>
-              <h3>Best Bionic Thunder Headphones</h3>
-              <ul class="price">
-                <li>1,300,000 VNĐ</li>
-                <li><del>1,500,000 VNĐ</del></li>
-              </ul>
-              <ul class="features">
-                <li>
-                  <span>Những đặc điểm chính:</span>
-                </li>
-                <li>Âm thanh chất lượng cao</li>
-                <li>Hủy giọng nói</li>
-                <li>Hỗ trợ di động</li>
-                <li>Bảo hành 3 năm</li>
-              </ul>
-              <ul class="timer">
-                <li>
-                  <div class="timer-inner">
-                    <span id="days"></span>
-                    <p>Ngày</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="timer-inner">
-                    <span id="hours"></span>
-                    <p>Giờ</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="timer-inner">
-                    <span id="minutes"></span>
-                    <p>Phút</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="timer-inner">
-                    <span id="seconds"></span>
-                    <p>Giây</p>
-                  </div>
-                </li>
-              </ul>
-              <ul class="cart-wishlist">
-                <li>
-                  <a href="#">
-                    <i class="bx bxs-cart"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="bx bxs-heart"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
+  <div class="deal-area pt-100 pb-70">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="section-title">
+            <h2>Ưu đãi trong ngày</h2>
           </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="section-title">
-          <h2>Ưu đãi hấp dẫn</h2>
-        </div>
-        <div class="deal-item two">
-          <span class="percent">-20%</span>
-          <a class="deal-btn" href="single-product.html">
-            <i class="bx bx-right-arrow-alt"></i>
-          </a>
-          <div class="inner align-items-center">
-            <div class="left">
-              <img src="assets/images/deal-main2.png" alt="Deal" />
-            </div>
-            <div class="right">
-              <ul class="reviews">
-                <li>
-                  <i class="bx bxs-star checked"></i>
-                </li>
-                <li>
-                  <i class="bx bxs-star checked"></i>
-                </li>
-                <li>
-                  <i class="bx bxs-star checked"></i>
-                </li>
-                <li>
-                  <i class="bx bxs-star checked"></i>
-                </li>
-                <li>
-                  <i class="bx bxs-star"></i>
-                </li>
-                <li>
-                  <span>(4 Reviews)</span>
-                </li>
-              </ul>
-              <h3>Bionic Thunder Smart Watch</h3>
-              <ul class="price">
-                <li>1,300,000 VNĐ</li>
-                <li><del>1,500,000 VNĐ</del></li>
-              </ul>
-              <h4>Áp dụng giảm giá từ ngày: <span>01 tháng 1</span></h4>
-              <ul class="cart-wishlist">
-                <li>
-                  <a href="#">
-                    <i class="bx bxs-cart"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="bx bxs-heart"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="deal-black">
-          <img src="assets/images/deal-shape1.png" alt="Shape" />
-          <h3>50% hạ giá ngày tết</h3>
-          <a href="shop.html">Xem sản phẩm</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section class="brand-area pb-70">
-  <div class="container">
-    <div class="section-title">
-      <h2>Thương hiệu đáng tin cậy của chúng tôi</h2>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-sm-4 col-lg-3">
-        <div class="brand-item">
-          <a href="#">
-            <img src="assets/images/brand/logo-Tissot.png" alt="Brand" />
-          </a>
-        </div>
-      </div>
-      <div class="col-sm-4 col-lg-3">
-        <div class="brand-item">
-          <a href="#">
-            <img src="assets/images/brand/logo-JaegerLecoultre.png" alt="Brand" />
-          </a>
-        </div>
-      </div>
-      <div class="col-sm-4 col-lg-3">
-        <div class="brand-item">
-          <a href="#">
-            <img src="assets/images/brand/logo-Omega.png" alt="Brand" />
-          </a>
-        </div>
-      </div>
-      <div class="col-sm-4 col-lg-3">
-        <div class="brand-item">
-          <a href="#">
-            <img src="assets/images/brand/logo-PatekPhilippe.png" alt="Brand" />
-          </a>
-        </div>
-      </div>
-      <div class="col-sm-4 col-lg-3">
-        <div class="brand-item">
-          <a href="#">
-            <img src="assets/images/brand/logo-TAG-Heuer.png" alt="Brand" />
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- <div class="products-area two pb-70">
-  <div class="container">
-    <div class="section-title">
-      <h2>Các sản phẩm bán chạy nhất</h2>
-    </div>
-    <div class="row">
-      <div *ngFor="let trending of trending_top" class="col-sm-6 col-lg-3">
-        <div class="products-item">
-          <div class="top">
-            <a class="wishlist" href="#">
-              <i class="bx bx-heart"></i>
+          <div class="deal-item">
+            <span class="percent">-20%</span>
+            <a class="deal-btn" href="single-product.html">
+              <i class="bx bx-right-arrow-alt"></i>
             </a>
-            <img [src]="url+'storage/images/product/'+trending.image" [alt]="trending.name" />
-            <div class="inner">
-              <h3>
-                <a routerLink='/product-detail/{{trending.id}}'>{{trending.name}}</a>
-              </h3>
-              <span>{{trending.price | number }}(VND)</span>
+            <div class="inner align-items-center">
+              <div class="left">
+                <img src="assets/images/deal-main1.png" alt="Deal" />
+              </div>
+              <div class="right">
+                <ul class="reviews">
+                  <li>
+                    <i class="bx bxs-star checked"></i>
+                  </li>
+                  <li>
+                    <i class="bx bxs-star checked"></i>
+                  </li>
+                  <li>
+                    <i class="bx bxs-star checked"></i>
+                  </li>
+                  <li>
+                    <i class="bx bxs-star checked"></i>
+                  </li>
+                  <li>
+                    <i class="bx bxs-star"></i>
+                  </li>
+                  <li>
+                    <span>(4 nhận xét)</span>
+                  </li>
+                </ul>
+                <h3>Best Bionic Thunder Headphones</h3>
+                <ul class="price">
+                  <li>1,300,000 VNĐ</li>
+                  <li><del>1,500,000 VNĐ</del></li>
+                </ul>
+                <ul class="features">
+                  <li>
+                    <span>Những đặc điểm chính:</span>
+                  </li>
+                  <li>Âm thanh chất lượng cao</li>
+                  <li>Hủy giọng nói</li>
+                  <li>Hỗ trợ di động</li>
+                  <li>Bảo hành 3 năm</li>
+                </ul>
+                <ul class="timer">
+                  <li>
+                    <div class="timer-inner">
+                      <span id="days"></span>
+                      <p>Ngày</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="timer-inner">
+                      <span id="hours"></span>
+                      <p>Giờ</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="timer-inner">
+                      <span id="minutes"></span>
+                      <p>Phút</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="timer-inner">
+                      <span id="seconds"></span>
+                      <p>Giây</p>
+                    </div>
+                  </li>
+                </ul>
+                <ul class="cart-wishlist">
+                  <li>
+                    <a href="#">
+                      <i class="bx bxs-cart"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="bx bxs-heart"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
-            <i class="bx bx-plus"></i>
+        </div>
+        <div class="col-lg-6">
+          <div class="section-title">
+            <h2>Ưu đãi hấp dẫn</h2>
+          </div>
+          <div class="deal-item two">
+            <span class="percent">-20%</span>
+            <a class="deal-btn" href="single-product.html">
+              <i class="bx bx-right-arrow-alt"></i>
+            </a>
+            <div class="inner align-items-center">
+              <div class="left">
+                <img src="assets/images/deal-main2.png" alt="Deal" />
+              </div>
+              <div class="right">
+                <ul class="reviews">
+                  <li>
+                    <i class="bx bxs-star checked"></i>
+                  </li>
+                  <li>
+                    <i class="bx bxs-star checked"></i>
+                  </li>
+                  <li>
+                    <i class="bx bxs-star checked"></i>
+                  </li>
+                  <li>
+                    <i class="bx bxs-star checked"></i>
+                  </li>
+                  <li>
+                    <i class="bx bxs-star"></i>
+                  </li>
+                  <li>
+                    <span>(4 Reviews)</span>
+                  </li>
+                </ul>
+                <h3>Bionic Thunder Smart Watch</h3>
+                <ul class="price">
+                  <li>1,300,000 VNĐ</li>
+                  <li><del>1,500,000 VNĐ</del></li>
+                </ul>
+                <h4>Áp dụng giảm giá từ ngày: <span>01 tháng 1</span></h4>
+                <ul class="cart-wishlist">
+                  <li>
+                    <a href="#">
+                      <i class="bx bxs-cart"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="bx bxs-heart"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="deal-black">
+            <img src="assets/images/deal-shape1.png" alt="Shape" />
+            <h3>50% hạ giá ngày tết</h3>
+            <a href="shop.html">Xem sản phẩm</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div> -->
 
-<!-- <div class="testimonials-area two pb-100">
-  <div class="container">
-    <div class="section-title">
-      <h2>Our Client Testimonials</h2>
-    </div>
-    <div class="testimonials-slider owl-theme owl-carousel">
-      <div class="testimonials-item">
-        <i class="flaticon-quote"></i>
-        <p>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-          erat, sed diam volu ptua
-        </p>
-        <h3>Adam Smith</h3>
-        <span>Co-Founder Of Company</span>
-        <img src="assets/images/testimonial1.jpg" alt="Testimonial" />
+  <section class="brand-area pb-70">
+    <div class="container">
+      <div class="section-title">
+        <h2>Thương hiệu đáng tin cậy của chúng tôi</h2>
       </div>
-      <div class="testimonials-item">
-        <i class="flaticon-quote"></i>
-        <p>
-          It is a long established fact that a reader will be distracted by
-          the readable content of a page when looking at its layout. The
-          point of using Lorem Ipsum
-        </p>
-        <h3>Jonathon Ronan</h3>
-        <span>Director Of Company</span>
-        <img src="assets/images/testimonial2.jpg" alt="Testimonial" />
-      </div>
-      <div class="testimonials-item">
-        <i class="flaticon-quote"></i>
-        <p>
-          Contrary to popular belief, Lorem Ipsum is not simply random text.
-          It has roots in a piece of classical Latin literature from 45 BC,
-          making it over 2000 years old
-        </p>
-        <h3>Sarp Cesmeli</h3>
-        <span>Engineer Of Company</span>
-        <img src="assets/images/testimonial3.jpg" alt="Testimonial" />
-      </div>
-      <div class="testimonials-item">
-        <i class="flaticon-quote"></i>
-        <p>
-          There are many variations of passages of Lorem Ipsum available,
-          but the majority have suffered alteration in some form, by
-          injected humour, or randomised words
-        </p>
-        <h3>Tom Henry</h3>
-        <span>Staff Of Company</span>
-        <img src="assets/images/testimonial4.jpg" alt="Testimonial" />
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<div class="support-area pt-100 pb-70">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-sm-6 col-lg-4">
-        <div class="support-item two">
-          <i class="flaticon-free-delivery"></i>
-          <h3>Miễn phí vận chuyển</h3>
-          <p>Giao hàng miễn phí toàn quốc</p>
-          <img src="assets/images/support-shape1.png" alt="Shape" />
+      <div class="row justify-content-center">
+        <div class="col-sm-4 col-lg-3">
+          <div class="brand-item">
+            <a href="#">
+              <img src="assets/images/brand/logo-Tissot.png" alt="Brand" />
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+          <div class="brand-item">
+            <a href="#">
+              <img
+                src="assets/images/brand/logo-JaegerLecoultre.png"
+                alt="Brand"
+              />
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+          <div class="brand-item">
+            <a href="#">
+              <img src="assets/images/brand/logo-Omega.png" alt="Brand" />
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+          <div class="brand-item">
+            <a href="#">
+              <img
+                src="assets/images/brand/logo-PatekPhilippe.png"
+                alt="Brand"
+              />
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+          <div class="brand-item">
+            <a href="#">
+              <img src="assets/images/brand/logo-TAG-Heuer.png" alt="Brand" />
+            </a>
+          </div>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="support-item three">
-          <i class="flaticon-call-center"></i>
-          <h3>24/7 Hỗ trợ trực tuyến</h3>
-          <p>Chăm sóc khách hàng trực tuyến</p>
-          <img src="assets/images/support-shape1.png" alt="Shape" />
+    </div>
+  </section>
+  <div class="support-area pt-100 pb-70">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-sm-6 col-lg-4">
+          <div class="support-item two">
+            <i class="flaticon-free-delivery"></i>
+            <h3>Miễn phí vận chuyển</h3>
+            <p>Giao hàng miễn phí toàn quốc</p>
+            <img src="assets/images/support-shape1.png" alt="Shape" />
+          </div>
         </div>
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="support-item four">
-          <i class="flaticon-giftbox"></i>
-          <h3>Phiếu tặng quà</h3>
-          <p>Phiếu giảm giá khi mua hàng</p>
-          <img src="assets/images/support-shape1.png" alt="Shape" />
+        <div class="col-sm-6 col-lg-4">
+          <div class="support-item three">
+            <i class="flaticon-call-center"></i>
+            <h3>24/7 Hỗ trợ trực tuyến</h3>
+            <p>Chăm sóc khách hàng trực tuyến</p>
+            <img src="assets/images/support-shape1.png" alt="Shape" />
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <div class="support-item four">
+            <i class="flaticon-giftbox"></i>
+            <h3>Phiếu tặng quà</h3>
+            <p>Phiếu giảm giá khi mua hàng</p>
+            <img src="assets/images/support-shape1.png" alt="Shape" />
+          </div>
         </div>
       </div>
     </div>
