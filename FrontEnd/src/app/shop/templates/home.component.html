@@ -106,7 +106,7 @@
       <div class="col-sm-6 col-lg-3" *ngFor="let product of trending_top">
         <div class="products-item">
           <div class="top">
-            <a class="wishlist" href="#">
+            <a class="wishlist" (click)="addToCartByLike(product.id)">
               <i class="bx bx-heart"></i>
             </a>
             <img [src]="url+'storage/images/product/'+product.image" [alt]="product.name"/>
@@ -118,7 +118,7 @@
             </div>
           </div>
           <div class="bottom">
-            <a class="cart-text" href="#">Thêm vào giỏ hàng</a>
+            <a class="cart-text" (click)="addToCart(product.id)">Thêm vào giỏ hàng</a>
             <i class="bx bx-plus"></i>
           </div>
         </div>

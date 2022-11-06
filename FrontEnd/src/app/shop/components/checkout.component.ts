@@ -23,22 +23,7 @@ export class CheckoutComponent implements OnInit {
   listWard: any;
   provinceSelected: boolean = false;
   districtSelected: boolean = false;
-  profile(){
-    if(this._UserService.checkAuth()) {
-        this._UserService.profile().subscribe(res =>{
-          console.log(res.id);
-          
-          this.id = res.id;
-          this.name = res.name;
-          this.email = res.email;
-        },e=>{
-          console.log(e);
-        })
-    }
-    else{
-      this._Router.navigate(['/login']);
-    }
-  }
+ 
   constructor(
     private ShopService: ShopService,
      private _UserService:AuthService,
@@ -63,8 +48,22 @@ export class CheckoutComponent implements OnInit {
       })
 
   }
-  get f() {
-      return this.form.controls;
+  profile(){
+    if(this._UserService.checkAuth()) {
+        this._UserService.profile().subscribe(res =>{
+          this.id = res.id;
+          this.name = res.name;
+          this.email = res.email;
+        },e=>{
+          console.log(e);
+        })
+    }
+    else{
+      this._Router.navigate(['/login']);
+    }
+  }
+  checkCart(){
+    this.getAllCart();
   }
   getAllCart() {
       this.ShopService.getAllCart().subscribe(res => {
@@ -81,9 +80,7 @@ export class CheckoutComponent implements OnInit {
       this.districtSelected = false;
       this.ShopService.getAllDistrictByProvinceId(provinceId).subscribe(res => {
           this.listDistrict = res;
-      })
-      console.log(this.id);
-      
+      })     
   }
   onSelectDistrict(event: any) {
       let districtId = event.target.value;
@@ -93,6 +90,7 @@ export class CheckoutComponent implements OnInit {
       })
   }
   submit() {
+        let order: any;
         let id = this.id;
         let data = this.form.value;
         let Order: Order = {
@@ -106,7 +104,10 @@ export class CheckoutComponent implements OnInit {
           customer_id:id,
         }
           this.ShopService.storeOrder(Order).subscribe(res => {
-            alert('thành công');
+            order = res;
+            // console.log(order);
+            this._Router.navigate(['order-detail', order.id]);
+            // alert('thành công');
               this.getAllCart();
           });
    

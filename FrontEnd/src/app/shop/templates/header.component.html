@@ -181,7 +181,7 @@ aria-hidden="true"
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Giỏ hàng <span *ngIf="listCart && listCart.length">{{ listCart?.length }}</span></h2>
+      <h2>Giỏ hàng <span style="margin-right: 50px;" *ngIf="listCart && listCart.length">Số lượng: {{ listCart?.length }}</span></h2>
       <button
         type="button"
         class="btn-close"
@@ -230,7 +230,8 @@ aria-hidden="true"
       </div>
     </div>
     <div class="modal-footer">
-          <button [routerLink]="['/checkout']" class="btn common-btn btn-info" data-bs-dismiss="modal" aria-label="Close">Kiểm Tra Giỏ Hàng</button>
+          <button [routerLink]="['/checkout']" class="btn common-btn btn-info" data-bs-dismiss="modal" aria-label="Close">Kiểm tra giỏ hàng</button>
+          <button routerLink='/listorder/{{ id_user }}' class="btn common-btn btn-warning" data-bs-dismiss="modal" aria-label="Close">Lịch sử đặt hàng</button>
 
     </div>
   </div>
@@ -247,7 +248,7 @@ aria-hidden="true"
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Yêu Thích <span *ngIf="listCartByLike && listCartByLike.length ">{{ listCartByLike?.length }}</span></h2>
+        <h2>Yêu Thích <span style="margin-right: 50px;" *ngIf="listCartByLike && listCartByLike.length ">Số lượng: {{ listCartByLike?.length }}</span></h2>
         <button
           type="button"
           class="btn-close"
