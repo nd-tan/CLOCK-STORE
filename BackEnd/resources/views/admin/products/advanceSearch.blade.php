@@ -88,7 +88,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
-                                <p><b>Loại:</b></p>
+                                <p><b>Loại đồng hồ:</b></p>
                                 <input type="radio" <?= request()->type_gender == 'Nam' ? 'checked' : '' ?>  name="type_gender" value="Nam">
                                 <label for="html">Nam </label>&nbsp&nbsp&nbsp
                                 <input type="radio" <?= request()->type_gender == 'Nữ' ? 'checked' : '' ?>  name="type_gender" value="Nữ">
