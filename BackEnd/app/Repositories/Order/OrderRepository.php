@@ -18,7 +18,6 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $orders->filterPrice(request(['startPrice', 'endPrice']));
         $orders->filterDate(request(['start_date', 'end_date']));
         $orders->status($request);
-        $orders->Type($request);
         return $orders->orderBy('orders.id', 'DESC')->paginate(5);
     }
     function updateSingle($id){

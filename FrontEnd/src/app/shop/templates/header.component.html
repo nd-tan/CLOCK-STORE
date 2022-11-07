@@ -85,7 +85,9 @@
               </button>
             </li>
             <li *ngIf="check">
-              <a style="text-decoration: none" class="btn btn-warning">
+              <a style="text-decoration: none" class="btn btn-warning" type="button"  data-bs-toggle="modal"
+              data-bs-target="#exampleModalChangePassword"
+              data-bs-whatever="@mdo">
                 <i
                   class="flaticon-round-account-button-with-user-inside"
                 ></i>
@@ -93,7 +95,7 @@
               </a>
             </li>
             <li *ngIf="!check">
-              <a style="text-decoration: none" class="join"  [routerLink]="['login']">
+              <a style="text-decoration: none" class="join" type="button" [routerLink]="['login']">
                 <i
                   class="flaticon-round-account-button-with-user-inside"
                 ></i>
@@ -101,7 +103,7 @@
               </a>
             </li>
             <li *ngIf="check">
-              <a style="text-decoration: none" class="join" (click)="logout()">
+              <a style="text-decoration: none" class="join" type="button" (click)="logout()">
                 <i
                   class="flaticon-round-account-button-with-user-inside"
                 ></i>
@@ -293,4 +295,83 @@ aria-hidden="true"
       </div>
     </div>
   </div>
+</div>
+
+<div
+class="modal fade modal-right popup-modal"
+id="exampleModalChangePassword"
+tabindex="-1"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Thay đổi mật khẩu</h2>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <form [formGroup]="changePassForm" (ngSubmit)="Submit()">
+    <div class="modal-body">
+      <div class="cart-table">
+        <table class="table" >
+          <tbody>
+            <input formControlName="old_password" type="password" id="password" class="form-control" name="old_password" placeholder="Mật khẩu cũ"><br>
+        <small class="label label-danger"
+        *ngIf="!changePassForm.controls['old_password']?.valid && (changePassForm.controls['old_password']?.dirty
+
+        ||changePassForm.controls['old_password']?.touched) && changePassForm.controls['old_password']?.errors?.['required']"
+            class="help-block text-danger"
+            >Hãy nhập mật khẩu cũ!</small
+          >
+          <small class="help-block text-danger" *ngIf="error">
+            Mật khẩu cũ không đúng!
+          </small>
+          <small
+            class="label label-danger"
+            *ngIf="!changePassForm.controls['old_password']?.valid && (changePassForm.controls['old_password']?.dirty
+        ||changePassForm.controls['old_password']?.touched) && changePassForm.controls['old_password']?.errors?.['minlength']"
+        class="help-block text-danger">Mật khẩu tối thiểu 6 ký tự!</small><br>
+        <input formControlName="new_password" type="password" id="password" class="form-control" name="new_password" placeholder="Mật khẩu mới"><br>
+        <small class="label label-danger"
+        *ngIf="!changePassForm.controls['new_password']?.valid && (changePassForm.controls['new_password']?.dirty
+
+        ||changePassForm.controls['new_password']?.touched) && changePassForm.controls['new_password']?.errors?.['required']"
+            class="help-block text-danger"
+            >Hãy nhập mật khẩu mới!</small
+          >
+          <small
+            class="label label-danger"
+            *ngIf="!changePassForm.controls['new_password']?.valid && (changePassForm.controls['new_password']?.dirty
+        ||changePassForm.controls['new_password']?.touched) && changePassForm.controls['new_password']?.errors?.['minlength']"
+        class="help-block text-danger">Mật khẩu tối thiểu 6 ký tự!</small><br>
+        <input formControlName="confirmPassword" type="password" id="password" class="form-control" name="confirmPassword" placeholder="Xác nhận mật khẩu mới"><br>
+        <small class="label label-danger"
+        *ngIf="!changePassForm.controls['confirmPassword']?.valid && (changePassForm.controls['confirmPassword']?.dirty
+
+        ||changePassForm.controls['confirmPassword']?.touched) && changePassForm.controls['confirmPassword']?.errors?.['required']"
+            class="help-block text-danger"
+            >Hãy nhập mật khẩu xác nhận!</small
+          >
+          <small
+            class="label label-danger"
+            *ngIf="!changePassForm.controls['password']?.valid && (changePassForm.controls['password']?.dirty
+        ||changePassForm.controls['password']?.touched) && changePassForm.controls['password']?.errors?.['minlength']"
+        class="help-block text-danger">Mật khẩu tối thiểu 6 ký tự!</small><br>
+        <small class="help-block text-danger" *ngIf="passwordMatchError">
+          Xác nhận mật khẩu không đúng!
+        </small>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <button type="submit" [disabled]="!changePassForm.valid"  class="btn common-btn btn-warning">Đổi mật khẩu</button>
+    </div>
+  </form>
+  </div>
+</div>
 </div>

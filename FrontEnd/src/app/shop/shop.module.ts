@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { RouterModule} from '@angular/router';
 import { HomeComponent } from './components/home.component';
-import { CartComponent } from './components/cart.component';
 import { CheckoutComponent } from './components/checkout.component';
 import { ProductListComponent } from './components/product-list.component';
 import { ProductDetailComponent } from './components/product-detail.component';
@@ -20,7 +19,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     HomeComponent,
-    CartComponent,
     CheckoutComponent,
     ProductListComponent,
     ProductDetailComponent,

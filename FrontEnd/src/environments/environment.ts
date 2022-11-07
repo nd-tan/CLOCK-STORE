@@ -26,6 +26,7 @@ export const environment = {
   urlProfile: urlApi+'profile',
   urlListOrder: urlApi+'listorder/',
   urlChangePassByMail: urlApi+'change-pass-mail',
+  urlChangePass: urlApi+'change-pass',
   
 
 

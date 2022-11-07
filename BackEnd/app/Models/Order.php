@@ -60,11 +60,5 @@ class Order extends Model
         };
         return $query;
     }
-    public function scopeType($query, $request)
-    {
-        if ($request->has('gender')) {
-            return $query->join('order_details','order_details.order_id','orders.id')->join('products','products.id','order_details.product_id')->where('type_gender', $request->gender);
-        };
-        return $query;
-    }
+    
 }
