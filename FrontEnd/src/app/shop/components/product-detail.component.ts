@@ -29,6 +29,7 @@ export class ProductDetailComponent implements OnInit {
   cate_id:any;
   count: number = 0;
   product_all: any = [];
+  images_array: any[] = [];
 
 
   ngOnInit(): void {
@@ -45,14 +46,26 @@ export class ProductDetailComponent implements OnInit {
     });
     this.shopService.product_images(this.id).subscribe(res => {
       this.images = res;
-
-    })
+      console.log(res);
+        for(let image of this.images){
+          this.images_array.push(image.product_images)
+        }
+        this.images_array.push(this.product.image);
+        var i= 0;
+       setInterval(()=>{
+        this.image1 = this.url_image+this.images_array[i];
+        i++;
+        if(i>=this.images_array.length){
+          i=0;
+        }
+       },3000)
+    });
 
   }
   trending(){
     this.shopService.product_list().subscribe(res => {
     this.product_all = res;
-    console.log(res);
+    // console.log(res);
       for( let _product of this.product_all){
         if(_product.id == this.id){
           continue;

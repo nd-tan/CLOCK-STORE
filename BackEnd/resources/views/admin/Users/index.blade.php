@@ -99,7 +99,7 @@
                     </tbody>
                 </table>
                 <div style="float: right">
-                    {{ $users->onEachSide(5)->links() }}
+                    {{ $users->appends(request()->all())->links() }}
                 </div>
             </div>
         </div>

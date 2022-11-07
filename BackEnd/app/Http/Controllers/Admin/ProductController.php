@@ -181,13 +181,23 @@ class ProductController extends Controller
     {
         $this->authorize('status', Product::class);
         $product = Product::findOrFail($id);
-        if($status){
+        if($status==1){
             $product->status = 0;
+            $product->save();
+            return response()->json([
+                'code' => 0,
+                'message' => 'success',
+            ], status:200);
         }else{
             $product->status = 1;
+            $product->save();
+            return response()->json([
+                'code' => 1,
+                'message' => 'success',
+            ], status:200);
         }
-        $product->save();
-        return redirect()->route('product.index');
+
+        // $product->save();
 
     }
 

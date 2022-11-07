@@ -92,17 +92,11 @@
           </td>
           <td >
             @if (Auth::user()->hasPermission('Product_status'))
-            {{-- @if ($product->status == '1') --}}
             <a data-href="{{ route('products.updateStatus', $product->id) }}" class="updateStatus"
                 data-status="{{ $product->status }}"  id="{{ $product->id }}">
                 <i class="h4  iconStatus{{ $product->id }}
                     {{ $product->status ? 'bi bi-eye-fill text-success' : 'bi bi-eye-slash-fill text-danger' }} "></i>
             </a>
-            {{-- @else
-            <a data-href="{{ route('products.showStatus', $product->id) }}" class="updateStatus"  id="{{ $product->id }}">
-                <i class="bi bi-eye-slash-fill h4 text-danger "></i>
-            </a> --}}
-            {{-- @endif --}}
             @endif
           </td>
           <td>
@@ -125,7 +119,7 @@
       </tbody>
     </table>
     <div style="float: right">
-        {{ $products->onEachSide(5)->links() }}
+        {{ $products->appends(request()->all())->links() }}
     </div>
   </div>
 </div>
@@ -146,18 +140,19 @@
             console.log(href);
             Swal.fire({
                 title: 'Bạn có chắc?',
-                text: "Thay đổi trạng thái của sản phẩm!",
+                text: "Bạn muốn thay đổi trạng thái của sản phẩm!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, update it!'
+                confirmButtonText: 'Cập nhật',
+                cancelButtonText: 'Không',
             }).then((result) => {
-                if (status) {
+                if (status && result.isConfirmed) {
                     $(this).data('status', 0);
                     $(`.iconStatus${id}`).removeClass('bi bi-eye-fill text-success');
                     $(`.iconStatus${id}`).addClass('bi bi-eye-slash-fill text-danger');
-                } else {
+                } else if(!status && result.isConfirmed) {
                     $(this).data('status', 1);
                     $(`.iconStatus${id}`).removeClass('bi bi-eye-slash-fill text-danger');
                     $(`.iconStatus${id}`).addClass('bi bi-eye-fill text-success');
@@ -171,10 +166,12 @@
                         },
                         success: function(res) {
                             console.log(id);
-                            Swal.fire(
-                                'Cập nhật thành công!',
-                                'Trạng thái của sản phẩm đã được cập.',
-                                'success'
+                            Swal.fire({
+                                title: 'Cập nhật thành công!',
+                                text: "Trạng thái của sản phẩm đã được cập nhật!",
+                                icon: 'success',
+                                confirmButtonText: 'Tốt lắm!',
+                            }
                             )
                         }
                     });

@@ -85,7 +85,7 @@
                     </tbody>
                 </table>
                 <div style="float: right">
-                    {{ $items->onEachSide(5)->links() }}
+                    {{ $items->appends(request()->all())->links() }}
                 </div>
             </div>
         </div>
