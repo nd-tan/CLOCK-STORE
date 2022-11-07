@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Brand, Category, Product, Register, Images} from './shop';
 import { environment } from './../../environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -87,5 +87,5 @@ export class ShopService {
   getListOrder(id: any){
     return this.http.get(environment.urlListOrder+id);
   }
-
+ 
 }

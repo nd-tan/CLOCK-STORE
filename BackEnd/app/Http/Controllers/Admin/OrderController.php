@@ -108,7 +108,9 @@ class OrderController extends Controller
     function updateSingle($id){
         $this->authorize('status', Order::class);
     try{
+        
         $this->orderService->updateSingle($id);
+        $this->orderService->updateProduct($id);
         $order = $this->orderService->find($id);
         $customer = Customer::findOrFail($order->customer->id);
         $orderDetails = $order->orderDetails;
@@ -123,6 +125,7 @@ class OrderController extends Controller
             $email->subject('TCC-Shop');
             $email->to($customer->email,$customer->name);
         });
+
         return redirect()->route('order.index');
     }catch(\Exception $e){
         Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());

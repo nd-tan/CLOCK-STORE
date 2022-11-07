@@ -4,11 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Services\Customer\CustomerServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller {
+    protected $customerService;
+    public function __construct(CustomerServiceInterface $customerService)
+    {
+        $this->middleware('auth:api');
+        $this->customerService = $customerService;
+    }
     function getAllCart(){
     try{
         $carts = Cache::get('carts');

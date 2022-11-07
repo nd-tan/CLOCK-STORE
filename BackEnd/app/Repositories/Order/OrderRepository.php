@@ -26,4 +26,13 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $order->update(['status' => 1]);
         return $order;
     }
+    function updateProduct($id){
+        $order = $this->model->find($id);
+        $orderDetails = $order->orderDetails;
+        foreach ($orderDetails as $orderDetail) {
+           $products = $orderDetail->products;
+           $quantity = ($products->quantity - $orderDetail->quantity) ;
+           $products->update(['quantity' => $quantity]);
+        }
+    }
 }

@@ -25,6 +25,7 @@ export const environment = {
   urlGetAllCartByLike : urlApi+'list-cart-by-like',
   urlProfile: urlApi+'profile',
   urlListOrder: urlApi+'listorder/',
+  urlChangePassByMail: urlApi+'change-pass-mail',
   
 
 

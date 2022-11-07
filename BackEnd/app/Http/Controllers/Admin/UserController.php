@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePasswordByMailRequets;
 use App\Http\Requests\UpdateUserInfeRequest;
 use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Customer;
 use App\Models\District;
 use App\Models\Group;
 use App\Models\Province;
@@ -280,6 +281,7 @@ class UserController extends Controller
     public function accountByEmail(UpdatePasswordByMailRequets $request){
         $user = DB::table('users')->where('email', $request->email)->first();
         if($request->email == $user->email){
+            try {
             $password = Str::random(6);
             $item=User::find($user->id);
             $item->password= bcrypt($password);
@@ -294,9 +296,46 @@ class UserController extends Controller
             });
             Session::flash('success', config('define.update.succes'));
             return redirect()->route('login');
+        } catch (\Exception $e) {
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+        }
         } else{
             Session::flash('error', config('define.update.error'));
                 return redirect()->route('login');
+            }
+    }
+    public function changePassByEmailCustomer(UpdatePasswordByMailRequets $request){
+        $customer = DB::table('customers')->where('email', $request->email)->first();
+        if($request->email == $customer->email){
+            try {
+            $password = Str::random(6);
+            $item=Customer::find($customer->id);
+            $item->password= bcrypt($password);
+            $item->save();
+            $params = [
+                'name' => $customer->name,
+                'password' => $password,
+            ];
+            Mail::send('admin.emails.password', compact('params'), function ($email) use($customer) {
+                $email->subject('TCC-Shop');
+                $email->to($customer->email, $customer->name);
+            });
+            return response()->json([
+                'message' => 'Gửi mật khẩu về mail thành công',
+                'user' => $customer,
+            ], 201);
+        } catch (\Exception $e) {
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+            return response()->json([
+                'message' => 'Mail không tồn tại',
+                'status' => false,
+            ], 401);
+        }
+        } else{
+            return response()->json([
+                'message' => 'Mail không tồn tại',
+                'status' => false,
+            ], 401);
             }
     }
 }

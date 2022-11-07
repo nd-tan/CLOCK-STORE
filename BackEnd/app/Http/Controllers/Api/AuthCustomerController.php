@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\User;
 use App\Services\Customer\CustomerServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Str;
 class AuthCustomerController extends Controller
 {
     /**
@@ -22,7 +24,7 @@ class AuthCustomerController extends Controller
         $this->customerService = $customerService;
     }
 
-    /**
+    /** 
      * Get a JWT via given credentials.
      *
      * @return \Illuminate\Http\JsonResponse

@@ -32,8 +32,8 @@ export class CheckoutComponent implements OnInit {
   }
   
   ngOnInit(): void {
-        this.getAllCart();  
         this.profile();  
+        this.getAllCart();  
         this.form = new FormGroup({
           province_id: new FormControl('', Validators.required),
           district_id: new FormControl('', Validators.required),
@@ -105,9 +105,8 @@ export class CheckoutComponent implements OnInit {
         }
           this.ShopService.storeOrder(Order).subscribe(res => {
             order = res;
-            // console.log(order);
+            alert('thành công');
             this._Router.navigate(['order-detail', order.id]);
-            // alert('thành công');
               this.getAllCart();
           });
    

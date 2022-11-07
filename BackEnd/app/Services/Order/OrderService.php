@@ -18,4 +18,7 @@ class OrderService extends BaseService implements OrderServiceInterface{
     function updateSingle($id){
         return $this->repository->updateSingle($id);
     }
+    function updateProduct($id){
+        return $this->repository->updateProduct($id);
+    }
 }

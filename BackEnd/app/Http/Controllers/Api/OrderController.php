@@ -121,15 +121,15 @@ class OrderController extends Controller {
         $orderDetails = $order->orderDetails;
         $orderStatus = 'Bạn Đã Đặt Mua Những Sản Phẩm Sau:';
         $params = [
-            'ordercheck' => $orderStatus,
+            'orderStatus' => $orderStatus,
             'order' => $order,
             'orderDetails' => $orderDetails,
         ];
        
-        // Mail::send('admin.emails.orders', compact('params'), function ($email) use($customer) {
-        //     $email->subject('TCC-Shop');
-        //     $email->to($customer->email,$customer->name);
-        // });
+        Mail::send('admin.emails.orders', compact('params'), function ($email) use($customer) {
+            $email->subject('TCC-Shop');
+            $email->to($customer->email,$customer->name);
+        });
       
         return response()->json(Order::with(['orderDetails'])->find($order->id));
         
@@ -196,4 +196,5 @@ class OrderController extends Controller {
             Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
         }
     }
+    
 }
