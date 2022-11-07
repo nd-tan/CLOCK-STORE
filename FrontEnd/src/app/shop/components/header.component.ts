@@ -5,14 +5,17 @@ import { ShopService } from '../shop.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Confirm } from '../confirm.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: '../templates/header.component.html',
 })
 export class HeaderComponent implements OnInit, DoCheck {
+  changePassForm!: FormGroup;
   id:any;
   id_user:any;
+  error:any;
   name:any;
   email:any;
   listCate: any;
@@ -27,18 +30,36 @@ export class HeaderComponent implements OnInit, DoCheck {
     private _AuthService: AuthService,
     private _ShopService: ShopService,
     private _Router: Router,
-    ) { }
+    ) { 
+    }
     
   
   ngOnInit(): void {
+    this.changePassForm = new FormGroup({
+      'old_password': new FormControl('',[
+        Validators.required,
+        Validators.minLength(6)
+      ]),
+      'new_password': new FormControl('',[
+        Validators.required,
+        Validators.minLength(6)
+      ]),
+      'confirmPassword': new FormControl('',[
+        Validators.required,
+        Validators.minLength(6)
+      ]),
+    },[Confirm.confirm('new_password', 'confirmPassword')])
+
       this.check;
     if(this.check){
       this.getAllCart();
       this.getAllCartBylike();
       this.profile();
+      
     }
     this.getBrands();
     this.getCategories();
+    
   }
   ngDoCheck(): void{
       if(!this.check){
@@ -49,8 +70,14 @@ export class HeaderComponent implements OnInit, DoCheck {
         this.getAllCartBylike();
         this.profile();
       }
-      
-  }
+      this.error;
+}
+get passwordMatchError() {
+  return (
+    this.changePassForm.getError('mismatch') &&
+    this.changePassForm.get('confirmPassword')?.touched
+  );
+}
   logout() {
     this._AuthService.logout();
     this.check = this._AuthService.checkAuth();
@@ -133,6 +160,21 @@ export class HeaderComponent implements OnInit, DoCheck {
       this._Router.navigate(['/login']);
     }
   }
-
+  Submit():void{
+    let data = this.changePassForm.value;
+    let passwords = {
+      old_password:data.old_password,
+      new_password:data.new_password,
+    }
+    this._AuthService.ChangePass(passwords).subscribe(res =>{
+      this.error = false;
+        alert("Thay đổi mật khẩu thành công")
+    }, err => {
+      if(err.status === 401) {
+        alert("Thay đổi mật khẩu không thành công");
+        this.error = true;
+      }
+    });
+  }
 }
 

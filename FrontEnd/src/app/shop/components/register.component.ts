@@ -10,7 +10,7 @@ import { Confirm } from '../confirm.component';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-
+  error:any;
   constructor(
     private _Router: Router,
     private _AuthService: AuthService,
@@ -31,11 +31,11 @@ export class RegisterComponent implements OnInit {
       ]),
       'password': new FormControl('',[
         Validators.required,
-        Validators.minLength(5)
+        Validators.minLength(6)
       ]),
       'confirmPassword': new FormControl('',[
         Validators.required,
-        Validators.minLength(5)
+        Validators.minLength(6)
       ]),
     },[Confirm.confirm('password', 'confirmPassword')])
     
@@ -58,7 +58,9 @@ export class RegisterComponent implements OnInit {
       this._AuthService.register(User).subscribe(()=>{
         this._Router.navigate(['']);
         alert("Đăng ký Thành Công")
-      });
+      }, err => {
+        this.error = true;
+      } );
       this._AuthService.login(User).subscribe(res =>{
         localStorage.setItem('access_token', res.access_token);
         this._Router.navigate(['home']);

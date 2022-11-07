@@ -30,6 +30,7 @@ class OrderController extends Controller
         $params = [
             'orders' => $orders,
         ];
+        // dd($orders);
         return view('admin.orders.index', $params);
     }catch(\Exception $e){
         Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());

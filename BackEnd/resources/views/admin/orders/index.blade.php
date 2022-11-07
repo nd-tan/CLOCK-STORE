@@ -96,7 +96,7 @@
                 </tbody>
             </table>
                 <div style="float: right">
-                    {{ $orders->onEachSide(5)->links() }}
+                    {{ $orders->appends(request()->all())->links() }}
                 </div>
         </div>
     </div>

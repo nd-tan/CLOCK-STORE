@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
-use App\Models\User;
 use App\Services\Customer\CustomerServiceInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 class AuthCustomerController extends Controller
 {
     /**
@@ -66,7 +65,7 @@ class AuthCustomerController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'errors' => $validator->errors()->toJson(),
+                // 'errors' => $validator->errors()->toJson(),
                 'message' => 'User failled registered',
                 'status' => false,
             ], 400);
@@ -136,23 +135,35 @@ class AuthCustomerController extends Controller
 
     public function changePassWord(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'old_password' => 'required|string|min:6',
-            'new_password' => 'required|string|min:6',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+        try {
+            $validator = Validator::make($request->all(), [
+                'old_password' => 'required|string|min:6',
+                'new_password' => 'required|string|min:6',
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json($validator->errors()->toJson(), 400);
+            }
+            $user = auth('api')->user();
+            if(Hash::check($request->old_password, $user->password)){
+                $user = Customer::where('id', $user->id)->update(
+                    ['password' => bcrypt($request->new_password)]
+                );
+                return response()->json([
+                    'message' => 'Đổi mật khẩu thành công',
+                ], 201);
+            } else{
+                return response()->json([
+                    'message' => 'Mật khẩu củ không đúng',
+                ], 401);
+            }
+    
+        } catch (\Exception $e) {
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+            return response()->json([
+                'message' => 'Đổi mật không khẩu thành công',
+            ], 401);
         }
-        $userId = auth('api')->user()->id;
-
-        $user = User::where('id', $userId)->update(
-            ['password' => bcrypt($request->new_password)]
-        );
-
-        return response()->json([
-            'message' => 'User successfully changed password',
-            'user' => $user,
-        ], 201);
+        
     }
 }

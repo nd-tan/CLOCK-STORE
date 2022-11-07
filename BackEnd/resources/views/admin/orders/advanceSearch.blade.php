@@ -10,8 +10,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-
-
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Tổng Tiền Đơn Hàng <span class="badge bg-success rounded-pill">VNĐ</span>
@@ -52,17 +50,6 @@
                                 <input <?= request()->status == '0' ? 'checked' : '' ?> type="radio"  name="status" value="0">
                                 <label for="css">Chưa Duyệt</label><br>
                             </div>
-
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <p><b>Loại Đồng Hồ:</b></p>
-                                <input <?= request()->gender == 'Nam' ? 'checked' : '' ?> type="radio" name="gender" value="Nam">
-                                <label for="html">Nam </label>&nbsp&nbsp&nbsp
-                                <input <?= request()->gender == 'Nữ' ? 'checked' : '' ?> type="radio" name="gender" value="Nữ">
-                                <label for="css">Nữ</label><br>
-                            </div>
-
                         </div>
                     </div>
                 </div>

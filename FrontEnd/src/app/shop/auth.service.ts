@@ -32,5 +32,8 @@ export class AuthService {
   changePassByMail(request: any){
     return this._HttpClient.post(environment.urlChangePassByMail, request);
   }
-
+  ChangePass(request: any){
+    return this._HttpClient.post(environment.urlChangePass, request);
+  }
+  
 }

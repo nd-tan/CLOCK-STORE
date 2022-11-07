@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       ]),
       'password': new FormControl('',[
         Validators.required,
-        Validators.minLength(5)
+        Validators.minLength(6)
       ]),
     });
     this.ChangePassForm = new FormGroup({
