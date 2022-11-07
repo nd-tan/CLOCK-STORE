@@ -49,8 +49,7 @@ export class HeaderComponent implements OnInit, DoCheck {
         this.getAllCartBylike();
         this.profile();
       }
-      
-  }
+}
   logout() {
     this._AuthService.logout();
     this.check = this._AuthService.checkAuth();
