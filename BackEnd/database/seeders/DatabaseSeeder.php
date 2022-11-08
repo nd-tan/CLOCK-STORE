@@ -145,8 +145,8 @@ class DatabaseSeeder extends Seeder
         $user->email = 'cuong@gmail.com';
         $user->password = Hash::make('123');
         $user->phone = '0337868789';
-        $user->birthday = '1996/07/07';
-        $user->address = 'Quảng Trị';
+        $user->birthday = '1996-07-07';
+        $user->address = '133 Lý Thường Kiệt';
         $user->image = 'aluy.jpg';
         $user->gender = 'Nam';
         $user->province_id = '1';
@@ -160,8 +160,8 @@ class DatabaseSeeder extends Seeder
         $user->email = 'phi@gmail.com';
         $user->password = Hash::make('123');
         $user->phone = '0777333274';
-        $user->birthday = '2002/04/24';
-        $user->address = 'Quảng Trị';
+        $user->birthday = '2002-04-24';
+        $user->address = '74 Hùng Vương';
         $user->image = 'cuong.jpg';
         $user->gender = 'Nam';
         $user->province_id = '1';
@@ -175,8 +175,8 @@ class DatabaseSeeder extends Seeder
         $user->email = 'hai@gmail.com';
         $user->password = Hash::make('123');
         $user->phone = '0916663237';
-        $user->birthday = '2003/06/27';
-        $user->address = 'Quảng Trị';
+        $user->birthday = '2003-06-27';
+        $user->address = '202 Huyền Trân Công Chúa';
         $user->image = 'phi.jpg';
         $user->gender = 'Nam';
         $user->province_id = '4';
@@ -190,8 +190,8 @@ class DatabaseSeeder extends Seeder
         $user->email = 'duong@gmail.com';
         $user->password = Hash::make('123');
         $user->phone = '0123456789';
-        $user->birthday = '2001/03/21';
-        $user->address = 'Quảng Trị';
+        $user->birthday = '2001-03-21';
+        $user->address = '33 Lý Thái Tổ';
         $user->image = 'vinh.jpg';
         $user->gender = 'Nam';
         $user->province_id = '5';
@@ -205,8 +205,8 @@ class DatabaseSeeder extends Seeder
         $user->email = 'vinh@gmail.com';
         $user->password = Hash::make('123');
         $user->phone = '0123456788';
-        $user->birthday = '2003/11/11';
-        $user->address = 'Quảng Trị';
+        $user->birthday = '2001-11-11';
+        $user->address = '22 Mã Siêu';
         $user->image = 'fgr.jpg';
         $user->gender = 'Nam';
         $user->province_id = '6';
