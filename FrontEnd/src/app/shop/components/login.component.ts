@@ -5,7 +5,7 @@ import { User } from '../shop';
 import { AuthService } from '../auth.service';
 import { SocialUser,SocialAuthService ,FacebookLoginProvider} from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'user-login',
   templateUrl: './../templates/login.component.html',
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     private _Router: Router,
     private _UserService: AuthService,
     private authService: SocialAuthService,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -58,10 +59,10 @@ export class LoginComponent implements OnInit {
     this._UserService.login(User).subscribe(res =>{
         localStorage.setItem('access_token', res.access_token);
         this._Router.navigate(['home']);
-        alert("Đăng nhập thành công")
+        this.toastr.success('Thành công', 'Đăng nhập!');
     }, err => {
       if(err.status === 401) {
-        alert("Đăng nhập không thành công");
+        this.toastr.error('Không thành công', 'Đăng nhập!');
       }
       this.error = true;
     });
@@ -73,21 +74,40 @@ export class LoginComponent implements OnInit {
     }
     this._UserService.changePassByMail(email).subscribe(res =>{
         this._Router.navigate(['/login']);
-        alert("Gửi yêu cầu mật khẩu thành công")
+        this.toastr.success('Thành công', 'Gửi yêu cầu mật khẩu!');
     }, err => {
       if(err.status === 401) {
-        alert("Gửi yêu cầu mật khẩu không thành công");
+        this.toastr.error('Không thành công', 'Gửi yêu cầu mật khẩu!');
       }
       this.error = true;
     });
   }
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    console.log(typeof(this.user));
-    console.log(this.user);
-
+    this.register(this.user);
   }
   signOut(): void {
     this.authService.signOut();
   }
+  register(data:any){
+    let User: User = {
+      name:data.name,
+      phone:0,
+      email:data.email,
+      password:data.id,
+    }
+    this._UserService.login(User).subscribe(res =>{
+      this.login(User);
+    });
+    this._UserService.register(User).subscribe(()=>{
+      this.login(User);
+    });
 }
+  login(User: any){
+    this._UserService.login(User).subscribe(res =>{
+      localStorage.setItem('access_token', res.access_token);
+      this._Router.navigate(['home']);
+      this.toastr.success('Thành công', 'Đăng nhập!');
+    });
+  }
+  }

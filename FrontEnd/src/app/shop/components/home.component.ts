@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from './../shop.service';
-import { environment } from 'src/environments/environment'; '';
+import { environment } from 'src/environments/environment';import { ToastrService } from 'ngx-toastr';
+ '';
 @Component({
   selector: 'app-home',
   templateUrl: './../templates/home.component.html',
 })
 export class HomeComponent implements OnInit {
 
-  constructor( private shopService : ShopService) { }
+  constructor( 
+    private shopService : ShopService,
+    private toastr: ToastrService
+
+    ) { }
   url: string = environment.url;
   trending_top:any[] =[];
 
@@ -23,13 +28,13 @@ export class HomeComponent implements OnInit {
   addToCart(id: number) {
     this.shopService.addToCart(id).subscribe(res => {
       this.shopService.getAllCart();
-      alert('Thêm vào giỏ thành công');
+      this.toastr.success('Thành công', 'Thêm vào giỏ hàng!');
     })
   }
   addToCartByLike(id: number) {
     this.shopService.addToCartByLike(id).subscribe(res => {
       this.shopService.getAllCartByLike();
-      alert('Thêm vào giỏ yêu thích thành công');
+      this.toastr.success('Thành công', 'Thêm vào giỏ hàng yêu thích!');
     })
   }
 }

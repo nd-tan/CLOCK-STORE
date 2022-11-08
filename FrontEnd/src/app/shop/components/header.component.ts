@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Confirm } from '../confirm.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -30,6 +31,8 @@ export class HeaderComponent implements OnInit, DoCheck {
     private _AuthService: AuthService,
     private _ShopService: ShopService,
     private _Router: Router,
+    private toastr: ToastrService
+
     ) { 
     }
     
@@ -142,8 +145,7 @@ get passwordMatchError() {
     this._ShopService.addToCart(id).subscribe(res => {
       this._ShopService.getAllCart();
       this.ngOnInit();
-
-      alert('Thêm vào giỏ thành công');
+      this.toastr.success('Thành công', 'Thêm vào giỏ hàng!');
     })
   }
   profile(){
@@ -168,10 +170,12 @@ get passwordMatchError() {
     }
     this._AuthService.ChangePass(passwords).subscribe(res =>{
       this.error = false;
-        alert("Thay đổi mật khẩu thành công")
+      this.toastr.success('Thành công', 'Thay đổi mật khẩu!');
+
     }, err => {
       if(err.status === 401) {
-        alert("Thay đổi mật khẩu không thành công");
+      this.toastr.error('không thành công', 'Thay đổi mật khẩu!');
+
         this.error = true;
       }
     });
