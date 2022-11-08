@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../shop';
 import { AuthService } from '../auth.service';
+import { SocialUser,SocialAuthService ,FacebookLoginProvider} from '@abacritt/angularx-social-login';
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'user-login',
   templateUrl: './../templates/login.component.html',
@@ -11,12 +14,20 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   ChangePassForm!: FormGroup;
   error: any;
+  user:any = SocialUser;
+  loggedIn:any;
   constructor(
     private _Router: Router,
     private _UserService: AuthService,
-  ) { }
+    private authService: SocialAuthService,
+    ) { }
 
   ngOnInit(): void {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
+
     if(!this._UserService.checkAuth()){
     this.loginForm = new FormGroup({
       'email':new FormControl('',[
@@ -69,5 +80,14 @@ export class LoginComponent implements OnInit {
       }
       this.error = true;
     });
+  }
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    console.log(typeof(this.user));
+    console.log(this.user);
+
+  }
+  signOut(): void {
+    this.authService.signOut();
   }
 }
