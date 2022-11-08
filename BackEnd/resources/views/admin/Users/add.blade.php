@@ -63,10 +63,10 @@
                                     alt="" />
                             </div>
                             <div class="col-md-6">
-                                <label for="inputPassword5" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    name='address' id="inputName5" value="{{ old('address') }}">
-                                @error('address')
+                                <label for="inputPassword5" class="form-label">Ngày sinh</label>
+                                <input type="date" class="form-control @error('birthday') is-invalid @enderror"
+                                    name='birthday' id="inputName5" value="{{ old('birthday') }}">
+                                @error('birthday')
                                     <div class="text text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -110,14 +110,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <label for="inputPassword5" class="form-label">Ngày sinh</label>
-                                <input type="date" class="form-control @error('birthday') is-invalid @enderror"
-                                    name='birthday' id="inputName5" value="{{ old('birthday') }}">
-                                @error('birthday')
-                                    <div class="text text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+
                             <div class="col-md-4">
                                 <label for="exampleFormControlSelect1">Nhóm nhân viên</label>
                                 <select class="form-control" name="group_id" id="exampleFormControlSelect1">

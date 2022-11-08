@@ -29,14 +29,6 @@
                                 @enderror
                             </div>
                             <div class="col-md-6">
-                                <label for="inputPassword5" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    name='address' id="inputName5" value="{{ old('address') ?? $users->address }}">
-                                @error('address')
-                                    <div class="text text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6">
                                 <label for="inputPassword5" class="form-label">Số điện thoại</label>
                                 <input type="text" class="form-control @error('phone') is-invalid @enderror"
                                     name='phone' id="inputName5" value="{{ old('phone') ?? $users->phone }}">
@@ -53,6 +45,14 @@
                                 @enderror
                             </div>
                             <div class="col-md-6">
+                                <label for="inputEmail5" class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                    name='address' id="inputName5" value="{{ old('address') ?? $users->address }}">
+                                @error('address')
+                                    <div class="text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
                                 <label for="inputEmail5" class="form-label">Ảnh đại diện</label>
                                 <input accept="image/*" type='file' id="inputFile" name="inputFile" class="form-control @error('image') is-invalid @enderror">
                                 @error('inputFile')
@@ -62,11 +62,11 @@
                                 <img type="hidden" width="120px" height="100px" id="blah1"
                                 src="{{ asset('storage/images/user/' . $users->image) ?? asset('storage/images/' . $request->inputFile) }}" alt="" />
                               </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail5" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    name='address' id="inputName5" value="{{ old('address') ?? $users->address }}">
-                                @error('address')
+                              <div class="col-md-6">
+                                <label for="inputPassword5" class="form-label">Ngày Sinh</label>
+                                <input type="date" class="form-control @error('birthday') is-invalid @enderror"
+                                    name='birthday' id="inputName5" value="{{ old('birthday') ?? $users->birthday }}">
+                                @error('birthday')
                                     <div class="text text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -99,15 +99,6 @@
                                         <option selected="" value="">Vui lòng chọn</option>
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="inputPassword5" class="form-label">Ngày Sinh</label>
-                                <input type="date" class="form-control @error('birthday') is-invalid @enderror"
-                                    name='birthday' id="inputName5" value="{{ old('birthday') ?? $users->birthday }}">
-                                @error('birthday')
-                                    <div class="text text-danger">{{ $message }}</div>
-                                @enderror
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label">Nhóm nhân viên</label>
