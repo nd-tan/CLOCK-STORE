@@ -51,14 +51,6 @@
                                     <div class="text text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            {{-- <div class="col-md-6">
-                                <label for="inputPassword5" class="form-label">Mật khẩu</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    name='password' id="inputName5" value="{{ old('password') }}">
-                                @error('password')
-                                    <div class="text text-danger">{{ $message }}</div>
-                                @enderror
-                            </div> --}}
                             <div class="col-md-6">
                                 <label for="inputCity" class="form-label">Ảnh đại diện</label>
                                 <input accept="image/*" type='file' id="inputFile" name="inputFile"

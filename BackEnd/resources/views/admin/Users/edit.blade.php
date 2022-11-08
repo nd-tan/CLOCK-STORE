@@ -59,7 +59,7 @@
                                 <div class="text text-danger">{{ $message }}</div>
                                 @enderror
                                 <br>
-                                <img type="hidden" width="90px" height="90px" id="blah1"
+                                <img type="hidden" width="120px" height="100px" id="blah1"
                                 src="{{ asset('storage/images/user/' . $users->image) ?? asset('storage/images/' . $request->inputFile) }}" alt="" />
                               </div>
                             <div class="col-md-6">
