@@ -52,23 +52,16 @@
                                     <div class="text text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            {{-- <div class="col-md-6">
-                                <label for="inputEmail5" class="form-label">Mật khẩu</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    name='password' id="inputName5" value="{{ old('password') ?? $users->password }}">
-                                @error('password')
-                                    <div class="text text-danger">{{ $message }}</div>
-                                @enderror
-                            </div> --}}
                             <div class="col-md-6">
                                 <label for="inputEmail5" class="form-label">Ảnh đại diện</label>
-                                <input accept="image/*" type='file' id="inputFile" name="inputFile"
-                                    class="form-control @error('inputFile') is-invalid @enderror"><br>
+                                <input accept="image/*" type='file' id="inputFile" name="inputFile" class="form-control @error('image') is-invalid @enderror">
                                 @error('inputFile')
-                                    <div class="text text-danger">{{ $message }}</div>
+                                <div class="text text-danger">{{ $message }}</div>
                                 @enderror
-                                <input name = "image1" type="hidden" value="{{$users->image}}">
-                            </div>
+                                <br>
+                                <img type="hidden" width="90px" height="90px" id="blah1"
+                                src="{{ asset('storage/images/user/' . $users->image) ?? asset('storage/images/' . $request->inputFile) }}" alt="" />
+                              </div>
                             <div class="col-md-6">
                                 <label for="inputEmail5" class="form-label">Địa chỉ</label>
                                 <input type="text" class="form-control @error('address') is-invalid @enderror"
@@ -87,9 +80,6 @@
                                             <option value="{{ $province->id }}">{{ $province->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('province_id')
-                                    <div class="text text-danger">{{ $message }}</div>
-                                @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -99,9 +89,6 @@
                                         aria-label="Default select example">
                                         <option selected="" value="">Vui lòng chọn</option>
                                     </select>
-                                    @error('district_id')
-                                    <div class="text text-danger">{{ $message }}</div>
-                                @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -111,9 +98,6 @@
                                         id="ward_id">
                                         <option selected="" value="">Vui lòng chọn</option>
                                     </select>
-                                    @error('ward_id')
-                                    <div class="text text-danger">{{ $message }}</div>
-                                @enderror
                                 </div>
                             </div>
 

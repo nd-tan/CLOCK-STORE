@@ -48,10 +48,6 @@
                                             <td>{{ $user->birthday }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Ảnh đại diện</td>
-                                            <td>{{ $user->image }}</td>
-                                        </tr>
-                                        <tr>
                                             <td>Giới tính</td>
                                             <td>{{ $user->gender }}</td>
                                         </tr>

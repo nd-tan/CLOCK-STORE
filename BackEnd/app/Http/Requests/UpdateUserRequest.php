@@ -30,9 +30,6 @@ class UpdateUserRequest extends FormRequest
             'phone' => 'required',
             'birthday' => 'required',
             'gender' => 'required',
-            'province_id' => 'required',
-            'district_id' => 'required',
-            'ward_id' => 'required',
             'group_id' => 'required',
         ];
     }
@@ -46,9 +43,6 @@ class UpdateUserRequest extends FormRequest
             'phone.required' => 'Không được để trống!',
             'birthday.required' => 'Không được để trống!',
             'gender.required' => 'Không được để trống!',
-            'province_id.required' => 'Không được để trống!',
-            'district_id.required' => 'Không được để trống!',
-            'ward_id.required' => 'Không được để trống!',
             'group_id.required' => 'Không được để trống!',
 
         ];
