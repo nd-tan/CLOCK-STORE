@@ -31,7 +31,6 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             GroupRoleSeeder::class,
             UserSeeder::class,
-            OrderSeeder::class,
         ]);
         $this->importGroup();
         $this->importRoles();

@@ -13,6 +13,9 @@ import { ShopRoutingModule } from './shop/shop-routing.module';
 import { ShopModule } from './shop/shop.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ListorderComponent } from './shop/components/listorder.component';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider } from '@abacritt/angularx-social-login';
+import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,26 @@ import { ListorderComponent } from './shop/components/listorder.component';
     ReactiveFormsModule,
     NgxPaginationModule,
     FormsModule,
+    
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorService, multi: true },],
+    { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorService, multi: true },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('5566948123396307')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
