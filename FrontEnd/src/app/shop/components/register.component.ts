@@ -4,6 +4,8 @@ import { AuthService } from '../auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../shop';
 import { Confirm } from '../confirm.component';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'user-register',
   templateUrl: './../templates/register.component.html',
@@ -14,6 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _Router: Router,
     private _AuthService: AuthService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -51,20 +54,19 @@ export class RegisterComponent implements OnInit {
       let data = this.registerForm.value;
       let User: User = {
         name:data.name,
-        phone:data.name,
+        phone:data.phone,
         email:data.email,
         password:data.password,
       }
       this._AuthService.register(User).subscribe(()=>{
         this._Router.navigate(['']);
-        alert("Đăng ký Thành Công")
       }, err => {
         this.error = true;
       } );
       this._AuthService.login(User).subscribe(res =>{
         localStorage.setItem('access_token', res.access_token);
         this._Router.navigate(['home']);
-        alert("Đăng Nhập Thành Công")
+        this.toastr.success('Thành công', 'Đăng nhập!');
       });
    
   }

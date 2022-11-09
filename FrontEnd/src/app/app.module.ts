@@ -16,6 +16,7 @@ import { ListorderComponent } from './shop/components/listorder.component';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { FacebookLoginProvider } from '@abacritt/angularx-social-login';
 import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
     ReactiveFormsModule,
     NgxPaginationModule,
     FormsModule,
+    ToastrModule.forRoot()
     
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorService, multi: true },

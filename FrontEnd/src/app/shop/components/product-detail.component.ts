@@ -5,6 +5,7 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Product} from '../shop';
 import { map, Observable, switchMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-product-detail',
   templateUrl: '../templates/product-detail.component.html',
@@ -13,7 +14,9 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private shopService: ShopService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+   private toastr: ToastrService
+
     ) { }
 
   url: string = environment.url;
@@ -117,7 +120,7 @@ export class ProductDetailComponent implements OnInit {
   addToCart(id: number) {
     this.shopService.addToCart(id).subscribe(res => {
       this.shopService.getAllCart()
-      alert('Thêm vào giỏ thành công');
+      this.toastr.success('Thành công', 'Thêm vào giỏ hàng!');
     })
   }
   changeImage(image:any){
@@ -126,7 +129,7 @@ export class ProductDetailComponent implements OnInit {
   addToCartByLike(id: number) {
     this.shopService.addToCartByLike(id).subscribe(res => {
       this.shopService.getAllCartByLike();
-      alert('Thêm vào giỏ yêu thích thành công');
+      this.toastr.success('Thành công', 'Thêm vào giỏ hàng yêu thích!');
     })
   }
 

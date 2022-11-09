@@ -3,6 +3,7 @@ import { ShopService } from './../shop.service';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-product-list',
   templateUrl: '../templates/product-list.component.html',
@@ -11,6 +12,8 @@ export class ProductListComponent implements OnInit {
   constructor(private shopService : ShopService,
    private _route: ActivatedRoute,
    private fb: FormBuilder,
+   private toastr: ToastrService
+
      ) { }
 
   data: any;
@@ -123,13 +126,14 @@ export class ProductListComponent implements OnInit {
   addToCart(id: number) {
     this.shopService.addToCart(id).subscribe(res => {
       this.shopService.getAllCart()
-      alert('Thêm vào giỏ thành công');
+      this.toastr.success('Thành công', 'Thêm vào giỏ hàng!');
     })
   }
   addToCartByLike(id: number) {
     this.shopService.addToCartByLike(id).subscribe(res => {
       this.shopService.getAllCartByLike();
-      alert('Thêm vào giỏ yêu thích thành công');
+      this.toastr.success('Thành công', 'Thêm vào giỏ hàng yêu thích!');
+
     })
   }
   getAllCart() {
