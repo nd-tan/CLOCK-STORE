@@ -52,14 +52,6 @@ export class HeaderComponent implements OnInit, DoCheck {
         Validators.minLength(6)
       ]),
     },[Confirm.confirm('new_password', 'confirmPassword')])
-
-      this.check;
-    if(this.check){
-      this.getAllCart();
-      this.getAllCartBylike();
-      this.profile();
-      
-    }
     this.getBrands();
     this.getCategories();
     
@@ -69,8 +61,6 @@ export class HeaderComponent implements OnInit, DoCheck {
         this.check = this._AuthService.checkAuth();
       }
       if(this.check && !this.name && !this.id_user){
-        this.getAllCart();
-        this.getAllCartBylike();
         this.profile();
       }
       this.error;
