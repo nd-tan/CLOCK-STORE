@@ -23,7 +23,6 @@ export class ListorderComponent implements OnInit {
     this.customer_id = this.route.snapshot.params['id'];
     this.ShopService.getListOrder(this.customer_id).subscribe(res => {
       this.order = res;
-      // console.log(this.order);
       for(let orderDetail of this.order.orders.order_details) {
         this.totalPrice += parseInt(orderDetail.price_at_time) * parseInt(orderDetail.quantity);
       }

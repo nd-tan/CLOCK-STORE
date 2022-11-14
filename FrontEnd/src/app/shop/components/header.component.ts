@@ -1,6 +1,5 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ShopService } from '../shop.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -76,12 +75,12 @@ get passwordMatchError() {
     this.check = this._AuthService.checkAuth();
     this.listCartByLike = [];
     this.listCart = [];
+    this.toastr.success('Thành công', 'Đăng xuất');
     this._Router.navigate(['login']);
   }
   changeCart(){
     this.getAllCart();
     this.getAllCartBylike();
-    this.check = this._AuthService.checkAuth();
   }
   getAllCart() {
     this._ShopService.getAllCart().subscribe(res => {
@@ -120,10 +119,6 @@ get passwordMatchError() {
   getAllCartBylike() {
     this._ShopService.getAllCartByLike().subscribe(res => {
       this.listCartByLike = res;
-      this.cartSubByLiketotal = 0;
-      for (let cartlike of this.listCartByLike) {
-        this.cartSubByLiketotal += cartlike.price * cartlike.quantity;
-      }
     });
   }
   deleteCartByLike(id: any) {
@@ -133,8 +128,6 @@ get passwordMatchError() {
   }
   addToCart(id: number) {
     this._ShopService.addToCart(id).subscribe(res => {
-      this._ShopService.getAllCart();
-      this.ngOnInit();
       this.toastr.success('Thành công', 'Thêm vào giỏ hàng!');
     })
   }
@@ -161,11 +154,9 @@ get passwordMatchError() {
     this._AuthService.ChangePass(passwords).subscribe(res =>{
       this.error = false;
       this.toastr.success('Thành công', 'Thay đổi mật khẩu!');
-
     }, err => {
       if(err.status === 401) {
       this.toastr.error('không thành công', 'Thay đổi mật khẩu!');
-
         this.error = true;
       }
     });
