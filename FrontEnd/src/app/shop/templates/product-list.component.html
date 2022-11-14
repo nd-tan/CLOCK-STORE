@@ -21,9 +21,19 @@
           </form>
       </div>
       <div class="col-lg-9">
-        <a (click)="product_list()" style="width: 150px; height: 40px; margin-left: 10%;" class="btn btn-{{color_1}}">Tất Cả Sản Phẩm</a>
-        <a (click)="product_male('Nam')" style="width: 150px; height: 40px;margin-left: 18%;" class="btn btn-{{color_2}}">Đồng Hồ Nam</a>
-        <a (click)="product_male('Nữ')" style="float: right ; width: 150px; height: 40px; margin-right: 12%;" class="btn btn-{{color_3}}">Đồng Hồ Nữ</a>
+        <div class="row">
+          <a (click)="product_list()" style="width: 150px; height: 40px; margin-left: 10%;" class="btn btn-{{color_1}}">Tất Cả Sản Phẩm</a>
+          <a (click)="product_male('Nam')" style="width: 150px; height: 40px;margin-left: 18%;" class="btn btn-{{color_2}}">Đồng Hồ Nam</a>
+          <a (click)="product_male('Nữ')" style="float: right ; width: 150px; height: 40px; margin-right: 12%;" class="btn btn-{{color_3}}">Đồng Hồ Nữ</a>
+        </div><br>
+        <div style="margin-left: 90px" class="row">
+          <a class="btn btn-{{color_2t}}" type="button" style=" width: 120px;" (click)="product_by_price('2t')" type="button">Dưới 2 triệu</a>&nbsp;&nbsp;
+          <a class="btn btn-{{color_2t_5t}}" type="button" style=" width: 120px;" (click)="product_by_price('2t-5t')" type="button">2 - 5 triệu</a>&nbsp;&nbsp;
+          <a class="btn btn-{{color_5t_10t}}" type="button" style=" width: 120px;" (click)="product_by_price('5t-10t')" type="button">5 - 10 triệu</a>&nbsp;&nbsp;
+          <a class="btn btn-{{color_10t_20t}}" type="button" style=" width: 120px;" (click)="product_by_price('10t-20t')" type="button">10 - 20 triệu</a>&nbsp;&nbsp;
+          <a class="btn btn-{{color_20t_50t}}" type="button" style=" width: 120px;" (click)="product_by_price('20t-50t')" type="button">20 - 50 triệu</a>&nbsp;&nbsp;
+          <a class="btn btn-{{color_50t}}" type="button" style=" width: 120px;" (click)="product_by_price('50t')" type="button">Trên 50 triệu</a>
+        </div>
       </div>
   </div><br>
   <div class="container">
@@ -44,29 +54,6 @@
               <div *ngFor="let category of categories" style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
                 <a style=" width: 170px;" (click)="product_OfCate(category.id)" type="button">{{category.name}}</a>
               </div>
-            </div>
-          </div>
-          <div>
-            <h3>Lọc Theo Giá</h3>
-              <div class="container">
-                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
-                  <a style=" width: 170px;" (click)="product_by_price('2t')" type="button">Dưới 2 triệu</a>
-                </div>
-                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
-                  <a style=" width: 170px;" (click)="product_by_price('2t-5t')" type="button">Từ 2 - 5 triệu</a>
-                </div>
-                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
-                  <a style=" width: 170px;" (click)="product_by_price('5t-10t')" type="button">Từ 5 - 10 triệu</a>
-                </div>
-                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
-                  <a style=" width: 170px;" (click)="product_by_price('10t-20t')" type="button">Từ 10 - 20 triệu</a>
-                </div>
-                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
-                  <a style=" width: 170px;" (click)="product_by_price('20t-50t')" type="button">Từ 20 - 50 triệu</a>
-                </div>
-                <div  style="margin: 10px;"  class="col" style="width:130px; height: 35px;">
-                  <a style=" width: 170px;" (click)="product_by_price('50t')" type="button">Trên 50 triệu</a>
-                </div>
             </div>
           </div>
         </div>
