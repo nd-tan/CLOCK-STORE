@@ -39,6 +39,16 @@ export class ProductListComponent implements OnInit {
   color_1:any = 'dark';
   color_2:any = 'dark';
   color_3:any = 'dark';
+  color_2t: any = 'dark';
+  color_2t_5t: any = 'dark';
+  color_5t_10t: any = 'dark';
+  color_10t_20t: any = 'dark';
+  color_20t_50t: any = 'dark';
+  color_50t: any = 'dark';
+  product_cate: any[] = [];
+  product_brand: any[] = [];
+  product_gender: any[] = [];
+  product_price: any[] = [];
 
 
   ngOnInit(): void {
@@ -69,8 +79,21 @@ export class ProductListComponent implements OnInit {
     this.color_2 = 'dark';
     this.color_3 = 'dark';
   }
+  reset_color_price(){
+    this.color_2t = 'dark';
+    this.color_2t_5t = 'dark';
+    this.color_5t_10t = 'dark';
+    this.color_10t_20t = 'dark';
+    this.color_20t_50t = 'dark';
+    this.color_50t = 'dark';
+  }
   product_list(){
     this.reset_color();
+    this.reset_color_price();
+    this.product_cate = [];
+    this.product_brand = [];
+    this.product_gender = [];
+    this.product_price = [];
     this.shopService.product_list().subscribe(res =>{
       this.products = res;
       this.color_1='warning';
@@ -97,23 +120,32 @@ export class ProductListComponent implements OnInit {
     })
   }
   product_OfBrand(brand_id:any){
+    this.reset_color_price()
+    this.reset_color();
+    this.color_1='warning';
     this.brand_id= brand_id;
     this.shopService.brand_list().subscribe(res =>{
       this.brands= res;
       for(const brand of this.brands){
         if(this.brand_id == brand.id){
           this.products = brand.products;
+          this.product_brand = this.products;
         }
       }
+
     })
   }
   product_OfCate(cate_id:any){
+    this.reset_color_price();
+    this.reset_color();
+    this.color_1='warning';
     this.cate_id= cate_id;
     this.shopService.cate_list().subscribe(res =>{
       this.categories= res;
       for(const category of this.categories){
         if(this.cate_id == category.id){
           this.products = category.products;
+          this.product_cate = this.products;
         }
       }
     })
@@ -159,25 +191,53 @@ export class ProductListComponent implements OnInit {
     }else{
       this.color_3 = 'warning';
     }
-    this.shopService.product_list().subscribe(res =>{
-    this.products = res;
-    let array: any[] = [];
-      for(let product of this.products){
-        if(product.type_gender == gender)
-        {
-          array.push(product);
+    if(this.product_cate.length != 0){
+      this.products=this.product_cate;
+    }else if(this.product_brand.length != 0){
+      this.products=this.product_brand;
+    }else if(this.product_price.length != 0){
+      this.products=this.product_price;
+    }else {
+      this.shopService.product_list().subscribe(res =>{
+      this.products = res;
+      let array: any[] = [];
+        for(let product of this.products){
+          if(product.type_gender == gender)
+          {
+            array.push(product);
+          }
         }
+        this.products=array;
+        this.product_gender= this.products;
+        });
       }
-      this.products=array;
-    });
+      let array: any[] = [];
+        for(let product of this.products){
+          if(product.type_gender == gender)
+          {
+            array.push(product);
+          }
+        }
+        this.products=array;
+        this.product_gender= this.products;
+
   }
 
   product_by_price(price:any){
-    this.shopService.product_list().subscribe(res =>{
-    this.products = res;
-    let array: any[] = [];
+    this.reset_color_price();
+    if(this.product_gender.length != 0){
+      this.products= this.product_gender;
+    }else if(this.product_cate.length != 0){
+      this.products=this.product_cate;
+    }else if(this.product_brand.length != 0){
+      this.products=this.product_brand;
+    }else {
+      this.shopService.product_list().subscribe(res =>{
+      this.products = res;
+      let array: any[] = [];
       switch(price){
         case '2t' :
+          this.color_2t='warning';
           for(let product of this.products){
             if(product.price < 2000000)
             {
@@ -185,8 +245,10 @@ export class ProductListComponent implements OnInit {
             }
           }
           this.products=array;
+          this.product_price= this.products;
           break;
         case '2t-5t':
+          this.color_2t_5t='warning';
           for(let product of this.products){
             if(product.price >= 2000000 && product.price <= 5000000)
             {
@@ -194,8 +256,10 @@ export class ProductListComponent implements OnInit {
             }
           }
           this.products=array;
+          this.product_price= this.products;
           break;
         case '5t-10t':
+          this.color_5t_10t='warning';
           for(let product of this.products){
             if(product.price >= 5000000 && product.price <= 10000000)
             {
@@ -203,8 +267,10 @@ export class ProductListComponent implements OnInit {
             }
           }
           this.products=array;
+          this.product_price= this.products;
           break;
         case '10t-20t':
+          this.color_10t_20t='warning';
           for(let product of this.products){
             if(product.price >= 10000000 && product.price <= 20000000)
             {
@@ -212,8 +278,10 @@ export class ProductListComponent implements OnInit {
             }
           }
           this.products=array;
+          this.product_price= this.products;
           break;
         case '20t-50t':
+          this.color_20t_50t='warning';
           for(let product of this.products){
             if(product.price >= 20000000 && product.price <= 50000000)
             {
@@ -221,8 +289,10 @@ export class ProductListComponent implements OnInit {
             }
           }
           this.products=array;
+          this.product_price= this.products;
           break;
         case '50t':
+          this.color_50t='warning';
           for(let product of this.products){
             if(product.price > 50000000)
             {
@@ -230,10 +300,80 @@ export class ProductListComponent implements OnInit {
             }
           }
           this.products=array;
+          this.product_price= this.products;
+          break;
+        }
+      });
+    }
+    let array: any[] = [];
+      switch(price){
+        case '2t' :
+          this.color_2t='warning';
+          for(let product of this.products){
+            if(product.price < 2000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          this.product_price= this.products;
+          break;
+        case '2t-5t':
+          this.color_2t_5t='warning';
+          for(let product of this.products){
+            if(product.price >= 2000000 && product.price <= 5000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          this.product_price= this.products;
+          break;
+        case '5t-10t':
+          this.color_5t_10t='warning';
+          for(let product of this.products){
+            if(product.price >= 5000000 && product.price <= 10000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          this.product_price= this.products;
+          break;
+        case '10t-20t':
+          this.color_10t_20t='warning';
+          for(let product of this.products){
+            if(product.price >= 10000000 && product.price <= 20000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          this.product_price= this.products;
+          break;
+        case '20t-50t':
+          this.color_20t_50t='warning';
+          for(let product of this.products){
+            if(product.price >= 20000000 && product.price <= 50000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          this.product_price= this.products;
+          break;
+        case '50t':
+          this.color_50t='warning';
+          for(let product of this.products){
+            if(product.price > 50000000)
+            {
+              array.push(product);
+            }
+          }
+          this.products=array;
+          this.product_price= this.products;
           break;
       }
-
-    });
   }
   product_search(search : any){
     let keywork = this.serachForm.value.search;

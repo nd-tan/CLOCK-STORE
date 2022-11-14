@@ -32,10 +32,10 @@ export class HeaderComponent implements OnInit, DoCheck {
     private _Router: Router,
     private toastr: ToastrService
 
-    ) { 
+    ) {
     }
-    
-  
+
+
   ngOnInit(): void {
     this.changePassForm = new FormGroup({
       'old_password': new FormControl('',[
@@ -53,16 +53,16 @@ export class HeaderComponent implements OnInit, DoCheck {
     },[Confirm.confirm('new_password', 'confirmPassword')])
     this.getBrands();
     this.getCategories();
-    
+
   }
   ngDoCheck(): void{
-      if(!this.check){
-        this.check = this._AuthService.checkAuth();
-      }
-      if(this.check && !this.name && !this.id_user){
-        this.profile();
-      }
-      this.error;
+      // if(!this.check){
+      //   this.check = this._AuthService.checkAuth();
+      // }
+      // if(this.check && !this.name && !this.id_user){
+      //   this.profile();
+      // }
+      // this.error;
 }
 get passwordMatchError() {
   return (
