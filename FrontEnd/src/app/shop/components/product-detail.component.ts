@@ -119,7 +119,6 @@ export class ProductDetailComponent implements OnInit {
   }
   addToCart(id: number) {
     this.shopService.addToCart(id).subscribe(res => {
-      this.shopService.getAllCart()
       this.toastr.success('Thành công', 'Thêm vào giỏ hàng!');
     })
   }
@@ -128,7 +127,6 @@ export class ProductDetailComponent implements OnInit {
   }
   addToCartByLike(id: number) {
     this.shopService.addToCartByLike(id).subscribe(res => {
-      this.shopService.getAllCartByLike();
       this.toastr.success('Thành công', 'Thêm vào giỏ hàng yêu thích!');
     })
   }
