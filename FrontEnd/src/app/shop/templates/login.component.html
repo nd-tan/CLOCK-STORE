@@ -34,8 +34,6 @@
         *ngIf="error"
         class="help-block text-danger">Tài Khoản hoặc Mật Khẩu Không Đúng</small><br>
         <input type="submit" [disabled]="!loginForm.valid" class="btn common-btn btn-info" value="Đăng nhập">
-  <img src="assets/images/shape1.png" alt="Shape">
-  <img src="assets/images/shape2.png" alt="Shape">
   <h4>Hoặc</h4>
   <ul>
   <li>
@@ -44,42 +42,45 @@
                 Đăng Nhập Facebook
               </a>
             </li>
+            <h5>Bạn chưa có tài khoản ? <a [routerLink]="['/register']">Đăng ký</a></h5><br>
             <li>
-              <a >
+              <!-- <a >
                 <i class="bx bxl-google"></i>
   Đăng Nhập Google
-  </a>
+  </a> -->
+
+  <form [formGroup]="ChangePassForm" (ngSubmit)="Submit()" class="form-horizontal">
+    <button type="button" class="title collapsed btn-warning" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+        aria-expanded="false" aria-controls="collapseFour">Quên mật khẩu</button>
+    <section class="checkout-steps-form-content collapse" id="collapseFour"
+        aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="single-form form-default"><br>
+                    <input type="email" class="form-control" formControlName="email" placeholder="Nhập email nhận mật khẩu" >
+                    <small class="label label-danger"
+                    *ngIf="!ChangePassForm.controls['email']?.valid && (ChangePassForm.controls['email']?.dirty
+                    ||ChangePassForm.controls['email']?.touched) && ChangePassForm.controls['email']?.errors?.['required']"
+                    class="help-block text-danger">Email không được để trống!</small>
+                    <small class="label label-danger"
+                    *ngIf="!ChangePassForm.controls['email']?.valid && (ChangePassForm.controls['email']?.dirty
+                    ||ChangePassForm.controls['email']?.touched) && ChangePassForm.controls['email']?.errors?.['email']"
+                    class="help-block text-danger">Email không đúng định dạng!</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+              <div class="single-form form-default">
+                <br>
+                  <input type="submit" [disabled]="!ChangePassForm.valid" class="btn btn-info" value="Gửi yêu cầu">
+              </div>
+          </div>
+        </div>
+    </section>
+  </form>
   </li>
   </ul>
 </form>
-  <h5>Bạn chưa có tài khoản ? <a [routerLink]="['/register']">Đăng ký</a></h5><br>
-      <form [formGroup]="ChangePassForm" (ngSubmit)="Submit()" class="form-horizontal">
-      <h6 class="title collapsed text-center btn-warning" data-bs-toggle="collapse" data-bs-target="#collapseFour"
-          aria-expanded="false" aria-controls="collapseFour">Quên mật khẩu</h6>
-      <section class="checkout-steps-form-content collapse" id="collapseFour"
-          aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-          <div class="row">
-              <div class="col-md-8">
-                  <div class="single-form form-default">
-                      <input type="email" class="form-control" formControlName="email" placeholder="Nhập email nhận mật khẩu" >
-                      <small class="label label-danger"
-                      *ngIf="!ChangePassForm.controls['email']?.valid && (ChangePassForm.controls['email']?.dirty
-                      ||ChangePassForm.controls['email']?.touched) && ChangePassForm.controls['email']?.errors?.['required']"
-                      class="help-block text-danger">Email không được để trống!</small>
-                      <small class="label label-danger"
-                      *ngIf="!ChangePassForm.controls['email']?.valid && (ChangePassForm.controls['email']?.dirty
-                      ||ChangePassForm.controls['email']?.touched) && ChangePassForm.controls['email']?.errors?.['email']"
-                      class="help-block text-danger">Email không đúng định dạng!</small>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                <div class="single-form form-default">
-                    <input type="submit" class="btn btn-info" value="Gửi yêu cầu">
-                </div>
-            </div>
-          </div>
-      </section>
-    </form>
+   
   </div>
   </div>
   </div>

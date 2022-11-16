@@ -306,7 +306,13 @@ class UserController extends Controller
     }
     public function changePassByEmailCustomer(UpdatePasswordByMailRequets $request){
         $customer = DB::table('customers')->where('email', $request->email)->first();
-        if($request->email == $customer->email){
+        if(!$customer){
+            return response()->json([
+                'message' => 'Mail không tồn tại',
+                'status' => false,
+            ], 401);
+        }
+        if($request->email == $customer->email && $customer->phone !=0){
             try {
             $password = Str::random(6);
             $item=Customer::find($customer->id);

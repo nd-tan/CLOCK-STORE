@@ -9,6 +9,7 @@ use App\Services\Order\OrderServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -126,9 +127,10 @@ class OrderController extends Controller
             $email->subject('TCC-Shop');
             $email->to($customer->email,$customer->name);
         });
-
+        Session::flash('success', config('define.accept.succes'));
         return redirect()->route('order.index');
     }catch(\Exception $e){
+        Session::flash('error', config('define.accept.error'));
         Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
     }
     }

@@ -72,20 +72,21 @@ export class LoginComponent implements OnInit {
     let email = {
       email:data.email,
     }
+    this.toastr.clear();
+    this.toastr.info('Đang xử lý...', 'Đang xác minh Email?');
     this._UserService.changePassByMail(email).subscribe(res =>{
         this._Router.navigate(['/login']);
+        this.toastr.clear();
         this.toastr.success('Thành công', 'Gửi yêu cầu mật khẩu!');
     }, err => {
       if(err.status === 401) {
-        this.toastr.error('Không thành công', 'Gửi yêu cầu mật khẩu!');
+        this.toastr.clear();
+        this.toastr.error('Email không tồn tại', 'Yêu cầu không thành công');
       }
-      this.error = true;
     });
   }
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    console.log(this.user);
-    
     this.register(this.user);
   }
   signOut(): void {

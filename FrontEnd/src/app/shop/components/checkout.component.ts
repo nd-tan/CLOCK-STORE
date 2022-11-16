@@ -109,7 +109,7 @@ export class CheckoutComponent implements OnInit {
         }
           this.ShopService.storeOrder(Order).subscribe(res => {
             order = res;
-            this.toastr.error('Thành công', 'Đặt hàng thành công!');
+            this.toastr.success('Thành công', 'Đặt hàng thành công!');
               this._Router.navigate(['order-detail', order.id]);
                 this.getAllCart();
           });

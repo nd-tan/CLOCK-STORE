@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit, DoCheck {
   id_user:any;
   error:any;
   name:any;
-  email:any;
   listCate: any;
   listCart: any;
   listBrand: any;
@@ -56,13 +55,13 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   }
   ngDoCheck(): void{
-      // if(!this.check){
-      //   this.check = this._AuthService.checkAuth();
-      // }
-      // if(this.check && !this.name && !this.id_user){
-      //   this.profile();
-      // }
-      // this.error;
+      if(!this.check){
+        this.check = this._AuthService.checkAuth();
+      }
+      if(this.check && !this.name && !this.id_user){
+          this.profile();
+      }
+      this.error;
 }
 get passwordMatchError() {
   return (
@@ -136,9 +135,9 @@ get passwordMatchError() {
         this._AuthService.profile().subscribe(res =>{
           this.id_user = res.id;
           this.name = res.name;
-          this.email = res.email;
         },e=>{
           console.log(e);
+          this._AuthService.logout();
         })
     }
     else{

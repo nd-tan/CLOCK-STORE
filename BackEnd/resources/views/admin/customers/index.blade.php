@@ -71,7 +71,7 @@
                         <tbody>
                             @foreach ($customers as $customer)
                                 <tr class="item-{{ $customer->id }}">
-                                    <th scope="row">{{ $customer->id }}</th>
+                                    <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>@if(Auth::user()->hasPermission('Customer_view'))
                                         <a data-bs-toggle="tooltip" data-bs-placement="top" title="Chi Tiết Khách Hàng" href="{{ route('customer.show',$customer->id) }}">
                                          @endif
